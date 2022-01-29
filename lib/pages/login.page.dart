@@ -51,24 +51,7 @@ class LoginPage extends StatelessWidget {
                 //padding: EdgeInsets.only(left: 25, right: 25, top: 10),
                 //corrigindo o bug de
                 height: double.maxFinite,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  /* boxShadow: [
-                    new BoxShadow(
-                      //cor do fundo (em volta) do container
-                      color: Colors.black12,
-                      //qnt de sombra
-                      offset: new Offset(1, 2.0),
-                      //expansao da sombra
-                      blurRadius: 10,
-                      //intensidade da borda
-                      spreadRadius: 10,
-                    ),
-                  ], */
-                  color: Colors.white.withOpacity(0.7),
-                ),
+
                 //padding para os campos do form
                 child: Padding(
                   padding: EdgeInsets.only(left: 15, right: 15, top: 20),
