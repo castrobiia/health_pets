@@ -1,8 +1,28 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/home.page.dart';
 
 class CadastroUsuario extends StatelessWidget {
   const CadastroUsuario({Key? key}) : super(key: key);
+
+  createInfoDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Informações sobre a senha"),
+            content: Text("Teste 2"),
+            actions: <Widget>[
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  },
+                  icon: Icon(Icons.close))
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +67,7 @@ class CadastroUsuario extends StatelessWidget {
                   TextFormField(
                     autofocus: false,
                     keyboardType: TextInputType.emailAddress,
+                    //validator:
                     decoration: InputDecoration(
                       labelText: "Nome",
                       labelStyle: TextStyle(
@@ -74,16 +95,23 @@ class CadastroUsuario extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
+                  TextField(
                     autofocus: false,
                     keyboardType: TextInputType.text,
                     obscureText: true,
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          createInfoDialog(context);
+                        },
+                        icon: Icon(Icons.info),
+                      ),
                       labelText: "Senha",
                       labelStyle: TextStyle(
-                          color: Color(0xFFCC9396),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17),
+                        color: Color(0xFFCC9396),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 17,
+                      ),
                     ),
                   ),
                   SizedBox(
