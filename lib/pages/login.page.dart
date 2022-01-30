@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/cadastro.usuario.page.dart';
 import 'package:health_pets/pages/home.page.dart';
+import 'package:health_pets/pages/reset-senha.page.dart';
 
 class LoginPage extends StatelessWidget {
   bool value = true;
@@ -167,7 +168,7 @@ class LoginPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomePage(),
+                                builder: (context) => ResetSenha(),
                               ),
                             );
                           },
