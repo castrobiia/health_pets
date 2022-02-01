@@ -54,11 +54,6 @@ class CadastroUsuario extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: Color(0xFFF6BD87)),
                       ),
-                      SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset("assets/logo_health_pets.png"),
-                      ),
                     ],
                   ),
                   SizedBox(

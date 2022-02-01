@@ -80,6 +80,20 @@ class ResetSenha extends StatelessWidget {
               ),
               child: TextButton(
                 onPressed: () {
+                  SnackBar(
+                    action: SnackBarAction(label: 'Desfazer', onPressed: () {}),
+                    content: Row(
+                      children: <Widget>[
+                        Icon(Icons.ac_unit_outlined),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: Text("E-mail enviado com sucesso!"),
+                        ),
+                      ],
+                    ),
+                  );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
