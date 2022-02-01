@@ -51,11 +51,6 @@ Widget _introScreen() {
           ],
         ),
         navigateAfterSeconds: LoginPage(),
-        /* DefaultTabController(
-          child: TabsPage(),
-          length: 1,
-        ),m*/
-        //HomePage(),
         loaderColor: Colors.transparent,
       ),
       Center(

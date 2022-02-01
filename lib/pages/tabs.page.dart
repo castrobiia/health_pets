@@ -10,12 +10,28 @@ class TabsPage extends StatelessWidget {
       body: TabBarView(
         children: [
           HomePage(),
+          HomePage(),
+          HomePage(),
+          HomePage(),
+          HomePage(),
         ],
       ),
       bottomNavigationBar: new TabBar(
         tabs: [
           Tab(
             icon: new Icon(Icons.home),
+          ),
+          Tab(
+            icon: new Icon(Icons.pets),
+          ),
+          Tab(
+            icon: new Icon(Icons.person),
+          ),
+          Tab(
+            icon: new Icon(Icons.calendar_today),
+          ),
+          Tab(
+            icon: new Icon(Icons.menu),
           ),
         ],
       ),
