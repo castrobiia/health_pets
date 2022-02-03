@@ -18,12 +18,62 @@ class PetPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
-        color: Colors.red[100],
-        child: Center(
-          child: Text("Teste"),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: petList(),
+            ),
+          ),
+          Container(
+            color: Colors.amber,
+            height: 80,
+            child: Text("Espaço botão"),
+          ),
+        ],
       ),
     );
   }
+}
+
+Widget petList() {
+  return ListView(children: <Widget>[
+    pet(),
+    pet(),
+    pet(),
+    pet(),
+  ]);
+}
+
+Widget pet() {
+  return Container(
+    height: 120,
+    margin: EdgeInsets.all(5),
+    child: Row(
+      children: <Widget>[
+        Container(
+          width: 100,
+          height: 100,
+          margin: EdgeInsets.all(10),
+          child: Image.asset(
+            "assets/dog.jpeg",
+            fit: BoxFit.fitWidth,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            top: 20,
+            left: 10,
+          ),
+          child: Column(
+            children: <Widget>[
+              Text("Nome"),
+              Text("Espécie/raça"),
+              Text("Idade"),
+            ],),
+        ),
+      ],
+    ),
+  );
 }
