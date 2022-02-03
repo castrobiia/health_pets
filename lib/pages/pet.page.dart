@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/menu.page.dart';
+import 'package:health_pets/widges/pet/pet-list.widget.dart';
+
 
 class PetPage extends StatelessWidget {
   const PetPage({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class PetPage extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              child: petList(),
+              child: PetList(),
             ),
           ),
           Container(
@@ -35,46 +37,4 @@ class PetPage extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget petList() {
-  return ListView(children: <Widget>[
-    pet(),
-    pet(),
-    pet(),
-    pet(),
-  ]);
-}
-
-Widget pet() {
-  return Container(
-    height: 120,
-    margin: EdgeInsets.all(5),
-    child: Row(
-      children: <Widget>[
-        Container(
-          width: 100,
-          height: 100,
-          margin: EdgeInsets.all(10),
-          child: Image.asset(
-            "assets/dog.jpeg",
-            fit: BoxFit.fitWidth,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            top: 20,
-            left: 10,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("Nome"),
-              Text("Espécie/raça"),
-              Text("Idade"),
-            ],),
-        ),
-      ],
-    ),
-  );
 }
