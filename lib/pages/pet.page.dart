@@ -67,6 +67,7 @@ Widget pet() {
             left: 10,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text("Nome"),
               Text("Espécie/raça"),
