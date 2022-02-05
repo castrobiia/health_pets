@@ -10,18 +10,14 @@ class TabsPage extends StatelessWidget {
     return Scaffold(
       body: TabBarView(
         children: [
-          HomePage(),
           PetPage(),
-          HomePage(),
-          HomePage(),
-          HomePage(),
+          PetPage(),
+          PetPage(),
+          PetPage(),
         ],
       ),
       bottomNavigationBar: new TabBar(
         tabs: [
-          Tab(
-            icon: new Icon(Icons.home),
-          ),
           Tab(
             icon: new Icon(Icons.pets),
           ),
@@ -32,7 +28,8 @@ class TabsPage extends StatelessWidget {
             icon: new Icon(Icons.calendar_today),
           ),
           Tab(
-            icon: new Icon(Icons.menu),
+            icon: new Icon(Icons.attach_money),
+            //auto_graph_outlined
           ),
         ],
       ),

@@ -146,7 +146,7 @@ class LoginPage extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (context) => DefaultTabController(
                                         child: TabsPage(),
-                                        length: 5,
+                                        length: 4,
                                       )),
                             );
                           },
