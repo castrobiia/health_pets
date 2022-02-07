@@ -17,63 +17,74 @@ class PetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //color: Colors.blue,
-      height: 100,
+      height: 116,
       //margin: EdgeInsets.all(5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Column(
         children: <Widget>[
-          Container(
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.only(left: 10),
-            child: Image.asset(
-              image,
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
-            width: 200,
-            //color: Colors.black12,
-            alignment: Alignment.centerLeft,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  petName,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Container(
+                width: 100,
+                height: 100,
+                margin: EdgeInsets.only(top: 15, left: 10),
+                child: Image.asset(
+                  image,
+                  fit: BoxFit.fitWidth,
                 ),
-                SizedBox(
-                  height: 5,
+              ),
+              Container(
+                padding: EdgeInsets.only(right: 10),
+                width: 200,
+                //color: Colors.black12,
+                alignment: Alignment.topLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      petName,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(taxonomy),
+                    //Text("${age} anos"), // fazer um if/switch pra: ano, mes, meses
+                  ],
                 ),
-                Text(taxonomy),
-                //Text("${age} anos"), // fazer um if/switch pra: ano, mes, meses
-              ],
-            ),
-          ),
-          Container(
-            width: 80,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              PetPage(), //depois alterar para o perfil do pet
-                        ),
-                      );
-                    },
-                    icon: Icon(Icons.navigate_next))
+              ),
+              Container(
+                width: 80,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  PetPage(), //depois alterar para o perfil do pet
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.navigate_next))
 
-                //Icon(Icons.edit),
-                //Icon(Icons.delete),
-              ],
-            ),
+                    //Icon(Icons.edit),
+                    //Icon(Icons.delete),
+                  ],
+                ),
+              ),
+            ],
           ),
+          Divider(
+            height: 1,
+            thickness: 1,
+            color: Colors.black12,
+            indent: 15,
+            endIndent: 15,
+          )
         ],
       ),
     );
