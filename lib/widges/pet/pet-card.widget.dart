@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/pet.page.dart';
 
 class PetCard extends StatelessWidget {
   final String image;
@@ -16,10 +17,11 @@ class PetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //color: Colors.blue,
       height: 100,
       //margin: EdgeInsets.all(5),
       child: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
             width: 100,
@@ -30,8 +32,11 @@ class PetCard extends StatelessWidget {
               fit: BoxFit.fitWidth,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 20, left: 10, right: 40),
+          Container(
+            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+            width: 200,
+            //color: Colors.black12,
+            alignment: Alignment.centerLeft,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -47,15 +52,23 @@ class PetCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: 110,
-          ),
           Container(
             width: 80,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(Icons.navigate_next)
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PetPage(), //depois alterar para o perfil do pet
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.navigate_next))
+
                 //Icon(Icons.edit),
                 //Icon(Icons.delete),
               ],
