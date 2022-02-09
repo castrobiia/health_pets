@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/pet.page.dart';
+import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 
 class PetCard extends StatelessWidget {
   final String image;
@@ -65,7 +66,7 @@ class PetCard extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  PetPage(), //depois alterar para o perfil do pet
+                                  PerfilPetPage(), //depois alterar para o perfil do pet
                             ),
                           );
                         },

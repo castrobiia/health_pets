@@ -63,6 +63,8 @@ flutter:
     - assets/logo.png
     - assets/logo_health_pets.png
     - assets/reset-password.png
+    - assets/perfil-cao1.jpeg
+    - assets/perfil-cao2.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
