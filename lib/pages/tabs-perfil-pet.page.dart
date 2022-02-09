@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/historico-pet.page.dart';
 import 'package:health_pets/pages/menu-pet.page.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
@@ -17,7 +18,7 @@ class PerfilPetPage extends StatelessWidget {
             tabs: [
               Tab(
                 //icon: Icon(Icons.android),
-                text: "Dados Gerais",
+                text: "Perfil",
               ),
               Tab(
                   //icon: Icon(Icons.phone_iphone),
@@ -40,7 +41,7 @@ class PerfilPetPage extends StatelessWidget {
         body: TabBarView(
           children: <Widget>[
             PerfilPet(),
-            PerfilPet(), //alterar depois com o histórico
+            HistoricoPet("dia", 10), //alterar depois com o histórico
           ],
         ),
       ),
