@@ -14,13 +14,13 @@ class PerfilPet extends StatelessWidget {
               height: 20,
             ),
             Container(
-              margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              margin: EdgeInsets.only(left: 20, right: 20, bottom: 80),
               padding: EdgeInsets.only(
                 left: 40,
                 right: 40,
               ),
               width: double.infinity,
-              height: 600,
+              height: 550,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(
