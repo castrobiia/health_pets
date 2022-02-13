@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/editar-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 
 class MenuItemPet {
@@ -15,6 +16,7 @@ class MenuItemsPet {
   static const List<MenuItemPet> items = [
     itemEditar,
     itemExcluir,
+    itemCompartilhar,
   ];
 
   static const itemEditar = MenuItemPet(
@@ -25,6 +27,11 @@ class MenuItemsPet {
   static const itemExcluir = MenuItemPet(
     texto: "Excluir",
     icone: Icons.delete,
+  );
+
+  static const itemCompartilhar = MenuItemPet(
+    texto: "Compartilhar",
+    icone: Icons.share,
   );
 }
 
@@ -47,11 +54,19 @@ void onSelected(BuildContext context, MenuItemPet item) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PetPage(), //arrumar depois
+          builder: (context) => EditarPetPage(),
         ),
       );
       break;
     case MenuItemsPet.itemExcluir:
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PetPage(), //arrumar depois
+        ),
+      );
+      break;
+    case MenuItemsPet.itemCompartilhar:
       Navigator.push(
         context,
         MaterialPageRoute(
