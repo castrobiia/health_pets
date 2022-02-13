@@ -43,8 +43,8 @@ class PerfilPet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Container(
-                    width: 220,
-                    height: 220,
+                    width: 200,
+                    height: 200,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -138,6 +138,34 @@ class PerfilPet extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text("10 kg"),
+                    ],
+                  ),
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Cor",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text("Caramelo"),
+                    ],
+                  ),
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "Porte",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text("Grande"),
                     ],
                   ),
                 ],
