@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/categorias-pet.page.dart';
 import 'package:health_pets/pages/historico-pet.page.dart';
 import 'package:health_pets/pages/menu-pet.page.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
@@ -11,7 +12,7 @@ class PerfilPetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(
@@ -25,12 +26,10 @@ class PerfilPetPage extends StatelessWidget {
           bottom: TabBar(
             tabs: [
               Tab(
-                //icon: Icon(Icons.android),
                 text: "Perfil",
               ),
-              Tab(
-                  //icon: Icon(Icons.phone_iphone),
-                  text: " Histórico"),
+              Tab(text: " Histórico"),
+              Tab(text: " Categorias"),
             ],
           ),
           backgroundColor: Colors.white,
@@ -49,7 +48,8 @@ class PerfilPetPage extends StatelessWidget {
         body: TabBarView(
           children: <Widget>[
             PerfilPet(),
-            HistoricoPet("dia", 10), //alterar depois com o histórico
+            HistoricoPet("dia", 10),
+            CategoriasPet()
           ],
         ),
       ),
