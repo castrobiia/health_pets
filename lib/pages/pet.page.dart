@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/cadastro-pet.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
 import 'package:health_pets/widges/pet/pet-list.widget.dart';
 
@@ -13,7 +14,16 @@ class PetPage extends StatelessWidget {
         backgroundColor: Color(0xFFF6BD87),
         //cor do ícone
         foregroundColor: Colors.white,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DefaultTabController(
+                      child: CadastrarPetPage(),
+                      length: 4,
+                    )),
+          );
+        },
       ),
       appBar: AppBar(
         backgroundColor: Colors.white,
