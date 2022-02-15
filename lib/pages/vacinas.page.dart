@@ -1,73 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/widges/vacina/scrollab.widget.dart';
-import 'package:health_pets/widges/vacina/vacina-list.dart';
-import 'package:health_pets/widges/vacina/vacina-table.dart';
+import 'package:health_pets/pages/menu.page.dart';
 
-
-class VacinaPage extends StatefulWidget {
-  @override
-  _VacinaPageState createState() => _VacinaPageState();
-}
-
-class _VacinaPageState extends State<VacinaPage> {
-  late List<Vacina> vacinas;
-  int? sortColumnIndex;
-  bool isAscending = false;
+class VacinaPage extends StatelessWidget {
+  const VacinaPage({Key? key}) : super(key: key);
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text("Vacinas"),
+        elevation: 1,
+        actions: [
+          PopupMenuButton<MenuItem>(
+            onSelected: (item) => onSelected(context, item),
+            itemBuilder: (context) => [
+              ...MenuItems.items.map(buildItem).toList(),
+            ],
+          ),
+        ],
+      ),
 
-    this.vacinas = List.of(allVacinas);
-  }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        body: ScrollableWidget(child: buildDataTable()),
-      );
-
-  Widget buildDataTable() {
-    final columns = ['Nome', 'Data Aplicação'];
-
-    return DataTable(
-      sortAscending: isAscending,
-      sortColumnIndex: sortColumnIndex,
-      columns: getColumns(columns),
-      rows: getRows(vacinas),
+      body: const MyStatelessWidget(),
     );
   }
+}
 
-  List<DataColumn> getColumns(List<String> columns) => columns
-      .map((String column) => DataColumn(
-            label: Text(column),
-            onSort: onSort,
-          ))
-      .toList();
+class MyStatelessWidget extends StatelessWidget {
+  const MyStatelessWidget({Key? key}) : super(key: key);
 
-  List<DataRow> getRows(List<Vacina> vacinas) => vacinas.map((Vacina vacina) {
-        final cells = [vacina.nomeVacina, vacina.dataAplicacao];
-
-        return DataRow(cells: getCells(cells));
-      }).toList();
-
-  List<DataCell> getCells(List<dynamic> cells) =>
-      cells.map((data) => DataCell(Text('$data'))).toList();
-
-  void onSort(int columnIndex, bool ascending) {
-    if (columnIndex == 0) {
-      vacinas.sort((vacina1, vacina2) =>
-          compareString(ascending, vacina1.nomeVacina, vacina2.nomeVacina));
-    } else if (columnIndex == 1) {
-      vacinas.sort((vacina1, vacina2) =>
-          compareString(ascending, vacina1.dataAplicacao, vacina2.dataAplicacao));
-    }
-
-    setState(() {
-      this.sortColumnIndex = columnIndex;
-      this.isAscending = ascending;
-    });
+  @override
+  Widget build(BuildContext context) {
+    return DataTable(
+      columns: const <DataColumn>[
+        DataColumn(
+          label: Text(
+            'Nome',
+            style: TextStyle(fontStyle: FontStyle.italic),
+          ),
+        ),
+        DataColumn(
+          label: Text(
+            'Data da Aplicacao',
+            style: TextStyle(fontStyle: FontStyle.italic),
+          ),
+        ),
+        DataColumn(
+          label: Text(
+            'Lote',
+            style: TextStyle(fontStyle: FontStyle.italic),
+          ),
+        ),
+      ],
+      rows: const <DataRow>[
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('V8')),
+            DataCell(Text('19/10/2012')),
+            DataCell(Text('8475632')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('V10')),
+            DataCell(Text('17/12/2012')),
+            DataCell(Text('7591663')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Antirabica')),
+            DataCell(Text('27/08/2013')),
+            DataCell(Text('1679834')),
+          ],
+        ),
+      ],
+    );
   }
-
-  int compareString(bool ascending, String value1, String value2) =>
-      ascending ? value1.compareTo(value2) : value2.compareTo(value1);
 }
