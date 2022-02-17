@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/calendario.page.dart';
 import 'package:health_pets/pages/home.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 
@@ -12,7 +13,7 @@ class TabsPage extends StatelessWidget {
         children: [
           PetPage(),
           PetPage(),
-          PetPage(),
+          CalendarioPage(),
           PetPage(),
         ],
       ),

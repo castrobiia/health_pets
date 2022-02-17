@@ -20,7 +20,7 @@ class PerfilPet extends StatelessWidget {
                 right: 40,
               ),
               width: double.infinity,
-              height: 550,
+              height: 650,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(

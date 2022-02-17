@@ -14,14 +14,6 @@ class PerfilPetPage extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          backgroundColor: Color(0xFFF6BD87),
-          //cor do ícone
-          foregroundColor: Colors.white,
-          onPressed: () {},
-        ),
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
