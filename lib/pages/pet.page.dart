@@ -18,10 +18,11 @@ class PetPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DefaultTabController(
-                      child: CadastrarPetPage(),
-                      length: 4,
-                    )),
+              builder: (context) => DefaultTabController(
+                child: CadastrarPetPage(),
+                length: 4,
+              ),
+            ),
           );
         },
       ),
