@@ -1,33 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/cadastro-vacina.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
+import 'package:health_pets/widges/vacina/tabela-vacina.widget.dart';
 
 class VacinaPage extends StatelessWidget {
   const VacinaPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text("Vacinas"),
-        elevation: 1,
-        actions: [
-          PopupMenuButton<MenuItem>(
-            onSelected: (item) => onSelected(context, item),
-            itemBuilder: (context) => [
-              ...MenuItems.items.map(buildItem).toList(),
-            ],
-          ),
-        ],
-      ),
-      body: const MyStatelessWidget(),
-    );
-  }
-}
-
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +26,30 @@ class MyStatelessWidget extends StatelessWidget {
           );
         },
       ),
-
-
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text("Vacinas"),
+        elevation: 1,
+        actions: [
+          PopupMenuButton<MenuItem>(
+            onSelected: (item) => onSelected(context, item),
+            itemBuilder: (context) => [
+              ...MenuItems.items.map(buildItem).toList(),
+            ],
+          ),
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              color: Colors.white,
+              child: TabelaVacina(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
