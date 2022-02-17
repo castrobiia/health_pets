@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/cadastro-vacina.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
 
 class VacinaPage extends StatelessWidget {
@@ -20,7 +21,6 @@ class VacinaPage extends StatelessWidget {
           ),
         ],
       ),
-
       body: const MyStatelessWidget(),
     );
   }
@@ -31,50 +31,26 @@ class MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Text(
-            'Nome',
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            'Data da Aplicacao',
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        ),
-        DataColumn(
-          label: Text(
-            'Lote',
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        ),
-      ],
-      rows: const <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('V8')),
-            DataCell(Text('19/10/2012')),
-            DataCell(Text('8475632')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('V10')),
-            DataCell(Text('17/12/2012')),
-            DataCell(Text('7591663')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Antirabica')),
-            DataCell(Text('27/08/2013')),
-            DataCell(Text('1679834')),
-          ],
-        ),
-      ],
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Color(0xFFF6BD87),
+        //cor do ícone
+        foregroundColor: Colors.white,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DefaultTabController(
+                child: CadastrarVacina(),
+                length: 4,
+              ),
+            ),
+          );
+        },
+      ),
+
+
     );
   }
 }
