@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 
 class PetCard extends StatelessWidget {
-  final String image;
-  final String petName;
-  final String taxonomy;
-  final int age;
+  final String fotoPet;
+  final String nomePet;
+  final String taxonomia;
+  final int idadePet;
 
   PetCard({
-    required this.image,
-    required this.petName,
-    required this.taxonomy,
-    required this.age,
+    required this.fotoPet,
+    required this.nomePet,
+    required this.taxonomia,
+    required this.idadePet,
   });
 
   @override
@@ -30,7 +29,7 @@ class PetCard extends StatelessWidget {
                 height: 100,
                 margin: EdgeInsets.only(top: 15, left: 10),
                 child: Image.asset(
-                  image,
+                  fotoPet,
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -43,15 +42,15 @@ class PetCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      petName,
+                      nomePet,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                     SizedBox(
                       height: 5,
                     ),
-                    Text(taxonomy),
-                    //Text("${age} anos"), // fazer um if/switch pra: ano, mes, meses
+                    Text(taxonomia),
+                    //Text("${idadePet} anos"), // fazer um if/switch pra: ano, mes, meses
                   ],
                 ),
               ),

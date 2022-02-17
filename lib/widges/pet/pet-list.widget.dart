@@ -1,68 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/widges/pet/pet-card.widget.dart';
 
-class PetList extends StatelessWidget {
-  const PetList({Key? key}) : super(key: key);
+class PetLista extends StatelessWidget {
+  const PetLista({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView(children: <Widget>[
-        PetCard(
-          image: "assets/logo_health_pets.png",
-          petName: "Dora",
-          taxonomy: "pug",
-          age: 2,
-        ),
-        PetCard(
-          image: "assets/logo_health_pets.png",
-          petName: "Dora",
-          taxonomy: "pug",
-          age: 3,
-        ),
-        PetCard(
-          image: "assets/logo_health_pets.png",
-          petName: "Dora",
-          taxonomy: "pug",
-          age: 4,
-        ),
-        PetCard(
-          image: "assets/logo_health_pets.png",
-          petName: "Dora",
-          taxonomy: "pug",
-          age: 5,
-        ),
-        PetCard(
-          image: "assets/logo_health_pets.png",
-          petName: "Dora",
-          taxonomy: "pug",
-          age: 5,
-        ),
-        PetCard(
-          image: "assets/logo_health_pets.png",
-          petName: "Dora",
-          taxonomy: "pug",
-          age: 5,
-        ),
-        PetCard(
-          image: "assets/logo_health_pets.png",
-          petName: "Dora",
-          taxonomy: "pug",
-          age: 5,
-        ),
-        PetCard(
-          image: "assets/logo_health_pets.png",
-          petName: "Dora",
-          taxonomy: "pug",
-          age: 5,
-        ),
-        PetCard(
-          image: "assets/logo_health_pets.png",
-          petName: "Dora",
-          taxonomy: "pug",
-          age: 5,
-        ),
-      ]),
+      child: ListView(
+        children: <Widget>[
+          PetCard(
+            fotoPet: "assets/logo_health_pets.png",
+            nomePet: "Dora",
+            taxonomia: "pug",
+            idadePet: 2,
+          ),
+          PetCard(
+            fotoPet: "assets/logo_health_pets.png",
+            nomePet: "Dora",
+            taxonomia: "pug",
+            idadePet: 3,
+          ),
+          PetCard(
+            fotoPet: "assets/logo_health_pets.png",
+            nomePet: "Dora",
+            taxonomia: "pug",
+            idadePet: 4,
+          ),
+          PetCard(
+            fotoPet: "assets/logo_health_pets.png",
+            nomePet: "Dora",
+            taxonomia: "pug",
+            idadePet: 5,
+          ),
+          PetCard(
+            fotoPet: "assets/logo_health_pets.png",
+            nomePet: "Dora",
+            taxonomia: "pug",
+            idadePet: 5,
+          ),
+          PetCard(
+            fotoPet: "assets/logo_health_pets.png",
+            nomePet: "Dora",
+            taxonomia: "pug",
+            idadePet: 5,
+          ),
+          PetCard(
+            fotoPet: "assets/logo_health_pets.png",
+            nomePet: "Dora",
+            taxonomia: "pug",
+            idadePet: 5,
+          ),
+          PetCard(
+            fotoPet: "assets/logo_health_pets.png",
+            nomePet: "Dora",
+            taxonomia: "pug",
+            idadePet: 5,
+          ),
+          PetCard(
+            fotoPet: "assets/logo_health_pets.png",
+            nomePet: "Dora",
+            taxonomia: "pug",
+            idadePet: 5,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -45,7 +45,7 @@ class PetPage extends StatelessWidget {
           Expanded(
             child: Container(
               color: Colors.white,
-              child: PetList(),
+              child: PetLista(),
             ),
           ),
           /* Container(
