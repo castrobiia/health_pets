@@ -4,13 +4,13 @@ import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 class PetCard extends StatelessWidget {
   final String fotoPet;
   final String nomePet;
-  final String taxonomia;
+  final String taxonomiaPet;
   final int idadePet;
 
   PetCard({
     required this.fotoPet,
     required this.nomePet,
-    required this.taxonomia,
+    required this.taxonomiaPet,
     required this.idadePet,
   });
 
@@ -49,7 +49,7 @@ class PetCard extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    Text(taxonomia),
+                    Text(taxonomiaPet),
                     //Text("${idadePet} anos"), // fazer um if/switch pra: ano, mes, meses
                   ],
                 ),
@@ -84,7 +84,7 @@ class PetCard extends StatelessWidget {
             color: Colors.black12,
             indent: 15,
             endIndent: 15,
-          )
+          ),
         ],
       ),
     );
