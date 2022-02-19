@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/cadastro-pet.page.dart';
+import 'package:health_pets/pages/cadastro-vacina.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
-import 'package:health_pets/widges/pet/pet-list.widget.dart';
+import 'package:health_pets/widges/vacina/tabela-vacina.widget.dart';
 
-class PetPage extends StatelessWidget {
-  const PetPage({Key? key}) : super(key: key);
+class VacinaPage extends StatelessWidget {
+  const VacinaPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class PetPage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => DefaultTabController(
-                child: CadastrarPetPage(),
+                child: CadastrarVacina(),
                 length: 4,
               ),
             ),
@@ -28,7 +28,7 @@ class PetPage extends StatelessWidget {
       ),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Pets"),
+        title: Text("Vacinas"),
         elevation: 1,
         actions: [
           PopupMenuButton<MenuItem>(
@@ -45,14 +45,9 @@ class PetPage extends StatelessWidget {
           Expanded(
             child: Container(
               color: Colors.white,
-              child: PetLista(),
+              child: TabelaVacina(),
             ),
           ),
-          /* Container(
-            color: Colors.amber,
-            height: 80,
-            child: Text("Espaço botão"),
-          ), */
         ],
       ),
     );
