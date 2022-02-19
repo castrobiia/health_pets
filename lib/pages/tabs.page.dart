@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/calendario.page.dart';
+import 'package:health_pets/pages/home.page.dart';
+import 'package:health_pets/pages/perfil-usuario.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/pages/vacinas.page.dart';
 
@@ -12,9 +14,9 @@ class TabsPage extends StatelessWidget {
       body: TabBarView(
         children: [
           PetPage(),
-          VacinaPage(), //Só para visualização
+          PerfilUsuario(),
           CalendarioPage(),
-          PetPage(),
+          VacinaPage(), //Só para visualização
         ],
       ),
       bottomNavigationBar: new TabBar(

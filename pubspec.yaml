@@ -73,6 +73,9 @@ flutter:
     - assets/veterinarian.png
     - assets/injection.png
     - assets/microscope.png
+    - assets/perfil-usuario1.png
+    - assets/dog.png
+    - assets/money.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
