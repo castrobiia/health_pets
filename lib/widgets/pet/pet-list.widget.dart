@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/widges/pet/pet-card.widget.dart';
+import 'package:health_pets/widgets/pet/pet-card.widget.dart';
 
 class PetLista extends StatelessWidget {
   const PetLista({Key? key}) : super(key: key);

@@ -21,7 +21,7 @@ class PerfilPetPage extends StatelessWidget {
                 text: "Perfil",
               ),
               Tab(text: " Histórico"),
-              Tab(text: " Categorias"),
+              Tab(text: " Informações"),
             ],
           ),
           backgroundColor: Colors.white,

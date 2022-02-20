@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/cadastro-pet.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
-import 'package:health_pets/widges/pet/pet-list.widget.dart';
+import 'package:health_pets/widgets/pet/pet-list.widget.dart';
 
 class PetPage extends StatelessWidget {
   const PetPage({Key? key}) : super(key: key);
@@ -28,7 +28,9 @@ class PetPage extends StatelessWidget {
       ),
       appBar: AppBar(
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         title: Text("Pets"),
+        centerTitle: true,
         elevation: 1,
         actions: [
           PopupMenuButton<MenuItem>(
