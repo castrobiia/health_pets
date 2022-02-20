@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/cadastro-vacina.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
-import 'package:health_pets/widges/vacina/tabela-vacina.widget.dart';
+import 'package:health_pets/widgets/vacina/tabela-vacina.widget.dart';
 
 class VacinaPage extends StatelessWidget {
   const VacinaPage({Key? key}) : super(key: key);
@@ -29,6 +29,8 @@ class VacinaPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text("Vacinas"),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
         elevation: 1,
         actions: [
           PopupMenuButton<MenuItem>(

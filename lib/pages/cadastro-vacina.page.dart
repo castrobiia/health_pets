@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/pet.page.dart';
 
-class CadastrarVacina extends StatelessWidget {
-  var ValorInicialEspecie = 'Gato';
-  List<String> especies = ['Cachorro', 'Gato'];
+class CadastrarVacina extends StatefulWidget {
+  const CadastrarVacina({Key? key}) : super(key: key);
+
+  @override
+  _CadastrarVacinaState createState() => _CadastrarVacinaState();
+}
+
+class _CadastrarVacinaState extends State<CadastrarVacina> {
+  bool checkedValue = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 1,
         centerTitle: true,
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {},
+            child: const Text("Salvar"),
+          ),
+        ],
         title: Text(
           "Adicionar Vacina",
           style: TextStyle(
@@ -30,7 +42,19 @@ class CadastrarVacina extends StatelessWidget {
               top: 30,
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                CheckboxListTile(
+                  title: Text("Vacina aplicada"),
+                  value: checkedValue,
+                  onChanged: (newValue) {
+                    setState(() {
+                      checkedValue = newValue!;
+                    });
+                  },
+                  controlAffinity:
+                      ListTileControlAffinity.leading, //  <-- leading Checkbox
+                ),
                 TextFormField(
                   autofocus: false,
                   keyboardType: TextInputType.text,
@@ -65,6 +89,8 @@ class CadastrarVacina extends StatelessWidget {
                 TextFormField(
                   //criar dropdown
                   autofocus: false,
+                  // criar if para quando o checkbox não estiver selecionado, bloquear os campos lote e fabricante
+                  //enabled: false,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: "Lote",
@@ -94,7 +120,7 @@ class CadastrarVacina extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Container(
+                /* Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Color(0xFFF6BD87),
@@ -114,7 +140,7 @@ class CadastrarVacina extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: TextButton(
+                   child: TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -131,7 +157,7 @@ class CadastrarVacina extends StatelessWidget {
                           fontSize: 17),
                     ),
                   ),
-                ),
+                ), */
               ],
             ),
           ),

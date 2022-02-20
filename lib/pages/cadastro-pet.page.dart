@@ -12,6 +12,12 @@ class CadastrarPetPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 1,
         centerTitle: true,
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {},
+            child: const Text("Salvar"),
+          ),
+        ],
         title: Text(
           "Cadastrar Pet",
           style: TextStyle(
@@ -166,44 +172,7 @@ class CadastrarPetPage extends StatelessWidget {
                 SizedBox(
                   height: 40,
                 ),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF6BD87),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                    boxShadow: [
-                      new BoxShadow(
-                        //cor do fundo (em volta) do container
-                        color: Colors.black12,
-                        //qnt de sombra
-                        offset: new Offset(1, 2.0),
-                        //expansao da sombra
-                        blurRadius: 5,
-                        //intensidade da borda
-                        spreadRadius: 3,
-                      ),
-                    ],
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PetPage(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "Salvar",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 17),
-                    ),
-                  ),
-                ),
+
                 /* DropdownButtonFormField(
                     value: ValorInicialEspecie,
                     items: especies.map((items) {

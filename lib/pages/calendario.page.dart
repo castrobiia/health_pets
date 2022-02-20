@@ -16,6 +16,8 @@ class _CalendarioPageState extends State<CalendarioPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text("Calendário"),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
         elevation: 1,
         actions: [
           PopupMenuButton<MenuItem>(
