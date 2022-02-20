@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/cadastro.usuario.page.dart';
-import 'package:health_pets/pages/home.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 
-class LoginPage extends StatelessWidget {
-  bool value = true;
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool checkedValue = true;
 
   @override
   Widget build(BuildContext context) {
@@ -110,13 +116,16 @@ class LoginPage extends StatelessWidget {
                       CheckboxListTile(
                         title: Text(
                           "Lembrar-me",
-                          style:
-                              TextStyle(color: Color(0xFFCC9396), fontSize: 14),
+                          style: TextStyle(color: Colors.grey),
                         ),
-                        onChanged: (bool? value) {},
-                        value: true,
-                        controlAffinity: ListTileControlAffinity.leading,
-                        activeColor: Color(0xFFCC9396),
+                        value: checkedValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            checkedValue = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity
+                            .leading, //  <-- leading Checkbox
                       ),
                       SizedBox(height: 20),
                       Container(

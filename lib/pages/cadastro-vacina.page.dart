@@ -14,7 +14,6 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 1,
         centerTitle: true,
