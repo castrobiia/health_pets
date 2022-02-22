@@ -24,7 +24,7 @@ class EditarVacinaState extends State<EditarVacina> {
           ),
         ],
         title: Text(
-          "Adicionar Vacina",
+          "Editar Vacina",
           style: TextStyle(
             color: Color(0xFFF6BD87),
           ),

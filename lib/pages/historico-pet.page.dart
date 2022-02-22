@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/vacinas.page.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HistoricoPet extends StatefulWidget {
@@ -42,7 +43,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                     //cor do fundo (em volta) do container
                     color: Colors.black12,
                     //qnt de sombra
-                    offset: new Offset(1, 2.0),
+                    offset: const Offset(1, 2.0),
                     //expansao da sombra
                     blurRadius: 5,
                     //intensidade da borda
@@ -56,77 +57,106 @@ class _HistoricoPetState extends State<HistoricoPet> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: Image.asset("assets/injection.png"),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Vacinas",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "5",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w500),
-                          )
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => VacinaPage(),
+                            ),
+                          );
+                        }, // Image tapped
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Image.asset("assets/injection.png"),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Vacinas",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "5",
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: Image.asset("assets/microscope.png"),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Exames",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "2",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w500),
-                          )
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  VacinaPage(), //corrigir
+                            ),
+                          );
+                        }, // Image tapped
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Image.asset("assets/microscope.png"),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Exames",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "5",
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: Image.asset("assets/veterinarian.png"),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Consultas",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "10",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w500),
-                          )
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  VacinaPage(), //corrigir
+                            ),
+                          );
+                        }, // Image tapped
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Image.asset("assets/veterinarian.png"),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Consultas",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "10",
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
