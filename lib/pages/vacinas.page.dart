@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/cadastro-vacina.page.dart';
-import 'package:health_pets/pages/menu.page.dart';
+import 'package:health_pets/pages/menu-vacina.page.dart';
 import 'package:health_pets/widgets/vacina/tabela-vacina.widget.dart';
 
 class VacinaPage extends StatelessWidget {
@@ -33,10 +33,10 @@ class VacinaPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         elevation: 1,
         actions: [
-          PopupMenuButton<MenuItem>(
+          PopupMenuButton<MenuItemVacina>(
             onSelected: (item) => onSelected(context, item),
             itemBuilder: (context) => [
-              ...MenuItems.items.map(buildItem).toList(),
+              ...MenuItensVacina.items.map(buildItem).toList(),
             ],
           ),
         ],
