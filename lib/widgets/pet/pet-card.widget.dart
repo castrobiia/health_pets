@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 
 class PetCard extends StatelessWidget {
@@ -61,13 +62,7 @@ class PetCard extends StatelessWidget {
                   children: <Widget>[
                     IconButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  PerfilPetPage(), //depois alterar para o perfil do pet
-                            ),
-                          );
+                          setarMaterialPageRoute(context, PerfilPetPage());
                         },
                         icon: Icon(Icons.navigate_next))
 
