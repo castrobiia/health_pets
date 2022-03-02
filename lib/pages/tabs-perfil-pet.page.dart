@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/categorias-pet.page.dart';
 import 'package:health_pets/pages/historico-pet.page.dart';
+import 'package:health_pets/pages/informacoes-pet.page.dart';
 import 'package:health_pets/pages/menu-pet.page.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
@@ -41,7 +42,7 @@ class PerfilPetPage extends StatelessWidget {
           children: <Widget>[
             PerfilPet(),
             HistoricoPet("dia", 10),
-            CategoriasPet()
+            InformacoesPet()
           ],
         ),
       ),
