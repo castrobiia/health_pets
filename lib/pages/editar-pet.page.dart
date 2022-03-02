@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/pet.page.dart';
 
 class EditarPetPage extends StatelessWidget {
@@ -187,12 +188,7 @@ class EditarPetPage extends StatelessWidget {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PetPage(),
-                        ),
-                      );
+                      setarMaterialPageRoute(context, PetPage());
                     },
                     child: Text(
                       "Salvar",

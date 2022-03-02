@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/editar-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 
@@ -51,27 +52,12 @@ PopupMenuItem<MenuItemPet> buildItem(MenuItemPet item) =>
 void onSelected(BuildContext context, MenuItemPet item) {
   switch (item) {
     case MenuItemsPet.itemEditar:
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EditarPetPage(),
-        ),
-      );
+      setarMaterialPageRoute(context, EditarPetPage());
       break;
     case MenuItemsPet.itemExcluir:
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PetPage(), //arrumar depois
-        ),
-      );
+      setarMaterialPageRoute(context, PetPage());
       break;
     case MenuItemsPet.itemCompartilhar:
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PetPage(), //arrumar depois
-        ),
-      );
+      setarMaterialPageRoute(context, PetPage());
   }
 }

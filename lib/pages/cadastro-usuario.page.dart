@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/home.page.dart';
+import 'package:health_pets/links/links-pages.dart';
+import 'package:health_pets/pages/tabs.page.dart';
 
 class CadastroUsuario extends StatelessWidget {
   const CadastroUsuario({Key? key}) : super(key: key);
@@ -162,12 +161,7 @@ class CadastroUsuario extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ),
-                        );
+                        setarMaterialPageRouteTab(context, TabsPage());
                       },
                       child: Text(
                         "Salvar",
