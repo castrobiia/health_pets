@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/cadastro-vacina.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
 import 'package:health_pets/widgets/vacina/tabela-vacina.widget.dart';
@@ -15,15 +16,7 @@ class VacinaPage extends StatelessWidget {
         //cor do ícone
         foregroundColor: Colors.white,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DefaultTabController(
-                child: CadastrarVacina(),
-                length: 4,
-              ),
-            ),
-          );
+          setarMaterialPageRouteTab(context, CadastrarVacina());
         },
       ),
       appBar: AppBar(
