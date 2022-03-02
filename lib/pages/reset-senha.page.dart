@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/login.page.dart';
 
 class ResetSenha extends StatelessWidget {
@@ -8,6 +9,7 @@ class ResetSenha extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
       ),
       body: Container(
@@ -94,12 +96,7 @@ class ResetSenha extends StatelessWidget {
                       ],
                     ),
                   );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginPage(),
-                    ),
-                  );
+                  setarMaterialPageRoute(context, LoginPage());
                 },
                 child: Text(
                   "Enviar",
