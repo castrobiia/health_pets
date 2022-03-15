@@ -1,11 +1,17 @@
 //flutter run --no-sound-null-safety
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:health_pets/http/webclient.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 void main() {
   runApp(const MyApp());
+
+  RepositoryEspecie()
+      .findAllEspecies()
+      .then((especies) => print('espécies: ${especies}'));
+  //findAllEspecies().then((especies) => print('espécies: ${especies}'));
 }
 
 class MyApp extends StatelessWidget {
