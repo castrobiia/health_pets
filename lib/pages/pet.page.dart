@@ -1,14 +1,31 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/cadastro-pet.page.dart';
+import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
 import 'package:health_pets/widgets/pet/pet-list.widget.dart';
+import 'package:hive/hive.dart';
 
 class PetPage extends StatelessWidget {
   const PetPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Future autenticacao() async {
+      var keyBox = await Hive.openBox('session');
+
+      if (!keyBox.containsKey('key')) {
+        print('não existe token');
+        setarMaterialPageRoute(context, LoginPage());
+      }
+      print('existe token');
+      setarMaterialPageRoute(context, PetPage());
+    }
+
+    autenticacao();
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
