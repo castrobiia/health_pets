@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:health_pets/http/usuario-repository.dart';
 import 'package:health_pets/links/links-pages.dart';
@@ -13,16 +15,33 @@ class CadastroUsuarioTeste extends StatefulWidget {
   State<CadastroUsuarioTeste> createState() => _CadastroUsuarioTesteState();
 }
 
+String mensagem = '';
 Future<UsuarioModelTeste?> submitUsuario(String name, String email,
     String password, String password_confirmation) async {
   //const url = 'https://www.healthpets.app.br/api/auth/register';
-  final response = await http
-      .post(Uri.https('healthpets.app.br', 'api/auth/register'), body: {
+
+  Map<String, String> requestHeaders = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json'
+  };
+
+  final requestBody = jsonEncode({
     'name': name,
     'email': email,
     'password': password,
     'password_confirmation': password_confirmation,
   });
+
+  final response = await http.post(
+      Uri.https('healthpets.app.br', 'api/auth/register'),
+      headers: requestHeaders,
+      body: requestBody);
+
+  Map mapResponse = jsonDecode(response.body);
+  mensagem = mapResponse['message'];
+
+  if (response.statusCode != 201) {}
+
   /* 
   final response1 = await http.post(Uri.parse(url), body: {
     'name': name,
@@ -30,17 +49,13 @@ Future<UsuarioModelTeste?> submitUsuario(String name, String email,
     'password': password,
     'password_confirmation': password_confirmation,
   }); */
-
-  /* ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content:
-                                            Text("Bem vindo(a), $_email"))); */
+  var statusCode = response.statusCode;
   var dadosUsuario = response.body;
 
   //Map<String, dynamic> decodedJson = jsonDecode(response.body);
   //final List<UsuarioJson> mensagemUsuario = decodedJson["message"];
   //print('mensagem usuário: ${mensagemUsuario}');
-  print('VENDO OS DADOS DO USUÁRIO ${dadosUsuario}');
+  print('VENDO OS DADOS DO USUÁRIO: ${statusCode}, ${dadosUsuario}');
 }
 
 class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
@@ -63,6 +78,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
   }
 
   //UsuarioRepository _repository;
+
   late UsuarioModelTeste _usuarioModelTeste;
   TextEditingController nomeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -224,6 +240,8 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                         setState(() {
                           _usuarioModelTeste = dadosUsuario;
                         });
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text(mensagem)));
                         setarMaterialPageRouteTab(context, TabsPage());
                       },
                       child: Text(
