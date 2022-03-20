@@ -1,16 +1,12 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:health_pets/http/login-repository.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/login-model.dart';
 import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
-import 'package:health_pets/pages/cadastro-usuario.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 
