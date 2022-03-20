@@ -1,6 +1,11 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:health_pets/http/login-repository.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/login-model.dart';
@@ -8,7 +13,6 @@ import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
 import 'package:health_pets/pages/cadastro-usuario.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
-import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -32,7 +36,8 @@ Future<LoginModel?> login(String email, String password) async {
     'password': password,
   });
 
-  print('RESPONSE STATUS CODE: ${response.statusCode}');
+  // print('RESPONSE STATUS CODE: ${response.statusCode}');
+  print('Retorno do login------');
   print('RESPONSE BODY: ${response.body}');
 
   Map mapResponse = jsonDecode(response.body);
@@ -40,8 +45,8 @@ Future<LoginModel?> login(String email, String password) async {
   //String mensagem = mapResponse['message'];
   String token = mapResponse['access_token'];
 
-  //print('MESSAGE $mensagem');
-  print('TOKEN: $token');
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('token', token);
 }
 
 class _LoginPageState extends State<LoginPage> {
