@@ -1,21 +1,17 @@
 //flutter run --no-sound-null-safety
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/http/webclient.dart';
 import 'package:health_pets/pages/login.page.dart';
-import 'package:hive/hive.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'package:path_provider/path_provider.dart';
 
-void main() async {
+void main() {
   // final documentDirectory = await path_provider.getApplicationDocumentsDirectory();
-  // Hive.init(documentDirectory.path); 
+  // Hive.init(documentDirectory.path);
 
-  // Directory directory = await getApplicationDocumentsDirectory();
-  // Hive.init(directory.path);
-
+  //WidgetsFlutterBinding.ensureInitialized();
+  //directory();
   runApp(const MyApp());
 
   RepositoryEspecie()
@@ -23,6 +19,12 @@ void main() async {
       .then((especies) => print('espécies: ${especies}'));
   //findAllEspecies().then((especies) => print('espécies: ${especies}'));
 }
+
+/* 
+directory() async {
+  Directory directory = await getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+} */
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
