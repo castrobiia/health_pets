@@ -5,8 +5,10 @@ import 'package:health_pets/http/usuario-repository.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/usuario-model-teste.dart';
 import 'package:health_pets/models/usuario-model.dart';
+import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CadastroUsuarioTeste extends StatefulWidget {
   const CadastroUsuarioTeste({Key? key}) : super(key: key);
@@ -40,7 +42,7 @@ Future<UsuarioModelTeste?> submitUsuario(String name, String email,
   Map mapResponse = jsonDecode(response.body);
   mensagem = mapResponse['message'];
 
-  if (response.statusCode != 201) {}
+  //if (response.statusCode != 201) {}
 
   /* 
   final response1 = await http.post(Uri.parse(url), body: {
@@ -52,6 +54,14 @@ Future<UsuarioModelTeste?> submitUsuario(String name, String email,
   var statusCode = response.statusCode;
 
   var dadosUsuario = response.body;
+
+  String token = mapResponse['token'];
+
+  // if (token == null || token == '') {
+  //   setarMaterialPageRoute(context, PerfilPetPage());
+  // }
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('token', token);
 
   //Map<String, dynamic> decodedJson = jsonDecode(response.body);
   //final List<UsuarioJson> mensagemUsuario = decodedJson["message"];
