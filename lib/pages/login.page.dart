@@ -38,30 +38,22 @@ Future<LoginModel?> login(String email, String password) async {
 
   Map mapResponse = jsonDecode(response.body);
 
+  var status = response.statusCode;
+
+  var mensagemErro = 'Erro';
+
+  Future _status(BuildContext context) async {
+    if (status != 200) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(mensagemErro)));
+    }
+  }
+
   //String mensagem = mapResponse['message'];
   String token = mapResponse['access_token'];
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('token', token);
-
-  //final caminho = await getApplicationDocumentsDirectory();
-
-  /* 
-  var keyBox = await Hive.openBox('session');
-  if (!keyBox.containsKey('key')) {
-    var key = token;
-    keyBox.put('key', key);
-  } */
-
-  //var key = keyBox.get('key') as Uint8List;
-  //print('Encryption key: $key');
-
-  // var encryptedBox = await Hive.openBox('vaultBox', encryptionKey: key);
-  // encryptedBox.put('secret', 'Hive is cool');
-  // print(encryptedBox.get('secret'));
-
-  //print('MESSAGE $mensagem');
-  //print('TOKEN: ${keyBox.get("key")}');
 }
 
 class _LoginPageState extends State<LoginPage> {

@@ -23,18 +23,7 @@ Future<UsuarioModelTeste?> submitUsuario(String name, String email,
     'password': password,
     'password_confirmation': password_confirmation,
   });
-  /* 
-  final response1 = await http.post(Uri.parse(url), body: {
-    'name': name,
-    'email': email,
-    'password': password,
-    'password_confirmation': password_confirmation,
-  }); */
 
-  /* ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content:
-                                            Text("Bem vindo(a), $_email"))); */
   var dadosUsuario = response.body;
 
   //Map<String, dynamic> decodedJson = jsonDecode(response.body);

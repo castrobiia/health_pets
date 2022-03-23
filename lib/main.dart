@@ -7,11 +7,6 @@ import 'package:health_pets/pages/login.page.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 void main() {
-  // final documentDirectory = await path_provider.getApplicationDocumentsDirectory();
-  // Hive.init(documentDirectory.path);
-
-  //WidgetsFlutterBinding.ensureInitialized();
-  //directory();
   runApp(const MyApp());
 
   RepositoryEspecie()
@@ -19,12 +14,6 @@ void main() {
       .then((especies) => print('espécies: ${especies}'));
   //findAllEspecies().then((especies) => print('espécies: ${especies}'));
 }
-
-/* 
-directory() async {
-  Directory directory = await getApplicationDocumentsDirectory();
-  Hive.init(directory.path);
-} */
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
