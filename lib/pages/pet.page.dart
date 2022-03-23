@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/cadastro-pet.page.dart';
+import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
 import 'package:health_pets/widgets/pet/pet-list.widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PetPage extends StatelessWidget {
   const PetPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Future autenticacao() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String token = await prefs.get('token').toString();
+
+      if (token == null || token == '') {
+        setarMaterialPageRoute(context, LoginPage());
+      }
+      /* 
+      var keyBox = await Hive.openBox('session');
+
+      if (!keyBox.containsKey('key')) {
+        print('não existe token');
+        setarMaterialPageRoute(context, LoginPage());
+      }
+      print('existe token');
+      setarMaterialPageRoute(context, PetPage());
+      */
+    }
+
+    autenticacao();
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -43,11 +66,6 @@ class PetPage extends StatelessWidget {
               child: PetLista(),
             ),
           ),
-          /* Container(
-            color: Colors.amber,
-            height: 80,
-            child: Text("Espaço botão"),
-          ), */
         ],
       ),
     );

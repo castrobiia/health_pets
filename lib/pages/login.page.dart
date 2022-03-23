@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:health_pets/links/links-pages.dart';
+import 'package:health_pets/models/login-model.dart';
+import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
 import 'package:health_pets/pages/cadastro-usuario.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,7 +17,49 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
+Future<LoginModel?> login(String email, String password) async {
+  //const url = 'https://www.healthpets.app.br/api/auth/login';
+
+  /*
+  var header = {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  }; */
+
+  var response =
+      await http.post(Uri.https('healthpets.app.br', 'api/auth/login'), body: {
+    'email': email,
+    'password': password,
+  });
+
+  print('Retorno do login------');
+  print('RESPONSE STATUS CODE: ${response.statusCode}');
+  print('RESPONSE BODY: ${response.body}');
+
+  Map mapResponse = jsonDecode(response.body);
+
+  var status = response.statusCode;
+
+  var mensagemErro = 'Erro';
+
+  Future _status(BuildContext context) async {
+    if (status != 200) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(mensagemErro)));
+    }
+  }
+
+  //String mensagem = mapResponse['message'];
+  String token = mapResponse['access_token'];
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('token', token);
+}
+
 class _LoginPageState extends State<LoginPage> {
+  late LoginModel _loginModel;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool checkedValue = true;
   final _formKey = GlobalKey<FormState>();
   String? _email;
@@ -22,30 +70,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          //para o background gradiente
           decoration: new BoxDecoration(
-            //color: Color(0x62F6BD87),
             color: Colors.white,
-            /* gradient: new LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                // #E5E5E5 0%, #F6BD87 8.54%, #E79F84 24.32%, #EC9F94 40.68%, #EB9B95 58.38%, #E89A95 65.44%, #DD9795 71.43%, #CC9396 77.03%, #B38C96 82.39%, #9A8F9C 87.59%, #9DA1A9 92.59%, #B3B9C0 96.37%
-                //E5E5E5 100%, F6BD87 100%, EDAB85 100%
-                Color(0xFFE5E5E5),
-                Color(0xFFF6BD87),
-                Color(0xFFE79F84),
-                Color(0xFFEC9F94),
-                Color(0xFFEB9B95),
-                Color(0xFFE89A95),
-                Color(0xFFDD9795),
-                Color(0xFFCC9396),
-                Color(0xFFB38C96),
-                Color(0xFF9A8F9C),
-                Color(0xFF9DA1A9),
-                Color(0xFFB3B9C0)
-              ],
-            ), */
           ),
           padding: EdgeInsets.only(left: 15, right: 15, top: 40),
           //coluna para colocar a imagem e o form
@@ -83,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                           onSaved: (input) => _email = input!,
+                          controller: emailController,
                           decoration: InputDecoration(
                             labelText: "E-mail",
                             labelStyle: TextStyle(
@@ -122,6 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           onSaved: (input) => _senha = input!,
                           obscureText: true,
+                          controller: passwordController,
                           decoration: InputDecoration(
                             labelText: "Senha",
                             labelStyle: TextStyle(
@@ -169,16 +197,34 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                           child: TextButton(
-                            onPressed: () {
+                            onPressed: () async {
                               //faz a validação do formulário
                               if (_formKey.currentState!.validate()) {
                                 //salvar o estado do formulário
                                 _formKey.currentState!.save();
 
+                                String email = emailController.text;
+                                String password = passwordController.text;
+
+                                LoginModel loginUsuario =
+                                    (await login(email, password))
+                                        as LoginModel;
+
+                                setState(() {
+                                  _loginModel = loginUsuario;
+                                });
+
+                                print('email: $email e senha: $password');
+
+                                /*
+                                var response =
+                                    await LoginModel(email, password); */
+
                                 /* ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content:
                                             Text("Bem vindo(a), $_email"))); */
+
                                 setarMaterialPageRouteTab(context, TabsPage());
                               }
                             },
@@ -214,7 +260,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: TextButton(
                             onPressed: () {
                               setarMaterialPageRoute(
-                                  context, CadastroUsuario());
+                                  context, CadastroUsuarioTeste());
                             },
                             child: Text(
                               "Criar conta",
@@ -247,4 +293,15 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+/*
+  String? _validaLogin(String value) {
+    if (value.isEmpty) {
+      return "E-mail inválido";
+    }
+    if (value.length < 8) {
+      return "O campo deve ter no mínimo 8 caracteres"
+    }
+    return null;
+  }
+  */
 }

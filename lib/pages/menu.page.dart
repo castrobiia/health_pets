@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/login.page.dart';
+import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
+import 'package:health_pets/pages/testeapi.dart';
 //import 'package:health_pets/pages/teste-slidable.page.dart';
 
 class MenuItem {
@@ -52,12 +54,12 @@ PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem<MenuItem>(
 void onSelected(BuildContext context, MenuItem item) {
   switch (item) {
     case MenuItems.itemVacinas:
-      setarMaterialPageRoute(context, PetPage());
+      setarMaterialPageRoute(context, TesteApi());
       break;
     case MenuItems.itemTratamentos:
       setarMaterialPageRoute(context, PetPage());
       break;
     case MenuItems.itemLogout:
-      setarMaterialPageRoute(context, LoginPage());
+      setarMaterialPageRoute(context, LogoutPage());
   }
 }
