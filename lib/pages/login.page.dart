@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/login-model.dart';
 import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
-import 'package:health_pets/pages/cadastro-usuario.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -32,8 +31,10 @@ Future<LoginModel?> login(String email, String password) async {
     'password': password,
   });
 
+
   print('Retorno do login------');
   print('RESPONSE STATUS CODE: ${response.statusCode}');
+
   print('RESPONSE BODY: ${response.body}');
 
   Map mapResponse = jsonDecode(response.body);

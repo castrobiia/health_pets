@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/cadastro-pet.page.dart';
 import 'package:health_pets/pages/login.page.dart';
@@ -15,21 +18,11 @@ class PetPage extends StatelessWidget {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String token = await prefs.get('token').toString();
 
-      if (token == null || token == '') {
+      if(token == null || token == ''){
         setarMaterialPageRoute(context, LoginPage());
       }
-      /* 
-      var keyBox = await Hive.openBox('session');
-
-      if (!keyBox.containsKey('key')) {
-        print('não existe token');
-        setarMaterialPageRoute(context, LoginPage());
-      }
-      print('existe token');
-      setarMaterialPageRoute(context, PetPage());
-      */
     }
-
+    
     autenticacao();
 
     return Scaffold(
