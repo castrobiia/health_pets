@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:health_pets/links/links-pages.dart';
@@ -18,11 +17,11 @@ class PetPage extends StatelessWidget {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String token = await prefs.get('token').toString();
 
-      if(token == null || token == ''){
+      if (token == null || token == '') {
         setarMaterialPageRoute(context, LoginPage());
       }
     }
-    
+
     autenticacao();
 
     return Scaffold(
