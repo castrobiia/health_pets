@@ -50,6 +50,7 @@ Future<UsuarioModelTeste?> submitUsuario(String name, String email,
     'password_confirmation': password_confirmation,
   }); */
   var statusCode = response.statusCode;
+
   var dadosUsuario = response.body;
 
   //Map<String, dynamic> decodedJson = jsonDecode(response.body);

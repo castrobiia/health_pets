@@ -7,6 +7,7 @@ import 'package:health_pets/pages/cadastro-pet.page.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
 import 'package:health_pets/widgets/pet/pet-list.widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PetPage extends StatelessWidget {
   const PetPage({Key? key}) : super(key: key);
@@ -58,11 +59,6 @@ class PetPage extends StatelessWidget {
               child: PetLista(),
             ),
           ),
-          /* Container(
-            color: Colors.amber,
-            height: 80,
-            child: Text("Espaço botão"),
-          ), */
         ],
       ),
     );

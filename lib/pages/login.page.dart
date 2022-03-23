@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/login-model.dart';
 import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
@@ -32,11 +31,24 @@ Future<LoginModel?> login(String email, String password) async {
     'password': password,
   });
 
-  // print('RESPONSE STATUS CODE: ${response.statusCode}');
+
   print('Retorno do login------');
+  print('RESPONSE STATUS CODE: ${response.statusCode}');
+
   print('RESPONSE BODY: ${response.body}');
 
   Map mapResponse = jsonDecode(response.body);
+
+  var status = response.statusCode;
+
+  var mensagemErro = 'Erro';
+
+  Future _status(BuildContext context) async {
+    if (status != 200) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(mensagemErro)));
+    }
+  }
 
   //String mensagem = mapResponse['message'];
   String token = mapResponse['access_token'];
