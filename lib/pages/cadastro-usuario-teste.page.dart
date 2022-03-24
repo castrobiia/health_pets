@@ -20,7 +20,6 @@ class CadastroUsuarioTeste extends StatefulWidget {
 String mensagem = '';
 Future<UsuarioModelTeste?> submitUsuario(String name, String email,
     String password, String password_confirmation) async {
-  //const url = 'https://www.healthpets.app.br/api/auth/register';
 
   Map<String, String> requestHeaders = {
     'Content-type': 'application/json',
@@ -42,15 +41,6 @@ Future<UsuarioModelTeste?> submitUsuario(String name, String email,
   Map mapResponse = jsonDecode(response.body);
   mensagem = mapResponse['message'];
 
-  //if (response.statusCode != 201) {}
-
-  /* 
-  final response1 = await http.post(Uri.parse(url), body: {
-    'name': name,
-    'email': email,
-    'password': password,
-    'password_confirmation': password_confirmation,
-  }); */
   var statusCode = response.statusCode;
 
   var dadosUsuario = response.body;
@@ -62,11 +52,6 @@ Future<UsuarioModelTeste?> submitUsuario(String name, String email,
   // }
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('token', token);
-
-  //Map<String, dynamic> decodedJson = jsonDecode(response.body);
-  //final List<UsuarioJson> mensagemUsuario = decodedJson["message"];
-  //print('mensagem usuário: ${mensagemUsuario}');
-  print('VENDO OS DADOS DO USUÁRIO: ${statusCode}, ${dadosUsuario}');
 }
 
 class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
