@@ -8,6 +8,7 @@ import 'package:health_pets/models/login-model.dart';
 import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -28,20 +29,24 @@ Future<LoginModel?> login(String email, String password) async {
 
   var status = response.statusCode;
 
-  var mensagemErro = 'Erro';
-
-  Future _status(BuildContext context) async {
-    if (status != 200) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(mensagemErro)));
-    }
+  if(status == 401){
+    var error = mensagem = mapResponse['error'];
+    Fluttertoast.showToast(
+        msg: error,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+  } else{
+    String token = mapResponse['access_token'];
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
   }
-
-  String token = mapResponse['access_token'];
-
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString('token', token);
 }
+
 
 class _LoginPageState extends State<LoginPage> {
   late LoginModel _loginModel;
@@ -104,22 +109,6 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.w400,
                               fontSize: 17,
                             ),
-                            /*
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFDBE2E7),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFDBE2E7),
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          filled: true, */
                           ),
                         ),
                         SizedBox(
@@ -203,15 +192,6 @@ class _LoginPageState extends State<LoginPage> {
 
                                 print('email: $email e senha: $password');
 
-                                /*
-                                var response =
-                                    await LoginModel(email, password); */
-
-                                /* ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content:
-                                            Text("Bem vindo(a), $_email"))); */
-
                                 setarMaterialPageRouteTab(context, TabsPage());
                               }
                             },
@@ -259,36 +239,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              /* Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                height: 100,
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Divider(
-                      height: 2,
-                      color: Colors.black12,
-                      thickness: 2,
-                    )
-                  ],
-                ),
-              ), */
             ],
           ),
         ),
       ),
     );
   }
-/*
-  String? _validaLogin(String value) {
-    if (value.isEmpty) {
-      return "E-mail inválido";
-    }
-    if (value.length < 8) {
-      return "O campo deve ter no mínimo 8 caracteres"
-    }
-    return null;
-  }
-  */
 }
