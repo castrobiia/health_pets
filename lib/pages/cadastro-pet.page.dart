@@ -1,10 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:health_pets/http/webclient.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
 import 'package:health_pets/models/especie-model.dart';
-import 'package:health_pets/pages/pet.page.dart';
 import 'package:http/http.dart' as http;
 
 class CadastrarPetPage extends StatefulWidget {

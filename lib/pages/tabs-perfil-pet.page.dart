@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/categorias-pet.page.dart';
 import 'package:health_pets/pages/historico-pet.page.dart';
 import 'package:health_pets/pages/informacoes-pet.page.dart';
 import 'package:health_pets/pages/menu-pet.page.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
-import 'package:health_pets/pages/pet.page.dart';
-import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 
 class PerfilPetPage extends StatelessWidget {
   const PerfilPetPage({Key? key}) : super(key: key);

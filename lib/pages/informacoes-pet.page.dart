@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/widgets/vacina/tabela-vacina.widget.dart';
 
 class InformacoesPet extends StatefulWidget {
   const InformacoesPet({Key? key}) : super(key: key);

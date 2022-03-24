@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:health_pets/http/usuario-repository.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/usuario-model-teste.dart';
-import 'package:health_pets/models/usuario-model.dart';
 import 'package:health_pets/pages/tabs.page.dart';
-import 'package:http/http.dart' as http;
 
 class CadastroUsuarioTeste extends StatefulWidget {
   const CadastroUsuarioTeste({Key? key}) : super(key: key);
@@ -18,7 +18,6 @@ class CadastroUsuarioTeste extends StatefulWidget {
 String mensagem = '';
 Future<UsuarioModelTeste?> submitUsuario(String name, String email,
     String password, String password_confirmation) async {
-  //const url = 'https://www.healthpets.app.br/api/auth/register';
 
   Map<String, String> requestHeaders = {
     'Content-type': 'application/json',
@@ -40,23 +39,17 @@ Future<UsuarioModelTeste?> submitUsuario(String name, String email,
   Map mapResponse = jsonDecode(response.body);
   mensagem = mapResponse['message'];
 
-  if (response.statusCode != 201) {}
-
-  /* 
-  final response1 = await http.post(Uri.parse(url), body: {
-    'name': name,
-    'email': email,
-    'password': password,
-    'password_confirmation': password_confirmation,
-  }); */
   var statusCode = response.statusCode;
 
   var dadosUsuario = response.body;
 
-  //Map<String, dynamic> decodedJson = jsonDecode(response.body);
-  //final List<UsuarioJson> mensagemUsuario = decodedJson["message"];
-  //print('mensagem usuário: ${mensagemUsuario}');
-  print('VENDO OS DADOS DO USUÁRIO: ${statusCode}, ${dadosUsuario}');
+  String token = mapResponse['token'];
+
+  // if (token == null || token == '') {
+  //   setarMaterialPageRoute(context, PerfilPetPage());
+  // }
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('token', token);
 }
 
 class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
