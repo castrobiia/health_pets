@@ -1,12 +1,17 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:json_annotation/json_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/usuario-model-teste.dart';
 import 'package:health_pets/pages/tabs.page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import 'login.page.dart';
 
 class CadastroUsuarioTeste extends StatefulWidget {
   const CadastroUsuarioTeste({Key? key}) : super(key: key);
@@ -15,8 +20,7 @@ class CadastroUsuarioTeste extends StatefulWidget {
   State<CadastroUsuarioTeste> createState() => _CadastroUsuarioTesteState();
 }
 
-String mensagem = '';
-Future<UsuarioModelTeste?> submitUsuario(String name, String email,
+Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name, String email,
     String password, String password_confirmation) async {
 
   Map<String, String> requestHeaders = {
@@ -35,21 +39,28 @@ Future<UsuarioModelTeste?> submitUsuario(String name, String email,
       Uri.https('healthpets.app.br', 'api/auth/register'),
       headers: requestHeaders,
       body: requestBody);
+  Map<String, dynamic> list = json.decode(response.body);
 
-  Map mapResponse = jsonDecode(response.body);
-  mensagem = mapResponse['message'];
+  if(list['errors'] != null){
+    var msg = '';
+    if(list['errors']["name"] != null || list['errors']["name"] == ""){
+      msg += '\n'+list['errors']["name"].toString().substring(1, list['errors']["name"].toString().length-1)+'\n';
+    }
+    if(list['errors']["email"] != null || list['errors']["email"] == ""){
+      msg += list['errors']["email"].toString().substring(1, list['errors']["email"].toString().length-1)+'\n';
+    }
+    if(list['errors']["password"] != null || list['errors']["password"] == ""){
+      msg += list['errors']["password"].toString().substring(1, list['errors']["password"].toString().length-1)+'\n';
+    }
+    if(list['errors']["password_confirmation"] != null || list['errors']["password_confirmation"] == ""){
+      msg += list['errors']["password_confirmation"].toString().substring(1, list['errors']["password_confirmation"].toString().length-1);
+    }
 
-  var statusCode = response.statusCode;
-
-  var dadosUsuario = response.body;
-
-  String token = mapResponse['token'];
-
-  // if (token == null || token == '') {
-  //   setarMaterialPageRoute(context, PerfilPetPage());
-  // }
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString('token', token);
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(msg)));
+  }else{
+    setarMaterialPageRouteTab(context, LoginPage());
+  }
 }
 
 class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
@@ -227,16 +238,13 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                         String confirmacaoSenha =
                             confirmacaoSenhaController.text;
 
-                        UsuarioModelTeste dadosUsuario = (await submitUsuario(
+                        UsuarioModelTeste dadosUsuario = (await submitUsuario( context,
                                 nome, email, senha, confirmacaoSenha))
                             as UsuarioModelTeste;
 
                         setState(() {
                           _usuarioModelTeste = dadosUsuario;
                         });
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text(mensagem)));
-                        setarMaterialPageRouteTab(context, TabsPage());
                       },
                       child: Text(
                         "Salvar",
