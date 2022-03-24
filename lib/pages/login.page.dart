@@ -17,7 +17,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-Future<LoginModel?> login(String email, String password) async {
+Future<LoginModel?> login(BuildContext context, String email, String password) async {
 
   var response =
       await http.post(Uri.https('healthpets.app.br', 'api/auth/login'), body: {
@@ -44,6 +44,7 @@ Future<LoginModel?> login(String email, String password) async {
     String token = mapResponse['access_token'];
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
+    setarMaterialPageRouteTab(context, TabsPage());
   }
 }
 
@@ -183,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                                 String password = passwordController.text;
 
                                 LoginModel loginUsuario =
-                                    (await login(email, password))
+                                    (await login(context, email, password))
                                         as LoginModel;
 
                                 setState(() {
@@ -192,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
 
                                 print('email: $email e senha: $password');
 
-                                setarMaterialPageRouteTab(context, TabsPage());
+                                //setarMaterialPageRouteTab(context, TabsPage());
                               }
                             },
                             child: Text(
