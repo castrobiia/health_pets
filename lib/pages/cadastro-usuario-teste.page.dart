@@ -1,14 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:health_pets/http/usuario-repository.dart';
-import 'package:health_pets/links/links-pages.dart';
-import 'package:health_pets/models/usuario-model-teste.dart';
-import 'package:health_pets/models/usuario-model.dart';
-import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
-import 'package:health_pets/pages/tabs.page.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:health_pets/links/links-pages.dart';
+import 'package:health_pets/models/usuario-model-teste.dart';
+import 'package:health_pets/pages/tabs.page.dart';
 
 class CadastroUsuarioTeste extends StatefulWidget {
   const CadastroUsuarioTeste({Key? key}) : super(key: key);
