@@ -30,7 +30,7 @@ Future<LoginModel?> login(BuildContext context, String email, String password) a
   var status = response.statusCode;
 
   if(status == 401){
-    var error = mensagem = mapResponse['error'];
+    var error = mapResponse['error'];
     Fluttertoast.showToast(
         msg: error,
         toastLength: Toast.LENGTH_SHORT,
