@@ -47,6 +47,8 @@ dependencies:
   flutter_slidable: ^1.2.0
   http_interceptor: ^1.0.2
   shared_preferences: ^2.0.13
+  fluttertoast: ^8.0.9
+
 
 dev_dependencies:
   flutter_test:

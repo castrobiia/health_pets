@@ -2,7 +2,7 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   archive:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: archive
       url: "https://pub.dartlang.org"
@@ -72,7 +72,7 @@ packages:
     source: hosted
     version: "1.15.0"
   crypto:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: crypto
       url: "https://pub.dartlang.org"
@@ -154,13 +154,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  hive:
+  fluttertoast:
     dependency: "direct main"
     description:
-      name: hive
+      name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.6"
+    version: "8.0.9"
   http:
     dependency: "direct main"
     description:
@@ -183,7 +183,7 @@ packages:
     source: hosted
     version: "4.0.0"
   image:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: image
       url: "https://pub.dartlang.org"
@@ -466,7 +466,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.2"
+    version: "2.4.4"
   xdg_directories:
     dependency: transitive
     description:
