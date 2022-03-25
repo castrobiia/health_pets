@@ -55,41 +55,47 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     "Accept": "application/json",
   };
 
+  List listaEspecies = [];
+
+  Future<EspecieModel?> getAllEspecies() async {
+    const url = 'https://www.healthpets.app.br/api/especie';
+
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    };
+    final response = await http.get(Uri.parse(url), headers: header);
+
+    // if (response.statusCode == 200) {
+    //   setState(() {
+    //     var especies = jsonDecode(response.body);
+    //   });
+    // } else {
+    //   setState(() {
+    //     ScaffoldMessenger.of(context)
+    //         .showSnackBar(SnackBar(content: Text('Erro ao carregar')));
+    //   });
+    // }
+
+    var especies = jsonDecode(response.body);
+
+    setState(() {
+      listaEspecies = especies;
+    });
+
+    // return especies;
+    // listaEspecies = especies;
+    // print(listaEspecies);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     var especieId;
-    List listaEspecies = [];
 
     const url = 'https://www.healthpets.app.br/api/especie';
 
-    Future<EspecieModel> getAllEspecies() async {
-      const url = 'https://www.healthpets.app.br/api/especie';
-
-      var header = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      };
-      final response = await http.get(Uri.parse(url), headers: header);
-
-      if (response.statusCode == 200) {
-        setState(() {
-          var especies = jsonDecode(response.body);
-        });
-      } else {
-        setState(() {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Erro ao carregar')));
-        });
-      }
-
-      var especies = jsonDecode(response.body);
-
-      setState(() {
-        listaEspecies = especies['descricao'];
-      });
-
-      return especies;
-    }
+    getAllEspecies();
 
     Future<CadastroAnimalModel?> submitAnimal(String nome,
         String data_nascimento, int id_especie, int id_raca) async {
@@ -300,16 +306,16 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   height: 40,
                 ),
                 */
-                DropdownButtonFormField(
-                  value: ValorInicialEspecie,
-                  items: especies.map((items) {
-                    return DropdownMenuItem(value: items, child: Text(items));
-                  }).toList(),
-                  onChanged: (value) {},
-                ),
+                // DropdownButtonFormField(
+                //   value: ValorInicialEspecie,
+                //   items: especies.map((items) {
+                //     return DropdownMenuItem(value: items, child: Text(items));
+                //   }).toList(),
+                //   onChanged: (value) {},
+                // ),
                 DropdownButtonFormField(
                   items: listaEspecies.map((item) {
-                    return new DropdownMenuItem(
+                    return DropdownMenuItem(
                       child: new Text(
                         item['descricao'],
                         style: TextStyle(fontSize: 12),

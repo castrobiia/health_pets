@@ -4,6 +4,10 @@ import 'package:health_pets/widgets/pet/pet-card.widget.dart';
 class PetLista extends StatelessWidget {
   const PetLista({Key? key}) : super(key: key);
 
+  getPets(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
