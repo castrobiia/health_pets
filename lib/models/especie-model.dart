@@ -1,5 +1,3 @@
-import 'dart:async';
-
 class EspecieModel {
   final int id;
   final String descricao;

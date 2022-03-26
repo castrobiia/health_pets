@@ -26,10 +26,6 @@ class EspecieController {
     } catch (e) {
       state.value = EspecieState.error;
     }
-
-    /* especies = await repository.findAllEspecies();
-    var tamEspecies = especies.length;
-    print('tamEspecies: ${tamEspecies}'); */
   }
 }
 

@@ -1,6 +1,5 @@
 import 'package:health_pets/models/login-model.dart';
 import 'package:http/http.dart' as http;
-import 'dart:typed_data';
 
 class LoginRepository {
   Future<LoginModel?> login(String email, String password) async {
