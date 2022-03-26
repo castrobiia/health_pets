@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:health_pets/models/usuario-model-teste.dart';
 import 'package:http/http.dart' as http;
 

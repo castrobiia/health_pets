@@ -1,10 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:health_pets/models/especie-model.dart';
-import 'package:health_pets/pages/cadastro-pet.page.dart';
 //coloca as funcoes dentro do objeto http
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 import 'package:http_interceptor/http_interceptor.dart';
