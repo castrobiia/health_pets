@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:health_pets/models/especie-model.dart';
-//coloca as funcoes dentro do objeto http
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
