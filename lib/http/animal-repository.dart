@@ -1,12 +1,6 @@
-import 'dart:convert';
-import 'dart:html';
-
 import 'package:dio/dio.dart';
-import 'package:http_interceptor/http/intercepted_client.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:health_pets/class/util.dart';
-import 'package:health_pets/http/webclient.dart';
+
 import 'package:health_pets/models/animal-model.dart';
 
 class AnimalRepository {
