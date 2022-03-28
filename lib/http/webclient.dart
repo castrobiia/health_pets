@@ -4,6 +4,7 @@ import 'package:health_pets/models/animal-model.dart';
 import 'package:health_pets/models/especie-model.dart';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http_interceptor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoggingInterceptor implements InterceptorContract {
   @override
@@ -48,19 +49,20 @@ class RepositoryEspecie {
 }
 
 class RepositoryAnimal {
-  Future<List<AnimalModel>> findAllAnimais() async {
+  Future<List> findAllAnimais() async {
     final Client client = InterceptedClient.build(
       interceptors: [
         LoggingInterceptor(),
       ],
     );
 
-    print(Util.getPreferences('token'));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
 
     var header = {
       "Content-Type": "application/json",
       "Accept": "application/json",
-      "Authorization": "Bearer ${Util.getPreferences('token')}"
+      "Authorization": "Bearer ${token}"
     };
 
     const url = 'https://www.healthpets.app.br/api/animal';
