@@ -4,7 +4,7 @@ class AnimalModel {
   String? dataNascimento;
   int? idEspecie;
   Null? idRaca;
-  int? foto;
+  String? foto;
 
   AnimalModel(
       {this.id,
