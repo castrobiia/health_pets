@@ -49,7 +49,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
 
   List listaEspecies = [];
   List listaRacas = [];
-  List teste = [];
 
   Future<EspecieModel?> getAllEspecies() async {
     const url = 'https://www.healthpets.app.br/api/especie';
@@ -71,9 +70,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     setState(() {
       listaRacas = racas;
     });
-
-    teste = racas['descricao'];
-    print(teste);
   }
 
   @override
