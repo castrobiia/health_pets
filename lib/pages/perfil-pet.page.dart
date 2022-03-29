@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/http/webclient.dart';
+import 'package:health_pets/models/animal-model.dart';
 
 class PerfilPet extends StatelessWidget {
-  const PerfilPet({Key? key}) : super(key: key);
+  final id;
+  const PerfilPet( this.id);
 
   @override
   Widget build(BuildContext context) {
+    final List animal = [];
+    // RepositoryAnimal().getAnimal(id).then((value) => animal.add(value));
+    RepositoryAnimal().getAnimal(id).then((value) => print(value));
+    // print(RepositoryAnimal().getAnimal(id));
+    print("retorno animal perfil");
+    // print(animal?[0]);
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -49,12 +58,14 @@ class PerfilPet extends StatelessWidget {
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/perfil-cao1.jpeg"),
+                        // image: AssetImage(animal?[0].foto ?? ''),
+                        image: AssetImage( 'jhsgjadhsgjas'),
                       ),
                     ),
                   ),
                   Text(
-                    "Thom",
+                    '',
+                    // animal?[0].nome ?? '',
                     style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                   ),
                   Row(
@@ -123,7 +134,8 @@ class PerfilPet extends StatelessWidget {
                         "Data de Nascimento",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Text("01/01/2012"),
+                      // Text(animal?[0].dataNascimento ?? ''),
+                      Text(''),
                     ],
                   ),
                   Divider(

@@ -4,8 +4,17 @@ import 'package:health_pets/pages/informacoes-pet.page.dart';
 import 'package:health_pets/pages/menu-pet.page.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
 
-class PerfilPetPage extends StatelessWidget {
-  const PerfilPetPage({Key? key}) : super(key: key);
+class PerfilPetPage extends StatefulWidget {
+  final id;
+  const PerfilPetPage(this.id);
+
+  @override
+  State<PerfilPetPage> createState() => _PerfilPetPageState(this.id);
+}
+
+class _PerfilPetPageState extends State<PerfilPetPage> {
+  final id;
+  _PerfilPetPageState(this.id);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +46,7 @@ class PerfilPetPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            PerfilPet(),
+            PerfilPet(id),
             HistoricoPet("dia", 10),
             InformacoesPet()
           ],
