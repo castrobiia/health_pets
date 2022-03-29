@@ -11,14 +11,6 @@ class CadastrarPetPage extends StatefulWidget {
 }
 
 class _CadastrarPetPageState extends State<CadastrarPetPage> {
-  var ValorInicialEspecie = 'Gato';
-
-  List<String> especies = ['Cachorro', 'Gato'];
-
-  void initState() {
-    super.initState();
-  }
-
   DateTime _data = DateTime.now();
   var mensagemErro = 'Selecione uma data';
 
@@ -56,46 +48,40 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
   };
 
   List listaEspecies = [];
+  List listaRacas = [];
+  List teste = [];
 
   Future<EspecieModel?> getAllEspecies() async {
     const url = 'https://www.healthpets.app.br/api/especie';
 
-    var header = {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    };
     final response = await http.get(Uri.parse(url), headers: header);
-
-    // if (response.statusCode == 200) {
-    //   setState(() {
-    //     var especies = jsonDecode(response.body);
-    //   });
-    // } else {
-    //   setState(() {
-    //     ScaffoldMessenger.of(context)
-    //         .showSnackBar(SnackBar(content: Text('Erro ao carregar')));
-    //   });
-    // }
-
     var especies = jsonDecode(response.body);
 
     setState(() {
       listaEspecies = especies;
     });
-
-    // return especies;
-    // listaEspecies = especies;
-    // print(listaEspecies);
   }
 
+  Future<EspecieModel?> getAllRacas() async {
+    const url = 'https://www.healthpets.app.br/api/raca';
+
+    final response = await http.get(Uri.parse(url), headers: header);
+    var racas = jsonDecode(response.body);
+
+    setState(() {
+      listaRacas = racas;
+    });
+
+    teste = racas['descricao'];
+    print(teste);
+  }
 
   @override
   Widget build(BuildContext context) {
-    var especieId;
-
-    const url = 'https://www.healthpets.app.br/api/especie';
+    var especieId, racaId;
 
     getAllEspecies();
+    getAllRacas();
 
     Future<CadastroAnimalModel?> submitAnimal(String nome,
         String data_nascimento, int id_especie, int id_raca) async {
@@ -200,38 +186,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   height: 10,
                 ),
                 TextFormField(
-                  autofocus: false,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Espécie",
-                    labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                    ),
-                  ),
-                  controller: especieController,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  autofocus: false,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Raça",
-                    labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                    ),
-                  ),
-                  controller: racaController,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
                   //formatar para receber data
                   autofocus: false,
                   //keyboardType: TextInputType.datetime,
@@ -245,7 +199,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                     ),
                   ),
                   readOnly: true,
-
                   onTap: () {
                     setState(() {
                       _dataSelecionada(context);
@@ -256,69 +209,14 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                 SizedBox(
                   height: 10,
                 ),
-                /* 
-                TextFormField(
-                  //criar dropdown
-                  autofocus: false,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Sexo",
-                    labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  //criar dropdown
-                  autofocus: false,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Porte",
-                    labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  //criar dropdown
-                  autofocus: false,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Cor",
-                    labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                */
-                // DropdownButtonFormField(
-                //   value: ValorInicialEspecie,
-                //   items: especies.map((items) {
-                //     return DropdownMenuItem(value: items, child: Text(items));
-                //   }).toList(),
-                //   onChanged: (value) {},
-                // ),
                 DropdownButtonFormField(
+                  hint: Text("Espécie"),
+                  style: TextStyle(fontSize: 17, color: Colors.black),
                   items: listaEspecies.map((item) {
                     return DropdownMenuItem(
                       child: new Text(
                         item['descricao'],
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 17),
                       ),
                       value: item['id'].toString(),
                     );
@@ -326,33 +224,32 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   onChanged: (newValue) {
                     setState(() {
                       especieId = newValue;
-                      print(especieId.toString());
                     });
                   },
                   value: especieId,
                 ),
-                /* DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: especieId,
-                    iconSize: 30,
-                    icon: (null),
-                    hint: Text("Espécie"),
-                    items: listaEspecies.map((item) {
-                      return new DropdownMenuItem(
-                        child: new Text(
-                          item['descricao']), 
-                          value: item['id'].toString(),
-                        );
-                    }).toList() ?? [],
-                    onChanged: (String newValue) {
+                SizedBox(
+                  height: 10,
+                ),
+                DropdownButtonFormField(
+                  hint: Text("Raça"),
+                  style: TextStyle(fontSize: 17, color: Colors.black),
+                  items: listaRacas.map((item) {
+                    return DropdownMenuItem(
+                      child: new Text(
+                        item['descricao'],
+                        style: TextStyle(fontSize: 17),
+                      ),
+                      value: item['id'].toString(),
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
                     setState(() {
-                      _myState = newValue;
-                      getAllEspecies(id, descricao, id_template)
-                      print(_myState);
-                    },),
-                    },
-                  ),
-                ), */
+                      racaId = newValue;
+                    });
+                  },
+                  value: racaId,
+                ),
               ],
             ),
           ),
@@ -361,33 +258,3 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     );
   }
 }
-
-
-
-
-
-/*
-
-Future<EspecieModel> getAllEspecies(String id, String descricao) async {
-
-  var header = {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    };
-
-  await http
-      .post(Uri.parse(url), headers: header, body: {
-    'id': id,
-    'descricao': descricao,
-    
-  }).then((response) {
-    var especies = jsonDecode(response.body);
-
-    print('Espécies: ${especies}');
-    setState(() {
-      listaEspecies = especies['descricao'];
-    });
-  });
-} */
-
-
