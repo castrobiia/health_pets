@@ -3,12 +3,14 @@ import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 
 class PetCard extends StatelessWidget {
+  final int idPet;
   final String fotoPet;
   final String nomePet;
   final String taxonomiaPet;
   final int idadePet;
 
   PetCard({
+    required this.idPet,
     required this.fotoPet,
     required this.nomePet,
     required this.taxonomiaPet,
@@ -62,7 +64,8 @@ class PetCard extends StatelessWidget {
                   children: <Widget>[
                     IconButton(
                         onPressed: () {
-                          setarMaterialPageRoute(context, PerfilPetPage());
+                          // setarMaterialPageRoute(context, PerfilPetPage());
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PerfilPetPage(idPet)));
                         },
                         icon: Icon(Icons.navigate_next))
 

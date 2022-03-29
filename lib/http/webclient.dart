@@ -76,4 +76,38 @@ class RepositoryAnimal {
     print("TESTE RETURN ANIMAL");
     return decodedJson.map((json) => AnimalModel.fromJson(json)).toList();
   }
+
+  Future<String> getAnimal(int id) async {
+  // Future<void> getAnimal(int id) async {
+    final Client client = InterceptedClient.build(
+      interceptors: [
+        LoggingInterceptor(),
+      ],
+    );
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    const url = 'https://www.healthpets.app.br/api/animal/';
+    final response = await client.get(Uri.parse(url+id.toString()), headers: header);
+    var titulo = jsonDecode(response.body);
+
+    final Listanimal;
+
+    final List<dynamic> decodedJson = jsonDecode(response.body) ;
+    final Map<String, dynamic> map = json.decode(response.body);
+    final List<AnimalModel> animais = [];
+
+    print("TESTE RETURN ANIMAL");
+    print("Dentro");
+    return response.body;
+    // return (json.decode(response.body) as Map<String,dynamic>);
+    // print
+  }
 }

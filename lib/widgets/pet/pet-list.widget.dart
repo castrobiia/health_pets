@@ -34,6 +34,7 @@ class PetLista extends StatelessWidget {
                 AnimalModel pet = list[index];
                   return Container(
                     child:  PetCard(
+                              idPet: pet.id ?? 0,
                               fotoPet: pet.foto ?? '',
                               nomePet:pet.nome ?? '',
                               taxonomiaPet: 'pug',
