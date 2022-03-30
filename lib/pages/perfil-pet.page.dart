@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:health_pets/http/webclient.dart';
 import 'package:health_pets/models/animal-model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
 class PerfilPet extends StatefulWidget {
@@ -31,6 +32,15 @@ Future<dynamic?> getAnimal(int id) async {
       await http.get(Uri.parse(url + id.toString()), headers: header);
 
   dynamic animal = jsonDecode(response.body);
+
+  /*
+  var formatarData = animal['data_nascimento'];
+  var dataFormatada = DateFormat("dd/MM/yyyy").format(formatarData);
+
+ 
+  var inputFormat = DateFormat('dd/MM/yyyy');
+  var inputDate = inputFormat.parse(formatarData);
+  */
 
   return animal;
 }
@@ -88,13 +98,26 @@ class _PerfilPetState extends State<PerfilPet> {
                     if (snapshot.connectionState != ConnectionState.done) {
                       // return: show loading widget
                       //todo mostrar o loading
-                      print(snapshot.data);
+                      return Center(
+                          child: Container(child: CircularProgressIndicator()));
                     }
                     if (snapshot.hasError) {
                       // return: show error widget
+                      return Center(
+                          child: Container(
+                              child: Text('Erro ao carregar os dados')));
                       print(snapshot.data);
                     }
+
                     final animal = snapshot.data;
+                    /*
+                    var data_teste = (animal['data_nascimento']);
+                    var dataFormatada =
+                        DateFormat("dd/MM/yyyy").format(data_teste);
+
+                    String teste = DateFormat("dd/MM/yyyy")
+                        .format(animal['data_nascimento']);
+                    DateTime teste2 = DateTime.parse(teste); */
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -166,7 +189,8 @@ class _PerfilPetState extends State<PerfilPet> {
                               "Data de Nascimento",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text(animal['data_nascimento']),
+                            //Text(dataFormatada),
+                            //Text(animal['data_nascimento']),
                           ],
                         ),
                         Divider(
