@@ -33,15 +33,6 @@ Future<dynamic?> getAnimal(int id) async {
 
   dynamic animal = jsonDecode(response.body);
 
-  /*
-  var formatarData = animal['data_nascimento'];
-  var dataFormatada = DateFormat("dd/MM/yyyy").format(formatarData);
-
- 
-  var inputFormat = DateFormat('dd/MM/yyyy');
-  var inputDate = inputFormat.parse(formatarData);
-  */
-
   return animal;
 }
 
@@ -110,14 +101,10 @@ class _PerfilPetState extends State<PerfilPet> {
                     }
 
                     final animal = snapshot.data;
-                    /*
-                    var data_teste = (animal['data_nascimento']);
-                    var dataFormatada =
-                        DateFormat("dd/MM/yyyy").format(data_teste);
 
-                    String teste = DateFormat("dd/MM/yyyy")
-                        .format(animal['data_nascimento']);
-                    DateTime teste2 = DateTime.parse(teste); */
+                    var dataFormatada = DateFormat("dd/MM/yyyy")
+                        .format(DateTime.parse(animal['data_nascimento']))
+                        .toString();
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -189,7 +176,7 @@ class _PerfilPetState extends State<PerfilPet> {
                               "Data de Nascimento",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            //Text(dataFormatada),
+                            Text(dataFormatada),
                             //Text(animal['data_nascimento']),
                           ],
                         ),
