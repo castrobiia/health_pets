@@ -12,9 +12,8 @@ class PetLista extends StatelessWidget {
 
     RepositoryAnimal()
         .findAllAnimais()
-        .then((animais) => animais.forEach((element) { pets.add(element);}));
-
-    print(pets.length);
+        .then((animais) => animais.forEach((element) { print('Id do print${element.id}');}));
+        // .then((animais) => animais.forEach((element) { pets.add(element);}));
 
     return Scaffold(
       body: FutureBuilder<List>(

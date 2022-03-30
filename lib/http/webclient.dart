@@ -74,10 +74,11 @@ class RepositoryAnimal {
     final List<AnimalModel> animais = [];
 
     print("TESTE RETURN ANIMAL");
+    print(decodedJson.map((json) => AnimalModel.fromJson(json).toString()));
     return decodedJson.map((json) => AnimalModel.fromJson(json)).toList();
   }
 
-  Future<String> getAnimal(int id) async {
+  Future<AnimalModel> getAnimal(int id) async {
   // Future<void> getAnimal(int id) async {
     final Client client = InterceptedClient.build(
       interceptors: [
@@ -87,6 +88,8 @@ class RepositoryAnimal {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
+
+    // AnimalModel.loadAnimal();
 
     var header = {
       "Content-Type": "application/json",
@@ -103,11 +106,12 @@ class RepositoryAnimal {
     final List<dynamic> decodedJson = jsonDecode(response.body) ;
     final Map<String, dynamic> map = json.decode(response.body);
     final List<AnimalModel> animais = [];
+    AnimalModel animal = new AnimalModel.fromJson(jsonDecode(response.body));
 
     print("TESTE RETURN ANIMAL");
     print("Dentro");
-    return response.body;
-    // return (json.decode(response.body) as Map<String,dynamic>);
+    // return response.body;
+    return animal;
     // print
   }
 }
