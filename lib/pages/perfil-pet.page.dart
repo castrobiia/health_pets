@@ -63,7 +63,7 @@ class _PerfilPetState extends State<PerfilPet> {
                 right: 40,
               ),
               width: double.infinity,
-              height: 650,
+              height: 500,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(
@@ -110,10 +110,12 @@ class _PerfilPetState extends State<PerfilPet> {
                           ),
                         ),
                         Text(
-                          // '',
                           animal['nome'],
                           style: TextStyle(
                               fontSize: 23, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,9 +131,6 @@ class _PerfilPetState extends State<PerfilPet> {
                           height: 1,
                           thickness: 1,
                         ),
-                        /* SizedBox(
-                    height: 10,
-                  ), */
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -140,20 +139,6 @@ class _PerfilPetState extends State<PerfilPet> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             Text("Golden"),
-                          ],
-                        ),
-                        Divider(
-                          height: 1,
-                          thickness: 1,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Sexo",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text("Macho"),
                           ],
                         ),
                         Divider(
@@ -182,13 +167,14 @@ class _PerfilPetState extends State<PerfilPet> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             Text(animal['data_nascimento']),
-                            // Text(''),
                           ],
                         ),
                         Divider(
                           height: 1,
                           thickness: 1,
                         ),
+                        // add campo peso somente quando habilitar cadastro de peso
+                        /*
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -202,31 +188,7 @@ class _PerfilPetState extends State<PerfilPet> {
                         Divider(
                           height: 1,
                           thickness: 1,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Cor",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text("Caramelo"),
-                          ],
-                        ),
-                        Divider(
-                          height: 1,
-                          thickness: 1,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Porte",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text("Grande"),
-                          ],
-                        ),
+                        ), */
                       ],
                     );
                   }),
