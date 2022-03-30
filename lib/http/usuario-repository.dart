@@ -12,6 +12,5 @@ class UsuarioRepository {
       'password_confirmation': password_confirmation,
     });
     var dadosUsuario = response.body;
-    print('VENDO OS DADOS DO USUÁRIO ${dadosUsuario}');
   }
 }

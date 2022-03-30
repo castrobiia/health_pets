@@ -92,8 +92,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
           });
 
       var dadosAnimal = response.body;
-
-      print('VENDO OS DADOS DO ANIMAL ${dadosAnimal}');
     }
 
     return Scaffold(

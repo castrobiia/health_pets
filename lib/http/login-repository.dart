@@ -14,8 +14,5 @@ class LoginRepository {
       'email': email,
       'password': password,
     });
-
-    print('RESPONSE STATUS CODE: ${response.statusCode}');
-    print('RESPONSE BODY: ${response.body}');
   }
 }
