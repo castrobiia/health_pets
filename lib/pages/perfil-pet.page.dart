@@ -1,19 +1,69 @@
-import 'package:flutter/material.dart';
-import 'package:health_pets/http/webclient.dart';
-import 'package:health_pets/models/animal-model.dart';
+import 'dart:convert';
 
-class PerfilPet extends StatelessWidget {
+import 'package:flutter/material.dart';
+// import 'package:health_pets/http/webclient.dart';
+import 'package:health_pets/models/animal-model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
+class PerfilPet extends StatefulWidget {
   final id;
   const PerfilPet( this.id);
 
   @override
+  State<PerfilPet> createState() => _PerfilPetState(this.id);
+}
+
+Future<dynamic?> getAnimal(int id) async {
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = await prefs.get('token').toString();
+
+  // AnimalModel.loadAnimal();
+
+  var header = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer ${token}"
+  };
+
+  const url = 'https://www.healthpets.app.br/api/animal/';
+  final response = await http.get(Uri.parse(url+id.toString()), headers: header);
+
+  dynamic animal = jsonDecode(response.body);
+
+
+  return animal;
+}
+
+class _PerfilPetState extends State<PerfilPet> {
+  final int id;
+  _PerfilPetState(this.id);
+
+
+  Future<String> getToken() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    return token as String;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List animal = [];
+    // final AnimalModel animal = RepositoryAnimal().getAnimal(id) as AnimalModel;
+    // Map<String, dynamic> myMap = Map<String, dynamic>.from(/Your Source/ );
     // RepositoryAnimal().getAnimal(id).then((value) => animal.add(value));
-    RepositoryAnimal().getAnimal(id).then((value) => print(value));
+    // RepositoryAnimal().getAnimal(id).then((value) => print(value));
     // print(RepositoryAnimal().getAnimal(id));
-    print("retorno animal perfil");
+    // print("retorno animal perfil");
     // print(animal?[0]);
+
+
+    // Future<String> token = getToken().then((value) => value);
+    // AnimalModel animal = new AnimalModel().loadAnimal(token as String) as AnimalModel;
+    //
+    // print(animal);
+
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -48,140 +98,155 @@ class PerfilPet extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        // image: AssetImage(animal?[0].foto ?? ''),
-                        image: AssetImage( 'jhsgjadhsgjas'),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    '',
-                    // animal?[0].nome ?? '',
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: FutureBuilder<dynamic>(
+                future: getAnimal(id),
+                builder: (context, snapshot){
+                  if(snapshot.connectionState != ConnectionState.done) {
+                    // return: show loading widget
+                    //todo mostrar o loading
+                    print(snapshot.data);
+                  }
+                  if(snapshot.hasError) {
+                    // return: show error widget
+                    print(snapshot.data);
+                  }
+                  final animal = snapshot.data;
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text(
-                        "Espécie",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Container(
+                        width: 200,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(animal['foto'] ?? ''),
+                          ),
+                        ),
                       ),
-                      Text("Canina"),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  /* SizedBox(
+                      Text(
+                        // '',
+                        animal['nome'],
+                        style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Espécie",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("Canina"),
+                        ],
+                      ),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                      /* SizedBox(
                     height: 10,
                   ), */
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Raça",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Raça",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("Golden"),
+                        ],
                       ),
-                      Text("Golden"),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Sexo",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
                       ),
-                      Text("Macho"),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Idade",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Sexo",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("Macho"),
+                        ],
                       ),
-                      Text("10 anos"),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Data de Nascimento",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
                       ),
-                      // Text(animal?[0].dataNascimento ?? ''),
-                      Text(''),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Peso",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Idade",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("10 anos"),
+                        ],
                       ),
-                      Text("10 kg"),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Cor",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
                       ),
-                      Text("Caramelo"),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Porte",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Data de Nascimento",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(animal['data_nascimento']),
+                          // Text(''),
+                        ],
                       ),
-                      Text("Grande"),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Peso",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("10 kg"),
+                        ],
+                      ),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Cor",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("Caramelo"),
+                        ],
+                      ),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Porte",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("Grande"),
+                        ],
+                      ),
                     ],
-                  ),
-                ],
+                  );
+                }
               ),
+              // child: getAnimal(id)! ?? 0,
             ),
           ],
         ),
