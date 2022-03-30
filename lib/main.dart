@@ -8,11 +8,6 @@ import 'package:splashscreen/splashscreen.dart';
 
 void main() {
   runApp(const MyApp());
-
-  RepositoryEspecie()
-      .findAllEspecies()
-      .then((especies) => print('espécies: ${especies}'));
-  //findAllEspecies().then((especies) => print('espécies: ${especies}'));
 }
 
 class MyApp extends StatelessWidget {

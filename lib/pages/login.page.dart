@@ -17,8 +17,8 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-Future<LoginModel?> login(BuildContext context, String email, String password) async {
-
+Future<LoginModel?> login(
+    BuildContext context, String email, String password) async {
   var response =
       await http.post(Uri.https('healthpets.app.br', 'api/auth/login'), body: {
     'email': email,
@@ -29,7 +29,7 @@ Future<LoginModel?> login(BuildContext context, String email, String password) a
 
   var status = response.statusCode;
 
-  if(status == 401){
+  if (status == 401) {
     var error = mapResponse['error'];
     Fluttertoast.showToast(
         msg: error,
@@ -38,16 +38,14 @@ Future<LoginModel?> login(BuildContext context, String email, String password) a
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
-        fontSize: 16.0
-    );
-  } else{
+        fontSize: 16.0);
+  } else {
     String token = mapResponse['access_token'];
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
     setarMaterialPageRouteTab(context, TabsPage());
   }
 }
-
 
 class _LoginPageState extends State<LoginPage> {
   late LoginModel _loginModel;
@@ -190,8 +188,6 @@ class _LoginPageState extends State<LoginPage> {
                                 setState(() {
                                   _loginModel = loginUsuario;
                                 });
-
-                                print('email: $email e senha: $password');
 
                                 //setarMaterialPageRouteTab(context, TabsPage());
                               }

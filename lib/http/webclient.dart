@@ -43,7 +43,6 @@ class RepositoryEspecie {
     final List<dynamic> decodedJson = jsonDecode(response.body);
     final List<EspecieModel> especies = [];
 
-    print("TESTE RETURN ESPECIES");
     return decodedJson.map((json) => EspecieModel.fromJson(json)).toList();
   }
 }
@@ -79,7 +78,7 @@ class RepositoryAnimal {
   }
 
   Future<AnimalModel> getAnimal(int id) async {
-  // Future<void> getAnimal(int id) async {
+    // Future<void> getAnimal(int id) async {
     final Client client = InterceptedClient.build(
       interceptors: [
         LoggingInterceptor(),
@@ -98,20 +97,17 @@ class RepositoryAnimal {
     };
 
     const url = 'https://www.healthpets.app.br/api/animal/';
-    final response = await client.get(Uri.parse(url+id.toString()), headers: header);
+    final response =
+        await client.get(Uri.parse(url + id.toString()), headers: header);
     var titulo = jsonDecode(response.body);
 
     final Listanimal;
 
-    final List<dynamic> decodedJson = jsonDecode(response.body) ;
+    final List<dynamic> decodedJson = jsonDecode(response.body);
     final Map<String, dynamic> map = json.decode(response.body);
     final List<AnimalModel> animais = [];
     AnimalModel animal = new AnimalModel.fromJson(jsonDecode(response.body));
 
-    print("TESTE RETURN ANIMAL");
-    print("Dentro");
-    // return response.body;
     return animal;
-    // print
   }
 }
