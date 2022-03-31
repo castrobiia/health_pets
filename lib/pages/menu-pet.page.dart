@@ -49,10 +49,11 @@ PopupMenuItem<MenuItemPet> buildItem(MenuItemPet item) =>
       ),
     );
 
-void onSelected(BuildContext context, MenuItemPet item) {
+void onSelected(BuildContext context, MenuItemPet item, dynamic id) {
+  final idPet = id;
   switch (item) {
     case MenuItemsPet.itemEditar:
-      setarMaterialPageRoute(context, EditarPetPage());
+      setarMaterialPageRoute(context, EditarPetPage(idPet));
       break;
     case MenuItemsPet.itemExcluir:
       setarMaterialPageRoute(context, PetPage());

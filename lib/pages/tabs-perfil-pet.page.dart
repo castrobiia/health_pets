@@ -37,7 +37,7 @@ class _PerfilPetPageState extends State<PerfilPetPage> {
           centerTitle: true,
           actions: [
             PopupMenuButton<MenuItemPet>(
-              onSelected: (item) => onSelected(context, item),
+              onSelected: (item) => onSelected(context, item, id),
               itemBuilder: (context) => [
                 ...MenuItemsPet.items.map(buildItem).toList(),
               ],
