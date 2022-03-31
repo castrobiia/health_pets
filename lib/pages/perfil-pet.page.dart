@@ -19,8 +19,6 @@ Future<dynamic?> getAnimal(int id) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String token = await prefs.get('token').toString();
 
-  // AnimalModel.loadAnimal();
-
   var header = {
     "Content-Type": "application/json",
     "Accept": "application/json",
@@ -34,6 +32,44 @@ Future<dynamic?> getAnimal(int id) async {
   dynamic animal = jsonDecode(response.body);
 
   return animal;
+}
+
+Future<dynamic?> getEspecie(int id) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = await prefs.get('token').toString();
+
+  var header = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer ${token}"
+  };
+
+  const url = 'https://www.healthpets.app.br/api/especie/';
+  final response =
+      await http.get(Uri.parse(url + id.toString()), headers: header);
+
+  dynamic especie = jsonDecode(response.body);
+
+  return especie;
+}
+
+Future<dynamic?> getRaca(int id) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = await prefs.get('token').toString();
+
+  var header = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer ${token}"
+  };
+
+  const url = 'https://www.healthpets.app.br/api/raca/';
+  final response =
+      await http.get(Uri.parse(url + id.toString()), headers: header);
+
+  dynamic raca = jsonDecode(response.body);
+
+  return raca;
 }
 
 class _PerfilPetState extends State<PerfilPet> {
@@ -127,29 +163,50 @@ class _PerfilPetState extends State<PerfilPet> {
                         SizedBox(
                           height: 10,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Espécie",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text("Canina"),
-                          ],
+                        FutureBuilder<dynamic>(
+                          future: getEspecie(animal['id_especie']),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState !=
+                                ConnectionState.done) {}
+                            if (snapshot.hasError) {}
+
+                            final especie = snapshot.data;
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Espécie",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(especie['descricao'] ?? ''),
+                              ],
+                            );
+                          },
                         ),
                         Divider(
                           height: 1,
                           thickness: 1,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Raça",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text("Golden"),
-                          ],
+                        FutureBuilder<dynamic>(
+                          future: getRaca(animal['id_raca']),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState !=
+                                ConnectionState.done) {}
+                            if (snapshot.hasError) {}
+
+                            final raca = snapshot.data;
+
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Raça",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(raca['raca']['nome'] ?? ''),
+                              ],
+                            );
+                          },
                         ),
                         Divider(
                           height: 1,
