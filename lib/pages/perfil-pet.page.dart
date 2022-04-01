@@ -160,7 +160,6 @@ class _PerfilPetState extends State<PerfilPet> {
                       if (hoje.day < nascimento.day) idade--;
                     }
 
-                    String idadeString = idade.toString();
                     String textoIdade;
 
                     if (idade == 1) {
@@ -247,7 +246,7 @@ class _PerfilPetState extends State<PerfilPet> {
                               "Idade",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text(idadeString + " " + textoIdade),
+                            Text(idade.toString() + " " + textoIdade),
                           ],
                         ),
                         Divider(
