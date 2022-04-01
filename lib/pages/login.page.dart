@@ -136,20 +136,6 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        CheckboxListTile(
-                          title: Text(
-                            "Lembrar-me",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          value: checkedValue,
-                          onChanged: (newValue) {
-                            setState(() {
-                              checkedValue = newValue!;
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity
-                              .leading, //  <-- leading Checkbox
-                        ),
                         SizedBox(height: 20),
                         Container(
                           width: double.infinity,
