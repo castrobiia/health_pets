@@ -131,9 +131,10 @@ class _PerfilPetState extends State<PerfilPet> {
                     if (snapshot.hasError) {
                       // return: show error widget
                       return Center(
-                          child: Container(
-                              child: Text('Erro ao carregar os dados')));
-                      print(snapshot.data);
+                        child: Container(
+                          child: Text('Erro ao carregar os dados'),
+                        ),
+                      );
                     }
 
                     final animal = snapshot.data;
@@ -141,6 +142,32 @@ class _PerfilPetState extends State<PerfilPet> {
                     var dataFormatada = DateFormat("dd/MM/yyyy")
                         .format(DateTime.parse(animal['data_nascimento']))
                         .toString();
+
+                    List<String> camposData = dataFormatada.split('/');
+
+                    int dia = int.parse(camposData[0]);
+                    int mes = int.parse(camposData[1]);
+                    int ano = int.parse(camposData[2]);
+
+                    DateTime nascimento = DateTime(ano, mes, dia);
+                    DateTime hoje = DateTime.now();
+
+                    int idade = hoje.year - nascimento.year;
+
+                    if (hoje.month < nascimento.month)
+                      idade--;
+                    else if (hoje.month == nascimento.month) {
+                      if (hoje.day < nascimento.day) idade--;
+                    }
+
+                    String textoIdade;
+
+                    if (idade == 1) {
+                      textoIdade = "ano";
+                    } else {
+                      textoIdade = "anos";
+                    }
+
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -219,7 +246,7 @@ class _PerfilPetState extends State<PerfilPet> {
                               "Idade",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text("10 anos"),
+                            Text(idade.toString() + " " + textoIdade),
                           ],
                         ),
                         Divider(
@@ -234,7 +261,6 @@ class _PerfilPetState extends State<PerfilPet> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             Text(dataFormatada),
-                            //Text(animal['data_nascimento']),
                           ],
                         ),
                         Divider(
@@ -260,7 +286,6 @@ class _PerfilPetState extends State<PerfilPet> {
                       ],
                     );
                   }),
-              // child: getAnimal(id)! ?? 0,
             ),
           ],
         ),
