@@ -21,14 +21,11 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         firstDate: DateTime(DateTime.now().year - 30),
         lastDate: DateTime.now());
 
+    print('date picker: ${_datePicker}');
+
     if (_datePicker != null && _datePicker != _data) {
       setState(() {
-        String data = _datePicker as String;
-        dataNascimentoController.text = data;
-
-        print(_data.toString());
-        print('controller');
-        print(dataNascimentoController.text);
+        dataNascimentoController.text = _datePicker.toString();
       });
     } else {
       ScaffoldMessenger.of(context)
@@ -184,7 +181,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   autofocus: false,
                   //keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
-                    hintText: (_data.toString()),
+                    hintText: (dataNascimentoController.toString()),
                     labelText: "Data de Nascimento",
                     labelStyle: TextStyle(
                       //color: Color(0xFFCC9396),
@@ -198,6 +195,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                       _dataSelecionada(context);
                     });
                   },
+
                   controller: dataNascimentoController,
                 ),
                 SizedBox(
