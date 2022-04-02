@@ -230,7 +230,7 @@ class _PerfilPetState extends State<PerfilPet> {
                                   "Raça",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                Text(raca['raca']['nome'] ?? ''),
+                                Text(raca['nome'] ?? ''),
                               ],
                             );
                           },
