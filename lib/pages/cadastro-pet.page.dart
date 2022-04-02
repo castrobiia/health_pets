@@ -58,28 +58,35 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     final response = await http.get(Uri.parse(url), headers: header);
     var especies = jsonDecode(response.body);
 
+    print(especies);
+
     setState(() {
       listaEspecies = especies;
     });
   }
 
-  Future<EspecieModel?> getAllRacas() async {
-    const url = 'https://www.healthpets.app.br/api/raca';
+  pegarIdEspecie(String id) async {
+    print('ID PEGAR ESPECIE: ${id}');
+
+    String url = 'https://www.healthpets.app.br/api/especie/${id}/racas';
+
+    print('URL: ${url}');
 
     final response = await http.get(Uri.parse(url), headers: header);
     var racas = jsonDecode(response.body);
+    print('RACAS: ${racas}');
 
     setState(() {
+      //listaRacas = racas;
+      print('cheguei');
       listaRacas = racas;
+      print(listaRacas);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     var especieId, racaId;
-
-    getAllEspecies();
-    getAllRacas();
 
     Future<CadastroAnimalModel?> submitAnimal(String nome,
         String data_nascimento, int id_especie, int id_raca) async {
@@ -166,6 +173,13 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   ],
                 ),
                 TextFormField(
+                  onTap: () {
+                    setState(() {
+                      print('to aqui');
+                      getAllEspecies();
+                      print('cheguei aqui');
+                    });
+                  },
                   autofocus: false,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -221,6 +235,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   onChanged: (newValue) {
                     setState(() {
                       especieId = newValue;
+                      print('especie id: ${especieId}');
+                      pegarIdEspecie(especieId);
                     });
                   },
                   value: especieId,
