@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
 import 'package:health_pets/models/especie-model.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class CadastrarPetPage extends StatefulWidget {
   @override
@@ -31,6 +32,10 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(mensagemErro)));
     }
+
+    dataNascimentoController.text =
+        DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
+    print(dataNascimentoController);
   }
 
   late CadastrarPetPage _cadastrarPetPage;
@@ -181,7 +186,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   autofocus: false,
                   //keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
-                    hintText: (dataNascimentoController.toString()),
+                    //hintText: (dataFormatada),
                     labelText: "Data de Nascimento",
                     labelStyle: TextStyle(
                       //color: Color(0xFFCC9396),
