@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:health_pets/class/util.dart';
 import 'package:health_pets/models/animal-model.dart';
 import 'package:health_pets/models/especie-model.dart';
 import 'package:http/http.dart';
