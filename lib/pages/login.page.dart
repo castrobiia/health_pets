@@ -51,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
   late LoginModel _loginModel;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  //bool checkedValue = true; //isso era do lembrar senha? [APAGAR]
   final _formKey = GlobalKey<FormState>();
   String? _email;
   String? _senha;
