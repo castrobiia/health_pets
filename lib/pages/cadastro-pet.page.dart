@@ -22,8 +22,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         firstDate: DateTime(DateTime.now().year - 30),
         lastDate: DateTime.now());
 
-    print('date picker: ${_datePicker}');
-
     if (_datePicker != null && _datePicker != _data) {
       setState(() {
         dataNascimentoController.text = _datePicker.toString();
@@ -35,7 +33,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
 
     dataNascimentoController.text =
         DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
-    print(dataNascimentoController);
   }
 
   late CadastrarPetPage _cadastrarPetPage;
@@ -58,29 +55,17 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     final response = await http.get(Uri.parse(url), headers: header);
     var especies = jsonDecode(response.body);
 
-    print(especies);
-
-    setState(() {
-      listaEspecies = especies;
-    });
+    listaEspecies = especies;
   }
 
-  pegarIdEspecie(String id) async {
-    print('ID PEGAR ESPECIE: ${id}');
-
+  getRacasPorEspecie(String id) async {
     String url = 'https://www.healthpets.app.br/api/especie/${id}/racas';
-
-    print('URL: ${url}');
 
     final response = await http.get(Uri.parse(url), headers: header);
     var racas = jsonDecode(response.body);
-    print('RACAS: ${racas}');
 
     setState(() {
-      //listaRacas = racas;
-      print('cheguei');
       listaRacas = racas;
-      print(listaRacas);
     });
   }
 
@@ -172,97 +157,97 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                     ),
                   ],
                 ),
-                TextFormField(
-                  onTap: () {
-                    setState(() {
-                      print('to aqui');
-                      getAllEspecies();
-                      print('cheguei aqui');
-                    });
-                  },
-                  autofocus: false,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    labelText: "Nome",
-                    labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                    ),
-                  ),
-                  controller: nomeController,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  //formatar para receber data
-                  autofocus: false,
-                  //keyboardType: TextInputType.datetime,
-                  decoration: InputDecoration(
-                    //hintText: (dataFormatada),
-                    labelText: "Data de Nascimento",
-                    labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                    ),
-                  ),
-                  readOnly: true,
-                  onTap: () {
-                    setState(() {
-                      _dataSelecionada(context);
-                    });
-                  },
+                FutureBuilder<dynamic>(
+                  future: getAllEspecies(),
+                  builder: (context, snapshot) {
+                    return Column(children: <Widget>[
+                      TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          labelText: "Nome",
+                          labelStyle: TextStyle(
+                            //color: Color(0xFFCC9396),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
+                          ),
+                        ),
+                        controller: nomeController,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        //formatar para receber data
+                        autofocus: false,
+                        //keyboardType: TextInputType.datetime,
+                        decoration: InputDecoration(
+                          //hintText: (dataFormatada),
+                          labelText: "Data de Nascimento",
+                          labelStyle: TextStyle(
+                            //color: Color(0xFFCC9396),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
+                          ),
+                        ),
+                        readOnly: true,
+                        onTap: () {
+                          setState(() {
+                            _dataSelecionada(context);
+                          });
+                        },
 
-                  controller: dataNascimentoController,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                DropdownButtonFormField(
-                  hint: Text("Espécie"),
-                  style: TextStyle(fontSize: 17, color: Colors.black),
-                  items: listaEspecies.map((item) {
-                    return DropdownMenuItem(
-                      child: new Text(
-                        item['descricao'],
-                        style: TextStyle(fontSize: 17),
+                        controller: dataNascimentoController,
                       ),
-                      value: item['id'].toString(),
-                    );
-                  }).toList(),
-                  onChanged: (newValue) {
-                    setState(() {
-                      especieId = newValue;
-                      print('especie id: ${especieId}');
-                      pegarIdEspecie(especieId);
-                    });
-                  },
-                  value: especieId,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                DropdownButtonFormField(
-                  hint: Text("Raça"),
-                  style: TextStyle(fontSize: 17, color: Colors.black),
-                  items: listaRacas.map((item) {
-                    return DropdownMenuItem(
-                      child: new Text(
-                        item['descricao'],
-                        style: TextStyle(fontSize: 17),
+                      SizedBox(
+                        height: 10,
                       ),
-                      value: item['id'].toString(),
-                    );
-                  }).toList(),
-                  onChanged: (newValue) {
-                    setState(() {
-                      racaId = newValue;
-                    });
+                      DropdownButtonFormField(
+                        hint: Text("Espécie"),
+                        style: TextStyle(fontSize: 17, color: Colors.black),
+                        items: listaEspecies.map((item) {
+                          return DropdownMenuItem(
+                            child: new Text(
+                              item['descricao'],
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            value: item['id'].toString(),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            especieId = newValue;
+
+                            getRacasPorEspecie(especieId);
+                          });
+                        },
+                        value: especieId,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      DropdownButtonFormField(
+                        hint: Text("Raça"),
+                        style: TextStyle(fontSize: 17, color: Colors.black),
+                        items: listaRacas.map((item) {
+                          return DropdownMenuItem(
+                            child: new Text(
+                              item['descricao'],
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            value: item['id'].toString(),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            racaId = newValue;
+                          });
+                        },
+                        value: racaId,
+                      )
+                    ]);
                   },
-                  value: racaId,
-                ),
+                )
               ],
             ),
           ),
