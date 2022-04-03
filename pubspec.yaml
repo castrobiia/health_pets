@@ -35,6 +35,9 @@ dependencies:
   dio: ^4.0.4
   http: ^0.13.4
   json_annotation: ^4.4.0
+  image_picker:  any
+  cached_network_image: any
+  path: any
 
 
   # The following adds the Cupertino Icons font to your application.
