@@ -238,9 +238,14 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 height: 10,
                               ),
                               TextFormField(
-                                //formatar para receber data
                                 autofocus: false,
-                                //keyboardType: TextInputType.datetime,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Selecione uma data";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (input) => _dataNascimento = input!,
                                 decoration: InputDecoration(
                                   labelText: "Data de Nascimento",
                                   labelStyle: TextStyle(
@@ -264,6 +269,13 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                               ),
                               DropdownButtonFormField(
                                 hint: Text("Espécie"),
+                                validator: (value) {
+                                  if (value==null) {
+                                    return "Selecione a espécie";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (input) => _especie = input! as String?,
                                 style: TextStyle(
                                     fontSize: 17, color: Colors.black),
                                 items: listaEspecies.map((item) {
@@ -289,6 +301,13 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                               ),
                               DropdownButtonFormField(
                                 hint: Text("Raça"),
+                                validator: (value) {
+                                  if (value==null) {
+                                    return "Selecione a raça";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (input) => _especie = input! as String?,
                                 style: TextStyle(
                                     fontSize: 17, color: Colors.black),
                                 items: listaRacas.map((item) {
