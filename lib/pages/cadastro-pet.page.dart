@@ -133,24 +133,29 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         actions: <Widget>[
           TextButton(
             onPressed: () async {
-              String nome = nomeController.text;
-              print(nome);
-              String data_nascimento = dataNascimentoTesteController.text;
-              print(data_nascimento);
-              String id_especie = especieController.text;
-              print(id_especie);
-              String id_raca = racaController.text;
-              print(id_raca);
+              if (_formKey.currentState!.validate()) {
+                //salvar o estado do formulário
+                _formKey.currentState!.save();
 
-              CadastroAnimalModel dadosAnimal = (await submitAnimal(
-                      nome, data_nascimento, id_especie, id_raca))
-                  as CadastroAnimalModel;
+                String nome = nomeController.text;
+                print(nome);
+                String data_nascimento = dataNascimentoTesteController.text;
+                print(data_nascimento);
+                String id_especie = especieController.text;
+                print(id_especie);
+                String id_raca = racaController.text;
+                print(id_raca);
 
-              print('DADOS ANIMAL: ${dadosAnimal}');
+                CadastroAnimalModel dadosAnimal = (await submitAnimal(
+                        nome, data_nascimento, id_especie, id_raca))
+                    as CadastroAnimalModel;
 
-              setState(() {
-                _cadastrarPetPage = dadosAnimal;
-              });
+                setState(
+                  () {
+                    _cadastrarPetPage = dadosAnimal;
+                  },
+                );
+              }
             },
             child: const Text("Salvar"),
           ),
