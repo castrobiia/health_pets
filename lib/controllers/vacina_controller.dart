@@ -1,4 +1,5 @@
 
+import 'package:health_pets/http/vacina-repository.dart';
 import 'package:health_pets/models/vacina-model.dart';
 
 class VacinaController {

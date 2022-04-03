@@ -85,6 +85,7 @@ class CadastroUsuario extends StatelessWidget {
                         fontSize: 17,
                       ),
                     ),
+                    //controller: nomeController,
                   ),
                   SizedBox(
                     height: 10,
