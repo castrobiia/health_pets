@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 
 class PetCard extends StatelessWidget {

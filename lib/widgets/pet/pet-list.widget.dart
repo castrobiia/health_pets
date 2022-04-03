@@ -36,7 +36,7 @@ class PetLista extends StatelessWidget {
                               idPet: pet.id ?? 0,
                               fotoPet: pet.foto ?? '',
                               nomePet:pet.nome ?? '',
-                              taxonomiaPet: 'pug',
+                              taxonomiaPet: '',
                               idadePet: 13,
                             ),
                   );
