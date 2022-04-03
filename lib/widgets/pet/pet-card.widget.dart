@@ -5,15 +5,15 @@ class PetCard extends StatelessWidget {
   final int idPet;
   final String fotoPet;
   final String nomePet;
-  final String taxonomiaPet;
-  final int idadePet;
+  //final String taxonomiaPet;
+  //final int idadePet;
 
   PetCard({
     required this.idPet,
     required this.fotoPet,
     required this.nomePet,
-    required this.taxonomiaPet,
-    required this.idadePet,
+    //required this.taxonomiaPet,
+    //required this.idadePet,
   });
 
   @override
@@ -51,7 +51,7 @@ class PetCard extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    Text(taxonomiaPet),
+                    //Text(taxonomiaPet),
                     //Text("${idadePet} anos"), // fazer um if/switch pra: ano, mes, meses
                   ],
                 ),
