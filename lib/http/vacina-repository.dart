@@ -3,7 +3,7 @@ import 'package:health_pets/models/vacina-model.dart';
 
 class VacinaRepository {
   final dio = Dio();
-  final url = "https://www.healthpets.app.br/api/vacina";
+  final url = "https://www.healthpets.app.br/api/animal/1/vacina";
 
   Future<List<VacinaModel>> fetchVacina() async {
     final response = await dio.get(url);
