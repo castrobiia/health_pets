@@ -17,7 +17,6 @@ class CadastrarPetPage extends StatefulWidget {
 class _CadastrarPetPageState extends State<CadastrarPetPage> {
   DateTime _data = DateTime.now();
   var mensagemErro = 'Selecione uma data';
-  var dataFormatada;
 
   Future _dataSelecionada(BuildContext context) async {
     var _datePicker = await showDatePicker(
@@ -37,9 +36,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     }
 
     dataNascimentoController.text =
-        DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
-
-    dataFormatada =
         DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
   }
 
