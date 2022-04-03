@@ -1,10 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
 import 'package:health_pets/models/especie-model.dart';
+import 'package:health_pets/pages/pet.page.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CadastrarPetPage extends StatefulWidget {
   @override
@@ -14,6 +17,7 @@ class CadastrarPetPage extends StatefulWidget {
 class _CadastrarPetPageState extends State<CadastrarPetPage> {
   DateTime _data = DateTime.now();
   var mensagemErro = 'Selecione uma data';
+  var dataFormatada;
 
   Future _dataSelecionada(BuildContext context) async {
     var _datePicker = await showDatePicker(
@@ -25,6 +29,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     if (_datePicker != null && _datePicker != _data) {
       setState(() {
         dataNascimentoController.text = _datePicker.toString();
+        dataNascimentoTesteController.text = dataNascimentoController.text;
       });
     } else {
       ScaffoldMessenger.of(context)
@@ -33,17 +38,21 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
 
     dataNascimentoController.text =
         DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
+
+    dataFormatada =
+        DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
   }
 
-  late CadastrarPetPage _cadastrarPetPage;
+  late CadastroAnimalModel _cadastrarPetPage;
   TextEditingController nomeController = TextEditingController();
   TextEditingController especieController = TextEditingController();
   TextEditingController racaController = TextEditingController();
   TextEditingController dataNascimentoController = TextEditingController();
+  TextEditingController dataNascimentoTesteController = TextEditingController();
 
   var header = {
     "Content-Type": "application/json",
-    "Accept": "application/json",
+    "Accept": "application/json"
   };
 
   List listaEspecies = [];
@@ -61,7 +70,18 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
   getRacasPorEspecie(String id) async {
     String url = 'https://www.healthpets.app.br/api/especie/${id}/racas';
 
-    final response = await http.get(Uri.parse(url), headers: header);
+    print('URL: $url');
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var headerToken = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    final response = await http.get(Uri.parse(url), headers: headerToken);
     var racas = jsonDecode(response.body);
 
     setState(() {
@@ -74,18 +94,34 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     var especieId, racaId;
 
     Future<CadastroAnimalModel?> submitAnimal(String nome,
-        String data_nascimento, int id_especie, int id_raca) async {
+        String data_nascimento, String id_especie, String id_raca) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String token = await prefs.get('token').toString();
+
+      var headerToken = {
+        "Accept": "application/json",
+        "Authorization": "Bearer ${token}"
+      };
       final response = await http.post(
           Uri.https('healthpets.app.br', 'api/animal'),
-          headers: header,
+          headers: headerToken,
           body: {
             'nome': nome,
             'data_nascimento': data_nascimento,
             'id_especie': id_especie,
             'id_raca': id_raca
           });
-
-      var dadosAnimal = response.body;
+      var status = response.statusCode;
+      print('status: $status');
+      var dados_animal = response.body;
+      print('dados_animal: $dados_animal');
+      if (status == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Animal cadastrado com sucesso')));
+        setarMaterialPageRouteTab(context, PetPage());
+      } else {
+        print("erro ao cadastrar animal");
+      }
     }
 
     return Scaffold(
@@ -97,16 +133,22 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
           TextButton(
             onPressed: () async {
               String nome = nomeController.text;
-              String data_nascimento = dataNascimentoController.text;
-              int id_especie = especieController.text as int;
-              int id_raca = racaController.text as int;
+              print(nome);
+              String data_nascimento = dataNascimentoTesteController.text;
+              print(data_nascimento);
+              String id_especie = especieController.text;
+              print(id_especie);
+              String id_raca = racaController.text;
+              print(id_raca);
 
               CadastroAnimalModel dadosAnimal = (await submitAnimal(
                       nome, data_nascimento, id_especie, id_raca))
                   as CadastroAnimalModel;
 
+              print('DADOS ANIMAL: ${dadosAnimal}');
+
               setState(() {
-                _cadastrarPetPage = dadosAnimal as CadastrarPetPage;
+                _cadastrarPetPage = dadosAnimal;
               });
             },
             child: const Text("Salvar"),
@@ -182,7 +224,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                         autofocus: false,
                         //keyboardType: TextInputType.datetime,
                         decoration: InputDecoration(
-                          //hintText: (dataFormatada),
                           labelText: "Data de Nascimento",
                           labelStyle: TextStyle(
                             //color: Color(0xFFCC9396),
@@ -190,14 +231,13 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                             fontSize: 17,
                           ),
                         ),
+                        controller: dataNascimentoController,
                         readOnly: true,
                         onTap: () {
                           setState(() {
                             _dataSelecionada(context);
                           });
                         },
-
-                        controller: dataNascimentoController,
                       ),
                       SizedBox(
                         height: 10,
@@ -216,9 +256,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                         }).toList(),
                         onChanged: (newValue) {
                           setState(() {
-                            especieId = newValue;
-
-                            getRacasPorEspecie(especieId);
+                            especieController.text = newValue.toString();
+                            getRacasPorEspecie(especieController.text);
                           });
                         },
                         value: especieId,
@@ -240,7 +279,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                         }).toList(),
                         onChanged: (newValue) {
                           setState(() {
-                            racaId = newValue;
+                            racaController.text = newValue.toString();
                           });
                         },
                         value: racaId,
