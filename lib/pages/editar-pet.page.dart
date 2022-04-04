@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -75,9 +76,40 @@ Future<dynamic?> getRaca(int id) async {
   return raca;
 }
 
+var dataNascimento;
+
 class _EditarPetPageState extends State<EditarPetPage> {
   final id;
   _EditarPetPageState(this.id);
+
+  DateTime _data = DateTime.now();
+  var mensagemErro = 'Selecione uma data';
+
+  Future _dataSelecionada(BuildContext context) async {
+    var _datePicker = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(DateTime.now().year - 30),
+        lastDate: DateTime.now());
+
+    if (_datePicker != null && _datePicker != _data) {
+      setState(() {
+        dataNascimentoController.text = _datePicker.toString();
+        dataNascimentoTesteController.text = dataNascimentoController.text;
+      });
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(mensagemErro)));
+    }
+
+    dataNascimentoController.text =
+        DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
+
+    var valorInicial = null;
+  }
+
+  final dataNascimentoController = TextEditingController(text: dataNascimento);
+  TextEditingController dataNascimentoTesteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +142,12 @@ class _EditarPetPageState extends State<EditarPetPage> {
                   // return: show loading widget
                   //todo mostrar o loading
                   return Center(
-                      child: Container(child: CircularProgressIndicator()));
+                    child: Column(
+                      children: [
+                        Text('carregando getAnimal'),
+                      ],
+                    ),
+                  );
                 }
                 if (snapshot.hasError) {
                   // return: show error widget
@@ -121,6 +158,11 @@ class _EditarPetPageState extends State<EditarPetPage> {
 
                 final animal = snapshot.data;
 
+                dataNascimento = DateFormat("dd/MM/yyyy")
+                    .format(DateTime.parse(animal['data_nascimento']));
+
+                print(dataNascimento);
+
                 return FutureBuilder<dynamic>(
                   future: getEspecie(animal['id_especie']),
                   builder: (context, snapshot) {
@@ -128,7 +170,12 @@ class _EditarPetPageState extends State<EditarPetPage> {
                       // return: show loading widget
                       //todo mostrar o loading
                       return Center(
-                          child: Container(child: CircularProgressIndicator()));
+                        child: Column(
+                          children: [
+                            Text('carregando getEspecie'),
+                          ],
+                        ),
+                      );
                     }
                     if (snapshot.hasError) {
                       // return: show error widget
@@ -147,8 +194,14 @@ class _EditarPetPageState extends State<EditarPetPage> {
                             // return: show loading widget
                             //todo mostrar o loading
                             return Center(
-                                child: Container(
-                                    child: CircularProgressIndicator()));
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Text('carregando getRaca'),
+                                  ],
+                                ),
+                              ),
+                            );
                           }
                           if (snapshot.hasError) {
                             // return: show error widget
@@ -206,10 +259,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                 height: 10,
                               ),
                               TextFormField(
-                                //formatar para receber data
                                 autofocus: false,
-                                initialValue: animal['data_nascimento'],
-                                keyboardType: TextInputType.datetime,
+                                //initialValue: dataNascimento,
                                 decoration: InputDecoration(
                                   labelText: "Data de Nascimento",
                                   labelStyle: TextStyle(
@@ -218,6 +269,13 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                     fontSize: 17,
                                   ),
                                 ),
+                                readOnly: true,
+                                controller: dataNascimentoController,
+                                onTap: () {
+                                  setState(() {
+                                    _dataSelecionada(context);
+                                  });
+                                },
                               ),
                               SizedBox(
                                 height: 10,
@@ -250,9 +308,6 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                     fontSize: 17,
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 10,
                               ),
                               SizedBox(
                                 height: 50,
