@@ -63,6 +63,8 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
 
   @override
   Widget build(BuildContext context) {
+    var vacinaId;
+
     Future<CadastroVacinaModel?> submitVacina(
         String nomeVacina,
         String data_aplicacao,
@@ -182,33 +184,49 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              TextFormField(
-                                autofocus: false,
-                                keyboardType: TextInputType.text,
+                              DropdownButtonFormField(
+                                hint: Text("Vacina"),
                                 validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Preencha o nome da vacina";
+                                  if (value == null) {
+                                    return "Selecione o nome da vacina";
                                   }
                                   return null;
                                 },
-                                onSaved: (input) => _nomeVacina = input!,
-                                controller: VacinaController().nomeVacinaController,
-                                decoration: InputDecoration(
-                                  labelText: "Nome da Vacina",
-                                  labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 17,
-                                  ),
-                                ),
+                                onSaved: (input) =>
+                                    _nomeVacina = input! as String?,
+                                style: TextStyle(
+                                    fontSize: 17, color: Colors.black),
+                                items: listaVacinas.map((item) {
+                                  return DropdownMenuItem(
+                                    child: new Text(
+                                      item['nome'],
+                                      style: TextStyle(fontSize: 17),
+                                    ),
+                                    value: item['id'].toString(),
+                                  );
+                                }).toList(),
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    //VacinaController().nomeVacinaController text =
+                                        newValue.toString();
+                                  });
+                                },
+                                value: vacinaId,
                               ),
                               SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
-                                //formatar para receber data
                                 autofocus: false,
-                                keyboardType: TextInputType.datetime,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Selecione uma data";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (input) => _dataAplicacao = input!,
+                                controller:
+                                    VacinaController().dataAplicacaoController,
                                 decoration: InputDecoration(
                                   labelText: "Data da Aplicação",
                                   labelStyle: TextStyle(
@@ -217,6 +235,14 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                     fontSize: 17,
                                   ),
                                 ),
+                                readOnly: true,
+                                onTap: () {
+                                  setState(
+                                    () {
+                                      _dataSelecionada(context);
+                                    },
+                                  );
+                                },
                               ),
                               SizedBox(
                                 height: 10,

@@ -10,6 +10,7 @@ class VacinaController {
   late CadastroVacinaModel cadastrarVacinaPage;
   TextEditingController nomeVacinaController = TextEditingController();
   TextEditingController dataAplicacaoController = TextEditingController();
+  TextEditingController dataAplicacaoTesteController = TextEditingController();
   TextEditingController fabricanteController = TextEditingController();
   TextEditingController loteController = TextEditingController();
   TextEditingController animalController = TextEditingController();
