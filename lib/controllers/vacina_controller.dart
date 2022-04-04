@@ -1,24 +1,36 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:health_pets/http/vacina-repository.dart';
+import 'package:health_pets/models/cadastro-vacina-model.dart';
 import 'package:health_pets/models/vacina-model.dart';
 
 class VacinaController {
-  List<VacinaModel> racas = [];
+  List<VacinaModel> vacinas = [];
+
+  late CadastroVacinaModel cadastrarVacinaPage;
+  TextEditingController nomeVacinaController = TextEditingController();
+  TextEditingController dataAplicacaoController = TextEditingController();
+  TextEditingController dataAplicacaoTesteController = TextEditingController();
+  TextEditingController fabricanteController = TextEditingController();
+  TextEditingController loteController = TextEditingController();
+  TextEditingController animalController = TextEditingController();
+  
+
   final VacinaRepository _repository;
-  RacaState state = RacaState.start;
+  VacinaState state = VacinaState.start;
 
   VacinaController([VacinaRepository? repository])
       : _repository = repository ?? VacinaRepository();
 
   Future start() async {
-    state = RacaState.loading;
+    state = VacinaState.loading;
     try {
-      racas = await _repository.fetchVacina();
-      state = RacaState.success;
+      //vacinas = await _repository.fetchVacina();
+      state = VacinaState.success;
     } catch (e) {
-      state = RacaState.error;
+      state = VacinaState.error;
     }
   }
 }
 
-enum RacaState { start, loading, success, error }
+enum VacinaState { start, loading, success, error }

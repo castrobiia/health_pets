@@ -16,7 +16,6 @@ class CadastrarPetPage extends StatefulWidget {
 
 class _CadastrarPetPageState extends State<CadastrarPetPage> {
   DateTime _data = DateTime.now();
-  var mensagemErro = 'Selecione uma data';
 
   Future _dataSelecionada(BuildContext context) async {
     var _datePicker = await showDatePicker(
@@ -31,8 +30,11 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         dataNascimentoTesteController.text = dataNascimentoController.text;
       });
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(mensagemErro)));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Selecione uma data'),
+        ),
+      );
     }
 
     dataNascimentoController.text =
@@ -270,12 +272,13 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                               DropdownButtonFormField(
                                 hint: Text("Espécie"),
                                 validator: (value) {
-                                  if (value==null) {
+                                  if (value == null) {
                                     return "Selecione a espécie";
                                   }
                                   return null;
                                 },
-                                onSaved: (input) => _especie = input! as String?,
+                                onSaved: (input) =>
+                                    _especie = input! as String?,
                                 style: TextStyle(
                                     fontSize: 17, color: Colors.black),
                                 items: listaEspecies.map((item) {
@@ -302,12 +305,13 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                               DropdownButtonFormField(
                                 hint: Text("Raça"),
                                 validator: (value) {
-                                  if (value==null) {
+                                  if (value == null) {
                                     return "Selecione a raça";
                                   }
                                   return null;
                                 },
-                                onSaved: (input) => _especie = input! as String?,
+                                onSaved: (input) =>
+                                    _especie = input! as String?,
                                 style: TextStyle(
                                     fontSize: 17, color: Colors.black),
                                 items: listaRacas.map((item) {
