@@ -8,6 +8,8 @@ import 'package:health_pets/pages/pet.page.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class CadastrarPetPage extends StatefulWidget {
   @override
@@ -16,6 +18,7 @@ class CadastrarPetPage extends StatefulWidget {
 
 class _CadastrarPetPageState extends State<CadastrarPetPage> {
   DateTime _data = DateTime.now();
+  File foto = new File('');
 
   Future _dataSelecionada(BuildContext context) async {
     var _datePicker = await showDatePicker(
@@ -92,12 +95,25 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     });
   }
 
+  getGaleria() async{
+    final ImagePicker _picker = ImagePicker();
+    var nomeArquivo = await  _picker.pickImage(source: ImageSource.gallery);
+    print('Arquivo Path: ${nomeArquivo?.path ?? 'Sem path'}');
+    File image = new File(nomeArquivo?.path ?? '');
+    // return image.path;
+    // print('Image Path: ${image.path}');
+    // print('Arquivo de imagem ${nomeArquivo?.path}' );
+    setState(() {
+      foto = new File(nomeArquivo?.path ?? '/default');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var especieId, racaId;
 
     Future<CadastroAnimalModel?> submitAnimal(String nome,
-        String data_nascimento, String id_especie, String id_raca) async {
+        String data_nascimento, String id_especie, String id_raca, File foto) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String token = await prefs.get('token').toString();
 
@@ -105,20 +121,23 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         "Accept": "application/json",
         "Authorization": "Bearer ${token}"
       };
-      final response = await http.post(
-          Uri.https('healthpets.app.br', 'api/animal'),
-          headers: headerToken,
-          body: {
-            'nome': nome,
-            'data_nascimento': data_nascimento,
-            'id_especie': id_especie,
-            'id_raca': id_raca
-          });
-      var status = response.statusCode;
-      print('status: $status');
-      var dados_animal = response.body;
-      print('dados_animal: $dados_animal');
-      if (status == 200) {
+
+      print('Imagem Form Path ${foto.path}');
+
+      var pic = await http.MultipartFile.fromPath("foto", foto.path);
+      var request = http.MultipartRequest("POST", Uri.https('healthpets.app.br', 'api/animal'));
+      request.headers.addAll(headerToken);
+      request.fields["nome"] = nome;
+      request.fields["data_nascimento"] = data_nascimento;
+      request.fields["id_especie"] = id_especie;
+      request.fields["id_raca"] = id_raca;
+      request.files.add(pic);
+
+      var response = await request.send();
+
+      var resp = await http.Response.fromStream(response);
+
+      if (resp.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Animal cadastrado com sucesso')));
         setarMaterialPageRouteTab(context, PetPage());
@@ -149,7 +168,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                 print(id_raca);
 
                 CadastroAnimalModel dadosAnimal = (await submitAnimal(
-                        nome, data_nascimento, id_especie, id_raca))
+                        nome, data_nascimento, id_especie, id_raca, foto))
                     as CadastroAnimalModel;
 
                 setState(
@@ -202,7 +221,9 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                         backgroundColor: Color(0xFFF6BD87),
                         //cor do ícone
                         foregroundColor: Colors.white,
-                        onPressed: () {},
+                        onPressed: () { setState(() {
+                            foto = new File (getGaleria() ?? 'null');
+                          });},
                       ),
                     ),
                   ],
