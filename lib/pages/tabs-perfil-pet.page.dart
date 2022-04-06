@@ -47,7 +47,7 @@ class _PerfilPetPageState extends State<PerfilPetPage> {
         body: TabBarView(
           children: <Widget>[
             PerfilPet(id),
-            HistoricoPet("dia", 10),
+            HistoricoPet("dia", 10, id),
             InformacoesPet()
           ],
         ),

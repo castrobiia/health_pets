@@ -5,16 +5,21 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class HistoricoPet extends StatefulWidget {
   //const HistoricoPet({Key? key}) : super(key: key);
 
-  HistoricoPet(this.dia, this.peso);
+  HistoricoPet(this.dia, this.peso, this.id);
 
   final String dia;
   final double peso;
+  final int id;
 
   @override
-  _HistoricoPetState createState() => _HistoricoPetState();
+  _HistoricoPetState createState() => _HistoricoPetState(id);
 }
 
 class _HistoricoPetState extends State<HistoricoPet> {
+  final int id;
+
+  _HistoricoPetState(this.id);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +31,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
               height: 20,
             ),
             Container(
-              margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+             margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
               padding: EdgeInsets.only(
                 left: 20,
                 right: 20,
@@ -61,7 +66,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (BuildContext context) => VacinaPage(),
+                              builder: (BuildContext context) => VacinaPage(id),
                             ),
                           );
                         }, // Image tapped
@@ -95,7 +100,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  VacinaPage(), //corrigir
+                                  VacinaPage(id), //corrigir
                             ),
                           );
                         }, // Image tapped
@@ -129,7 +134,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  VacinaPage(), //corrigir
+                                  VacinaPage(id), //corrigir
                             ),
                           );
                         }, // Image tapped
@@ -166,12 +171,12 @@ class _HistoricoPetState extends State<HistoricoPet> {
                     series: <ChartSeries<HistoricoPet, String>>[
                       LineSeries<HistoricoPet, String>(
                           dataSource: <HistoricoPet>[
-                            HistoricoPet('13/01/2022', 20),
-                            HistoricoPet('13/02/2022', 30),
-                            HistoricoPet('13/03/2022', 10),
-                            HistoricoPet('13/04/2022', 15),
-                            HistoricoPet('13/05/2022', 30),
-                            HistoricoPet('13/06/2022', 40),
+                            HistoricoPet('13/01/2022', 20, id),
+                            HistoricoPet('13/02/2022', 30, id),
+                            HistoricoPet('13/03/2022', 10, id),
+                            HistoricoPet('13/04/2022', 15, id),
+                            HistoricoPet('13/05/2022', 30, id),
+                            HistoricoPet('13/06/2022', 40, id),
                           ],
                           xValueMapper: (HistoricoPet peso, _) => peso.dia,
                           yValueMapper: (HistoricoPet peso, _) => peso.peso,

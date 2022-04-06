@@ -15,7 +15,7 @@ class TabsPage extends StatelessWidget {
           PetPage(),
           PerfilUsuario(),
           CalendarioPage(),
-          VacinaPage(), //Só para visualização
+          VacinaPage(0), //Só para visualização
         ],
       ),
       bottomNavigationBar: new TabBar(
