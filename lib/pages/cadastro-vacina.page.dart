@@ -188,7 +188,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                 hint: Text("Vacina"),
                                 validator: (value) {
                                   if (value == null) {
-                                    return "Selecione o nome da vacina";
+                                    return "Selecione a vacina";
                                   }
                                   return null;
                                 },
@@ -198,6 +198,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                     fontSize: 17, color: Colors.black),
                                 items: listaVacinas.map((item) {
                                   return DropdownMenuItem(
+                                    // criar if para quando o checkbox não estiver selecionado, bloquear os campos lote e fabricante
                                     child: new Text(
                                       item['nome'],
                                       style: TextStyle(fontSize: 17),
@@ -206,10 +207,17 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                   );
                                 }).toList(),
                                 onChanged: (newValue) {
-                                  setState(() {
-                                    //VacinaController().nomeVacinaController text =
-                                        newValue.toString();
-                                  });
+                                  setState(
+                                    () {
+                                      VacinaController()
+                                          .nomeVacinaController
+                                          .text = newValue.toString();
+                                      VacinaRepository().getVacinasPorAnimal(
+                                          VacinaController()
+                                              .nomeVacinaController
+                                              .text);
+                                    },
+                                  );
                                 },
                                 value: vacinaId,
                               ),
@@ -250,9 +258,15 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                               TextFormField(
                                 //criar dropdown
                                 autofocus: false,
-                                // criar if para quando o checkbox não estiver selecionado, bloquear os campos lote e fabricante
-                                //enabled: false,
                                 keyboardType: TextInputType.text,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Preencha o lote";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (input) => _lote = input!,
+                                controller: VacinaController().loteController,
                                 decoration: InputDecoration(
                                   labelText: "Lote",
                                   labelStyle: TextStyle(
@@ -266,9 +280,17 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                 height: 10,
                               ),
                               TextFormField(
-                                //criar dropdown
                                 autofocus: false,
                                 keyboardType: TextInputType.text,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Preencha o fabricante";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (input) => _fabricante = input!,
+                                controller:
+                                    VacinaController().fabricanteController,
                                 decoration: InputDecoration(
                                   labelText: "Fabricante",
                                   labelStyle: TextStyle(
