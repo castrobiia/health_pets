@@ -10,15 +10,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class CadastrarVacina extends StatefulWidget {
-  const CadastrarVacina({Key? key}) : super(key: key);
+  const CadastrarVacina(this.id);
+  final int id;
 
   @override
-  _CadastrarVacinaState createState() => _CadastrarVacinaState();
+  _CadastrarVacinaState createState() => _CadastrarVacinaState(this.id);
 }
 
 class _CadastrarVacinaState extends State<CadastrarVacina> {
   bool checkedValue = true;
   DateTime _data = DateTime.now();
+
+  final int id;
+  _CadastrarVacinaState(this.id);
 
   Future _dataSelecionada(BuildContext context) async {
     var _datePicker = await showDatePicker(
@@ -63,7 +67,9 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
 
   @override
   Widget build(BuildContext context) {
-    var vacinaId;
+    final int id;
+
+    _CadastrarVacinaState(this.id);
 
     Future<CadastroVacinaModel?> submitVacina(
         String nomeVacina,
@@ -96,7 +102,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
       if (status == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Vacina cadastrada com sucesso')));
-        setarMaterialPageRouteTab(context, VacinaPage());
+        setarMaterialPageRoute(context, VacinaPage(this.id));
       } else {
         print("Erro ao cadastrar vacina");
       }
@@ -176,7 +182,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),
                 FutureBuilder<dynamic>(
-                  future: VacinaRepository().getAllVacinas(),
+                  future: VacinaRepository().getVacinasPorAnimal(this.id),
                   builder: (context, snapshot) {
                     return Column(
                       children: <Widget>[
@@ -184,43 +190,27 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              DropdownButtonFormField(
-                                hint: Text("Vacina"),
+                              TextFormField(
+                                autofocus: false,
+                                keyboardType: TextInputType.text,
                                 validator: (value) {
-                                  if (value == null) {
-                                    return "Selecione a vacina";
+                                  if (value!.isEmpty) {
+                                    return "Preencha a vacina";
                                   }
                                   return null;
                                 },
-                                onSaved: (input) =>
-                                    _nomeVacina = input! as String?,
-                                style: TextStyle(
-                                    fontSize: 17, color: Colors.black),
-                                items: listaVacinas.map((item) {
-                                  return DropdownMenuItem(
-                                    // criar if para quando o checkbox não estiver selecionado, bloquear os campos lote e fabricante
-                                    child: new Text(
-                                      item['nome'],
-                                      style: TextStyle(fontSize: 17),
-                                    ),
-                                    value: item['id'].toString(),
-                                  );
-                                }).toList(),
-                                onChanged: (newValue) {
-                                  setState(
-                                    () {
-                                      VacinaController()
-                                          .nomeVacinaController
-                                          .text = newValue.toString();
-                                      VacinaRepository().getVacinasPorAnimal(
-                                          VacinaController()
-                                              .nomeVacinaController
-                                              .text);
-                                    },
-                                  );
-                                },
-                                value: vacinaId,
+                                onSaved: (input) => _lote = input!,
+                                controller: VacinaController().loteController,
+                                decoration: InputDecoration(
+                                  labelText: "Vacina",
+                                  labelStyle: TextStyle(
+                                    //color: Color(0xFFCC9396),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 17,
+                                  ),
+                                ),
                               ),
+            
                               SizedBox(
                                 height: 10,
                               ),
@@ -256,7 +246,6 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                 height: 10,
                               ),
                               TextFormField(
-                                //criar dropdown
                                 autofocus: false,
                                 keyboardType: TextInputType.text,
                                 validator: (value) {

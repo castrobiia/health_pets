@@ -62,7 +62,7 @@ void onSelected(BuildContext context, MenuItemVacina item) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => VacinaPage(), //arrumar depois
+          builder: (context) => VacinaPage(0), //arrumar depois
         ),
       );
       break;
@@ -70,7 +70,7 @@ void onSelected(BuildContext context, MenuItemVacina item) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => VacinaPage(), //arrumar depois
+          builder: (context) => VacinaPage(0), //arrumar depois
         ),
       );
   }

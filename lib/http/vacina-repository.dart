@@ -13,16 +13,16 @@ class VacinaRepository {
 
   List listaVacinas = [];
 
-  Future<VacinaModel?> getAllVacinas() async {
-    const url = 'https://www.healthpets.app.br/api/animal/1/vacina';
+  // Future<VacinaModel?> getAllVacinas(String id) async {
+  //   const url = 'https://www.healthpets.app.br/api/especie/${id}/vacina';
 
-    final response = await http.get(Uri.parse(url), headers: header);
-    var vacinas = jsonDecode(response.body);
+  //   final response = await http.get(Uri.parse(url), headers: header);
+  //   var vacinas = jsonDecode(response.body);
 
-    listaVacinas = vacinas;
-  }
+  //   listaVacinas = vacinas;
+  // }
 
-  getVacinasPorAnimal(String id) async {
+  getVacinasPorAnimal(int id) async {
     String url = 'https://www.healthpets.app.br/api/animal/${id}/vacina';
 
     print('URL: $url');
