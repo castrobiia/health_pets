@@ -209,8 +209,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                     fontSize: 17,
                                   ),
                                 ),
-                              ),
-            
+                              ),          
                               SizedBox(
                                 height: 10,
                               ),
@@ -268,27 +267,28 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                               SizedBox(
                                 height: 10,
                               ),
-                              TextFormField(
-                                autofocus: false,
-                                keyboardType: TextInputType.text,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Preencha o fabricante";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (input) => _fabricante = input!,
-                                controller:
-                                    VacinaController().fabricanteController,
-                                decoration: InputDecoration(
-                                  labelText: "Fabricante",
-                                  labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              ),
+                              setarCampo(VacinaController().fabricanteController, "Fabricante", _fabricante, validator: (value)=> validarCampo(value)),
+                              // TextFormField(
+                              //   autofocus: false,
+                              //   keyboardType: TextInputType.text,
+                              //   validator: (value) {
+                              //     if (value!.isEmpty) {
+                              //       return "Preencha o fabricante";
+                              //     }
+                              //     return null;
+                              //   },
+                              //   onSaved: (input) => _fabricante = input!,
+                              //   controller:
+                              //       VacinaController().fabricanteController,
+                              //   decoration: InputDecoration(
+                              //     labelText: "Fabricante",
+                              //     labelStyle: TextStyle(
+                              //       //color: Color(0xFFCC9396),
+                              //       fontWeight: FontWeight.w400,
+                              //       fontSize: 17,
+                              //     ),
+                              //   ),
+                              // ),
                               SizedBox(
                                 height: 10,
                               ),
@@ -345,3 +345,5 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
     );
   }
 }
+
+

@@ -20,3 +20,29 @@ void setarMaterialPageRouteTab(BuildContext context, page) {
     ),
   );
 }
+
+setarCampo(variavelController, nomeCampo, variavel, {
+  required FormFieldValidator<String> validator }) {
+  return TextFormField(
+    autofocus: false,
+    keyboardType: TextInputType.text,
+    controller: variavelController,
+    validator: validator,
+    onSaved: (input) => variavel = input!,
+    decoration: InputDecoration(
+      labelText: "$nomeCampo",
+      labelStyle: TextStyle(
+        //color: Color(0xFFCC9396),
+        fontWeight: FontWeight.w400,
+        fontSize: 17,
+      ),
+    ),
+  );
+}
+
+validarCampo(value) {
+  if (value!.isEmpty) {
+    return "Preencha o campo";
+  }
+  return null;
+}
