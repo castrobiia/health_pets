@@ -190,30 +190,12 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              TextFormField(
-                                autofocus: false,
-                                keyboardType: TextInputType.text,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Preencha a vacina";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (input) => _lote = input!,
-                                controller: VacinaController().loteController,
-                                decoration: InputDecoration(
-                                  labelText: "Vacina",
-                                  labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              ),
-            
-                              SizedBox(
-                                height: 10,
-                              ),
+                              setarCampo(
+                                  VacinaController().nomeVacinaController,
+                                  "Vacina",
+                                  _nomeVacina,
+                                  validator: (value) => validarCampo(value)),
+                              SizedBox(height: 10),
                               TextFormField(
                                 autofocus: false,
                                 validator: (value) {
@@ -242,56 +224,17 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                   );
                                 },
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                autofocus: false,
-                                keyboardType: TextInputType.text,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Preencha o lote";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (input) => _lote = input!,
-                                controller: VacinaController().loteController,
-                                decoration: InputDecoration(
-                                  labelText: "Lote",
-                                  labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                autofocus: false,
-                                keyboardType: TextInputType.text,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Preencha o fabricante";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (input) => _fabricante = input!,
-                                controller:
-                                    VacinaController().fabricanteController,
-                                decoration: InputDecoration(
-                                  labelText: "Fabricante",
-                                  labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              SizedBox(height: 10),
+                              setarCampo(VacinaController().loteController,
+                                  "Lote", _lote,
+                                  validator: (value) => validarCampo(value)),
+                              SizedBox(height: 10),
+                              setarCampo(
+                                  VacinaController().fabricanteController,
+                                  "Fabricante",
+                                  _fabricante,
+                                  validator: (value) => validarCampo(value)),
+                              SizedBox(height: 10),
                             ],
                           ),
                         ),
@@ -299,44 +242,6 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                     );
                   },
                 ),
-                /* Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF6BD87),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                    boxShadow: [
-                      new BoxShadow(
-                        //cor do fundo (em volta) do container
-                        color: Colors.black12,
-                        //qnt de sombra
-                        offset: new Offset(1, 2.0),
-                        //expansao da sombra
-                        blurRadius: 5,
-                        //intensidade da borda
-                        spreadRadius: 3,
-                      ),
-                    ],
-                  ),
-                   child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PetPage(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "Salvar",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 17),
-                    ),
-                  ),
-                ), */
               ],
             ),
           ),
