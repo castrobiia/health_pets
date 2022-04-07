@@ -1,11 +1,23 @@
 //flutter run --no-sound-null-safety
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:health_pets/firebase_messaging/custom_firebase_messaging.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-void main() {
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
+void main() async {
+  //se certificando de que todas as plataformas foram inicializadas para iniciar a app
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+  await CustomFirebaseMessaging().inicialize();
+
+  await CustomFirebaseMessaging().getTokenFirebase();
+
   runApp(const MyApp());
 }
 

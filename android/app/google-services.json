@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "966313048090",
+    "project_id": "healthpets-ada61",
+    "storage_bucket": "healthpets-ada61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966313048090:android:ac93d5a24c49856f7879a3",
+        "android_client_info": {
+          "package_name": "com.example.health_pets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966313048090-iie3j8p2s44h515sc5ei7ilfhvenp6p9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByVHF883GRiD2G2NtlXkEp6qfktXkAGQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966313048090-iie3j8p2s44h515sc5ei7ilfhvenp6p9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
