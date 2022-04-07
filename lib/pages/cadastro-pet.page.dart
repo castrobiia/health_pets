@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
-import 'package:health_pets/models/especie-model.dart';
-import 'package:health_pets/pages/pet.page.dart';
+import 'package:health_pets/pages/tabs.page.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,22 +61,10 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     "Accept": "application/json"
   };
 
-  List listaEspecies = [];
   List listaRacas = [];
-
-  Future<EspecieModel?> getAllEspecies() async {
-    const url = 'https://www.healthpets.app.br/api/especie';
-
-    final response = await http.get(Uri.parse(url), headers: header);
-    var especies = jsonDecode(response.body);
-
-    listaEspecies = especies;
-  }
 
   getRacasPorEspecie(String id) async {
     String url = 'https://www.healthpets.app.br/api/especie/${id}/racas';
-
-    print('URL: $url');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
@@ -95,9 +83,10 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     });
   }
 
-  getGaleria() async{
+  getGaleria() async {
     final ImagePicker _picker = ImagePicker();
-    var nomeArquivo = await  _picker.pickImage(source: ImageSource.gallery);
+    var nomeArquivo = await _picker.pickImage(source: ImageSource.gallery);
+
     print('Arquivo Path: ${nomeArquivo?.path ?? 'Sem path'}');
     File image = new File(nomeArquivo?.path ?? '');
     // return image.path;
@@ -112,8 +101,12 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
   Widget build(BuildContext context) {
     var especieId, racaId;
 
-    Future<CadastroAnimalModel?> submitAnimal(String nome,
-        String data_nascimento, String id_especie, String id_raca, File foto) async {
+    Future<CadastroAnimalModel?> submitAnimal(
+        String nome,
+        String data_nascimento,
+        String id_especie,
+        String id_raca,
+        File foto) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String token = await prefs.get('token').toString();
 
@@ -121,11 +114,11 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         "Accept": "application/json",
         "Authorization": "Bearer ${token}"
       };
-
-      print('Imagem Form Path ${foto.path}');
+      FileSystemEntity.isDirectory("./").then((value) => print(value));
 
       var pic = await http.MultipartFile.fromPath("foto", foto.path);
-      var request = http.MultipartRequest("POST", Uri.https('healthpets.app.br', 'api/animal'));
+      var request = http.MultipartRequest(
+          "POST", Uri.https('healthpets.app.br', 'api/animal'));
       request.headers.addAll(headerToken);
       request.fields["nome"] = nome;
       request.fields["data_nascimento"] = data_nascimento;
@@ -140,9 +133,9 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
       if (resp.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Animal cadastrado com sucesso')));
-        setarMaterialPageRouteTab(context, PetPage());
+        setarMaterialPageRouteTab(context, TabsPage());
       } else {
-        print("erro ao cadastrar animal");
+        print("Erro ao cadastrar animal");
       }
     }
 
@@ -159,13 +152,9 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                 _formKey.currentState!.save();
 
                 String nome = nomeController.text;
-                print(nome);
                 String data_nascimento = dataNascimentoTesteController.text;
-                print(data_nascimento);
-                String id_especie = especieController.text;
-                print(id_especie);
+                var id_especie = especieController.text;
                 String id_raca = racaController.text;
-                print(id_raca);
 
                 CadastroAnimalModel dadosAnimal = (await submitAnimal(
                         nome, data_nascimento, id_especie, id_raca, foto))
@@ -221,16 +210,22 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                         backgroundColor: Color(0xFFF6BD87),
                         //cor do ícone
                         foregroundColor: Colors.white,
-                        onPressed: () { setState(() {
-                            foto = new File (getGaleria() ?? 'null');
-                          });},
+                        onPressed: () {
+                          setState(() {
+                            foto = new File(
+                              getGaleria() ?? '',
+                            );
+                          });
+                        },
                       ),
                     ),
                   ],
                 ),
                 FutureBuilder<dynamic>(
-                  future: getAllEspecies(),
+                  future: EspecieEntity().getEspecies(),
                   builder: (context, snapshot) {
+                    List<dynamic> listaEspecies =
+                        EspecieEntity().toList(snapshot.data);
                     return Column(
                       children: <Widget>[
                         Form(
@@ -299,16 +294,16 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                   return null;
                                 },
                                 onSaved: (input) =>
-                                    _especie = input! as String?,
+                                    _especie = input!.toString(),
                                 style: TextStyle(
                                     fontSize: 17, color: Colors.black),
                                 items: listaEspecies.map((item) {
                                   return DropdownMenuItem(
                                     child: new Text(
-                                      item['descricao'],
+                                      item.descricao,
                                       style: TextStyle(fontSize: 17),
                                     ),
-                                    value: item['id'].toString(),
+                                    value: item.id,
                                   );
                                 }).toList(),
                                 onChanged: (newValue) {
