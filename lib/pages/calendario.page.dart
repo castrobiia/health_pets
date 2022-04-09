@@ -35,7 +35,7 @@ class _CalendarioPageState extends State<CalendarioPage> {
           //mostrar caléndario por mês
           view: CalendarView.month,
           //dia da semana começando no domingo
-          firstDayOfWeek: 0,
+          firstDayOfWeek: 7,
           dataSource: CompromissoCalendario(getAppointments()),
           //data de exibição
           //initialDisplayDate: DateTime(2022, 02, 02),
