@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/controllers/animal_controller.dart';
 import 'package:health_pets/links/links-pages.dart';
+import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/editar-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
+import 'package:health_pets/repository/animal-repository.dart';
 
 class MenuItemPet {
   final String texto;
@@ -51,12 +54,21 @@ PopupMenuItem<MenuItemPet> buildItem(MenuItemPet item) =>
 
 void onSelected(BuildContext context, MenuItemPet item, dynamic id) {
   final idPet = id;
+  var animalController = AnimalController(AnimalRepositoryy());
   switch (item) {
     case MenuItemsPet.itemEditar:
       setarMaterialPageRoute(context, EditarPetPage(idPet));
       break;
     case MenuItemsPet.itemExcluir:
-      setarMaterialPageRoute(context, PetPage());
+      // createInfoDialogPet(context);
+      animalController.deleteAnimal(id).then((value) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('$value'),
+          ),
+        );
+        setarMaterialPageRoute(context, PetPage());
+      });
       break;
     case MenuItemsPet.itemCompartilhar:
       setarMaterialPageRoute(context, PetPage());
