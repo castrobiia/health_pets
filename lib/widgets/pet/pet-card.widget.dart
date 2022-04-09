@@ -5,22 +5,17 @@ class PetCard extends StatelessWidget {
   final int idPet;
   final String fotoPet;
   final String nomePet;
-  //final String taxonomiaPet;
-  //final int idadePet;
 
   PetCard({
     required this.idPet,
     required this.fotoPet,
     required this.nomePet,
-    //required this.taxonomiaPet,
-    //required this.idadePet,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 116,
-      //margin: EdgeInsets.all(5),
       child: Column(
         children: <Widget>[
           Row(
@@ -38,7 +33,6 @@ class PetCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(right: 10),
                 width: 200,
-                //color: Colors.black12,
                 alignment: Alignment.topLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,8 +45,6 @@ class PetCard extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    //Text(taxonomiaPet),
-                    //Text("${idadePet} anos"), // fazer um if/switch pra: ano, mes, meses
                   ],
                 ),
               ),
@@ -64,12 +56,10 @@ class PetCard extends StatelessWidget {
                     IconButton(
                         onPressed: () {
                           // setarMaterialPageRoute(context, PerfilPetPage());
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PerfilPetPage(idPet)));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => PerfilPetPage(idPet)));
                         },
                         icon: Icon(Icons.navigate_next))
-
-                    //Icon(Icons.edit),
-                    //Icon(Icons.delete),
                   ],
                 ),
               ),

@@ -76,7 +76,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
               //form (estilizacao)
               Container(
-                //padding: EdgeInsets.only(left: 25, right: 25, top: 10),
                 //corrigindo o bug de
                 height: double.maxFinite,
 
@@ -175,10 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                                     _loginModel = loginUsuario;
                                   },
                                 );
-
-                                //setarMaterialPageRouteTab(context, TabsPage());
                               }
-                              
                             },
                             child: Text(
                               "Login",

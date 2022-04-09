@@ -12,38 +12,35 @@ class PetLista extends StatelessWidget {
 
     RepositoryAnimal()
         .findAllAnimais()
-        .then((animais) => animais.forEach((element) { print('Id do print${element.id}');}));
-        // .then((animais) => animais.forEach((element) { pets.add(element);}));
+        .then((animais) => animais.forEach((element) {
+              print('Id do print${element.id}');
+            }));
 
     return Scaffold(
-      body: FutureBuilder<List>(
-        future: RepositoryAnimal().findAllAnimais(),
-        builder: (context, snapshot){
-          if(snapshot.connectionState != ConnectionState.done) {
-            // return: show loading widget
-            //todo mostrar o loading
-          }
-          if(snapshot.hasError) {
-            // return: show error widget
-          }
-          final list = snapshot.data ?? [];
-          return ListView.builder(
-              itemCount: list.length,
-              itemBuilder: (context, index){
-                AnimalModel pet = list[index];
-                  return Container(
-                    child:  PetCard(
-                              idPet: pet.id ?? 0,
-                              fotoPet: pet.foto ?? '',
-                              nomePet:pet.nome ?? '',
-                              //taxonomiaPet: '',
-                              //idadePet: 13,
-                            ),
-                  );
-              }
-          );
-        },
-      )
-    );
+        body: FutureBuilder<List>(
+      future: RepositoryAnimal().findAllAnimais(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          // return: show loading widget
+          //todo mostrar o loading
+        }
+        if (snapshot.hasError) {
+          // return: show error widget
+        }
+        final list = snapshot.data ?? [];
+        return ListView.builder(
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              AnimalModel pet = list[index];
+              return Container(
+                child: PetCard(
+                  idPet: pet.id ?? 0,
+                  fotoPet: pet.foto ?? '',
+                  nomePet: pet.nome ?? '',
+                ),
+              );
+            });
+      },
+    ));
   }
 }
