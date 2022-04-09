@@ -21,7 +21,7 @@ void setarMaterialPageRouteTab(BuildContext context, page) {
   );
 }
 
-setarCampo(variavelController, nomeCampo, variavel,
+setarCampoForms(variavelController, nomeCampo, variavel,
     {required FormFieldValidator<String> validator}) {
   return TextFormField(
     autofocus: false,

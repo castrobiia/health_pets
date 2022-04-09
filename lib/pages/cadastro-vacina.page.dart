@@ -190,7 +190,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              setarCampo(
+                              setarCampoForms(
                                   VacinaController().nomeVacinaController,
                                   "Vacina",
                                   _nomeVacina,
@@ -224,11 +224,11 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                 },
                               ),
                               SizedBox(height: 10),
-                              setarCampo(VacinaController().loteController,
+                              setarCampoForms(VacinaController().loteController,
                                   "Lote", _lote,
                                   validator: (value) => validarCampo(value)),
                               SizedBox(height: 10),
-                              setarCampo(
+                              setarCampoForms(
                                   VacinaController().fabricanteController,
                                   "Fabricante",
                                   _fabricante,
