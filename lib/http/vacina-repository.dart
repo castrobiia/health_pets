@@ -25,7 +25,7 @@ class VacinaRepository {
   getVacinasPorAnimal(int id) async {
     String url = 'https://www.healthpets.app.br/api/animal/${id}/vacina';
 
-    print('URL: $url');
+    print('URL VACINA: $url');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
@@ -37,6 +37,24 @@ class VacinaRepository {
     };
 
     final response = await http.get(Uri.parse(url), headers: headerToken);
+    var vacinas = jsonDecode(response.body);
+  }
+
+  postVacina(int id_animal) async {
+    String url = 'https://www.healthpets.app.br/api/animal/${id_animal}/vacina';
+
+    print('URL POST VACINA: $url');
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var headerToken = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    final response = await http.post(Uri.parse(url), headers: headerToken);
     var vacinas = jsonDecode(response.body);
   }
 }

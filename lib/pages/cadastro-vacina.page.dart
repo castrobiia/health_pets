@@ -30,14 +30,15 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         initialDate: DateTime.now(),
         firstDate: DateTime(DateTime.now().year - 30),
         lastDate: DateTime.now());
+    print('datePicker: $_datePicker');
 
     if (_datePicker != null && _datePicker != _data) {
       setState(
         () {
-          VacinaController().dataAplicacaoController.text =
-              _datePicker.toString();
-          VacinaController().dataAplicacaoTesteController.text =
-              VacinaController().dataAplicacaoController.text;
+          dataAplicacaoController.text = _datePicker.toString();
+          dataAplicacaoTesteController.text = dataAplicacaoController.text;
+
+          print('dataAplicacaoController: ${dataAplicacaoController.text}');
         },
       );
     } else {
@@ -48,9 +49,17 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
       );
     }
 
-    VacinaController().dataAplicacaoController.text =
+    dataAplicacaoController.text =
         DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
   }
+
+  late CadastroVacinaModel cadastrarVacinaPage;
+  TextEditingController nomeVacinaController = TextEditingController();
+  TextEditingController dataAplicacaoController = TextEditingController();
+  TextEditingController dataAplicacaoTesteController = TextEditingController();
+  TextEditingController fabricanteController = TextEditingController();
+  TextEditingController loteController = TextEditingController();
+  TextEditingController animalController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   String? _nomeVacina;
@@ -58,10 +67,10 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
   String? _fabricante;
   String? _lote;
 
-  // var header = {
-  //   "Content-Type": "application/json",
-  //   "Accept": "application/json"
-  // };
+  var header = {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  };
 
   List listaVacinas = [];
 
@@ -119,18 +128,15 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
 
-                String nomeVacina =
-                    VacinaController().nomeVacinaController.text;
+                String nomeVacina = nomeVacinaController.text;
                 print(nomeVacina);
-                String data_aplicacao =
-                    VacinaController().dataAplicacaoController.text;
+                String data_aplicacao = dataAplicacaoController.text;
                 print(data_aplicacao);
-                String fabricante =
-                    VacinaController().fabricanteController.text;
+                String fabricante = fabricanteController.text;
                 print(fabricante);
-                String lote = VacinaController().loteController.text;
+                String lote = loteController.text;
                 print(lote);
-                String id_animal = VacinaController().animalController.text;
+                String id_animal = animalController.text;
                 print(id_animal);
 
                 CadastroVacinaModel dadosVacina = (await submitVacina(
@@ -142,7 +148,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
 
                 setState(
                   () {
-                    VacinaController().cadastrarVacinaPage = dadosVacina;
+                    cadastrarVacinaPage = dadosVacina;
                   },
                 );
               }
@@ -182,7 +188,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),
                 FutureBuilder<dynamic>(
-                  future: VacinaRepository().getVacinasPorAnimal(this.id),
+                  future: VacinaRepository().postVacina(this.id),
                   builder: (context, snapshot) {
                     return Column(
                       children: <Widget>[
@@ -191,9 +197,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                           child: Column(
                             children: [
                               setarCampoForms(
-                                  VacinaController().nomeVacinaController,
-                                  "Vacina",
-                                  _nomeVacina,
+                                  nomeVacinaController, "Vacina", _nomeVacina,
                                   validator: (value) => validarCampo(value)),
                               TextFormField(
                                 autofocus: false,
@@ -204,8 +208,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                   return null;
                                 },
                                 onSaved: (input) => _dataAplicacao = input!,
-                                controller:
-                                    VacinaController().dataAplicacaoController,
+                                controller: dataAplicacaoController,
                                 decoration: InputDecoration(
                                   labelText: "Data da Aplicação",
                                   labelStyle: TextStyle(
@@ -223,13 +226,10 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                 },
                               ),
                               SizedBox(height: 10),
-                              setarCampoForms(VacinaController().loteController,
-                                  "Lote", _lote,
+                              setarCampoForms(loteController, "Lote", _lote,
                                   validator: (value) => validarCampo(value)),
-                              setarCampoForms(
-                                  VacinaController().fabricanteController,
-                                  "Fabricante",
-                                  _fabricante,
+                              setarCampoForms(fabricanteController,
+                                  "Fabricante", _fabricante,
                                   validator: (value) => validarCampo(value)),
                             ],
                           ),
