@@ -21,21 +21,28 @@ void setarMaterialPageRouteTab(BuildContext context, page) {
   );
 }
 
-setarCampo(variavelController, nomeCampo, variavel,
+setarCampoForms(variavelController, nomeCampo, variavel,
     {required FormFieldValidator<String> validator}) {
-  return TextFormField(
-    autofocus: false,
-    keyboardType: TextInputType.text,
-    controller: variavelController,
-    validator: validator,
-    onSaved: (input) => variavel = input!,
-    decoration: InputDecoration(
-      labelText: "$nomeCampo",
-      labelStyle: TextStyle(
-        fontWeight: FontWeight.w400,
-        fontSize: 17,
+  return Column(
+    children: [
+      TextFormField(
+        autofocus: false,
+        keyboardType: TextInputType.text,
+        controller: variavelController,
+        validator: validator,
+        onSaved: (input) => variavel = input!,
+        decoration: InputDecoration(
+          labelText: "$nomeCampo",
+          labelStyle: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 17,
+          ),
+        ),
       ),
-    ),
+      SizedBox(
+        height: 10,
+      ),
+    ],
   );
 }
 

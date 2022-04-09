@@ -232,28 +232,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              TextFormField(
-                                autofocus: false,
-                                keyboardType: TextInputType.text,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Preencha o nome";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (input) => _nome = input!,
-                                controller: nomeController,
-                                decoration: InputDecoration(
-                                  labelText: "Nome",
-                                  labelStyle: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              setarCampoForms(nomeController, "Nome", _nome, validator: (value) => validarCampo(value)),
                               TextFormField(
                                 autofocus: false,
                                 validator: (value) {
