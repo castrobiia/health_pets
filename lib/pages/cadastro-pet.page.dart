@@ -232,7 +232,12 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              setarCampoForms(nomeController, "Nome", _nome, validator: (value) => validarCampo(value)),
+                              setarCampoForms(
+                                nomeController,
+                                "Nome",
+                                _nome,
+                                validator: (value) => validarCampo(value),
+                              ),
                               TextFormField(
                                 autofocus: false,
                                 validator: (value) {
