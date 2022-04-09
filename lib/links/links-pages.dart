@@ -52,3 +52,40 @@ validarCampo(value) {
   }
   return null;
 }
+
+setarCampoDataForms(BuildContext context, variavelController, nomeCampo, variavel,
+    {required FormFieldValidator<String> validator}) {
+  return Column(
+    children: [
+      TextFormField(
+        autofocus: false,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Selecione uma data";
+          }
+          return null;
+        },
+        onSaved: (input) => variavel = input!,
+        decoration: InputDecoration(
+          labelText: "$nomeCampo",
+          labelStyle: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 17,
+          ),
+        ),
+        controller: variavelController,
+        readOnly: true,
+        onTap: () {
+          setState(
+            () {
+              variavel(context);
+            },
+          );
+        },
+      ),
+      SizedBox(
+        height: 10,
+      ),
+    ],
+  );
+}
