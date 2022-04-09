@@ -3,7 +3,6 @@ import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/pages/testeapi.dart';
-//import 'package:health_pets/pages/teste-slidable.page.dart';
 
 class MenuItem {
   final String texto;

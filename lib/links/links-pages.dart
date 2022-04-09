@@ -21,8 +21,8 @@ void setarMaterialPageRouteTab(BuildContext context, page) {
   );
 }
 
-setarCampo(variavelController, nomeCampo, variavel, {
-  required FormFieldValidator<String> validator }) {
+setarCampo(variavelController, nomeCampo, variavel,
+    {required FormFieldValidator<String> validator}) {
   return TextFormField(
     autofocus: false,
     keyboardType: TextInputType.text,
@@ -32,7 +32,6 @@ setarCampo(variavelController, nomeCampo, variavel, {
     decoration: InputDecoration(
       labelText: "$nomeCampo",
       labelStyle: TextStyle(
-        //color: Color(0xFFCC9396),
         fontWeight: FontWeight.w400,
         fontSize: 17,
       ),

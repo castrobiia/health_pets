@@ -38,21 +38,5 @@ class VacinaRepository {
 
     final response = await http.get(Uri.parse(url), headers: headerToken);
     var vacinas = jsonDecode(response.body);
-
   }
-
-  // final dio = Dio();
-  // final url = "https://www.healthpets.app.br/api/animal/1/vacina";
-
-  // Future<List<VacinaModel>> fetchVacina() async {
-  //   final response = await dio.get(url);
-  //   final list = response.data as List;
-
-  //   List<VacinaModel> vacinas = [];
-  //   for (var json in list) {
-  //     final vacina = VacinaModel.fromJson(json);
-  //     vacinas.add(vacina);
-  //   }
-  //   return vacinas;
-  // }
 }

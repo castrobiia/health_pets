@@ -15,9 +15,8 @@ class CadastroUsuarioTeste extends StatefulWidget {
   State<CadastroUsuarioTeste> createState() => _CadastroUsuarioTesteState();
 }
 
-Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name, String email,
-    String password, String password_confirmation) async {
-
+Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
+    String email, String password, String password_confirmation) async {
   Map<String, String> requestHeaders = {
     'Content-type': 'application/json',
     'Accept': 'application/json'
@@ -36,24 +35,36 @@ Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name, Stri
       body: requestBody);
   Map<String, dynamic> list = json.decode(response.body);
 
-  if(list['errors'] != null){
+  if (list['errors'] != null) {
     var msg = '';
-    if(list['errors']["name"] != null || list['errors']["name"] == ""){
-      msg += '\n'+list['errors']["name"].toString().substring(1, list['errors']["name"].toString().length-1)+'\n';
+    if (list['errors']["name"] != null || list['errors']["name"] == "") {
+      msg += '\n' +
+          list['errors']["name"]
+              .toString()
+              .substring(1, list['errors']["name"].toString().length - 1) +
+          '\n';
     }
-    if(list['errors']["email"] != null || list['errors']["email"] == ""){
-      msg += list['errors']["email"].toString().substring(1, list['errors']["email"].toString().length-1)+'\n';
+    if (list['errors']["email"] != null || list['errors']["email"] == "") {
+      msg += list['errors']["email"]
+              .toString()
+              .substring(1, list['errors']["email"].toString().length - 1) +
+          '\n';
     }
-    if(list['errors']["password"] != null || list['errors']["password"] == ""){
-      msg += list['errors']["password"].toString().substring(1, list['errors']["password"].toString().length-1)+'\n';
+    if (list['errors']["password"] != null ||
+        list['errors']["password"] == "") {
+      msg += list['errors']["password"]
+              .toString()
+              .substring(1, list['errors']["password"].toString().length - 1) +
+          '\n';
     }
-    if(list['errors']["password_confirmation"] != null || list['errors']["password_confirmation"] == ""){
-      msg += list['errors']["password_confirmation"].toString().substring(1, list['errors']["password_confirmation"].toString().length-1);
+    if (list['errors']["password_confirmation"] != null ||
+        list['errors']["password_confirmation"] == "") {
+      msg += list['errors']["password_confirmation"].toString().substring(
+          1, list['errors']["password_confirmation"].toString().length - 1);
     }
 
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(msg)));
-  }else{
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+  } else {
     setarMaterialPageRouteTab(context, LoginPage());
   }
 }
@@ -97,8 +108,6 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
           height: double.maxFinite,
           padding: EdgeInsets.only(left: 15, right: 15, top: 10),
           child: Container(
-            //height: double.maxFinite,
-            //height: 500,
             width: double.infinity,
             child: Padding(
               padding: EdgeInsets.only(left: 15, right: 15),
@@ -123,7 +132,6 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                   TextFormField(
                     autofocus: false,
                     keyboardType: TextInputType.emailAddress,
-                    //validator:
                     decoration: InputDecoration(
                       labelText: "Nome",
                       labelStyle: TextStyle(
@@ -233,8 +241,8 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                         String confirmacaoSenha =
                             confirmacaoSenhaController.text;
 
-                        UsuarioModelTeste dadosUsuario = (await submitUsuario( context,
-                                nome, email, senha, confirmacaoSenha))
+                        UsuarioModelTeste dadosUsuario = (await submitUsuario(
+                                context, nome, email, senha, confirmacaoSenha))
                             as UsuarioModelTeste;
 
                         setState(() {

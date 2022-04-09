@@ -25,10 +25,9 @@ Future deleteToken(BuildContext context) async {
   };
 
   const url = 'https://www.healthpets.app.br/api/auth/logout';
-  final response =
-  await http.get(Uri.parse(url), headers: header);
+  final response = await http.get(Uri.parse(url), headers: header);
 
-  if(response.statusCode == 200){
+  if (response.statusCode == 200) {
     prefs.clear();
     setarMaterialPageRoute(context, LoginPage());
   }
@@ -39,7 +38,6 @@ Future deleteToken(BuildContext context) async {
 }
 
 class _LogoutPageState extends State<LogoutPage> {
-
   @override
   Widget build(BuildContext context) {
     deleteToken(context);
@@ -60,23 +58,4 @@ class _LogoutPageState extends State<LogoutPage> {
       ),
     );
   }
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     body: Center(
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         children: <Widget>[
-  //           Text(
-  //             "Saindo...",
-  //           ),
-  //           SizedBox(height: 10),
-  //           Container(
-  //             child: CircularProgressIndicator(),
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

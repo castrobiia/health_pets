@@ -35,8 +35,6 @@ class CadastroUsuario extends StatelessWidget {
           height: double.maxFinite,
           padding: EdgeInsets.only(left: 15, right: 15, top: 10),
           child: Container(
-            //height: double.maxFinite,
-            //height: 500,
             width: double.infinity,
             child: Padding(
               padding: EdgeInsets.only(left: 15, right: 15),

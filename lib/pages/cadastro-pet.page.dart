@@ -246,7 +246,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 decoration: InputDecoration(
                                   labelText: "Nome",
                                   labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
                                     fontWeight: FontWeight.w400,
                                     fontSize: 17,
                                   ),
@@ -267,7 +266,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 decoration: InputDecoration(
                                   labelText: "Data de Nascimento",
                                   labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
                                     fontWeight: FontWeight.w400,
                                     fontSize: 17,
                                   ),
