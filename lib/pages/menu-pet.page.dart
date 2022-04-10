@@ -60,15 +60,7 @@ void onSelected(BuildContext context, MenuItemPet item, dynamic id) {
       setarMaterialPageRoute(context, EditarPetPage(idPet));
       break;
     case MenuItemsPet.itemExcluir:
-      // createInfoDialogPet(context);
-      animalController.deleteAnimal(id).then((value) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('$value'),
-          ),
-        );
-        setarMaterialPageRoute(context, PetPage());
-      });
+      confirmarExclusaoAnimal(context, id);
       break;
     case MenuItemsPet.itemCompartilhar:
       setarMaterialPageRoute(context, PetPage());
