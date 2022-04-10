@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/class/api/token.dart';
+import 'package:health_pets/pages/login.page.dart';
 
 void setarMaterialPageRoute(BuildContext context, page) {
   Navigator.push(
@@ -51,4 +53,12 @@ validarCampo(value) {
     return "Preencha o campo";
   }
   return null;
+}
+
+void autenticacao(BuildContext context) async {
+  var token = Token().getToken();
+
+  if (token == null || token == '') {
+    setarMaterialPageRoute(context, LoginPage());
+  }
 }

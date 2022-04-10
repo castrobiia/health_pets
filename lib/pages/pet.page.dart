@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/cadastro-pet.page.dart';
-import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/menu.page.dart';
 import 'package:health_pets/widgets/pet/pet-list.widget.dart';
 
@@ -12,16 +9,7 @@ class PetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future autenticacao() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String token = await prefs.get('token').toString();
-
-      if (token == null || token == '') {
-        setarMaterialPageRoute(context, LoginPage());
-      }
-    }
-
-    autenticacao();
+    autenticacao(context);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
