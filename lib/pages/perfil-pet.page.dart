@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-// import 'package:health_pets/http/webclient.dart';
-import 'package:health_pets/models/animal-model.dart';
+import 'package:health_pets/class/entity/animal-entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -13,25 +12,6 @@ class PerfilPet extends StatefulWidget {
 
   @override
   State<PerfilPet> createState() => _PerfilPetState(this.id);
-}
-
-Future<dynamic?> getAnimal(int id) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String token = await prefs.get('token').toString();
-
-  var header = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer ${token}"
-  };
-
-  const url = 'https://www.healthpets.app.br/api/animal/';
-  final response =
-      await http.get(Uri.parse(url + id.toString()), headers: header);
-
-  dynamic animal = jsonDecode(response.body);
-
-  return animal;
 }
 
 Future<dynamic?> getEspecie(int id) async {
@@ -120,7 +100,7 @@ class _PerfilPetState extends State<PerfilPet> {
                 ],
               ),
               child: FutureBuilder<dynamic>(
-                  future: getAnimal(id),
+                  future: AnimalEntity().getAnimal(id),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
                       // return: show loading widget
