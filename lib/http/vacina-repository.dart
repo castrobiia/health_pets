@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import 'package:health_pets/models/vacina-model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class VacinaRepository {
@@ -11,19 +9,8 @@ class VacinaRepository {
     "Accept": "application/json"
   };
 
-  List listaVacinas = [];
-
-  // Future<VacinaModel?> getAllVacinas(String id) async {
-  //   const url = 'https://www.healthpets.app.br/api/especie/${id}/vacina';
-
-  //   final response = await http.get(Uri.parse(url), headers: header);
-  //   var vacinas = jsonDecode(response.body);
-
-  //   listaVacinas = vacinas;
-  // }
-
-  getVacinasPorAnimal(int id) async {
-    String url = 'https://www.healthpets.app.br/api/animal/${id}/vacina';
+  getVacina(int id) async {
+    String url = 'https://www.healthpets.app.br/api/vacina/${id}';
 
     print('URL VACINA: $url');
 
@@ -41,7 +28,7 @@ class VacinaRepository {
   }
 
   postVacina(int id_animal) async {
-    String url = 'https://www.healthpets.app.br/api/animal/${id_animal}/vacina';
+    String url = 'https://www.healthpets.app.br/api/vacina/${id_animal}';
 
     print('URL POST VACINA: $url');
 
