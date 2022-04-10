@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/animal-entity.dart';
+import 'package:health_pets/class/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -132,51 +133,7 @@ class _PerfilPetState extends State<PerfilPet> {
                     DateTime nascimento = DateTime(ano, mes, dia);
                     DateTime hoje = DateTime.now();
 
-                    var numAnos = hoje.year - nascimento.year;
-                    if (hoje.month < nascimento.month ||
-                        (hoje.month == nascimento.month &&
-                            hoje.day < nascimento.day)) {
-                      numAnos--;
-                    }
-
-                    var numMeses = 0;
-                    if (hoje.month > nascimento.month) {
-                      numMeses = hoje.month - nascimento.month;
-                    } else if (hoje.month < nascimento.month) {
-                      if (hoje.day > nascimento.day) {
-                        numMeses = (12 - nascimento.month) + (hoje.month);
-                      } else if (hoje.day < nascimento.day) {
-                        numMeses = (12 - nascimento.month) + (hoje.month - 1);
-                      }
-                    }
-
-                    var numDias = 0;
-                    var dUltima;
-                    if ((hoje.month > nascimento.month ||
-                            hoje.month < nascimento.month) &&
-                        (hoje.day > nascimento.day)) {
-                      dUltima = DateTime(nascimento.day, hoje.month, hoje.year)
-                          .toString();
-                      int dUltimaInt = int.parse(dUltima);
-                      var teste = hoje.toString();
-                      int hojeInt = int.parse(teste);
-
-                      numDias = (hojeInt - dUltimaInt);
-                      print('dUltima: $numDias');
-                    }
-
-                    var anos, meses, dias, idadeAnimal;
-
-                    if (numAnos == 1) {
-                      anos = ('$numAnos ano e ');
-                    } else {
-                      anos = ('$numAnos anos e ');
-                    }
-                    if (numMeses == 1) {
-                      meses = ('$numMeses mês');
-                    } else {
-                      meses = ('$numMeses meses');
-                    }
+                    var idade = Util().calculoIdade(hoje, nascimento);
 
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -256,8 +213,7 @@ class _PerfilPetState extends State<PerfilPet> {
                               "Idade",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            //Text(idade.toString() + " " + textoIdade),
-                            Text(anos + meses),
+                            Text(idade),
                           ],
                         ),
                         Divider(
