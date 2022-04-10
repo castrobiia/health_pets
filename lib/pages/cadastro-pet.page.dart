@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
+import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
 import 'package:health_pets/pages/tabs.page.dart';
@@ -55,31 +56,17 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
   String? _dataNascimento;
   String? _especie;
   String? _raca;
+  List listaRacas = [];
 
   var header = {
     "Content-Type": "application/json",
     "Accept": "application/json"
   };
 
-  List listaRacas = [];
-
-  getRacasPorEspecie(String id) async {
-    String url = 'https://www.healthpets.app.br/api/especie/${id}/racas';
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = await prefs.get('token').toString();
-
-    var headerToken = {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "Authorization": "Bearer ${token}"
-    };
-
-    final response = await http.get(Uri.parse(url), headers: headerToken);
-    var racas = jsonDecode(response.body);
-
+  setRacas(id) async {
+    var list = await RacaEntity().getRacasPorEspecie(id);
     setState(() {
-      listaRacas = racas;
+      listaRacas = list;
     });
   }
 
@@ -232,12 +219,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              setarCampoForms(
-                                nomeController,
-                                "Nome",
-                                _nome,
-                                validator: (value) => validarCampo(value),
-                              ),
+                              setarCampoForms(nomeController, "Nome", _nome,
+                                  validator: (value) => validarCampo(value)),
                               TextFormField(
                                 autofocus: false,
                                 validator: (value) {
@@ -292,7 +275,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                   setState(() {
                                     especieController.text =
                                         newValue.toString();
-                                    getRacasPorEspecie(especieController.text);
+                                    setRacas(especieController.text);
                                   });
                                 },
                                 value: especieId,
@@ -309,16 +292,16 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                   return null;
                                 },
                                 onSaved: (input) =>
-                                    _especie = input! as String?,
+                                    _especie = input!.toString(),
                                 style: TextStyle(
                                     fontSize: 17, color: Colors.black),
                                 items: listaRacas.map((item) {
                                   return DropdownMenuItem(
                                     child: new Text(
-                                      item['descricao'],
+                                      item.descricao,
                                       style: TextStyle(fontSize: 17),
                                     ),
-                                    value: item['id'].toString(),
+                                    value: item.id,
                                   );
                                 }).toList(),
                                 onChanged: (newValue) {
