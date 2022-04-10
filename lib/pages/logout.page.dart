@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:health_pets/links/links-pages.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:health_pets/links/links-pages.dart';
 
 import 'login.page.dart';
 
@@ -31,31 +30,28 @@ Future deleteToken(BuildContext context) async {
     prefs.clear();
     setarMaterialPageRoute(context, LoginPage());
   }
-
-  return Container(
-    child: Text('Bye Bye'),
-  );
 }
 
 class _LogoutPageState extends State<LogoutPage> {
   @override
   Widget build(BuildContext context) {
     deleteToken(context);
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Saindo...",
-            ),
-            SizedBox(height: 10),
-            Container(
-              child: CircularProgressIndicator(),
-            ),
-          ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("Saindo..."),
+              SizedBox(height: 10),
+              Container(
+                child: CircularProgressIndicator(),
+              ),
+            ],
+          ),
         ),
-      ),
+      ),              
     );
   }
 }
