@@ -29,7 +29,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         initialDate: DateTime.now(),
         firstDate: DateTime(DateTime.now().year - 30),
         lastDate: DateTime.now());
-    print('datePicker: $_datePicker');
+    print('datePicker: $_datePicker'); //[APAGAR]
 
     if (_datePicker != null && _datePicker != _data) {
       setState(
@@ -52,7 +52,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
   }
 
-  late CadastroVacinaModel cadastrarVacinaPage;
+  late CadastroVacinaModel _cadastrarVacinaPage;
   TextEditingController nomeVacinaController = TextEditingController();
   TextEditingController dataAplicacaoController = TextEditingController();
   TextEditingController dataAplicacaoTesteController = TextEditingController();
@@ -97,7 +97,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         headers: headerToken,
         body: {
           'nome': nomeVacina,
-          'data_nascimento': data_aplicacao,
+          'data_aplicacao': data_aplicacao,
           'fabricante': fabricante,
           'lote': lote,
           'id_animal': id_animal
@@ -147,7 +147,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
 
                 setState(
                   () {
-                    cadastrarVacinaPage = dadosVacina;
+                    _cadastrarVacinaPage = dadosVacina;
                   },
                 );
               }

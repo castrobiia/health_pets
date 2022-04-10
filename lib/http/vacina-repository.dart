@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import 'package:health_pets/models/vacina-model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class VacinaRepository {
