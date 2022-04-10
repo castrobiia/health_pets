@@ -10,7 +10,7 @@ class VacinaRepository {
   };
 
   getVacina(int id) async {
-    String url = 'https://www.healthpets.app.br/api/animal/${id}/vacina';
+    String url = 'https://www.healthpets.app.br/api/vacina/${id}';
 
     print('URL VACINA: $url');
 
