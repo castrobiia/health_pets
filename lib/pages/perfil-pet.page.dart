@@ -132,22 +132,6 @@ class _PerfilPetState extends State<PerfilPet> {
                     DateTime nascimento = DateTime(ano, mes, dia);
                     DateTime hoje = DateTime.now();
 
-                    // int idade = hoje.year - nascimento.year;
-
-                    // if (hoje.month < nascimento.month)
-                    //   idade--;
-                    // else if (hoje.month == nascimento.month) {
-                    //   if (hoje.day < nascimento.day) idade--;
-                    // }
-
-                    // String textoIdade;
-
-                    // if (idade == 1) {
-                    //   textoIdade = "ano";
-                    // } else {
-                    //   textoIdade = "anos";
-                    // }
-
                     var numAnos = hoje.year - nascimento.year;
                     if (hoje.month < nascimento.month ||
                         (hoje.month == nascimento.month &&
