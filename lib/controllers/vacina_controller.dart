@@ -1,20 +1,8 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:health_pets/http/vacina-repository.dart';
-import 'package:health_pets/models/cadastro-vacina-model.dart';
 import 'package:health_pets/models/vacina-model.dart';
 
 class VacinaController {
   List<VacinaModel> vacinas = [];
-
-  late CadastroVacinaModel cadastrarVacinaPage;
-  TextEditingController nomeVacinaController = TextEditingController();
-  TextEditingController dataAplicacaoController = TextEditingController();
-  TextEditingController dataAplicacaoTesteController = TextEditingController();
-  TextEditingController fabricanteController = TextEditingController();
-  TextEditingController loteController = TextEditingController();
-  TextEditingController animalController = TextEditingController();
-  
 
   final VacinaRepository _repository;
   VacinaState state = VacinaState.start;

@@ -52,6 +52,7 @@ dependencies:
   shared_preferences: ^2.0.13
   fluttertoast: ^8.0.9
   intl: ^0.17.0
+  back_button_interceptor: ^5.0.2
 
 dev_dependencies:
   flutter_test:

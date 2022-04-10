@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/class/entity/vacina-entity.dart';
 
-import 'package:health_pets/controllers/vacina_controller.dart';
 import 'package:health_pets/http/vacina-repository.dart';
 import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/models/cadastro-vacina-model.dart';
@@ -10,19 +10,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class CadastrarVacina extends StatefulWidget {
-  const CadastrarVacina(this.id);
-  final int id;
+  const CadastrarVacina(this.idAnimal);
+  final int idAnimal;
 
   @override
-  _CadastrarVacinaState createState() => _CadastrarVacinaState(this.id);
+  _CadastrarVacinaState createState() => _CadastrarVacinaState(this.idAnimal);
 }
 
 class _CadastrarVacinaState extends State<CadastrarVacina> {
   bool checkedValue = true;
   DateTime _data = DateTime.now();
 
-  final int id;
-  _CadastrarVacinaState(this.id);
+  final int idAnimal;
+  _CadastrarVacinaState(this.idAnimal);
 
   Future _dataSelecionada(BuildContext context) async {
     var _datePicker = await showDatePicker(
@@ -30,14 +30,16 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         initialDate: DateTime.now(),
         firstDate: DateTime(DateTime.now().year - 30),
         lastDate: DateTime.now());
+    print('datePicker: $_datePicker'); //[APAGAR]
 
     if (_datePicker != null && _datePicker != _data) {
       setState(
         () {
-          VacinaController().dataAplicacaoController.text =
-              _datePicker.toString();
-          VacinaController().dataAplicacaoTesteController.text =
-              VacinaController().dataAplicacaoController.text;
+          dataAplicacaoController.text = _datePicker.toString();
+          dataAplicacaoTesteController.text = dataAplicacaoController.text;
+
+          print(
+              'dataAplicacaoController: ${dataAplicacaoController.text}'); //[APAGAR]
         },
       );
     } else {
@@ -48,28 +50,37 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
       );
     }
 
-    VacinaController().dataAplicacaoController.text =
+    dataAplicacaoController.text =
         DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
   }
+
+  late CadastroVacinaModel _cadastrarVacinaPage;
+  TextEditingController nomeVacinaController = TextEditingController();
+  TextEditingController dataAplicacaoController = TextEditingController();
+  TextEditingController dataAplicacaoTesteController = TextEditingController();
+  TextEditingController fabricanteController = TextEditingController();
+  TextEditingController loteController = TextEditingController();
+  TextEditingController animalController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   String? _nomeVacina;
   String? _dataAplicacao;
   String? _fabricante;
   String? _lote;
+  String? _id_animal;
 
-  // var header = {
-  //   "Content-Type": "application/json",
-  //   "Accept": "application/json"
-  // };
+  var header = {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  };
 
   List listaVacinas = [];
 
   @override
   Widget build(BuildContext context) {
-    final int id;
+    final int idAnimal;
 
-    _CadastrarVacinaState(this.id);
+    _CadastrarVacinaState(this.idAnimal);
 
     Future<CadastroVacinaModel?> submitVacina(
         String nomeVacina,
@@ -77,6 +88,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         String fabricante,
         String lote,
         String id_animal) async {
+      print('id_animal - linha 89: $id_animal');
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String token = await prefs.get('token').toString();
 
@@ -85,11 +97,11 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         "Authorization": "Bearer ${token}"
       };
       final response = await http.post(
-        Uri.https('healthpets.app.br', 'api/vacina'),
+        Uri.https('healthpets.app.br', 'api/vacina/${id_animal}'),
         headers: headerToken,
         body: {
           'nome': nomeVacina,
-          'data_nascimento': data_aplicacao,
+          'data_aplicacao': data_aplicacao,
           'fabricante': fabricante,
           'lote': lote,
           'id_animal': id_animal
@@ -102,7 +114,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
       if (status == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Vacina cadastrada com sucesso')));
-        setarMaterialPageRoute(context, VacinaPage(this.id));
+        setarMaterialPageRoute(context, VacinaPage(this.idAnimal));
       } else {
         print("Erro ao cadastrar vacina");
       }
@@ -119,32 +131,34 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
 
-                String nomeVacina =
-                    VacinaController().nomeVacinaController.text;
+                String nomeVacina = nomeVacinaController.text;
                 print(nomeVacina);
-                String data_aplicacao =
-                    VacinaController().dataAplicacaoController.text;
+                String data_aplicacao = dataAplicacaoController.text;
                 print(data_aplicacao);
-                String fabricante =
-                    VacinaController().fabricanteController.text;
+                String fabricante = fabricanteController.text;
                 print(fabricante);
-                String lote = VacinaController().loteController.text;
+                String lote = loteController.text;
                 print(lote);
-                String id_animal = VacinaController().animalController.text;
-                print(id_animal);
+                int id_animal = this.idAnimal;
+                print(this.idAnimal);
 
-                CadastroVacinaModel dadosVacina = (await submitVacina(
-                    nomeVacina,
-                    data_aplicacao,
-                    fabricante,
-                    lote,
-                    id_animal)) as CadastroVacinaModel;
+                // VacinaEntity().createVacina(nomeVacina, data_aplicacao,
+                //     fabricante, lote, this.idAnimal);
 
-                setState(
-                  () {
-                    VacinaController().cadastrarVacinaPage = dadosVacina;
-                  },
-                );
+                print(VacinaEntity().createVacina(context, nomeVacina, data_aplicacao,
+                    fabricante, lote, this.idAnimal).then((value) => value));
+                // CadastroVacinaModel dadosVacina = (await submitVacina(
+                //     nomeVacina,
+                //     data_aplicacao,
+                //     fabricante,
+                //     lote,
+                //     id_animal)) as CadastroVacinaModel;
+
+                // setState(
+                //   () {
+                //     _cadastrarVacinaPage = dadosVacina;
+                //   },
+                //);
               }
             },
             child: const Text("Salvar"),
@@ -181,62 +195,56 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                   controlAffinity:
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),
-                FutureBuilder<dynamic>(
-                  future: VacinaRepository().getVacinasPorAnimal(this.id),
-                  builder: (context, snapshot) {
-                    return Column(
-                      children: <Widget>[
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              setarCampoForms(
-                                  VacinaController().nomeVacinaController,
-                                  "Vacina",
-                                  _nomeVacina,
-                                  validator: (value) => validarCampo(value)),
-                              TextFormField(
-                                autofocus: false,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Selecione uma data";
-                                  }
-                                  return null;
-                                },
-                                onSaved: (input) => _dataAplicacao = input!,
-                                controller:
-                                    VacinaController().dataAplicacaoController,
-                                decoration: InputDecoration(
-                                  labelText: "Data da Aplicação",
-                                  labelStyle: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                                readOnly: true,
-                                onTap: () {
-                                  setState(
-                                    () {
-                                      _dataSelecionada(context);
-                                    },
-                                  );
-                                },
+                //   FutureBuilder<dynamic>(
+                //     future: VacinaEntity().createVacina(this.idAnimal),
+                //     builder: (context, snapshot) {
+                Column(
+                  children: <Widget>[
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          setarCampoForms(
+                              nomeVacinaController, "Vacina", _nomeVacina,
+                              validator: (value) => validarCampo(value)),
+                          TextFormField(
+                            autofocus: false,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Selecione uma data";
+                              }
+                              return null;
+                            },
+                            onSaved: (input) => _dataAplicacao = input!,
+                            controller: dataAplicacaoController,
+                            decoration: InputDecoration(
+                              labelText: "Data da Aplicação",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 17,
                               ),
-                              SizedBox(height: 10),
-                              setarCampoForms(VacinaController().loteController,
-                                  "Lote", _lote,
-                                  validator: (value) => validarCampo(value)),
-                              setarCampoForms(
-                                  VacinaController().fabricanteController,
-                                  "Fabricante",
-                                  _fabricante,
-                                  validator: (value) => validarCampo(value)),
-                            ],
+                            ),
+                            readOnly: true,
+                            onTap: () {
+                              setState(
+                                () {
+                                  _dataSelecionada(context);
+                                },
+                              );
+                            },
                           ),
-                        ),
-                      ],
-                    );
-                  },
+                          SizedBox(height: 10),
+                          setarCampoForms(loteController, "Lote", _lote,
+                              validator: (value) => validarCampo(value)),
+                          setarCampoForms(
+                              fabricanteController, "Fabricante", _fabricante,
+                              validator: (value) => validarCampo(value)),
+                        ],
+                      ),
+                    ),
+                  ],
+                  //);
+                  //},
                 ),
               ],
             ),
