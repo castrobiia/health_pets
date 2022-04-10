@@ -160,13 +160,13 @@ class _PerfilPetState extends State<PerfilPet> {
                     //   if (hoje.day < nascimento.day) idade--;
                     // }
 
-                    String textoIdade;
+                    // String textoIdade;
 
-                    if (idade == 1) {
-                      textoIdade = "ano";
-                    } else {
-                      textoIdade = "anos";
-                    }
+                    // if (idade == 1) {
+                    //   textoIdade = "ano";
+                    // } else {
+                    //   textoIdade = "anos";
+                    // }
 
                     var numAnos = hoje.year - nascimento.year;
                     if (hoje.month < nascimento.month ||
