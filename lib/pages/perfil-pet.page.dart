@@ -152,20 +152,66 @@ class _PerfilPetState extends State<PerfilPet> {
                     DateTime nascimento = DateTime(ano, mes, dia);
                     DateTime hoje = DateTime.now();
 
-                    int idade = hoje.year - nascimento.year;
+                    // int idade = hoje.year - nascimento.year;
 
-                    if (hoje.month < nascimento.month)
-                      idade--;
-                    else if (hoje.month == nascimento.month) {
-                      if (hoje.day < nascimento.day) idade--;
+                    // if (hoje.month < nascimento.month)
+                    //   idade--;
+                    // else if (hoje.month == nascimento.month) {
+                    //   if (hoje.day < nascimento.day) idade--;
+                    // }
+
+                    // String textoIdade;
+
+                    // if (idade == 1) {
+                    //   textoIdade = "ano";
+                    // } else {
+                    //   textoIdade = "anos";
+                    // }
+
+                    var numAnos = hoje.year - nascimento.year;
+                    if (hoje.month < nascimento.month ||
+                        (hoje.month == nascimento.month &&
+                            hoje.day < nascimento.day)) {
+                      numAnos--;
                     }
 
-                    String textoIdade;
+                    var numMeses = 0;
+                    if (hoje.month > nascimento.month) {
+                      numMeses = hoje.month - nascimento.month;
+                    } else if (hoje.month < nascimento.month) {
+                      if (hoje.day > nascimento.day) {
+                        numMeses = (12 - nascimento.month) + (hoje.month);
+                      } else if (hoje.day < nascimento.day) {
+                        numMeses = (12 - nascimento.month) + (hoje.month - 1);
+                      }
+                    }
 
-                    if (idade == 1) {
-                      textoIdade = "ano";
+                    var numDias = 0;
+                    var dUltima;
+                    if ((hoje.month > nascimento.month ||
+                            hoje.month < nascimento.month) &&
+                        (hoje.day > nascimento.day)) {
+                      dUltima = DateTime(nascimento.day, hoje.month, hoje.year)
+                          .toString();
+                      int dUltimaInt = int.parse(dUltima);
+                      var teste = hoje.toString();
+                      int hojeInt = int.parse(teste);
+
+                      numDias = (hojeInt - dUltimaInt);
+                      print('dUltima: $numDias');
+                    }
+
+                    var anos, meses, dias, idadeAnimal;
+
+                    if (numAnos == 1) {
+                      anos = ('$numAnos ano e ');
                     } else {
-                      textoIdade = "anos";
+                      anos = ('$numAnos anos e ');
+                    }
+                    if (numMeses == 1) {
+                      meses = ('$numMeses mês');
+                    } else {
+                      meses = ('$numMeses meses');
                     }
 
                     return Column(
@@ -246,7 +292,8 @@ class _PerfilPetState extends State<PerfilPet> {
                               "Idade",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text(idade.toString() + " " + textoIdade),
+                            //Text(idade.toString() + " " + textoIdade),
+                            Text(anos + meses),
                           ],
                         ),
                         Divider(
