@@ -42,6 +42,7 @@ class _LogoutPageState extends State<LogoutPage> {
   Widget build(BuildContext context) {
     deleteToken(context);
     return WillPopScope(
+      onWillPop: () async => false,
       child: Scaffold(
         body: Center(
           child: Column(
@@ -52,12 +53,10 @@ class _LogoutPageState extends State<LogoutPage> {
               Container(
                 child: CircularProgressIndicator(),
               ),
-              // onPressed: () => Navigator.of(context).pop(),
             ],
           ),
         ),
-      ),
-      onWillPop: () async => false,
+      ),              
     );
   }
 }
