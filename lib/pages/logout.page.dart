@@ -1,9 +1,9 @@
-import 'dart:convert';
-
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
-import 'package:health_pets/links/links-pages.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:health_pets/links/links-pages.dart';
 
 import 'login.page.dart';
 
@@ -41,21 +41,23 @@ class _LogoutPageState extends State<LogoutPage> {
   @override
   Widget build(BuildContext context) {
     deleteToken(context);
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Saindo...",
-            ),
-            SizedBox(height: 10),
-            Container(
-              child: CircularProgressIndicator(),
-            ),
-          ],
+    return WillPopScope(
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("Saindo..."),
+              SizedBox(height: 10),
+              Container(
+                child: CircularProgressIndicator(),
+              ),
+              // onPressed: () => Navigator.of(context).pop(),
+            ],
+          ),
         ),
       ),
+      onWillPop: () async => false,
     );
   }
 }
