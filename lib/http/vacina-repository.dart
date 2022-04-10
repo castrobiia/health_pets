@@ -11,18 +11,7 @@ class VacinaRepository {
     "Accept": "application/json"
   };
 
-  List listaVacinas = [];
-
-  // Future<VacinaModel?> getAllVacinas(String id) async {
-  //   const url = 'https://www.healthpets.app.br/api/especie/${id}/vacina';
-
-  //   final response = await http.get(Uri.parse(url), headers: header);
-  //   var vacinas = jsonDecode(response.body);
-
-  //   listaVacinas = vacinas;
-  // }
-
-  getVacinasPorAnimal(int id) async {
+  getVacina(int id) async {
     String url = 'https://www.healthpets.app.br/api/animal/${id}/vacina';
 
     print('URL VACINA: $url');
@@ -41,7 +30,7 @@ class VacinaRepository {
   }
 
   postVacina(int id_animal) async {
-    String url = 'https://www.healthpets.app.br/api/animal/${id_animal}/vacina';
+    String url = 'https://www.healthpets.app.br/api/vacina/${id_animal}';
 
     print('URL POST VACINA: $url');
 
