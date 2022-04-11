@@ -14,88 +14,20 @@ class Util {
 
     if (anos > 0) {
       if (anos == 1) {
-        if (meses == 1) {
-          if (dias == 1) {
-            return anos.toString() +
-                ' ano e ' +
-                meses.toString() +
-                ' mês e ' +
-                dias.toString() +
-                'dia';
-          } else {
-            return anos.toString() +
-                ' ano e ' +
-                meses.toString() +
-                ' mês e ' +
-                dias.toString() +
-                'dias';
-          }
-        } else if (dias == 1) {
-          return anos.toString() +
-              ' ano e ' +
-              meses.toString() +
-              ' meses e ' +
-              dias.toString() +
-              ' dia';
-        } else {
-          return anos.toString() +
-              ' ano e ' +
-              meses.toString() +
-              ' meses e ' +
-              dias.toString() +
-              ' dias';
-        }
-      } else if (meses == 1) {
-        if (dias == 1) {
-          return anos.toString() +
-              ' anos e ' +
-              meses.toString() +
-              ' mês e ' +
-              dias.toString() +
-              ' dia';
-        } else {
-          return anos.toString() +
-              ' anos e ' +
-              meses.toString() +
-              ' mês e ' +
-              dias.toString() +
-              ' dias';
-        }
-      } else if (dias == 1) {
-        return anos.toString() +
-            ' anos e ' +
-            meses.toString() +
-            ' meses e ' +
-            dias.toString() +
-            ' dia';
+        return anos.toString() + ' ano';
       } else {
-        return anos.toString() +
-            ' anos e ' +
-            meses.toString() +
-            ' meses e ' +
-            dias.toString() +
-            ' dias';
+        return anos.toString() + ' anos';
       }
     } else if (meses > 0) {
       if (meses == 1) {
-        if (dias == 1) {
-          return meses.toString() + ' mês e ' + dias.toString() + ' dia';
-        } else {
-          return meses.toString() + ' mês e ' + dias.toString() + ' dias';
-        }
+        return meses.toString() + ' mês';
       } else {
-        if (dias == 1) {
-          return meses.toString() + ' meses e ' + dias.toString() + ' dia';
-        } else {
-          return meses.toString() + ' meses e ' + dias.toString() + ' dias';
-        }
+        return meses.toString() + ' meses';
       }
+    } else if (dias == 1) {
+      return dias.toString() + ' dia';
     } else {
-      if (dias == 1) {
-        return dias.toString() + ' dia';
-      } else {
-        return dias.toString() + ' dias';
-      }
+      return dias.toString() + ' dias';
     }
   }
 
