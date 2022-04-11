@@ -63,7 +63,7 @@ Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
           1, list['errors']["password_confirmation"].toString().length - 1);
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+    exibirMensagem(context, msg);
   } else {
     setarMaterialPageRouteTab(context, LoginPage());
   }

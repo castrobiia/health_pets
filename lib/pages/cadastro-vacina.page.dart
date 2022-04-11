@@ -112,8 +112,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
       var dados_vacina = response.body;
       print('dados_vacina: $dados_vacina');
       if (status == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Vacina cadastrada com sucesso')));
+        exibirMensagem(context, 'Vacina cadastrada com sucesso');
         setarMaterialPageRoute(context, VacinaPage(this.idAnimal));
       } else {
         print("Erro ao cadastrar vacina");
@@ -145,8 +144,10 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                 // VacinaEntity().createVacina(nomeVacina, data_aplicacao,
                 //     fabricante, lote, this.idAnimal);
 
-                print(VacinaEntity().createVacina(context, nomeVacina, data_aplicacao,
-                    fabricante, lote, this.idAnimal).then((value) => value));
+                print(VacinaEntity()
+                    .createVacina(context, nomeVacina, data_aplicacao,
+                        fabricante, lote, this.idAnimal)
+                    .then((value) => value));
                 // CadastroVacinaModel dadosVacina = (await submitVacina(
                 //     nomeVacina,
                 //     data_aplicacao,
