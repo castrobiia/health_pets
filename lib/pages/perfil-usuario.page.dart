@@ -128,61 +128,6 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                     height: 1,
                     thickness: 1,
                   ),
-                  /*
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: Image.asset("assets/dog.png"),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Animais",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "5",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: Image.asset("assets/money.png"),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Gastos",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "R\$156,00",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ],
-                  ), */
                 ],
               ),
             ),
