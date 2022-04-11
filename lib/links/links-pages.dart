@@ -23,6 +23,14 @@ void setarMaterialPageRouteTab(BuildContext context, page) {
   );
 }
 
+void exibirMensagem(BuildContext context, mensagem) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(mensagem),
+    ),
+  );
+}
+
 setarCampoForms(variavelController, nomeCampo, variavel,
     {required FormFieldValidator<String> validator}) {
   return Column(
