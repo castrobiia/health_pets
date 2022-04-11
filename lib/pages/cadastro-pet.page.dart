@@ -34,11 +34,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         dataNascimentoTesteController.text = dataNascimentoController.text;
       });
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Selecione uma data'),
-        ),
-      );
+      exibirMensagem(context, 'Selecione uma data');
     }
 
     dataNascimentoController.text =

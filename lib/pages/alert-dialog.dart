@@ -22,11 +22,7 @@ confirmarExclusaoAnimal(BuildContext context, id) {
             TextButton(
               onPressed: () {
                 animalController.deleteAnimal(id).then((value) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('$value'),
-                    ),
-                  );
+                  exibirMensagem(context, '$value');
                   setarMaterialPageRoute(context, PetPage());
                 });
               },
