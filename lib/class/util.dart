@@ -10,15 +10,92 @@ class Util {
   String calculoIdade(hoje, nascimento) {
     var anos = calculoAnos(hoje, nascimento);
     var meses = calculoMeses(hoje, nascimento);
+    var dias = calculoDias(hoje, nascimento);
 
     if (anos > 0) {
       if (anos == 1) {
-        return anos.toString() + ' ano e ' + meses.toString();
+        if (meses == 1) {
+          if (dias == 1) {
+            return anos.toString() +
+                ' ano e ' +
+                meses.toString() +
+                ' mês e ' +
+                dias.toString() +
+                'dia';
+          } else {
+            return anos.toString() +
+                ' ano e ' +
+                meses.toString() +
+                ' mês e ' +
+                dias.toString() +
+                'dias';
+          }
+        } else if (dias == 1) {
+          return anos.toString() +
+              ' ano e ' +
+              meses.toString() +
+              ' meses e ' +
+              dias.toString() +
+              ' dia';
+        } else {
+          return anos.toString() +
+              ' ano e ' +
+              meses.toString() +
+              ' meses e ' +
+              dias.toString() +
+              ' dias';
+        }
+      } else if (meses == 1) {
+        if (dias == 1) {
+          return anos.toString() +
+              ' anos e ' +
+              meses.toString() +
+              ' mês e ' +
+              dias.toString() +
+              ' dia';
+        } else {
+          return anos.toString() +
+              ' anos e ' +
+              meses.toString() +
+              ' mês e ' +
+              dias.toString() +
+              ' dias';
+        }
+      } else if (dias == 1) {
+        return anos.toString() +
+            ' anos e ' +
+            meses.toString() +
+            ' meses e ' +
+            dias.toString() +
+            ' dia';
       } else {
-        return anos.toString() + ' anos e ' + meses.toString();
+        return anos.toString() +
+            ' anos e ' +
+            meses.toString() +
+            ' meses e ' +
+            dias.toString() +
+            ' dias';
+      }
+    } else if (meses > 0) {
+      if (meses == 1) {
+        if (dias == 1) {
+          return meses.toString() + ' mês e ' + dias.toString() + ' dia';
+        } else {
+          return meses.toString() + ' mês e ' + dias.toString() + ' dias';
+        }
+      } else {
+        if (dias == 1) {
+          return meses.toString() + ' meses e ' + dias.toString() + ' dia';
+        } else {
+          return meses.toString() + ' meses e ' + dias.toString() + ' dias';
+        }
       }
     } else {
-      return meses.toString();
+      if (dias == 1) {
+        return dias.toString() + ' dia';
+      } else {
+        return dias.toString() + ' dias';
+      }
     }
   }
 
@@ -31,7 +108,7 @@ class Util {
     return numAnos;
   }
 
-  String calculoMeses(hoje, nascimento) {
+  calculoMeses(hoje, nascimento) {
     num numMeses = 0;
     if (hoje.month > nascimento.month) {
       numMeses = hoje.month - nascimento.month;
@@ -42,10 +119,25 @@ class Util {
         numMeses = (12 - nascimento.month) + (hoje.month - 1);
       }
     }
-    if (numMeses == 1) {
-      return numMeses.toString() + ' mês';
-    } else {
-      return numMeses.toString() + ' meses';
+    return numMeses;
+  }
+
+  int calculoDias(hoje, nascimento) {
+    var numDias = 0;
+    var dUltima;
+    if ((hoje.month > nascimento.month || hoje.month < nascimento.month) &&
+        (hoje.day > nascimento.day)) {
+      dUltima = DateTime(hoje.year, hoje.month, nascimento.day);
+      numDias = hoje.difference(dUltima).inDays;
+    } else if ((hoje.month > nascimento.month ||
+            hoje.month < nascimento.month) &&
+        (hoje.day < nascimento.day)) {
+      dUltima = DateTime(hoje.year, (hoje.month - 1), nascimento.day);
+      numDias = hoje.difference(dUltima).inDays;
+    } else if (nascimento.month == hoje.month) {
+      dUltima = DateTime(hoje.year, hoje.month, nascimento.day);
+      numDias = hoje.difference(dUltima).inDays;
     }
+    return numDias;
   }
 }
