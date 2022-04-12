@@ -32,10 +32,7 @@ class _PerfilPetState extends State<PerfilPet> {
             ),
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, bottom: 80),
-              padding: EdgeInsets.only(
-                left: 40,
-                right: 40,
-              ),
+              padding: EdgeInsets.only(left: 40, right: 40),
               width: double.infinity,
               height: 500,
               decoration: boxDecoration(Colors.white),
@@ -59,10 +56,10 @@ class _PerfilPetState extends State<PerfilPet> {
 
                   final animal = snapshot.data;
 
-                  var dataFormatada = DateFormat("dd/MM/yyyy")
-                      .format(DateTime.parse(animal['data_nascimento']))
-                      .toString();
+                  var dataFormatada =
+                      Util().formatarData(animal['data_nascimento']);
 
+                  //add código ao método calculoIdade
                   List<String> camposData = dataFormatada.split('/');
 
                   int dia = int.parse(camposData[0]);
@@ -100,7 +97,6 @@ class _PerfilPetState extends State<PerfilPet> {
                         future: RacaEntity().getRaca(animal['id_raca']),
                         builder: (context, snapshot) {
                           final raca = snapshot.data;
-
                           return setarRowPerfil("Raça", raca['nome'] ?? '');
                         },
                       ),

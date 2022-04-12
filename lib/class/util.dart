@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Util {
@@ -71,5 +72,13 @@ class Util {
       numDias = hoje.difference(dUltima).inDays;
     }
     return numDias;
+  }
+
+  formatarData(dataSemFormatacao) {
+    var dataFormatada = DateFormat("dd/MM/yyyy")
+        .format(DateTime.parse(dataSemFormatacao))
+        .toString();
+
+    return dataFormatada;
   }
 }
