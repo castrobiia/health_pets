@@ -56,6 +56,51 @@ setarCampoForms(variavelController, nomeCampo, variavel,
   );
 }
 
+setarRowPerfil(campo, texto) {
+  return Column(
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            campo,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(texto),
+        ],
+      ),
+    ],
+  );
+}
+
+divider() {
+  return Divider(
+    height: 1,
+    thickness: 1,
+  );
+}
+
+boxDecoration() {
+  return BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.all(
+      Radius.circular(8),
+    ),
+    boxShadow: [
+      new BoxShadow(
+        //cor do fundo (em volta) do container
+        color: Colors.black12,
+        //qnt de sombra
+        offset: new Offset(1, 2.0),
+        //expansao da sombra
+        blurRadius: 5,
+        //intensidade da borda
+        spreadRadius: 1,
+      ),
+    ],
+  );
+}
+
 validarCampo(value) {
   if (value!.isEmpty) {
     return "Preencha o campo";
