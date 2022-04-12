@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/vacina-entity.dart';
 
 import 'package:health_pets/http/vacina-repository.dart';
-import 'package:health_pets/links/links-pages.dart';
+import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-vacina-model.dart';
 import 'package:health_pets/pages/vacinas.page.dart';
 import 'package:intl/intl.dart';

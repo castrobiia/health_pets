@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
-import 'package:health_pets/links/links-pages.dart';
+import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:http/http.dart' as http;

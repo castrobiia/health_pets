@@ -5,7 +5,7 @@ import 'package:health_pets/class/entity/animal-entity.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/class/util.dart';
-import 'package:health_pets/links/links-pages.dart';
+import 'package:health_pets/widgets/widgets.dart';
 
 class PerfilPet extends StatefulWidget {
   final id;

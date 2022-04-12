@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/links/links-pages.dart';
+import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 
 class CadastroUsuario extends StatelessWidget {
