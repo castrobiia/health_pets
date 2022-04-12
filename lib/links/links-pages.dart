@@ -80,24 +80,34 @@ divider() {
   );
 }
 
-boxDecoration() {
+boxDecoration(cor) {
   return BoxDecoration(
-    color: Colors.white,
+    color: cor,
     borderRadius: BorderRadius.all(
       Radius.circular(8),
     ),
-    boxShadow: [
-      new BoxShadow(
-        //cor do fundo (em volta) do container
-        color: Colors.black12,
-        //qnt de sombra
-        offset: new Offset(1, 2.0),
-        //expansao da sombra
-        blurRadius: 5,
-        //intensidade da borda
-        spreadRadius: 1,
-      ),
-    ],
+    boxShadow: [decorationBoxShadow()],
+  );
+}
+
+decorationBoxShadow() {
+  return new BoxShadow(
+    //cor do fundo (em volta) do container
+    color: Colors.black12,
+    //qnt de sombra
+    offset: new Offset(1, 2.0),
+    //expansao da sombra
+    blurRadius: 5,
+    //intensidade da borda
+    spreadRadius: 1,
+  );
+}
+
+textBotao(texto) {
+  return Text(
+    texto,
+    style: TextStyle(
+        color: Colors.white, fontWeight: FontWeight.w700, fontSize: 17),
   );
 }
 
