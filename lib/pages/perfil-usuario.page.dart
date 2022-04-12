@@ -38,17 +38,7 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage("assets/perfil-usuario1.png"),
-                      ),
-                    ),
-                  ),
+                  BoxDecorationImagem(200, "assets/perfil-usuario1.png"),
                   Text(
                     "Thomaz",
                     style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),

@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/firebase_messaging/custom_firebase_messaging.dart';
+import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -70,17 +71,7 @@ Widget _introScreen() {
         loaderColor: Colors.transparent,
       ),
       Center(
-        child: Container(
-          width: 400.0,
-          height: 400.0,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage("assets/logo_health_pets.png"),
-            ),
-          ),
-        ),
+        child: BoxDecorationImagem(400, "assets/logo_health_pets.png"),
       ),
     ],
   );
