@@ -56,8 +56,6 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                   final usuario = snapshot.data;
                   var idade;
 
-                  print('usuario: $usuario');
-
                   // add else calculando idade
                   if (usuario['data_nascimento'] == null ||
                       usuario['data_nascimento'] == '') {
@@ -66,6 +64,7 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
+                      //carregar imagem
                       BoxDecorationImagem(200, "assets/perfil-usuario1.png"),
                       Text(
                         usuario['name'] ?? '',
@@ -73,64 +72,18 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                             fontSize: 23, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "E-mail",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(usuario['email'] ?? ''),
-                        ],
-                      ),
-                      Divider(
-                        height: 1,
-                        thickness: 1,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Data de Nascimento",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(usuario['data_nascimento'] ?? 'Não informada'),
-                        ],
-                      ),
-                      Divider(
-                        height: 1,
-                        thickness: 1,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Idade",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(idade),
-                        ],
-                      ),
-                      Divider(
-                        height: 1,
-                        thickness: 1,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "Animais",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text("5"),
-                        ],
-                      ),
-                      Divider(
-                        height: 1,
-                        thickness: 1,
-                      ),
+                      setarRowPerfil("Email", usuario['email'] ?? ''),
+                      divider(),
+                      setarRowPerfil("Data de Nascimento",
+                          usuario['data_nascimento'] ?? 'Não informada'),
+                      divider(),
+                      setarRowPerfil("Idade", idade),
+                      divider(),
+                      // alterar
+                      setarRowPerfil("Animais", "5"),
+                      divider(),
                     ],
                   );
                 },
