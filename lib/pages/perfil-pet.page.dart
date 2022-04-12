@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/animal-entity.dart';
+import 'package:health_pets/class/entity/especie-entity.dart';
+import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/class/util.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:health_pets/links/links-pages.dart';
 import 'package:intl/intl.dart';
-import 'package:http/http.dart' as http;
 
 class PerfilPet extends StatefulWidget {
   final id;
@@ -15,54 +16,9 @@ class PerfilPet extends StatefulWidget {
   State<PerfilPet> createState() => _PerfilPetState(this.id);
 }
 
-Future<dynamic?> getEspecie(int id) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String token = await prefs.get('token').toString();
-
-  var header = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer ${token}"
-  };
-
-  const url = 'https://www.healthpets.app.br/api/especie/';
-  final response =
-      await http.get(Uri.parse(url + id.toString()), headers: header);
-
-  dynamic especie = jsonDecode(response.body);
-
-  return especie;
-}
-
-Future<dynamic?> getRaca(int id) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String token = await prefs.get('token').toString();
-
-  var header = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer ${token}"
-  };
-
-  const url = 'https://www.healthpets.app.br/api/raca/';
-  final response =
-      await http.get(Uri.parse(url + id.toString()), headers: header);
-
-  dynamic raca = jsonDecode(response.body);
-
-  return raca;
-}
-
 class _PerfilPetState extends State<PerfilPet> {
   final int id;
   _PerfilPetState(this.id);
-
-  Future<String> getToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = await prefs.get('token').toString();
-
-    return token as String;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,24 +38,7 @@ class _PerfilPetState extends State<PerfilPet> {
               ),
               width: double.infinity,
               height: 500,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8),
-                ),
-                boxShadow: [
-                  new BoxShadow(
-                    //cor do fundo (em volta) do container
-                    color: Colors.black12,
-                    //qnt de sombra
-                    offset: new Offset(1, 2.0),
-                    //expansao da sombra
-                    blurRadius: 5,
-                    //intensidade da borda
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
+              decoration: boxDecoration(),
               child: FutureBuilder<dynamic>(
                   future: AnimalEntity().getAnimal(id),
                   builder: (context, snapshot) {
@@ -158,98 +97,33 @@ class _PerfilPetState extends State<PerfilPet> {
                           height: 10,
                         ),
                         FutureBuilder<dynamic>(
-                          future: getEspecie(animal['id_especie']),
+                          future:
+                              EspecieEntity().getEspecie(animal['id_especie']),
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {}
-                            if (snapshot.hasError) {}
-
                             final especie = snapshot.data;
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Espécie",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text(especie['descricao'] ?? ''),
-                              ],
-                            );
+                            return setarRowPerfil(
+                                "Espécie", especie['descricao'] ?? '');
                           },
                         ),
-                        Divider(
-                          height: 1,
-                          thickness: 1,
-                        ),
+                        divider(),
                         FutureBuilder<dynamic>(
-                          future: getRaca(animal['id_raca']),
+                          future: RacaEntity().getRaca(animal['id_raca']),
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {}
-                            if (snapshot.hasError) {}
-
                             final raca = snapshot.data;
 
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  "Raça",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                Text(raca['nome'] ?? ''),
-                              ],
-                            );
+                            return setarRowPerfil("Raça", raca['nome'] ?? '');
                           },
                         ),
-                        Divider(
-                          height: 1,
-                          thickness: 1,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Idade",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(idade),
-                          ],
-                        ),
-                        Divider(
-                          height: 1,
-                          thickness: 1,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Data de Nascimento",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(dataFormatada),
-                          ],
-                        ),
-                        Divider(
-                          height: 1,
-                          thickness: 1,
-                        ),
+                        divider(),
+                        setarRowPerfil("Idade", idade),
+                        divider(),
+                        setarRowPerfil("Data de Nascimento", dataFormatada),
+                        divider(),
                         // add campo peso somente quando habilitar cadastro de peso
                         /*
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "Peso",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text("10 kg"),
-                          ],
-                        ),
-                        Divider(
-                          height: 1,
-                          thickness: 1,
-                        ), */
+                        setarRowPerfil("Peso", "10 kg"),
+                        divider(),
+                         */
                       ],
                     );
                   }),
