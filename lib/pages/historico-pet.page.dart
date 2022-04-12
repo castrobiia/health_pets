@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/vacinas.page.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -31,31 +32,14 @@ class _HistoricoPetState extends State<HistoricoPet> {
               height: 20,
             ),
             Container(
-             margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
               padding: EdgeInsets.only(
                 left: 20,
                 right: 20,
               ),
               width: double.infinity,
               height: 500,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8),
-                ),
-                boxShadow: [
-                  new BoxShadow(
-                    //cor do fundo (em volta) do container
-                    color: Colors.black12,
-                    //qnt de sombra
-                    offset: const Offset(1, 2.0),
-                    //expansao da sombra
-                    blurRadius: 5,
-                    //intensidade da borda
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
+              decoration: boxDecoration(Colors.white),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
