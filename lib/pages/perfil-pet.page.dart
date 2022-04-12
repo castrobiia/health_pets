@@ -38,7 +38,7 @@ class _PerfilPetState extends State<PerfilPet> {
               ),
               width: double.infinity,
               height: 500,
-              decoration: boxDecoration(),
+              decoration: boxDecoration(Colors.white),
               child: FutureBuilder<dynamic>(
                   future: AnimalEntity().getAnimal(id),
                   builder: (context, snapshot) {

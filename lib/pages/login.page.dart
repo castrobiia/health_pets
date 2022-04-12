@@ -62,9 +62,6 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            decoration: new BoxDecoration(
-              color: Colors.white,
-            ),
             padding: EdgeInsets.only(left: 15, right: 15, top: 40),
             //coluna para colocar a imagem e o form
             child: Column(
@@ -139,24 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 20),
                           Container(
                             width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFCC9396),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                              boxShadow: [
-                                new BoxShadow(
-                                  //cor do fundo (em volta) do container
-                                  color: Colors.black12,
-                                  //qnt de sombra
-                                  offset: new Offset(1, 2.0),
-                                  //expansao da sombra
-                                  blurRadius: 5,
-                                  //intensidade da borda
-                                  spreadRadius: 3,
-                                ),
-                              ],
-                            ),
+                            decoration: boxDecoration(Color(0xFFCC9396)),
                             child: TextButton(
                               onPressed: () async {
                                 //faz a validação do formulário
@@ -178,13 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 }
                               },
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 17),
-                              ),
+                              child: textBotao("Login"),
                             ),
                           ),
                           SizedBox(
