@@ -174,17 +174,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    Container(
-                      width: 180,
-                      height: 180,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage("assets/perfil-cao1.jpeg"),
-                        ),
-                      ),
-                    ),
+                    BoxDecorationImagem(180, "assets/perfil-cao1.jpeg"),
                     Positioned(
                       top: 120,
                       left: 120,

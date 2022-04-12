@@ -90,6 +90,20 @@ boxDecoration(cor) {
   );
 }
 
+BoxDecorationImagem(double tamanho, imagem) {
+  return Container(
+    width: tamanho,
+    height: tamanho,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      image: DecorationImage(
+        fit: BoxFit.cover,
+        image: AssetImage(imagem),
+      ),
+    ),
+  );
+}
+
 decorationBoxShadow() {
   return new BoxShadow(
     //cor do fundo (em volta) do container
