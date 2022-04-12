@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/animal-entity.dart';
+import 'package:health_pets/class/entity/especie-entity.dart';
+import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/class/util.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
-import 'package:http/http.dart' as http;
 
 class PerfilPet extends StatefulWidget {
   final id;
@@ -15,54 +15,9 @@ class PerfilPet extends StatefulWidget {
   State<PerfilPet> createState() => _PerfilPetState(this.id);
 }
 
-Future<dynamic?> getEspecie(int id) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String token = await prefs.get('token').toString();
-
-  var header = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer ${token}"
-  };
-
-  const url = 'https://www.healthpets.app.br/api/especie/';
-  final response =
-      await http.get(Uri.parse(url + id.toString()), headers: header);
-
-  dynamic especie = jsonDecode(response.body);
-
-  return especie;
-}
-
-Future<dynamic?> getRaca(int id) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String token = await prefs.get('token').toString();
-
-  var header = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer ${token}"
-  };
-
-  const url = 'https://www.healthpets.app.br/api/raca/';
-  final response =
-      await http.get(Uri.parse(url + id.toString()), headers: header);
-
-  dynamic raca = jsonDecode(response.body);
-
-  return raca;
-}
-
 class _PerfilPetState extends State<PerfilPet> {
   final int id;
   _PerfilPetState(this.id);
-
-  Future<String> getToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = await prefs.get('token').toString();
-
-    return token as String;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +113,8 @@ class _PerfilPetState extends State<PerfilPet> {
                           height: 10,
                         ),
                         FutureBuilder<dynamic>(
-                          future: getEspecie(animal['id_especie']),
+                          future:
+                              EspecieEntity().getEspecie(animal['id_especie']),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState !=
                                 ConnectionState.done) {}
@@ -182,7 +138,7 @@ class _PerfilPetState extends State<PerfilPet> {
                           thickness: 1,
                         ),
                         FutureBuilder<dynamic>(
-                          future: getRaca(animal['id_raca']),
+                          future: RacaEntity().getRaca(animal['id_raca']),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState !=
                                 ConnectionState.done) {}
