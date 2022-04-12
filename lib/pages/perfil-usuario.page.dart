@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/links/links-pages.dart';
 
 class PerfilUsuario extends StatefulWidget {
   const PerfilUsuario({Key? key}) : super(key: key);
@@ -33,24 +34,7 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
               ),
               width: double.infinity,
               height: 450,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8),
-                ),
-                boxShadow: [
-                  new BoxShadow(
-                    //cor do fundo (em volta) do container
-                    color: Colors.black12,
-                    //qnt de sombra
-                    offset: new Offset(1, 2.0),
-                    //expansao da sombra
-                    blurRadius: 5,
-                    //intensidade da borda
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
+              decoration: boxDecoration(Colors.white),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
