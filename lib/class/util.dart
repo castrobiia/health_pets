@@ -8,7 +8,16 @@ class Util {
     return preference;
   }
 
-  String calculoIdade(hoje, nascimento) {
+  calculoIdade(dataFormatada) {
+    List<String> camposData = dataFormatada.split('/');
+
+    int dia = int.parse(camposData[0]);
+    int mes = int.parse(camposData[1]);
+    int ano = int.parse(camposData[2]);
+
+    DateTime nascimento = DateTime(ano, mes, dia);
+    DateTime hoje = DateTime.now();
+
     var anos = calculoAnos(hoje, nascimento);
     var meses = calculoMeses(hoje, nascimento);
     var dias = calculoDias(hoje, nascimento);

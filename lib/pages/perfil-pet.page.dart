@@ -6,7 +6,6 @@ import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/class/util.dart';
 import 'package:health_pets/links/links-pages.dart';
-import 'package:intl/intl.dart';
 
 class PerfilPet extends StatefulWidget {
   final id;
@@ -59,17 +58,7 @@ class _PerfilPetState extends State<PerfilPet> {
                   var dataFormatada =
                       Util().formatarData(animal['data_nascimento']);
 
-                  //add código ao método calculoIdade
-                  List<String> camposData = dataFormatada.split('/');
-
-                  int dia = int.parse(camposData[0]);
-                  int mes = int.parse(camposData[1]);
-                  int ano = int.parse(camposData[2]);
-
-                  DateTime nascimento = DateTime(ano, mes, dia);
-                  DateTime hoje = DateTime.now();
-
-                  var idade = Util().calculoIdade(hoje, nascimento);
+                  var idade = Util().calculoIdade(dataFormatada);
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
