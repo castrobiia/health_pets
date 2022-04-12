@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/class/entity/usuario-entity.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
 class PerfilUsuario extends StatefulWidget {
@@ -35,74 +36,104 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
               width: double.infinity,
               height: 450,
               decoration: boxDecoration(Colors.white),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  BoxDecorationImagem(200, "assets/perfil-usuario1.png"),
-                  Text(
-                    "Thomaz",
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "E-mail",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+              child: FutureBuilder<dynamic>(
+                future: UsuarioEntity().getUsuario(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    // return: show loading widget
+                    //todo mostrar o loading
+                    return Center(
+                        child: Container(child: CircularProgressIndicator()));
+                  }
+                  if (snapshot.hasError) {
+                    // return: show error widget
+                    return Center(
+                      child: Container(
+                        child: Text('Erro ao carregar os dados'),
                       ),
-                      Text("thomaz@ifsp.edu.br"),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    );
+                  }
+                  final usuario = snapshot.data;
+                  var idade;
+
+                  print('usuario: $usuario');
+
+                  // add else calculando idade
+                  if (usuario['data_nascimento'] == null ||
+                      usuario['data_nascimento'] == '') {
+                    idade = '-';
+                  }
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
+                      BoxDecorationImagem(200, "assets/perfil-usuario1.png"),
                       Text(
-                        "Data de Nascimento",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        usuario['name'] ?? '',
+                        style: TextStyle(
+                            fontSize: 23, fontWeight: FontWeight.bold),
                       ),
-                      Text("01/01/1998"),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Idade",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      SizedBox(
+                        height: 5,
                       ),
-                      Text("24 anos"),
-                    ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Animais",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "E-mail",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(usuario['email'] ?? ''),
+                        ],
                       ),
-                      Text("5"),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Data de Nascimento",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(usuario['data_nascimento'] ?? 'Não informada'),
+                        ],
+                      ),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Idade",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(idade),
+                        ],
+                      ),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Animais",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("5"),
+                        ],
+                      ),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                      ),
                     ],
-                  ),
-                  Divider(
-                    height: 1,
-                    thickness: 1,
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ],
