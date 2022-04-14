@@ -71,17 +71,13 @@ class _PerfilPetState extends State<PerfilPet> {
                             width: 200,
                             height: 200,
                             margin: EdgeInsets.only(top: 15, left: 10),
-                              // BoxDecorationImagem(200, animal['foto'] ?? ''),
-                              child: Column(
-                                  children: [
-                                    Expanded(
-                                        flex: 1,
-                                        child: (image!=null? Image.file(File(image!.path)) : Container())
-                                      // kIsWeb && image!=null? Image.memory(File(image!.path).readAsBytesSync()) : Container(),
-                                      // image!=null? SizedBox(height: 100,) : Container()
-                                    ),
-                                ]
-                              )
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: FileImage(File(image!.path)) as ImageProvider ,
+                                ),
+                              ),
                         ),
                       Text(
                         animal['nome'],
