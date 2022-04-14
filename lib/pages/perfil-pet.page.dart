@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/animal-entity.dart';
@@ -6,6 +7,7 @@ import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/class/util.dart';
 import 'package:health_pets/widgets/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PerfilPet extends StatefulWidget {
   final id;
@@ -17,6 +19,7 @@ class PerfilPet extends StatefulWidget {
 
 class _PerfilPetState extends State<PerfilPet> {
   final int id;
+  XFile? image;
   _PerfilPetState(this.id);
 
   @override
@@ -59,18 +62,34 @@ class _PerfilPetState extends State<PerfilPet> {
                       Util().formatarData(animal['data_nascimento']);
 
                   var idade = Util().calculoIdade(dataFormatada);
+                  image = XFile(animal['foto']);
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      BoxDecorationImagem(200, animal['foto'] ?? ''),
+                        Container(
+                            width: 200,
+                            height: 200,
+                            margin: EdgeInsets.only(top: 15, left: 10),
+                              // BoxDecorationImagem(200, animal['foto'] ?? ''),
+                              child: Column(
+                                  children: [
+                                    Expanded(
+                                        flex: 1,
+                                        child: (image!=null? Image.file(File(image!.path)) : Container())
+                                      // kIsWeb && image!=null? Image.memory(File(image!.path).readAsBytesSync()) : Container(),
+                                      // image!=null? SizedBox(height: 100,) : Container()
+                                    ),
+                                ]
+                              )
+                        ),
                       Text(
                         animal['nome'],
                         style: TextStyle(
                             fontSize: 23, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       FutureBuilder<dynamic>(
                         future:
