@@ -22,8 +22,8 @@ class _GastoPageState extends State<GastoPage> {
               Tab(
                 text: "Visão geral",
               ),
-              Tab(text: "Gastos por animal"),
-              Tab(text: " Estimativas"),
+              Tab(text: "Relatórios"),
+              Tab(text: " Metas"),
             ],
           ),
           automaticallyImplyLeading: false,
