@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:crypto/crypto.dart';
 
 class Util {
   static Future<String?> getPreferences(String campo) async {
@@ -89,5 +92,9 @@ class Util {
         .toString();
 
     return dataFormatada;
+  }
+
+  String textToMd5 (String text) {
+    return md5.convert(utf8.encode(text)).toString();
   }
 }

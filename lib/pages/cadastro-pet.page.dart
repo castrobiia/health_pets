@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
+import 'package:health_pets/http/animal-repository.dart';
+import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
 import 'package:health_pets/pages/tabs.page.dart';
@@ -12,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:health_pets/class/util.dart';
 
 class CadastrarPetPage extends StatefulWidget {
   @override
@@ -20,6 +23,7 @@ class CadastrarPetPage extends StatefulWidget {
 
 class _CadastrarPetPageState extends State<CadastrarPetPage> {
   DateTime _data = DateTime.now();
+  final ImagePicker _picker = ImagePicker();
   XFile? pickedFile;
 
   Future _dataSelecionada(BuildContext context) async {
@@ -67,61 +71,61 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     });
   }
 
-  getGaleria() async {
-    final ImagePicker _picker = ImagePicker();
-    var nomeArquivo = await _picker.pickImage(source: ImageSource.gallery);
-
-    print('Arquivo Path: ${nomeArquivo?.path ?? 'Sem path'}');
-    File image = new File(nomeArquivo?.path ?? '');
-    // return image.path;
-    // print('Image Path: ${image.path}');
-    // print('Arquivo de imagem ${nomeArquivo?.path}' );
-    setState(() {
-      foto = new File(nomeArquivo?.path ?? '/default');
-    });
-  }
+  // getGaleria() async {
+  //   final ImagePicker _picker = ImagePicker();
+  //   var nomeArquivo = await _picker.pickImage(source: ImageSource.gallery);
+  //
+  //   print('Arquivo Path: ${nomeArquivo?.path ?? 'Sem path'}');
+  //   File image = new File(nomeArquivo?.path ?? '');
+  //   // return image.path;
+  //   // print('Image Path: ${image.path}');
+  //   // print('Arquivo de imagem ${nomeArquivo?.path}' );
+  //   setState(() {
+  //     foto = new File(nomeArquivo?.path ?? '/default');
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     var especieId, racaId;
 
-    Future<CadastroAnimalModel?> submitAnimal(
-        String nome,
-        String data_nascimento,
-        String id_especie,
-        String id_raca,
-        File foto) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String token = await prefs.get('token').toString();
-
-      var headerToken = {
-        "Accept": "application/json",
-        "Authorization": "Bearer ${token}"
-      };
-      FileSystemEntity.isDirectory("./").then((value) => print(value));
-
-      var pic = await http.MultipartFile.fromPath("foto", foto.path);
-      var request = http.MultipartRequest(
-          "POST", Uri.https('healthpets.app.br', 'api/animal'));
-      request.headers.addAll(headerToken);
-      request.fields["nome"] = nome;
-      request.fields["data_nascimento"] = data_nascimento;
-      request.fields["id_especie"] = id_especie;
-      request.fields["id_raca"] = id_raca;
-      request.files.add(pic);
-
-      var response = await request.send();
-
-      var resp = await http.Response.fromStream(response);
-
-      if (resp.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Animal cadastrado com sucesso')));
-        setarMaterialPageRouteTab(context, TabsPage());
-      } else {
-        print("Erro ao cadastrar animal");
-      }
-    }
+    // Future<CadastroAnimalModel?> submitAnimal(
+    //     String nome,
+    //     String data_nascimento,
+    //     String id_especie,
+    //     String id_raca,
+    //     String foto) async {
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   String token = await prefs.get('token').toString();
+    //
+    //   var headerToken = {
+    //     "Accept": "application/json",
+    //     "Authorization": "Bearer ${token}"
+    //   };
+    //   FileSystemEntity.isDirectory("./").then((value) => print(value));
+    //
+    //   var pic = await http.MultipartFile.fromPath("foto", foto.path);
+    //   var request = http.MultipartRequest(
+    //       "POST", Uri.https('healthpets.app.br', 'api/animal'));
+    //   request.headers.addAll(headerToken);
+    //   request.fields["nome"] = nome;
+    //   request.fields["data_nascimento"] = data_nascimento;
+    //   request.fields["id_especie"] = id_especie;
+    //   request.fields["id_raca"] = id_raca;
+    //   request.files.add(pic);
+    //
+    //   var response = await request.send();
+    //
+    //   var resp = await http.Response.fromStream(response);
+    //
+    //   if (resp.statusCode == 200) {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //         SnackBar(content: Text('Animal cadastrado com sucesso')));
+    //     setarMaterialPageRouteTab(context, TabsPage());
+    //   } else {
+    //     print("Erro ao cadastrar animal");
+    //   }
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -139,16 +143,13 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                 String data_nascimento = dataNascimentoTesteController.text;
                 var id_especie = especieController.text;
                 String id_raca = racaController.text;
+                String foto = pickedFile!.path;
 
-                CadastroAnimalModel dadosAnimal = (await submitAnimal(
-                        nome, data_nascimento, id_especie, id_raca, foto))
-                    as CadastroAnimalModel;
+                if(await AnimalRepository().postAnimal(nome, data_nascimento, id_especie, id_raca, foto) == '200'){
 
-                setState(
-                  () {
-                    _cadastrarPetPage = dadosAnimal;
-                  },
-                );
+                }
+
+                setarMaterialPageRoute(context, PetPage());
               }
             },
             child: const Text("Salvar"),
@@ -175,7 +176,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    BoxDecorationImagem(180, "assets/perfil-cao1.jpeg"),
+                    BoxDecorationImagem(180,"assets/perfil-cao1.jpeg" ),
                     Positioned(
                       top: 120,
                       left: 120,
@@ -184,13 +185,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                         backgroundColor: Color(0xFFF6BD87),
                         //cor do ícone
                         foregroundColor: Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            foto = new File(
-                              getGaleria() ?? '',
-                            );
-                          });
-                        },
+                        onPressed: () { pickImage(); }
                       ),
                     ),
                   ],
@@ -311,5 +306,41 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         ),
       ),
     );
+
+  }
+
+  void pickImage() async{
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if(image != null){
+      setState(() {
+        pickedFile = image;
+      });
+
+      saveImage(image);
+    }
+  }
+
+  void saveImage(XFile img) async{
+    final String path = (await getApplicationDocumentsDirectory()).path;
+
+    File convertedImg = File(img.path);
+
+    final String fileName = Util().textToMd5(DateTime.now().toString());
+    final File localImage = await convertedImg.copy('$path/$fileName');
+    print("Saved Image under: $path/$fileName");
+  }
+
+  void loadImage(String imgName) async{
+    final String fileName = imgName;
+    final String path = (await getApplicationDocumentsDirectory()).path;
+
+    if(File('$path/$fileName').existsSync()){
+      print("Image exists. Loading It...");
+      setState(() {
+        pickedFile = XFile('$path/$fileName');
+      });
+    }
+
   }
 }
+
