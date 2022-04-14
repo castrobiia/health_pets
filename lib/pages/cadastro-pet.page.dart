@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CadastrarPetPage extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class CadastrarPetPage extends StatefulWidget {
 
 class _CadastrarPetPageState extends State<CadastrarPetPage> {
   DateTime _data = DateTime.now();
-  File foto = new File('');
+  XFile? pickedFile;
 
   Future _dataSelecionada(BuildContext context) async {
     var _datePicker = await showDatePicker(
