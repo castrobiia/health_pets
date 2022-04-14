@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/pages/calendario.page.dart';
 import 'package:health_pets/pages/perfil-usuario.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
-import 'package:health_pets/pages/vacinas.page.dart';
+
+import 'gasto.page.dart';
 
 class TabsPage extends StatelessWidget {
   const TabsPage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class TabsPage extends StatelessWidget {
           PetPage(),
           PerfilUsuario(),
           CalendarioPage(),
-          VacinaPage(0), //Só para visualização
+          GastoPage(),
         ],
       ),
       bottomNavigationBar: new TabBar(
@@ -31,7 +32,6 @@ class TabsPage extends StatelessWidget {
           ),
           Tab(
             icon: new Icon(Icons.attach_money),
-            //auto_graph_outlined
           ),
         ],
       ),
