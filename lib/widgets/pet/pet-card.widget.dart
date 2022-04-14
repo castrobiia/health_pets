@@ -1,10 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class PetCard extends StatelessWidget {
   final int idPet;
   final String fotoPet;
   final String nomePet;
+  XFile? image;
 
   PetCard({
     required this.idPet,
@@ -14,6 +18,9 @@ class PetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    image = XFile(fotoPet);
+
     return Container(
       height: 116,
       child: Column(
@@ -25,10 +32,18 @@ class PetCard extends StatelessWidget {
                 width: 100,
                 height: 100,
                 margin: EdgeInsets.only(top: 15, left: 10),
-                child: Image.asset(
-                  fotoPet,
-                  fit: BoxFit.fitWidth,
-                ),
+                // child: Image.asset(
+                //   fotoPet,
+                //   fit: BoxFit.fitWidth,
+                // ),
+                  child: Column(
+                    children: [
+                      !kIsWeb && image!=null? Image.file(File(image!.path)) : Container(),
+                      kIsWeb && image!=null? Image.memory(File(image!.path).readAsBytesSync()) : Container(),
+                      image!=null? SizedBox(height: 100,) : Container()
+                    ],
+                  )
+
               ),
               Container(
                 padding: EdgeInsets.only(right: 10),
