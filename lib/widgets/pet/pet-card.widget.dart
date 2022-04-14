@@ -38,9 +38,12 @@ class PetCard extends StatelessWidget {
                 // ),
                   child: Column(
                     children: [
-                      !kIsWeb && image!=null? Image.file(File(image!.path)) : Container(),
-                      kIsWeb && image!=null? Image.memory(File(image!.path).readAsBytesSync()) : Container(),
-                      image!=null? SizedBox(height: 100,) : Container()
+                      Expanded(
+                        flex: 1,
+                      child: (!kIsWeb && image!=null? Image.file(File(image!.path)) : Container())
+                          // kIsWeb && image!=null? Image.memory(File(image!.path).readAsBytesSync()) : Container(),
+                          // image!=null? SizedBox(height: 100,) : Container()
+                      )
                     ],
                   )
 
