@@ -33,7 +33,7 @@ class AnimalRepository {
   postAnimal(String nome,String data_nascimento, String id_especie, String id_raca, String foto) async {
     String url = 'https://www.healthpets.app.br/api/animal';
 
-    print('Nome: $nome, data_nascimento: $data_nascimento, id_especie: $id_especie,  id_raca: $id_raca, foto: $foto');
+    // print('Nome: $nome, data_nascimento: $data_nascimento, id_especie: $id_especie,  id_raca: $id_raca, foto: $foto');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();

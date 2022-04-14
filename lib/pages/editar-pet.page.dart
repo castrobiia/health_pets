@@ -35,7 +35,7 @@ Future<dynamic?> getAnimal(int id) async {
 
   dynamic animal = jsonDecode(response.body);
 
-  print('Animal Function ${animal}');
+  // print('Animal Function ${animal}');
 
   return animal;
 }

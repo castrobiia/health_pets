@@ -8,20 +8,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoggingInterceptor implements InterceptorContract {
   @override
   Future<RequestData> interceptRequest({required RequestData data}) async {
-    print("Request");
-    print('url: ${data.url}');
-    print('headers: ${data.headers}');
-    print('body: ${data.body}');
+    // print("Request");
+    // print('url: ${data.url}');
+    // print('headers: ${data.headers}');
+    // print('body: ${data.body}');
     return data;
   }
 
   @override
   Future<ResponseData> interceptResponse({required ResponseData data}) async {
-    print("Response");
-    print('status code: ${data.statusCode}');
-    print('url: ${data.url}');
-    print('headers: ${data.headers}');
-    print('body: ${data.body}');
+    // print("Response");
+    // print('status code: ${data.statusCode}');
+    // print('url: ${data.url}');
+    // print('headers: ${data.headers}');
+    // print('body: ${data.body}');
     return data;
   }
 }
@@ -71,8 +71,8 @@ class RepositoryAnimal {
     final List<dynamic> decodedJson = jsonDecode(response.body);
     final List<AnimalModel> animais = [];
 
-    print("TESTE RETURN ANIMAL");
-    print(decodedJson.map((json) => AnimalModel.fromJson(json).toString()));
+    // print("TESTE RETURN ANIMAL");
+    // print(decodedJson.map((json) => AnimalModel.fromJson(json).toString()));
     return decodedJson.map((json) => AnimalModel.fromJson(json)).toList();
   }
 
