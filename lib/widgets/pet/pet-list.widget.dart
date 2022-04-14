@@ -13,7 +13,7 @@ class PetLista extends StatelessWidget {
     RepositoryAnimal()
         .findAllAnimais()
         .then((animais) => animais.forEach((element) {
-              print('Id do print${element.id}');
+              // print('Id do print${element.id}');
             }));
 
     return Scaffold(

@@ -5,6 +5,6 @@ main() {
   final repository = AnimalRepository();
   test('deve trazer uma lista de AnimalModel', () async {
     final list = await repository.fetchAnimais();
-    print(list[0].nome);
+    // print(list[0].nome);
   });
 }
