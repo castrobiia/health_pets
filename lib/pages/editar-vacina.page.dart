@@ -28,7 +28,7 @@ class EditarVacinaState extends State<EditarVacina> {
         title: Text(
           "Editar Vacina",
           style: TextStyle(
-            color: ColorTheme.salmaoClaro,
+            color: ColorTheme.salmao1,
           ),
         ),
       ),
@@ -124,7 +124,7 @@ class EditarVacinaState extends State<EditarVacina> {
                 /* Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: ColorTheme.salmaoClaro,
+                    color: ColorTheme.salmao1,
                     borderRadius: BorderRadius.all(
                       Radius.circular(5),
                     ),

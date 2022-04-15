@@ -170,7 +170,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         title: Text(
           "Adicionar Vacina",
           style: TextStyle(
-            color: ColorTheme.salmaoClaro,
+            color: ColorTheme.salmao1,
           ),
         ),
       ),
