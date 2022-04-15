@@ -10,6 +10,8 @@ import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../themes/color_theme.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -101,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: InputDecoration(
                               labelText: "E-mail",
                               labelStyle: TextStyle(
-                                color: Color(0xFFCC9396),
+                                color: ColorTheme.rosa5,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 17,
                               ),
@@ -125,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: InputDecoration(
                               labelText: "Senha",
                               labelStyle: TextStyle(
-                                  color: Color(0xFFCC9396),
+                                  color: ColorTheme.rosa5,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 17),
                             ),
@@ -136,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 20),
                           Container(
                             width: double.infinity,
-                            decoration: boxDecoration(Color(0xFFCC9396)),
+                            decoration: boxDecoration(ColorTheme.rosa5),
                             child: TextButton(
                               onPressed: () async {
                                 //faz a validação do formulário
