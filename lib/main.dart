@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/firebase_messaging/custom_firebase_messaging.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -54,7 +55,7 @@ Widget _introScreen() {
           end: Alignment.bottomCenter,
           colors: [
             Color(0xFFE5E5E5),
-            Color(0xFFF6BD87),
+            ColorTheme.salmaoClaro,
             Color(0xFFE79F84),
             Color(0xFFEC9F94),
             Color(0xFFEB9B95),
