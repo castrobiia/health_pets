@@ -4,6 +4,8 @@ import 'package:health_pets/pages/cadastro-vacina.page.dart';
 import 'package:health_pets/pages/menu-vacina.page.dart';
 import 'package:health_pets/widgets/vacina/tabela-vacina.widget.dart';
 
+import '../themes/color_theme.dart';
+
 class VacinaPage extends StatefulWidget {
   const VacinaPage(this.id);
   final int id;
@@ -22,7 +24,7 @@ class _VacinaPageState extends State<VacinaPage> {
       return Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          backgroundColor: Color(0xFFF6BD87),
+          backgroundColor: ColorTheme.salmaoClaro,
           //cor do ícone
           foregroundColor: Colors.white,
           onPressed: () {
