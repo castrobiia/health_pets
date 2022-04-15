@@ -24,7 +24,7 @@ class _VacinaPageState extends State<VacinaPage> {
       return Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          backgroundColor: ColorTheme.salmaoClaro,
+          backgroundColor: ColorTheme.salmao1,
           //cor do ícone
           foregroundColor: Colors.white,
           onPressed: () {
