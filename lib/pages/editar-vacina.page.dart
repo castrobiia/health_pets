@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../themes/color_theme.dart';
+
 class EditarVacina extends StatefulWidget {
   const EditarVacina({Key? key}) : super(key: key);
 
@@ -26,7 +28,7 @@ class EditarVacinaState extends State<EditarVacina> {
         title: Text(
           "Editar Vacina",
           style: TextStyle(
-            color: Color(0xFFF6BD87),
+            color: ColorTheme.salmaoClaro,
           ),
         ),
       ),
@@ -122,7 +124,7 @@ class EditarVacinaState extends State<EditarVacina> {
                 /* Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Color(0xFFF6BD87),
+                    color: ColorTheme.salmaoClaro,
                     borderRadius: BorderRadius.all(
                       Radius.circular(5),
                     ),

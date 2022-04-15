@@ -9,6 +9,8 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../themes/color_theme.dart';
+
 class CadastrarVacina extends StatefulWidget {
   const CadastrarVacina(this.idAnimal);
   final int idAnimal;
@@ -168,7 +170,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         title: Text(
           "Adicionar Vacina",
           style: TextStyle(
-            color: Color(0xFFF6BD87),
+            color: ColorTheme.salmaoClaro,
           ),
         ),
       ),
