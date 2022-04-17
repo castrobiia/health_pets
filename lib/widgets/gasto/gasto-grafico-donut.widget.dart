@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Dados {
   final double value;
@@ -38,7 +39,7 @@ final linePaint = Paint()
   ..style = PaintingStyle.stroke;
 
 final midPaint = Paint()
-  ..color = Colors.white24
+  ..color = Colors.white
   ..style = PaintingStyle.fill;
 
 class DonutChartPainter extends CustomPainter {
@@ -51,7 +52,7 @@ class DonutChartPainter extends CustomPainter {
     final radius = size.width * 0.9;
     final rect = Rect.fromCenter(center: c, width: radius, height: radius);
     var startAngle = 0.0;
-    
+
     dataset.forEach((di) {
       final sweepAngle = di.value * 360.0 * pi / 180.0;
       drawSelectors(canvas, di, rect, startAngle, sweepAngle);
@@ -65,7 +66,24 @@ class DonutChartPainter extends CustomPainter {
     canvas.drawCircle(c, radius * 0.3, midPaint);
   }
 
+  // TextPainter measureText(
+  //     String s, TextStyle style, double maxWidth, TextAlign align) {
+  //   final span = TextSpan(text: s, style: style);
+  //   final tp = TextPainter(
+  //       text: span, textAlign: align, textDirection: TextDirection.LTR);
+  //   tp.layout(minWidth: 0, maxWidth: maxWidth);
+  //   return tp;
+  // }
 
+  // Size drawTextCentered(Canvas canvas, Offset position, String text,
+  //     TextStyle style, double maxWidth) {
+  //   final tp = measureText(text, style, maxWidth, TextAlign.center);
+  //   final pos = position + Offset(-tp.width / 2.0, -tp.height / 2.0);
+
+  //   tp.paint(canvas, pos);
+  //   return tp.size;
+  // }
+//13:24
   void drawLine(Canvas canvas, Offset c, double radius, double startAngle) {
     final dx = radius / 2.0 * cos(startAngle);
     final dy = radius / 2.0 * sin(startAngle);
@@ -73,7 +91,8 @@ class DonutChartPainter extends CustomPainter {
     canvas.drawLine(c, p2, linePaint);
   }
 
-  void drawSelectors(Canvas canvas, Dados di, Rect rect, double startAngle, double sweepAngle) {
+  void drawSelectors(Canvas canvas, Dados di, Rect rect, double startAngle,
+      double sweepAngle) {
     final paint = Paint()
       ..style = PaintingStyle.fill
       ..color = di.color;
