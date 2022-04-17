@@ -36,9 +36,9 @@ class _GastoPageState extends State<GastoPage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            InformacoesPet(),
-            RelatoriosGastos(),
             ChamaGasto(),
+            RelatoriosGastos(),
+            InformacoesPet(),
           ],
         ),
       ),
