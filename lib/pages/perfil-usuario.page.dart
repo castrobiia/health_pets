@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/usuario-entity.dart';
+import 'package:health_pets/pages/menu-usuario.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
 class PerfilUsuario extends StatefulWidget {
@@ -19,6 +20,14 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
         title: Text("Meu Perfil"),
         elevation: 1,
         centerTitle: true,
+        actions: [
+          PopupMenuButton<MenuItemUsuario>(
+            onSelected: (item) => onSelected(context, item),
+            itemBuilder: (context) => [
+              ...MenuItemsUsuario.items.map(buildItem).toList(),
+            ],
+          ),
+        ],
       ),
       body: Container(
         color: Colors.white,
