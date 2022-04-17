@@ -18,36 +18,28 @@ class PetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     image = XFile(fotoPet);
 
     return Container(
-      height: 116,
+      height: 121,
       child: Column(
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
-                width: 100,
-                height: 100,
-                margin: EdgeInsets.only(top: 15, left: 10),
-                // child: Image.asset(
-                //   fotoPet,
-                //   fit: BoxFit.fitWidth,
-                // ),
+                  width: 100,
+                  height: 100,
+                  margin: EdgeInsets.only(top: 5, left: 10, bottom: 10),
                   child: Column(
                     children: [
                       Expanded(
-                        flex: 1,
-                      child: (!kIsWeb && image!=null? Image.file(File(image!.path)) : Container())
-                          // kIsWeb && image!=null? Image.memory(File(image!.path).readAsBytesSync()) : Container(),
-                          // image!=null? SizedBox(height: 100,) : Container()
-                      )
+                          flex: 1,
+                          child: (!kIsWeb && image != null
+                              ? Image.file(File(image!.path))
+                              : Container()))
                     ],
-                  )
-
-              ),
+                  )),
               Container(
                 padding: EdgeInsets.only(right: 10),
                 width: 200,
@@ -73,7 +65,6 @@ class PetCard extends StatelessWidget {
                   children: <Widget>[
                     IconButton(
                         onPressed: () {
-                          // setarMaterialPageRoute(context, PerfilPetPage());
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => PerfilPetPage(idPet)));
                         },
