@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/relatorios-gastos.page.dart';
+import 'package:health_pets/pages/gasto-relatorio.page.dart';
+import 'gasto-geral.page.dart';
 import 'informacoes-pet.page.dart';
 
 class GastoPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _GastoPageState extends State<GastoPage> {
           children: <Widget>[
             InformacoesPet(),
             RelatoriosGastos(),
-            InformacoesPet(),
+            ChamaGasto(),
           ],
         ),
       ),
