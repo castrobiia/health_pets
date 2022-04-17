@@ -1,12 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:health_pets/controllers/especie_controller.dart';
-import 'package:health_pets/http/webclient.dart';
 import 'package:health_pets/models/especie-model.dart';
 
 main() {
+  /*
   final repository = RepositoryEspecie();
   final controller = EspecieController();
-  /* 
+  
   test('deve preencher variavel especies', () async {
     when(repository.findAllEspecies())
         .thenAnswer((_) async => [EspecieModel(1, 'Gato', 'null')]);

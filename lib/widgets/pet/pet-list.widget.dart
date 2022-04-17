@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/http/webclient.dart';
+import 'package:health_pets/http/animal-repository.dart';
 import 'package:health_pets/models/animal-model.dart';
 import 'package:health_pets/widgets/pet/pet-card.widget.dart';
 
@@ -10,7 +10,7 @@ class PetLista extends StatelessWidget {
   Widget build(BuildContext context) {
     List pets = [];
 
-    RepositoryAnimal()
+    AnimalRepository()
         .findAllAnimais()
         .then((animais) => animais.forEach((element) {
               // print('Id do print${element.id}');
@@ -18,7 +18,7 @@ class PetLista extends StatelessWidget {
 
     return Scaffold(
         body: FutureBuilder<List>(
-      future: RepositoryAnimal().findAllAnimais(),
+      future: AnimalRepository().findAllAnimais(),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           // return: show loading widget

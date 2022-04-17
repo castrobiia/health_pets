@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AnimalRepository {
+  var url = "https://www.healthpets.app.br/api/animal";
   Future<List<AnimalModel>> fetchAnimais() async {
     Dio dio = Dio();
 
@@ -16,8 +17,6 @@ class AnimalRepository {
     dio.options.headers['content-Type'] = 'application/json';
 
     dio.options.headers["Authorization"] = "Bearer ${token}";
-
-    final url = "https://www.healthpets.app.br/api/animal";
 
     final response = await dio.get(url);
     final list = response.data as List;
@@ -30,11 +29,8 @@ class AnimalRepository {
     return animais;
   }
 
-  postAnimal(String nome,String data_nascimento, String id_especie, String id_raca, String foto) async {
-    String url = 'https://www.healthpets.app.br/api/animal';
-
-    // print('Nome: $nome, data_nascimento: $data_nascimento, id_especie: $id_especie,  id_raca: $id_raca, foto: $foto');
-
+  postAnimal(String nome, String data_nascimento, String id_especie,
+      String id_raca, String foto) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
 
@@ -52,7 +48,23 @@ class AnimalRepository {
       'foto': foto,
     });
 
-    final response = await http.post(Uri.parse(url), body: body, headers: headerToken);
+    final response =
+        await http.post(Uri.parse(url), body: body, headers: headerToken);
     return jsonDecode(response.statusCode.toString());
+  }
+
+  Future<List> findAllAnimais() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    final response = await http.get(Uri.parse(url), headers: header);
+    final List<dynamic> decodedJson = jsonDecode(response.body);
+    return decodedJson.map((json) => AnimalModel.fromJson(json)).toList();
   }
 }
