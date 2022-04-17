@@ -40,13 +40,10 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                 future: UsuarioEntity().getUsuario(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    // return: show loading widget
-                    //todo mostrar o loading
                     return Center(
                         child: Container(child: CircularProgressIndicator()));
                   }
                   if (snapshot.hasError) {
-                    // return: show error widget
                     return Center(
                       child: Container(
                         child: Text('Erro ao carregar os dados'),
@@ -56,11 +53,6 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                   final usuario = snapshot.data;
                   var idade;
 
-                  // add else calculando idade
-                  if (usuario['data_nascimento'] == null ||
-                      usuario['data_nascimento'] == '') {
-                    idade = '-';
-                  }
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -75,11 +67,6 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                         height: 15,
                       ),
                       setarRowPerfil("Email", usuario['email'] ?? ''),
-                      divider(),
-                      setarRowPerfil("Data de Nascimento",
-                          usuario['data_nascimento'] ?? 'Não informada'),
-                      divider(),
-                      setarRowPerfil("Idade", idade),
                       divider(),
                       // alterar
                       setarRowPerfil("Animais", "5"),
