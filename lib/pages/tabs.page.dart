@@ -10,30 +10,33 @@ class TabsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: TabBarView(
-        children: [
-          PetPage(),
-          PerfilUsuario(),
-          CalendarioPage(),
-          GastoPage(),
-        ],
-      ),
-      bottomNavigationBar: new TabBar(
-        tabs: [
-          Tab(
-            icon: new Icon(Icons.pets),
-          ),
-          Tab(
-            icon: new Icon(Icons.person),
-          ),
-          Tab(
-            icon: new Icon(Icons.calendar_today),
-          ),
-          Tab(
-            icon: new Icon(Icons.attach_money),
-          ),
-        ],
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        body: TabBarView(
+          children: [
+            PetPage(),
+            PerfilUsuario(),
+            CalendarioPage(),
+            GastoPage(),
+          ],
+        ),
+        bottomNavigationBar: new TabBar(
+          tabs: [
+            Tab(
+              icon: new Icon(Icons.pets),
+            ),
+            Tab(
+              icon: new Icon(Icons.person),
+            ),
+            Tab(
+              icon: new Icon(Icons.calendar_today),
+            ),
+            Tab(
+              icon: new Icon(Icons.attach_money),
+            ),
+          ],
+        ),
       ),
     );
   }
