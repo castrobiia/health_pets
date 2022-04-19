@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
@@ -52,7 +53,7 @@ void onSelected(BuildContext context, MenuItemUsuario item) {
       setarMaterialPageRoute(context, PetPage());
       break;
     case MenuItemsUsuario.itemExcluir:
-      setarMaterialPageRoute(context, PetPage());
+      confirmarExclusaoUsuario(context);
       break;
     case MenuItemsUsuario.itemLogout:
       setarMaterialPageRoute(context, LogoutPage());

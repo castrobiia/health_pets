@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/class/entity/usuario-entity.dart';
 import 'package:health_pets/pages/menu-usuario.page.dart';
+import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
 class PerfilUsuario extends StatefulWidget {
@@ -46,7 +46,7 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
               height: 450,
               decoration: boxDecoration(Colors.white),
               child: FutureBuilder<dynamic>(
-                future: UsuarioEntity().getUsuario(),
+                future: UsuarioRepository().getUsuario(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
                     return Center(
@@ -60,7 +60,6 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                     );
                   }
                   final usuario = snapshot.data;
-                  var idade;
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
