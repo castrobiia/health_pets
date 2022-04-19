@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/http/animal-repository.dart';
-import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
 import 'package:health_pets/pages/tabs.page.dart';
@@ -145,11 +143,11 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                 String id_raca = racaController.text;
                 String foto = pickedFile!.path;
 
-                if(await AnimalRepository().postAnimal(nome, data_nascimento, id_especie, id_raca, foto) == '200'){
+                if (await AnimalRepository().postAnimal(
+                        nome, data_nascimento, id_especie, id_raca, foto) ==
+                    '200') {}
 
-                }
-
-                setarMaterialPageRoute(context, PetPage());
+                setarMaterialPageRoute(context, TabsPage());
               }
             },
             child: const Text("Salvar"),
@@ -176,17 +174,19 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    BoxDecorationImagem(180,"assets/perfil-cao1.jpeg" ),
+                    BoxDecorationImagem(180, "assets/perfil-cao1.jpeg"),
                     Positioned(
                       top: 120,
                       left: 120,
                       child: FloatingActionButton(
-                        child: Icon(Icons.add_a_photo), //ou upload, add, image
-                        backgroundColor: Color(0xFFF6BD87),
-                        //cor do ícone
-                        foregroundColor: Colors.white,
-                        onPressed: () { pickImage(); }
-                      ),
+                          child:
+                              Icon(Icons.add_a_photo), //ou upload, add, image
+                          backgroundColor: Color(0xFFF6BD87),
+                          //cor do ícone
+                          foregroundColor: Colors.white,
+                          onPressed: () {
+                            pickImage();
+                          }),
                     ),
                   ],
                 ),
@@ -306,12 +306,11 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         ),
       ),
     );
-
   }
 
-  void pickImage() async{
+  void pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if(image != null){
+    if (image != null) {
       setState(() {
         pickedFile = image;
       });
@@ -320,7 +319,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     }
   }
 
-  void saveImage(XFile img) async{
+  void saveImage(XFile img) async {
     final String path = (await getApplicationDocumentsDirectory()).path;
 
     File convertedImg = File(img.path);
@@ -330,17 +329,15 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
     print("Saved Image under: $path/$fileName");
   }
 
-  void loadImage(String imgName) async{
+  void loadImage(String imgName) async {
     final String fileName = imgName;
     final String path = (await getApplicationDocumentsDirectory()).path;
 
-    if(File('$path/$fileName').existsSync()){
+    if (File('$path/$fileName').existsSync()) {
       print("Image exists. Loading It...");
       setState(() {
         pickedFile = XFile('$path/$fileName');
       });
     }
-
   }
 }
-
