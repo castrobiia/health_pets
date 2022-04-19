@@ -17,30 +17,53 @@ class PetLista extends StatelessWidget {
             }));
 
     return Scaffold(
-        body: FutureBuilder<List>(
-      future: AnimalRepository().findAllAnimais(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          // return: show loading widget
-          //todo mostrar o loading
-        }
-        if (snapshot.hasError) {
-          // return: show error widget
-        }
-        final list = snapshot.data ?? [];
-        return ListView.builder(
-            itemCount: list.length,
-            itemBuilder: (context, index) {
-              AnimalModel pet = list[index];
-              return Container(
-                child: PetCard(
-                  idPet: pet.id ?? 0,
-                  fotoPet: pet.foto ?? '',
-                  nomePet: pet.nome ?? '',
+      body: FutureBuilder<List>(
+        future: AnimalRepository().findAllAnimais(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return Center(
+              child: Container(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(
+              child: Container(
+                child: Text('Erro ao carregar os dados'),
+              ),
+            );
+          }
+
+          final list = snapshot.data ?? [];
+
+          if (list.length == 0) {
+            return Center(
+              child: Text(
+                'Não há animais cadastrados',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w300,
                 ),
-              );
-            });
-      },
-    ));
+              ),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                AnimalModel pet = list[index];
+                return Container(
+                  child: PetCard(
+                    idPet: pet.id ?? 0,
+                    fotoPet: pet.foto ?? '',
+                    nomePet: pet.nome ?? '',
+                  ),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 }
