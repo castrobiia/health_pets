@@ -4,13 +4,11 @@ import 'gasto-geral.page.dart';
 import 'gasto-meta.page.dart';
 
 class GastoPage extends StatefulWidget {
-
   @override
   State<GastoPage> createState() => _GastoPageState();
 }
 
 class _GastoPageState extends State<GastoPage> {
-
   _GastoPageState();
 
   @override
@@ -36,7 +34,7 @@ class _GastoPageState extends State<GastoPage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            DonutPieChart(),
+            GeraisGastos(),
             RelatoriosGastos(),
             MetaGasto(),
           ],
