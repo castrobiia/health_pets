@@ -66,10 +66,10 @@ Card _metaLinear(context) {
       lineHeight: 30,
       percent: 0.75,
       center: Text(
-        'R\$200',
+        '(R\$) 200/300',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 25,
+          fontSize: 20,
         ),
       ),
       linearStrokeCap: LinearStrokeCap.roundAll,
