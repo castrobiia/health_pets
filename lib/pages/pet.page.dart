@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/cadastro-pet.page.dart';
-import 'package:health_pets/pages/menu.page.dart';
 import 'package:health_pets/widgets/pet/pet-list.widget.dart';
 
 class PetPage extends StatelessWidget {
@@ -27,14 +26,6 @@ class PetPage extends StatelessWidget {
         title: Text("Pets"),
         centerTitle: true,
         elevation: 1,
-        actions: [
-          PopupMenuButton<MenuItem>(
-            onSelected: (item) => onSelected(context, item),
-            itemBuilder: (context) => [
-              ...MenuItems.items.map(buildItem).toList(),
-            ],
-          ),
-        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

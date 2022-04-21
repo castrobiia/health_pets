@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/login.page.dart';
 
@@ -27,7 +28,8 @@ class ResetSenha extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 32,
-                fontWeight: FontWeight.w200,
+                fontWeight: FontWeight.bold,
+                color: ColorTheme.salmao1,
               ),
             ),
             SizedBox(

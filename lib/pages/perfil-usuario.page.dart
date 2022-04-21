@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/class/entity/usuario-entity.dart';
+import 'package:health_pets/pages/menu-usuario.page.dart';
+import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
 class PerfilUsuario extends StatefulWidget {
@@ -19,6 +20,14 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
         title: Text("Meu Perfil"),
         elevation: 1,
         centerTitle: true,
+        actions: [
+          PopupMenuButton<MenuItemUsuario>(
+            onSelected: (item) => onSelected(context, item),
+            itemBuilder: (context) => [
+              ...MenuItemsUsuario.items.map(buildItem).toList(),
+            ],
+          ),
+        ],
       ),
       body: Container(
         color: Colors.white,
@@ -35,18 +44,15 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
               ),
               width: double.infinity,
               height: 450,
-              decoration: boxDecoration(Colors.white),
+              //decoration: boxDecoration(Colors.white),
               child: FutureBuilder<dynamic>(
-                future: UsuarioEntity().getUsuario(),
+                future: UsuarioRepository().getUsuario(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    // return: show loading widget
-                    //todo mostrar o loading
                     return Center(
                         child: Container(child: CircularProgressIndicator()));
                   }
                   if (snapshot.hasError) {
-                    // return: show error widget
                     return Center(
                       child: Container(
                         child: Text('Erro ao carregar os dados'),
@@ -54,13 +60,7 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                     );
                   }
                   final usuario = snapshot.data;
-                  var idade;
 
-                  // add else calculando idade
-                  if (usuario['data_nascimento'] == null ||
-                      usuario['data_nascimento'] == '') {
-                    idade = '-';
-                  }
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -75,11 +75,6 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                         height: 15,
                       ),
                       setarRowPerfil("Email", usuario['email'] ?? ''),
-                      divider(),
-                      setarRowPerfil("Data de Nascimento",
-                          usuario['data_nascimento'] ?? 'Não informada'),
-                      divider(),
-                      setarRowPerfil("Idade", idade),
                       divider(),
                       // alterar
                       setarRowPerfil("Animais", "5"),

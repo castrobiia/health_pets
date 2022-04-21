@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/editar-vacina.page.dart';
-import 'package:health_pets/pages/vacinas.page.dart';
+import 'package:health_pets/pages/vacina.page.dart';
 
 class MenuItemVacina {
   final String texto;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/pages/vacinas.page.dart';
+import 'package:health_pets/pages/vacina.page.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HistoricoPet extends StatefulWidget {
@@ -48,11 +48,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => VacinaPage(id),
-                            ),
-                          );
+                          setarMaterialPageRoute(context, VacinaPage(id));
                         }, // Image tapped
                         child: Column(
                           children: <Widget>[
@@ -81,25 +77,21 @@ class _HistoricoPetState extends State<HistoricoPet> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  VacinaPage(id), //corrigir
-                            ),
-                          );
+                          setarMaterialPageRoute(
+                              context, VacinaPage(id)); // corrigir
                         }, // Image tapped
                         child: Column(
                           children: <Widget>[
                             SizedBox(
                               width: 50,
                               height: 50,
-                              child: Image.asset("assets/microscope.png"),
+                              child: Image.asset("assets/diario.png"),
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              "Exames",
+                              "Diário",
                               style: TextStyle(fontSize: 15),
                             ),
                             SizedBox(
@@ -107,40 +99,6 @@ class _HistoricoPetState extends State<HistoricoPet> {
                             ),
                             Text(
                               "5",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  VacinaPage(id), //corrigir
-                            ),
-                          );
-                        }, // Image tapped
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: Image.asset("assets/veterinarian.png"),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Consultas",
-                              style: TextStyle(fontSize: 15),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "10",
                               style: TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.w500),
                             ),
