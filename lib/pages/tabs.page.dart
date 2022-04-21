@@ -16,9 +16,9 @@ class TabsPage extends StatelessWidget {
         body: TabBarView(
           children: [
             PetPage(),
-            PerfilUsuario(),
-            CalendarioPage(),
             GastoPage(),
+            CalendarioPage(),
+            PerfilUsuario(),
           ],
         ),
         bottomNavigationBar: new TabBar(
@@ -27,13 +27,13 @@ class TabsPage extends StatelessWidget {
               icon: new Icon(Icons.pets),
             ),
             Tab(
-              icon: new Icon(Icons.person),
+              icon: new Icon(Icons.attach_money),
             ),
             Tab(
               icon: new Icon(Icons.calendar_today),
             ),
             Tab(
-              icon: new Icon(Icons.attach_money),
+              icon: new Icon(Icons.person),
             ),
           ],
         ),
