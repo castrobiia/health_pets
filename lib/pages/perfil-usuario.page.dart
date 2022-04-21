@@ -44,7 +44,7 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
               ),
               width: double.infinity,
               height: 450,
-              decoration: boxDecoration(Colors.white),
+              //decoration: boxDecoration(Colors.white),
               child: FutureBuilder<dynamic>(
                 future: UsuarioRepository().getUsuario(),
                 builder: (context, snapshot) {
