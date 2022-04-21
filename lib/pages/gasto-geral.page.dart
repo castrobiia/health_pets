@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+import '../widgets/widgets.dart';
+import 'cadastro-gasto.page.dart';
+
 class GeraisGastos extends StatelessWidget {
   Map<String, double> categorias = {
     "Alimentação": 5,
@@ -14,6 +17,15 @@ class GeraisGastos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Color(0xFFF6BD87),
+        //cor do ícone
+        foregroundColor: Colors.white,
+        onPressed: () {
+          setarMaterialPageRouteTab(context, CadastrarGastoPage());
+        },
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
