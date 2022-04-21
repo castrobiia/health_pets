@@ -8,6 +8,10 @@ import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
@@ -29,11 +33,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       localizationsDelegates: [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
       ],
-      supportedLocales: [const Locale('pt', 'BR')],
+      supportedLocales: [
+        Locale('en', ''),
+        Locale('es', ''),
+        Locale('pt', ''),],
       title: 'Health Pets',
       //tirar o banner de debug da tela
       debugShowCheckedModeBanner: false,

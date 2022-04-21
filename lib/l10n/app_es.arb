@@ -1,0 +1,14 @@
+{
+    "invalidEmail": "Email inválido",
+    "password": "Contraseña",
+    "invalidPassword": "Contraseña invalida",
+    "login": "Acceso",
+    "forgotPassword": "Olvido la contraseña?",
+    "createAccount": "Crea una cuenta",
+    "@password":{
+        "description": "Bienvenido a HealthPets!"
+    }
+}
+
+
+    

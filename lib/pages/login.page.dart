@@ -9,6 +9,7 @@ import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../themes/color_theme.dart';
 
@@ -94,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                             keyboardType: TextInputType.emailAddress,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "E-mail inválido";
+                                return (AppLocalizations.of(context)!.invalidEmail);
                               }
                               return null;
                             },
@@ -117,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                             keyboardType: TextInputType.text,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Senha inválida";
+                                return (AppLocalizations.of(context)!.invalidPassword);
                               }
                               return null;
                             },
@@ -125,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: true,
                             controller: passwordController,
                             decoration: InputDecoration(
-                              labelText: "Senha",
+                              labelText: AppLocalizations.of(context)!.password,
                               labelStyle: TextStyle(
                                   color: ColorTheme.rosa5,
                                   fontWeight: FontWeight.w400,
@@ -160,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 }
                               },
-                              child: textBotao("Login"),
+                              child: textBotao(AppLocalizations.of(context)!.login),
                             ),
                           ),
                           SizedBox(
@@ -175,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                                 setarMaterialPageRoute(context, ResetSenha());
                               },
                               child: Text(
-                                "Esqueceu sua senha?",
+                                AppLocalizations.of(context)!.forgotPassword
                               ),
                             ),
                           ),
@@ -189,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                                     context, CadastroUsuarioTeste());
                               },
                               child: Text(
-                                "Criar conta",
+                                AppLocalizations.of(context)!.createAccount
                               ),
                             ),
                           ),
