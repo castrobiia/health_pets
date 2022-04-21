@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import 'package:health_pets/pages/menu.page.dart';
-
 class CalendarioPage extends StatefulWidget {
   const CalendarioPage({Key? key}) : super(key: key);
 
@@ -20,14 +18,6 @@ class _CalendarioPageState extends State<CalendarioPage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 1,
-        actions: [
-          PopupMenuButton<MenuItem>(
-            onSelected: (item) => onSelected(context, item),
-            itemBuilder: (context) => [
-              ...MenuItems.items.map(buildItem).toList(),
-            ],
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.only(left: 20, right: 20),
