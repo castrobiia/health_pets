@@ -27,35 +27,49 @@ class PetCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Container(
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => PerfilPetPage(idPet)));
+                },
+                child: Container(
                   width: 100,
                   height: 100,
                   margin: EdgeInsets.only(top: 5, left: 10, bottom: 10),
                   child: Column(
                     children: [
                       Expanded(
-                          flex: 1,
-                          child: (!kIsWeb && image != null
-                              ? Image.file(File(image!.path))
-                              : Container()))
+                        flex: 1,
+                        child: (!kIsWeb && image != null
+                            ? Image.file(File(image!.path))
+                            : Container()),
+                      ),
                     ],
-                  )),
-              Container(
-                padding: EdgeInsets.only(right: 10),
-                width: 200,
-                alignment: Alignment.topLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      nomePet,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                  ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => PerfilPetPage(idPet)));
+                },
+                child: Container(
+                  padding: EdgeInsets.only(right: 10),
+                  width: 200,
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        nomePet,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Container(
