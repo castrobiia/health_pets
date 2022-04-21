@@ -1,0 +1,17 @@
+{
+    "invalidEmail": "E-mail inválido",
+    "password": "Senha",
+    "invalidPassword": "Senha inválida",
+    "login": "Conecte-se",
+    "forgotPassword": "Esqueceu a senha?",
+    "createAccount": "Criar conta",
+    "@password":{
+        "description": "Bem-vindo ao HealthPets!"
+    }
+}
+
+
+    
+
+
+
