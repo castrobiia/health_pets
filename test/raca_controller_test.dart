@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:health_pets/controllers/racas_controller.dart';
+import 'package:health_pets/controllers/raca_controller.dart';
 import 'package:health_pets/http/racas-repository.dart';
 
 main() {
