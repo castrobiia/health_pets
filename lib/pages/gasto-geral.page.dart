@@ -13,16 +13,39 @@ class GeraisGastos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 8.0),
+                const Text(
+                  "Despesas por categoria",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 50.0),
+                _graficoCategoria(context),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  PieChart _graficoCategoria(context) {
     return PieChart(
       dataMap: categorias,
-      animationDuration: Duration(milliseconds: 1200),
+      animationDuration: const Duration(milliseconds: 1200),
       chartLegendSpacing: 32,
       chartRadius: MediaQuery.of(context).size.width / 3.2,
       //colorList: colorList,
       initialAngleInDegree: 0,
       chartType: ChartType.ring,
       ringStrokeWidth: 32,
-      legendOptions: LegendOptions(
+      legendOptions: const LegendOptions(
         showLegendsInRow: true,
         legendPosition: LegendPosition.bottom,
         showLegends: true,
@@ -31,7 +54,7 @@ class GeraisGastos extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      chartValuesOptions: ChartValuesOptions(
+      chartValuesOptions: const ChartValuesOptions(
         showChartValueBackground: true,
         showChartValues: true,
         showChartValuesInPercentage: false,
