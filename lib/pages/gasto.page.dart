@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/relatorios-gastos.page.dart';
+import 'package:health_pets/pages/gasto-relatorio.page.dart';
 import 'gasto-geral.page.dart';
 import 'gasto-meta.page.dart';
 
