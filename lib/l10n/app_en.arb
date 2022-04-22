@@ -3,7 +3,7 @@
     "password": "Password",
     "invalidPassword": "Invalid password",
     "login": "Login",
-    "forgotPassword": "Forgot a password?",
+    "forgotPassword": "Forgot your password?",
     "createAccount": "Create an account",
     "name": "Name",
     "confirmPassword": "Confirm password",
@@ -11,6 +11,9 @@
     "term": "By continuing, I agree to the Health Pets Terms of Use and Privacy Policy.",
     "email": "Email",
     "information": "Password information",
+    "informationRecovery": "Enter your registered email, we will shortly send you a link with instructions for creating a new password.",
+    "send": "Send",
+    "emailSent": "Email successfully sent!",
     "@forgotPassword":{
         "description": "Welcome to HealthPets!"
     }
