@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/cadastro-diario.page.dart';
 import 'package:health_pets/widgets/diario/diario-list.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
@@ -19,7 +20,7 @@ class _DiarioPetState extends State<DiarioPet> {
         //cor do ícone
         foregroundColor: Colors.white,
         onPressed: () {
-          setarMaterialPageRoute(context, DiarioPet());
+          setarMaterialPageRoute(context, CadastroDiario());
         },
       ),
       appBar: AppBar(
