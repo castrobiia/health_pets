@@ -2,16 +2,14 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:splashscreen/splashscreen.dart';
+
 import 'package:health_pets/firebase_messaging/custom_firebase_messaging.dart';
+import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/pages/login.page.dart';
-import 'package:splashscreen/splashscreen.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
