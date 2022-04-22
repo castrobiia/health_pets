@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/vacina-entity.dart';
 
-import 'package:health_pets/http/vacina-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-vacina-model.dart';
 import 'package:health_pets/pages/vacina.page.dart';
