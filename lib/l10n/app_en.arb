@@ -5,6 +5,12 @@
     "login": "Login",
     "forgotPassword": "Forgot a password?",
     "createAccount": "Create an account",
+    "name": "Name",
+    "confirmPassword": "Confirm password",
+    "save": "Save",
+    "term": "By continuing, I agree to the Health Pets Terms of Use and Privacy Policy.",
+    "email": "Email",
+    "information": "Password information",
     "@forgotPassword":{
         "description": "Welcome to HealthPets!"
     }
