@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/diario-pet.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/vacina.page.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -78,7 +79,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                       GestureDetector(
                         onTap: () {
                           setarMaterialPageRoute(
-                              context, VacinaPage(id)); // corrigir
+                              context, DiarioPet()); // corrigir
                         }, // Image tapped
                         child: Column(
                           children: <Widget>[
