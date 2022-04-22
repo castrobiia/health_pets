@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                             onSaved: (input) => _email = input!,
                             controller: emailController,
                             decoration: InputDecoration(
-                              labelText: "E-mail",
+                              labelText: AppLocalizations.of(context)!.email,
                               labelStyle: TextStyle(
                                 color: ColorTheme.rosa5,
                                 fontWeight: FontWeight.w400,

@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/usuario-model-teste.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'login.page.dart';
 
@@ -75,7 +76,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Informações sobre a senha"),
+            title: Text(AppLocalizations.of(context)!.information),
             content: Text("Teste 2"),
             actions: <Widget>[
               IconButton(
@@ -118,7 +119,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        "Criar Conta",
+                        AppLocalizations.of(context)!.createAccount,
                         style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
@@ -133,7 +134,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     autofocus: false,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      labelText: "Nome",
+                      labelText: AppLocalizations.of(context)!.name,
                       labelStyle: TextStyle(
                         color: Color(0xFFCC9396),
                         fontWeight: FontWeight.w400,
@@ -149,7 +150,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     autofocus: false,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      labelText: "E-mail",
+                      labelText: AppLocalizations.of(context)!.email,
                       labelStyle: TextStyle(
                         color: Color(0xFFCC9396),
                         fontWeight: FontWeight.w400,
@@ -172,7 +173,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                         },
                         icon: Icon(Icons.info),
                       ),
-                      labelText: "Senha",
+                      labelText: AppLocalizations.of(context)!.password,
                       labelStyle: TextStyle(
                         color: Color(0xFFCC9396),
                         fontWeight: FontWeight.w400,
@@ -189,7 +190,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     keyboardType: TextInputType.text,
                     obscureText: true,
                     decoration: InputDecoration(
-                      labelText: "Confirmar Senha",
+                      labelText: AppLocalizations.of(context)!.confirmPassword,
                       labelStyle: TextStyle(
                           color: Color(0xFFCC9396),
                           fontWeight: FontWeight.w400,
@@ -206,7 +207,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                       bottom: 15,
                     ),
                     child: Text(
-                      "Ao continuar, estou de acordo com as Termos de Uso e Políticas de Privacidade do Health Pets.",
+                      AppLocalizations.of(context)!.term,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -232,7 +233,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                           _usuarioModelTeste = dadosUsuario;
                         });
                       },
-                      child: textBotao("Salvar"),
+                      child: textBotao(AppLocalizations.of(context)!.save),
                     ),
                   ),
                 ],
