@@ -14,6 +14,9 @@
     "informationRecovery": "Informe seu e-mail cadastrado, em instantes enviaremos um link com as instruções para a criação de uma nova senha.",
     "send": "Enviar",
     "emailSent": "E-mail enviado com sucesso!",
+    "myProfile": "Meu Perfil",
+    "errorLoading": "Erro ao carregar os dados",
+    "animals": "Animais",
     "@password":{
         "description": "Bem-vindo ao HealthPets!"
     }
