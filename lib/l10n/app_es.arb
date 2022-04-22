@@ -14,6 +14,9 @@
     "informationRecovery": "Ingrese su correo electrónico registrado, en breve le enviaremos un enlace con instrucciones para crear una nueva contraseña.",
     "send": "Mandar",
     "emailSent": "Correo electrónico enviado con éxito!",
+    "myProfile": "Mi Perfil",
+    "errorLoading": "Error al cargar datos",
+    "animals": "Animales",
     "@password":{
         "description": "Bienvenido a HealthPets!"
     }

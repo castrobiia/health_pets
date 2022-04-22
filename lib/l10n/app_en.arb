@@ -14,6 +14,9 @@
     "informationRecovery": "Enter your registered email, we will shortly send you a link with instructions for creating a new password.",
     "send": "Send",
     "emailSent": "Email successfully sent!",
+    "myProfile": "My Profile",
+    "errorLoading": "Error loading data",
+    "animals": "Animals",
     "@forgotPassword":{
         "description": "Welcome to HealthPets!"
     }
