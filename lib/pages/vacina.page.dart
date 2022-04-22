@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/cadastro-vacina.page.dart';
 import 'package:health_pets/pages/menu-vacina.page.dart';
-import 'package:health_pets/widgets/vacina/tabela-vacina.widget.dart';
+import 'package:health_pets/widgets/vacina/vacina-tabela.widget.dart';
 
 import '../themes/color_theme.dart';
 
