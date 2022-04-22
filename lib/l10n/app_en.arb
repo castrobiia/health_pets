@@ -17,6 +17,7 @@
     "myProfile": "My Profile",
     "errorLoading": "Error loading data",
     "animals": "Animals",
+    "pets": "Pets",
     "@forgotPassword":{
         "description": "Welcome to HealthPets!"
     }

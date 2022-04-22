@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/cadastro-pet.page.dart';
 import 'package:health_pets/widgets/pet/pet-list.widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PetPage extends StatelessWidget {
   const PetPage({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class PetPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        title: Text("Pets"),
+        title: Text(AppLocalizations.of(context)!.pets),
         centerTitle: true,
         elevation: 1,
       ),
