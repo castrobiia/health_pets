@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:health_pets/models/racas-model.dart';
+import 'package:health_pets/models/raca-model.dart';
 
 class RacasRepository {
   final dio = Dio();
