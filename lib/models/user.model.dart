@@ -1,11 +1,11 @@
 class UserModel {
-  final int? id;
-  final String? nome;
-  final String? emaiil;
-  final String? foto;
-  final String? token;
+  final int id;
+  final String nome;
+  final String emaiil;
+  final String foto;
+  final String token;
 
-  // UserModel(this.id, this.nome, this.emaiil, this.foto, this.token);
+  UserModel(this.id, this.nome, this.emaiil, this.foto, this.token);
 
   UserModel.fromJson(Map<String, dynamic> json):
     id = json['id'],

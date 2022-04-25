@@ -4,7 +4,7 @@ import 'package:health_pets/http/racas-repository.dart';
 main() {
   final repository = RacasRepository();
   test('deve trazer uma lista de RacasModel', () async {
-    final list = await repository.fetchRacas();
+    // final list = await repository.fetchRacas();
     // print(list[0].descricao);
   });
 }
