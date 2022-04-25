@@ -32,7 +32,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   rxdart:
-  dio: ^4.0.4
+  dio: any
+  provider: any
   http: ^0.13.4
   json_annotation: ^4.4.0
   image_picker: any

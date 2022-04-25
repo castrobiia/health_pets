@@ -57,6 +57,8 @@ class AnimalRepository {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
 
+    print(token);
+
     var header = {
       "Content-Type": "application/json",
       "Accept": "application/json",
