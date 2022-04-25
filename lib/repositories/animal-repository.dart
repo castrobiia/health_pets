@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:health_pets/models/animal-model.dart';
 
 import './repository.dart';
-import '../models/animal-model.dart';
 import '../settings.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
