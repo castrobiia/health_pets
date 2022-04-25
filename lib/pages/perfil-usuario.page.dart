@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/menu-usuario.page.dart';
-import 'package:health_pets/repository/usuario-repository.dart';
+// Todo descomentar para voltar ao estado principal. import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -46,44 +46,44 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
               width: double.infinity,
               height: 450,
               //decoration: boxDecoration(Colors.white),
-              child: FutureBuilder<dynamic>(
-                future: UsuarioRepository().getUsuario(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done) {
-                    return Center(
-                        child: Container(child: CircularProgressIndicator()));
-                  }
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Container(
-                        child: Text(AppLocalizations.of(context)!.errorLoading),
-                      ),
-                    );
-                  }
-                  final usuario = snapshot.data;
-
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      //carregar imagem
-                      BoxDecorationImagem(200, "assets/perfil-usuario1.png"),
-                      Text(
-                        usuario['name'] ?? '',
-                        style: TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      setarRowPerfil(AppLocalizations.of(context)!.email, usuario['email'] ?? ''),
-                      divider(),
-                      // alterar
-                      setarRowPerfil(AppLocalizations.of(context)!.animals, "5"),
-                      divider(),
-                    ],
-                  );
-                },
-              ),
+              // Todo descomentar para voltar ao estado principal. child: FutureBuilder<dynamic>(
+              //   future: UsuarioRepository().getUsuario(),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.connectionState != ConnectionState.done) {
+              //       return Center(
+              //           child: Container(child: CircularProgressIndicator()));
+              //     }
+              //     if (snapshot.hasError) {
+              //       return Center(
+              //         child: Container(
+              //           child: Text(AppLocalizations.of(context)!.errorLoading),
+              //         ),
+              //       );
+              //     }
+              //     final usuario = snapshot.data;
+              //
+              //     return Column(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: <Widget>[
+              //         //carregar imagem
+              //         BoxDecorationImagem(200, "assets/perfil-usuario1.png"),
+              //         Text(
+              //           usuario['name'] ?? '',
+              //           style: TextStyle(
+              //               fontSize: 23, fontWeight: FontWeight.bold),
+              //         ),
+              //         SizedBox(
+              //           height: 15,
+              //         ),
+              //         setarRowPerfil(AppLocalizations.of(context)!.email, usuario['email'] ?? ''),
+              //         divider(),
+              //         // alterar
+              //         setarRowPerfil(AppLocalizations.of(context)!.animals, "5"),
+              //         divider(),
+              //       ],
+              //     );
+              //   },
+              // ),
             ),
           ],
         ),

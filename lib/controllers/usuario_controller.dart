@@ -1,4 +1,4 @@
-import 'package:health_pets/repository/usuario-repository.dart';
+import 'package:health_pets/repositories/usuario-repository.dart';
 
 class UsuarioController {
   final UsuarioRepository _repositoryUsuario;

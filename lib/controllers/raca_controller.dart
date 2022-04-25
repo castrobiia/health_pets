@@ -3,7 +3,7 @@ import 'package:health_pets/http/racas-repository.dart';
 import 'package:health_pets/models/raca-model.dart';
 
 class RacasController {
-  List<RacasModel> racas = [];
+  List<RacaModel> racas = [];
   final RacasRepository _repository;
   RacaState state = RacaState.start;
 
@@ -13,7 +13,7 @@ class RacasController {
   Future start() async {
     state = RacaState.loading;
     try {
-      racas = await _repository.fetchRacas();
+      // Todo descomentar para voltar ao estado principal. racas = await _repository.fetchRacas();
       state = RacaState.success;
     } catch (e) {
       state = RacaState.error;

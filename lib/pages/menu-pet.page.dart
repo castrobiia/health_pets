@@ -4,7 +4,7 @@ import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/editar-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
-import 'package:health_pets/repository/animal-repository.dart';
+// Todo descomentar para voltar ao estado principal. import 'package:health_pets/repository/animal-repository.dart';
 
 class MenuItemPet {
   final String texto;
@@ -54,7 +54,7 @@ PopupMenuItem<MenuItemPet> buildItem(MenuItemPet item) =>
 
 void onSelected(BuildContext context, MenuItemPet item, dynamic id) {
   final idPet = id;
-  var animalController = AnimalController(AnimalRepositoryy());
+  // Todo descomentar para voltar ao estado principal. var animalController = AnimalController(AnimalRepositoryy());
   switch (item) {
     case MenuItemsPet.itemEditar:
       setarMaterialPageRoute(context, EditarPetPage(idPet));

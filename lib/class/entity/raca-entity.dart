@@ -17,10 +17,10 @@ class RacaEntity {
     return listaRacas;
   }
 
-  List<RacasModel> toList(dynamic listaRacas) {
-    List<RacasModel> list = [];
+  List<RacaModel> toList(dynamic listaRacas) {
+    List<RacaModel> list = [];
     list =
-        (listaRacas as List).map((item) => RacasModel.fromJson(item)).toList();
+        (listaRacas as List).map((item) => RacaModel.fromJson(item)).toList();
 
     return list;
   }

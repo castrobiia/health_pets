@@ -4,17 +4,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:health_pets/blocs/home.bloc.dart';
+import 'package:health_pets/pages/tabs.page.dart';
+import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 import 'package:health_pets/firebase_messaging/custom_firebase_messaging.dart';
-import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 void main() async {
-  //se certificando de que todas as plataformas foram inicializadas para iniciar a app
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
@@ -22,16 +23,28 @@ void main() async {
 
   await CustomFirebaseMessaging().getTokenFirebase();
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<HomeBloc>.value(
+          value: HomeBloc(),
+        ),
+      ],
+      child: Main(),
+    );
+  }
+}
 
+
+class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -75,7 +88,11 @@ Widget _introScreen() {
             ColorTheme.cinza2
           ],
         ),
-        navigateAfterSeconds: LoginPage(),
+        // navigateAfterSeconds: TabsPage(),
+        navigateAfterSeconds: DefaultTabController(
+          length: 3,
+          child: TabsPage(),
+        ),
         loaderColor: Colors.transparent,
       ),
       Center(
@@ -84,3 +101,6 @@ Widget _introScreen() {
     ],
   );
 }
+
+
+

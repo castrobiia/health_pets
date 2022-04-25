@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Form(
                       key: _formKey,
                       child: Column(
-                        //para a coluna ocupar todo o container
+                        //para a coluna ocupar to-do o container
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           TextFormField(

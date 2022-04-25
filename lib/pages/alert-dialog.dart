@@ -3,13 +3,13 @@ import 'package:health_pets/controllers/animal_controller.dart';
 import 'package:health_pets/controllers/usuario_controller.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
-import 'package:health_pets/repository/usuario-repository.dart';
+// Todo descomentar para voltar ao estado principal. import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/pet.page.dart';
-import 'package:health_pets/repository/animal-repository.dart';
+// Todo descomentar para voltar ao estado principal. import 'package:health_pets/repository/animal-repository.dart';
 
 confirmarExclusaoAnimal(BuildContext context, id) {
-  var animalController = AnimalController(AnimalRepositoryy());
+  // Todo descomentar para voltar ao estado principal. var animalController = AnimalController(AnimalRepositoryy());
   return showDialog(
       context: context,
       builder: (context) {
@@ -25,10 +25,10 @@ confirmarExclusaoAnimal(BuildContext context, id) {
             ),
             TextButton(
               onPressed: () {
-                animalController.deleteAnimal(id).then((value) {
-                  exibirMensagem(context, '$value');
-                  setarMaterialPageRoute(context, PetPage());
-                });
+                // Todo descomentar para voltar ao estado principal. animalController.deleteAnimal(id).then((value) {
+                //   exibirMensagem(context, '$value');
+                //   setarMaterialPageRoute(context, PetPage());
+                // });
               },
               child: const Text('Sim'),
             ),
@@ -38,7 +38,7 @@ confirmarExclusaoAnimal(BuildContext context, id) {
 }
 
 confirmarExclusaoUsuario(BuildContext context) {
-  var usuarioController = UsuarioController(UsuarioRepository());
+  // Todo descomentar para voltar ao estado principal. var usuarioController = UsuarioController(UsuarioRepository());
   return showDialog(
       context: context,
       builder: (context) {
@@ -54,11 +54,11 @@ confirmarExclusaoUsuario(BuildContext context) {
             ),
             TextButton(
               onPressed: () {
-                usuarioController.deleteUsuario().then((value) {
-                  exibirMensagem(context, '$value');
-                  deleteToken(context);
-                  setarMaterialPageRoute(context, LoginPage());
-                });
+                // Todo descomentar para voltar ao estado principal. usuarioController.deleteUsuario().then((value) {
+                //   exibirMensagem(context, '$value');
+                //   deleteToken(context);
+                //   setarMaterialPageRoute(context, LoginPage());
+                // });
               },
               child: const Text('Sim'),
             ),
