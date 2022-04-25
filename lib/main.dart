@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/blocs/home.bloc.dart';
+import 'package:health_pets/blocs/user.bloc.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<HomeBloc>.value(
           value: HomeBloc(),
+        ),
+        ChangeNotifierProvider<UserBloc>.value(
+          value: UserBloc(),
         ),
       ],
       child: Main(),

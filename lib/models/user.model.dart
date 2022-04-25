@@ -1,19 +1,19 @@
 class UserModel {
-  int? id;
-  String? nome;
-  String? emaiil;
-  String? foto;
-  String? token;
+  final int? id;
+  final String? nome;
+  final String? emaiil;
+  final String? foto;
+  final String? token;
 
-  UserModel({this.id, this.nome, this.emaiil, this.foto, this.token});
+  // UserModel(this.id, this.nome, this.emaiil, this.foto, this.token);
 
-  UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nome = json['nome'];
-    emaiil = json['emaiil'];
-    foto = json['foto'];
+  UserModel.fromJson(Map<String, dynamic> json):
+    id = json['id'],
+    nome = json['nome'],
+    emaiil = json['emaiil'],
+    foto = json['foto'],
     token = json['token'];
-  }
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

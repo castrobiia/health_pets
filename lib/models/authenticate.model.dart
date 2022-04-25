@@ -1,0 +1,20 @@
+class AuthenticateModel {
+  final String email;
+  final String password;
+
+  AuthenticateModel(
+    this.email,
+    this.password
+  );
+
+  AuthenticateModel.fromJson(Map<String, dynamic> json):
+    email = json['email'],
+    password = json['password'];
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['email'] = this.email;
+    data['password'] = this.password;
+    return data;
+  }
+}
