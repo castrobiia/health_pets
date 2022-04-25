@@ -61,70 +61,72 @@ class _CadastroDiarioState extends State<CadastroDiario> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: double.maxFinite,
-          color: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: 30,
-              right: 30,
-              top: 20,
-            ),
-            child: Column(
-              children: <Widget>[
-                Form(
-                  child: Column(
-                    children: [
-                      setarCampoForms(tituloController, "Título", _titulo,
-                          validator: (value) => validarCampo(value)),
-                      TextFormField(
-                        autofocus: false,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Selecione uma data";
-                          }
-                          return null;
-                        },
-                        onSaved: (input) => _data = input!,
-                        decoration: InputDecoration(
-                          labelText: "Data do Diário",
-                          labelStyle: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 17,
+      body: Container(
+        color: Colors.white,
+        child: SingleChildScrollView(
+          child: Container(
+            height: double.maxFinite,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 30,
+                right: 30,
+                top: 20,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Form(
+                    child: Column(
+                      children: [
+                        setarCampoForms(tituloController, "Título", _titulo,
+                            validator: (value) => validarCampo(value)),
+                        TextFormField(
+                          autofocus: false,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Selecione uma data";
+                            }
+                            return null;
+                          },
+                          onSaved: (input) => _data = input!,
+                          decoration: InputDecoration(
+                            labelText: "Data do Diário",
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
                           ),
+                          controller: dataController,
+                          readOnly: true,
+                          onTap: () {
+                            setState(
+                              () {
+                                _dataSelecionada(context);
+                              },
+                            );
+                          },
                         ),
-                        controller: dataController,
-                        readOnly: true,
-                        onTap: () {
-                          setState(
-                            () {
-                              _dataSelecionada(context);
-                            },
-                          );
-                        },
-                      ),
-                      setarCampoForms(humorController, "Humor", _humor,
-                          validator: (value) => validarCampo(value)),
-                      //peso mudar para receber apenas numeros
-                      setarCampoForms(pesoController, "Peso", _peso,
-                          validator: (value) => validarCampo(value)),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "Descrição",
-                          labelStyle: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 17,
+                        setarCampoForms(humorController, "Humor", _humor,
+                            validator: (value) => validarCampo(value)),
+                        //peso mudar para receber apenas numeros
+                        setarCampoForms(pesoController, "Peso", _peso,
+                            validator: (value) => validarCampo(value)),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Descrição",
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
                           ),
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 8,
+                          maxLength: 1000,
                         ),
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 8,
-                        maxLength: 1000,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/diario-pet.page.dart';
-import 'package:health_pets/pages/pet.page.dart';
+import 'package:health_pets/pages/informacao-diario.page.dart';
 
 class DiarioCard extends StatelessWidget {
   @override
@@ -70,7 +69,7 @@ class DiarioCard extends StatelessWidget {
                     IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => DiarioPet()));
+                              builder: (context) => InformacaoDiario()));
                         },
                         icon: Icon(Icons.navigate_next))
                   ],
