@@ -18,6 +18,14 @@ class AnimalRepository implements Repository{
         .toList();
   }
 
+  Future<List<AnimalModel>> getByUser(id) async{
+    var url = "${Settings.apiUrl}animal/$id/user";
+    Response response = await Dio().get(url);
+    return (response.data as List)
+        .map((result) => AnimalModel.fromJson(result))
+        .toList();
+  }
+
   @override
   Future<List<AnimalModel>> getAll() async{
     var url = "${Settings.apiUrl}animal";

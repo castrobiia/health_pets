@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/diario-pet.page.dart';
-import 'package:health_pets/pages/pet.page.dart';
 
 class DiarioCard extends StatelessWidget {
   @override

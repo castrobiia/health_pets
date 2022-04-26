@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/blocs/home.bloc.dart';
 import 'package:health_pets/blocs/user.bloc.dart';
+import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -95,7 +96,7 @@ Widget _introScreen() {
         // navigateAfterSeconds: TabsPage(),
         navigateAfterSeconds: DefaultTabController(
           length: 3,
-          child: TabsPage(),
+          child: LoginPage(),
         ),
         loaderColor: Colors.transparent,
       ),

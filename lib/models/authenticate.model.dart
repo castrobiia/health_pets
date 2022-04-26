@@ -1,8 +1,9 @@
 class AuthenticateModel {
-  final String email;
-  final String password;
+  late String email;
+  late String password;
 
-  AuthenticateModel(
+  AuthenticateModel(){}
+  AuthenticateModel.withParams(
     this.email,
     this.password
   );

@@ -5,7 +5,6 @@ import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
 // Todo descomentar para voltar ao estado principal. import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/pages/pet.page.dart';
 // Todo descomentar para voltar ao estado principal. import 'package:health_pets/repository/animal-repository.dart';
 
 confirmarExclusaoAnimal(BuildContext context, id) {
@@ -27,7 +26,7 @@ confirmarExclusaoAnimal(BuildContext context, id) {
               onPressed: () {
                 // Todo descomentar para voltar ao estado principal. animalController.deleteAnimal(id).then((value) {
                 //   exibirMensagem(context, '$value');
-                //   setarMaterialPageRoute(context, PetPage());
+                //   setarMaterialPageRoute(context, HomePage());
                 // });
               },
               child: const Text('Sim'),

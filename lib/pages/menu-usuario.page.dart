@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/logout.page.dart';
-import 'package:health_pets/pages/pet.page.dart';
+import 'package:health_pets/ui/pages/home.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
 class MenuItemUsuario {
@@ -50,7 +50,7 @@ PopupMenuItem<MenuItemUsuario> buildItem(MenuItemUsuario item) =>
 void onSelected(BuildContext context, MenuItemUsuario item) {
   switch (item) {
     case MenuItemsUsuario.itemEditar:
-      setarMaterialPageRoute(context, PetPage());
+      setarMaterialPageRoute(context, HomePage());
       break;
     case MenuItemsUsuario.itemExcluir:
       confirmarExclusaoUsuario(context);

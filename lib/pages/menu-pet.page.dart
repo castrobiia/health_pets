@@ -3,7 +3,8 @@ import 'package:health_pets/controllers/animal_controller.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/editar-pet.page.dart';
-import 'package:health_pets/pages/pet.page.dart';
+
+import '../ui/pages/home.page.dart';
 // Todo descomentar para voltar ao estado principal. import 'package:health_pets/repository/animal-repository.dart';
 
 class MenuItemPet {
@@ -63,6 +64,6 @@ void onSelected(BuildContext context, MenuItemPet item, dynamic id) {
       confirmarExclusaoAnimal(context, id);
       break;
     case MenuItemsPet.itemCompartilhar:
-      setarMaterialPageRoute(context, PetPage());
+      setarMaterialPageRoute(context, HomePage());
   }
 }

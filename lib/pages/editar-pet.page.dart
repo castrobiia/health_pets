@@ -1,13 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-// import 'package:health_pets/links/links-pages.dart';
-import 'package:health_pets/pages/perfil-pet.page.dart';
-import 'package:health_pets/pages/pet.page.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../ui/pages/home.page.dart';
 import '../widgets/widgets.dart';
 
 class EditarPetPage extends StatefulWidget {
@@ -336,7 +334,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                 ),
                                 child: TextButton(
                                   onPressed: () {
-                                    setarMaterialPageRoute(context, PetPage());
+                                    setarMaterialPageRoute(context, HomePage());
                                   },
                                   child: Text(
                                     "Salvar",

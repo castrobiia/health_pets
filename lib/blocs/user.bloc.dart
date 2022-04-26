@@ -10,10 +10,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserBloc extends ChangeNotifier{
   var user;
 
-  UserBloc(){
-    user = null;
-    loadUser();
-  }
+  // UserBloc(){
+  //   user = null;
+  //   loadUser();
+  // }
 
   Future authenticate(AuthenticateModel model) async{
     try{
@@ -25,8 +25,9 @@ class UserBloc extends ChangeNotifier{
       user=res;
       await prefs.setString('user', jsonEncode(res));
 
-      return res;
+      return user;
     }catch(ex){
+      print(ex);
       user = null;
       return null;
     }

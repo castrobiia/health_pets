@@ -4,23 +4,23 @@ import 'package:http/http.dart' as http;
 import 'dart:async' show Future;
 
 class AnimalModel {
-  final int id;
-  final String nome;
-  final String dataNascimento;
-  final int idEspecie;
-  final int idRaca;
-  final String foto;
+  late final int id;
+  late final String nome;
+  late final String dataNascimento;
+  late final int idEspecie;
+  late final int idRaca;
+  late final String foto;
 
-  AnimalModel(this.id, this.nome, this.dataNascimento, this.idEspecie, this.idRaca, this.foto);
+  AnimalModel(){}
 
-  //jeito antigo -> nao pra reinicializar a variavel nulla, sem parametros
-  // AnimalModel({
-  //   required this.id,
-  //   required this.nome,
-  //   required this.dataNascimento,
-  //   required this.idEspecie,
-  //   required this.idRaca,
-  //   required this.foto});
+  AnimalModel.withParams(id,nome,dataNascimento,idEspecie, idRaca, foto) {
+    this.id = id;
+    this.nome = nome;
+    this.dataNascimento = dataNascimento;
+    this.idEspecie = idEspecie;
+    this.idRaca= idRaca;
+    this.foto = foto;
+  }
 
   AnimalModel.fromJson(Map<String, dynamic> json) :
         id = json['id'],

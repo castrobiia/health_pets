@@ -1,74 +1,43 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:health_pets/blocs/user.bloc.dart';
+import 'package:health_pets/models/authenticate.model.dart';
+import 'package:provider/provider.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/models/login-model.dart';
 import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../settings.dart';
 
 import '../themes/color_theme.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-Future<LoginModel?> login(
-    BuildContext context, String email, String password) async {
-  var response =
-      await http.post(Uri.https('healthpets.app.br', 'api/auth/login'), body: {
-    'email': email,
-    'password': password,
-  });
-
-  Map mapResponse = jsonDecode(response.body);
-
-  var status = response.statusCode;
-
-  if (status == 401) {
-    var error = mapResponse['error'];
-    Fluttertoast.showToast(
-        msg: error,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-  } else {
-    String token = mapResponse['access_token'];
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('token', token);
-    setarMaterialPageRouteTab(context, TabsPage());
-  }
-}
 
 class _LoginPageState extends State<LoginPage> {
-  late LoginModel _loginModel;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  String? _email;
-  String? _senha;
+  final _formKey =  GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  var auth = new AuthenticateModel();
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        key: _scaffoldKey,
         body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.only(left: 15, right: 15, top: 40),
             //coluna para colocar a imagem e o form
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 //logo
                 SizedBox(
@@ -99,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                               }
                               return null;
                             },
-                            onSaved: (input) => _email = input!,
+                            onSaved: (value) => auth.email = value!,
                             controller: emailController,
                             decoration: InputDecoration(
                               labelText: AppLocalizations.of(context)!.email,
@@ -122,7 +91,9 @@ class _LoginPageState extends State<LoginPage> {
                               }
                               return null;
                             },
-                            onSaved: (input) => _senha = input!,
+                            onSaved: (value) {
+                              auth.password = value!;
+                            },
                             obscureText: true,
                             controller: passwordController,
                             decoration: InputDecoration(
@@ -142,23 +113,16 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: boxDecoration(ColorTheme.rosa5),
                             child: TextButton(
                               onPressed: () async {
-                                //faz a validação do formulário
+
                                 if (_formKey.currentState!.validate()) {
-                                  //salvar o estado do formulário
                                   _formKey.currentState!.save();
-
-                                  String email = emailController.text;
-                                  String password = passwordController.text;
-
-                                  LoginModel loginUsuario =
-                                      (await login(context, email, password))
-                                          as LoginModel;
-
-                                  setState(
-                                    () {
-                                      _loginModel = loginUsuario;
-                                    },
-                                  );
+                                  var user = await context.read<UserBloc>().authenticate(auth);
+                                    if(user != null){
+                                      Settings.user = user;
+                                      setarMaterialPageRoute(context, TabsPage());
+                                    }
+                                    final snackBar = SnackBar(content: Text("Usuario ou senha invalidos!"));
+                                    _scaffoldKey.currentState?.showSnackBar(snackBar);
                                 }
                               },
                               child: textBotao(AppLocalizations.of(context)!.login),
@@ -206,4 +170,5 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
 }
