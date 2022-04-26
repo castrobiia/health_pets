@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/widgets/vacina/vacina-list.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/cadastro-vacina.page.dart';
 import 'package:health_pets/pages/menu-vacina.page.dart';
@@ -52,7 +53,7 @@ class _VacinaPageState extends State<VacinaPage> {
             Expanded(
               child: Container(
                 color: Colors.white,
-                child: TabelaVacina(),
+                child: VacinaLista(),
               ),
             ),
           ],
