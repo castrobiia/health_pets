@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
+import 'package:health_pets/pages/vacina.page.dart';
 
 class VacinaCard extends StatelessWidget {
   final int idVacina;
@@ -7,13 +7,15 @@ class VacinaCard extends StatelessWidget {
   final String dataAplicacao;
   final String fabricante;
   final String lote;
+  final int idAnimal;
 
   VacinaCard({
     required this.idVacina,
     required this.nomeVacina,
     required this.dataAplicacao,
     required this.fabricante,
-    required this.lote,
+    required this.lote, 
+    required this.idAnimal,
   });
 
   @override
@@ -28,7 +30,7 @@ class VacinaCard extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => PerfilPetPage(idVacina)));
+                      builder: (context) => VacinaPage(idAnimal)));
                 },
                 child: Container(
                   width: 100,
@@ -39,7 +41,7 @@ class VacinaCard extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => PerfilPetPage(idVacina)));
+                      builder: (context) => VacinaPage(idAnimal)));
                 },
                 child: Container(
                   padding: EdgeInsets.only(right: 10),
@@ -68,7 +70,7 @@ class VacinaCard extends StatelessWidget {
                     IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => PerfilPetPage(idVacina)));
+                              builder: (context) => VacinaPage(idAnimal)));
                         },
                         icon: Icon(Icons.navigate_next))
                   ],

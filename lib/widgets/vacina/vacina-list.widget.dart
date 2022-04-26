@@ -63,6 +63,7 @@ class VacinaLista extends StatelessWidget {
                     dataAplicacao: vacina.dataAplicacao ?? '',
                     fabricante: vacina.fabricante ?? '',
                     lote: vacina.lote ?? '',
+                    idAnimal: vacina.idAnimal ?? 0,
                   ),
                 );
               },
