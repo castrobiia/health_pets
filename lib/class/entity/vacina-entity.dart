@@ -10,7 +10,7 @@ class VacinaEntity {
   List listaVacinas = [];
   var url = 'https://www.healthpets.app.br/api/vacinas';
 
-  Future<VacinaModel?> getVacinas(int? id) async {
+  Future<VacinaModel?> getVacina(int? id) async {
     if (id != null) {
       url = 'https://www.healthpets.app.br/api/vacina/${id}';
     }

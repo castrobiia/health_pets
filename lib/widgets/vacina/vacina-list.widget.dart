@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/http/vacina-repository.dart';
+import 'package:health_pets/class/entity/vacina-entity.dart';
 import 'package:health_pets/models/vacina-model.dart';
 
 import 'vacina-card.widget.dart';
@@ -16,12 +16,12 @@ class VacinaLista extends StatelessWidget {
 
     //List vacinas = [];
 
-    // VacinaRepository().getVacina(vacina['id_animal']);
+    VacinaEntity().getVacina(vacina['id_animal']);
 
-    print('print da vacina: ${VacinaRepository().getVacina(vacina['id_animal'])}');
+    print('print da vacina: ${VacinaEntity().getVacina(vacina['id_animal'])}');
     return Scaffold(
       body: FutureBuilder<dynamic>(
-        future: VacinaRepository().getVacina(vacina['id_animal']),
+        future: VacinaEntity().getVacina(vacina['id_animal']),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(
