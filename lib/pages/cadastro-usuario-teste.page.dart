@@ -16,7 +16,7 @@ class CadastroUsuarioTeste extends StatefulWidget {
   State<CadastroUsuarioTeste> createState() => _CadastroUsuarioTesteState();
 }
 
-Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
+Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String nome,
     String email, String password, String password_confirmation) async {
   Map<String, String> requestHeaders = {
     'Content-type': 'application/json',
@@ -24,7 +24,7 @@ Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
   };
 
   final requestBody = jsonEncode({
-    'name': name,
+    'nome': nome,
     'email': email,
     'password': password,
     'password_confirmation': password_confirmation,
@@ -38,11 +38,11 @@ Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
 
   if (list['errors'] != null) {
     var msg = '';
-    if (list['errors']["name"] != null || list['errors']["name"] == "") {
+    if (list['errors']["nome"] != null || list['errors']["nome"] == "") {
       msg += '\n' +
-          list['errors']["name"]
+          list['errors']["nome"]
               .toString()
-              .substring(1, list['errors']["name"].toString().length - 1) +
+              .substring(1, list['errors']["nome"].toString().length - 1) +
           '\n';
     }
     if (list['errors']["email"] != null || list['errors']["email"] == "") {
@@ -66,6 +66,7 @@ Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
 
     exibirMensagem(context, msg);
   } else {
+    exibirMensagem(context, list['message']);
     setarMaterialPageRouteTab(context, LoginPage());
   }
 }
