@@ -5,23 +5,24 @@ import 'package:health_pets/models/vacina-model.dart';
 import 'vacina-card.widget.dart';
 
 class VacinaLista extends StatelessWidget {
-  const VacinaLista({Key? key}) : super(key: key);
+  final int idAnimal;
+
+  const VacinaLista(this.idAnimal);
 
   @override
   Widget build(BuildContext context) {
     //var id_animal;
 
-    var snapshoot;
-    final vacina = snapshoot.data;
-
     //List vacinas = [];
 
-    VacinaEntity().getVacina(vacina['id_animal']);
+    VacinaEntity().getVacina(idAnimal);
 
-    print('print da vacina: ${VacinaEntity().getVacina(vacina['id_animal'])}');
+    print('print da instância vacina: ${VacinaEntity().getVacina(idAnimal)}');
+    print('idAnimal: $idAnimal');
+
     return Scaffold(
       body: FutureBuilder<dynamic>(
-        future: VacinaEntity().getVacina(vacina['id_animal']),
+        future: VacinaEntity().getVacina(idAnimal),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(

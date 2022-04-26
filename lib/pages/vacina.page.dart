@@ -53,7 +53,7 @@ class _VacinaPageState extends State<VacinaPage> {
             Expanded(
               child: Container(
                 color: Colors.white,
-                child: VacinaLista(),
+                child: VacinaLista(id),
               ),
             ),
           ],
