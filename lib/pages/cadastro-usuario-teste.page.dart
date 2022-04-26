@@ -77,7 +77,25 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
         builder: (context) {
           return AlertDialog(
             title: Text(AppLocalizations.of(context)!.information),
-            content: Text("Teste 2"),
+            content: Container(
+              height: 160,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("A senha deve conter, no mínimo:"),
+                  SizedBox(height: 15),
+                  Text('- 1 letra maiúscula'),
+                  SizedBox(height: 7),
+                  Text('- 1 letra minúscula'),
+                  SizedBox(height: 7),
+                  Text('- 1 número'),
+                  SizedBox(height: 7),
+                  Text('- 1 caractere especial'),
+                  SizedBox(height: 7),
+                  Text('- 8 caracteres'),
+                ],
+              ),
+            ),
             actions: <Widget>[
               IconButton(
                   onPressed: () {
@@ -225,13 +243,26 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                         String confirmacaoSenha =
                             confirmacaoSenhaController.text;
 
-                        UsuarioModelTeste dadosUsuario = (await submitUsuario(
-                                context, nome, email, senha, confirmacaoSenha))
-                            as UsuarioModelTeste;
+                        RegExp senhaExp = new RegExp(
+                          r"^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
+                          caseSensitive: true,
+                        );
+                        bool resultado = senhaExp.hasMatch(senha);
 
-                        setState(() {
-                          _usuarioModelTeste = dadosUsuario;
-                        });
+                        if (resultado) {
+                          UsuarioModelTeste dadosUsuario = (await submitUsuario(
+                              context,
+                              nome,
+                              email,
+                              senha,
+                              confirmacaoSenha)) as UsuarioModelTeste;
+                          setState(() {
+                            _usuarioModelTeste = dadosUsuario;
+                          });
+                        } else {
+                          exibirMensagem(context,
+                              'A senha não cumpre os requisitos. Para saber mais, clique no ícone de informação no campo Senha.');
+                        }
                       },
                       child: textBotao(AppLocalizations.of(context)!.save),
                     ),
