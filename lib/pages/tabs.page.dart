@@ -17,7 +17,7 @@ class TabsPage extends StatelessWidget {
           children: [
             PetPage(),
             GastoPage(),
-            CalendarioPage(),
+            Calendario(),
             PerfilUsuario(),
           ],
         ),
