@@ -4,9 +4,10 @@ class UserModel {
   late String? email;
   late String? foto;
   late String? token;
+  late String? password;
 
   UserModel(){}
-  UserModel.withParams({this.id, this.nome, this.email, this.foto, this.token});
+  UserModel.withParams({this.id, this.nome, this.email, this.foto, this.token, this.password});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -14,6 +15,7 @@ class UserModel {
     email = json['email'];
     foto = json['foto'];
     token = json['token'];
+    password = json['password'];
   }
 
   Map<String, dynamic> toJson() {
@@ -23,6 +25,7 @@ class UserModel {
     data['emaiil'] = this.email;
     data['foto'] = this.foto;
     data['token'] = this.token;
+    data['password'] = this.password;
     return data;
   }
 }

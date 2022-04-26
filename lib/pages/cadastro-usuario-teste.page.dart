@@ -1,76 +1,33 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
+import 'package:health_pets/blocs/user.bloc.dart';
+import 'package:health_pets/models/user-cadastro-model.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/models/usuario-model-teste.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
+import '../settings.dart';
 import 'login.page.dart';
 
 class CadastroUsuarioTeste extends StatefulWidget {
-  const CadastroUsuarioTeste({Key? key}) : super(key: key);
-
   @override
   State<CadastroUsuarioTeste> createState() => _CadastroUsuarioTesteState();
 }
 
-Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
-    String email, String password, String password_confirmation) async {
-  Map<String, String> requestHeaders = {
-    'Content-type': 'application/json',
-    'Accept': 'application/json'
-  };
-
-  final requestBody = jsonEncode({
-    'name': name,
-    'email': email,
-    'password': password,
-    'password_confirmation': password_confirmation,
-  });
-
-  final response = await http.post(
-      Uri.https('healthpets.app.br', 'api/auth/register'),
-      headers: requestHeaders,
-      body: requestBody);
-  Map<String, dynamic> list = json.decode(response.body);
-
-  if (list['errors'] != null) {
-    var msg = '';
-    if (list['errors']["name"] != null || list['errors']["name"] == "") {
-      msg += '\n' +
-          list['errors']["name"]
-              .toString()
-              .substring(1, list['errors']["name"].toString().length - 1) +
-          '\n';
-    }
-    if (list['errors']["email"] != null || list['errors']["email"] == "") {
-      msg += list['errors']["email"]
-              .toString()
-              .substring(1, list['errors']["email"].toString().length - 1) +
-          '\n';
-    }
-    if (list['errors']["password"] != null ||
-        list['errors']["password"] == "") {
-      msg += list['errors']["password"]
-              .toString()
-              .substring(1, list['errors']["password"].toString().length - 1) +
-          '\n';
-    }
-    if (list['errors']["password_confirmation"] != null ||
-        list['errors']["password_confirmation"] == "") {
-      msg += list['errors']["password_confirmation"].toString().substring(
-          1, list['errors']["password_confirmation"].toString().length - 1);
-    }
-
-    exibirMensagem(context, msg);
-  } else {
-    setarMaterialPageRouteTab(context, LoginPage());
-  }
-}
 
 class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
+  final _formKey =  GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  var user = new UserCadastroModel();
+
+  //Controllers
+  TextEditingController nomeController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
+  TextEditingController confirmacaoSenhaController = TextEditingController();
+
+
   createInfoDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -89,13 +46,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
         });
   }
 
-  //UsuarioRepository _repository;
 
-  late UsuarioModelTeste _usuarioModelTeste;
-  TextEditingController nomeController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
-  TextEditingController confirmacaoSenhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -127,115 +78,131 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.name,
-                      labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 30,
+                        ),
+                        TextFormField(
+                          autofocus: false,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)!.name,
+                            labelStyle: TextStyle(
+                              color: Color(0xFFCC9396),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
+                          ),
+                          controller: nomeController,
+                          onSaved: (value){
+                            user.nome = value!;
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          autofocus: false,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)!.email,
+                            labelStyle: TextStyle(
+                              color: Color(0xFFCC9396),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
+                          ),
+                          controller: emailController,
+                          onSaved: (value){
+                            user.email = value!;
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          autofocus: false,
+                          keyboardType: TextInputType.text,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                createInfoDialog(context);
+                              },
+                              icon: Icon(Icons.info),
+                            ),
+                            labelText: AppLocalizations.of(context)!.password,
+                            labelStyle: TextStyle(
+                              color: Color(0xFFCC9396),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
+                          ),
+                          controller: senhaController,
+                          onSaved: (value){
+                            user.password = value!;
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          autofocus: false,
+                          keyboardType: TextInputType.text,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)!.confirmPassword,
+                            labelStyle: TextStyle(
+                                color: Color(0xFFCC9396),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 17),
+                          ),
+                          controller: confirmacaoSenhaController,
+                          onSaved: (value){
+                            user.passwordConfirmation = value!;
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(
+                            top: 15,
+                            bottom: 15,
+                          ),
+                          child: Text(
+                            AppLocalizations.of(context)!.term,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: boxDecoration(Color(0xFFCC9396)),
+                          child: TextButton(
+                            onPressed: () async {
+                              if(_formKey.currentState!.validate()){
+                                _formKey.currentState!.save();
+                                var res = await context.read<UserBloc>().create(user);
+                                if(res != null){
+                                  setarMaterialPageRoute(context, LoginPage());
+                                }
+                                final snackBar = SnackBar(content: Text("Informações incorretas! Verifique e tente novamente!"));
+                                _scaffoldKey.currentState?.showSnackBar(snackBar);
+                              }
+                            },
+                            child: textBotao(AppLocalizations.of(context)!.save),
+                          ),
+                        ),
+                      ],
                     ),
-                    controller: nomeController,
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.email,
-                      labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
-                    ),
-                    controller: emailController,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    autofocus: false,
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          createInfoDialog(context);
-                        },
-                        icon: Icon(Icons.info),
-                      ),
-                      labelText: AppLocalizations.of(context)!.password,
-                      labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
-                    ),
-                    controller: senhaController,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.confirmPassword,
-                      labelStyle: TextStyle(
-                          color: Color(0xFFCC9396),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17),
-                    ),
-                    controller: confirmacaoSenhaController,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 15,
-                      bottom: 15,
-                    ),
-                    child: Text(
-                      AppLocalizations.of(context)!.term,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    decoration: boxDecoration(Color(0xFFCC9396)),
-                    child: TextButton(
-                      onPressed: () async {
-                        String nome = nomeController.text;
-                        String email = emailController.text;
-                        String senha = senhaController.text;
-                        String confirmacaoSenha =
-                            confirmacaoSenhaController.text;
 
-                        UsuarioModelTeste dadosUsuario = (await submitUsuario(
-                                context, nome, email, senha, confirmacaoSenha))
-                            as UsuarioModelTeste;
-
-                        setState(() {
-                          _usuarioModelTeste = dadosUsuario;
-                        });
-                      },
-                      child: textBotao(AppLocalizations.of(context)!.save),
-                    ),
-                  ),
                 ],
               ),
             ),

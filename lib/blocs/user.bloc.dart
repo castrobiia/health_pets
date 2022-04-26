@@ -7,8 +7,11 @@ import 'package:health_pets/repositories/account.repository.dart';
 import 'package:health_pets/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/user-cadastro-model.dart';
+
 class UserBloc extends ChangeNotifier{
   var user;
+  var userCadastro;
 
   // UserBloc(){
   //   user = null;
@@ -33,12 +36,13 @@ class UserBloc extends ChangeNotifier{
     }
   }
 
-  Future create(UserModel model) async{
+  Future create(UserCadastroModel model) async{
     try{
       var repository = new AccountRepository();
       var res = await repository.create(model);
       return res;
     }catch(ex){
+      print("Catch #45 ${ex.toString()}");
       user = null;
       return null;
     }

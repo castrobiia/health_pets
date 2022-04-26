@@ -17,7 +17,7 @@ class AnimalBloc extends ChangeNotifier{
   }
 
   getAnimalByUser(){
-    animalRepository.getByUser(Settings.user.id);
+    animalRepository.getByUser();
   }
 
 
