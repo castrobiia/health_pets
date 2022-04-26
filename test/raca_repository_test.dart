@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:health_pets/http/racas-repository.dart';
+import 'package:health_pets/http/raca-repository.dart';
 
 main() {
   final repository = RacasRepository();
