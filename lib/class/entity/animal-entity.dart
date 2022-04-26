@@ -17,7 +17,7 @@ class AnimalEntity {
 
     //usar Header().getHeader();, entender a mensagem de erro message: Wrong number of segments
     final response =
-        await http.get(Uri.parse(url + id.toString()), headers: header);
+        await http.get(Uri.parse(url + id.toString()+'/user'), headers: header);
 
     dynamic animal = jsonDecode(response.body);
 
