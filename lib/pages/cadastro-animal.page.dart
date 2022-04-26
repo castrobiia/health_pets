@@ -15,6 +15,10 @@ class _CadastrarAnimalPage extends State<CadastrarAnimalPage> {
   
   @override
   Widget build(BuildContext context) {
+
+    print("Raças: ${RacaBloc().racas}");
+    print("Especies: ${EspecieBloc().especies}");
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -49,20 +53,22 @@ class _CadastrarAnimalPage extends State<CadastrarAnimalPage> {
                 children: <Widget>[
                   Stack(
                     children: <Widget>[
-                      Container(
-                        width: 180,
-                        height: 180,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/perfil-cao1.jpeg"),
+                      Center(
+                        child: Container(
+                          width: 180,
+                          height: 180,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage("assets/perfil-cao1.jpeg"),
+                            ),
                           ),
                         ),
                       ),
                       Positioned(
                         top: 120,
-                        left: 120,
+                        left: 200,
                         child: FloatingActionButton(
                           child: Icon(Icons.add_a_photo), //ou upload, add, image
                           backgroundColor: Color(0xFFF6BD87),
@@ -72,6 +78,9 @@ class _CadastrarAnimalPage extends State<CadastrarAnimalPage> {
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   TextFormField(
                     autofocus: false,
@@ -89,10 +98,7 @@ class _CadastrarAnimalPage extends State<CadastrarAnimalPage> {
                     },
                   ),
                   SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   DropdownButton(
                     icon: Icon(Icons.keyboard_arrow_down),
@@ -107,7 +113,7 @@ class _CadastrarAnimalPage extends State<CadastrarAnimalPage> {
                     },
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   DropdownButton(
                     icon: Icon(Icons.keyboard_arrow_down),
@@ -138,7 +144,7 @@ class _CadastrarAnimalPage extends State<CadastrarAnimalPage> {
                     },
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                 ],
               ),

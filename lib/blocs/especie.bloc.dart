@@ -7,6 +7,10 @@ class EspecieBloc extends ChangeNotifier{
 
   List<EspecieModel> especies = [];
 
+  EspecieBloc(){
+    getEspecies();
+  }
+
   getEspecies(){
     especieRepository.getAll().then((data) {
       this.especies = data;

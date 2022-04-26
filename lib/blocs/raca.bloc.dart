@@ -7,6 +7,10 @@ class RacaBloc extends ChangeNotifier{
 
   List<RacaModel> racas = [];
 
+  RacaBloc(){
+    getRacas();
+  }
+
   getRacas(){
     racaRepository.getAll().then((data){
       this.racas = data;

@@ -6,10 +6,18 @@ import 'package:health_pets/repositories/repository.dart';
 
 class EspecieRepository implements Repository{
 
+  Dio dio = new Dio();
+
+
+  EspecieRepository(){
+    dio.options.headers['content-Type'] = 'application/json';
+    dio.options.headers['accept'] = 'application/json';
+  }
+
   @override
   Future<List<EspecieModel>> getAll() async {
     var url = "${Settings.apiUrl}animal";
-    Response response = await Dio().get(url);
+    Response response = await dio.get(url);
     return (response.data as List)
         .map((result) => EspecieModel.fromJson(result))
         .toList();

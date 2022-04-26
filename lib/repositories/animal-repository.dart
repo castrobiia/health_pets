@@ -8,11 +8,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AnimalRepository implements Repository{
 
+  Dio dio = new Dio();
+
+
+  AnimalRepository(){
+    dio.options.headers['content-Type'] = 'application/json';
+    dio.options.headers['accept'] = 'application/json';
+  }
+
 
   @override
   Future<AnimalModel> getOne(id) async {
     var url = "${Settings.apiUrl}animal/$id";
-    Response response = await Dio().get(url);
+    Response response = await dio.get(url);
     return (response.data)
         .map((result) => AnimalModel.fromJson(result))
         .toList();
@@ -20,7 +28,7 @@ class AnimalRepository implements Repository{
 
   Future<List<AnimalModel>> getByUser() async{
     var url = "${Settings.apiUrl}animal";
-    Response response = await Dio().get(url);
+    Response response = await dio.get(url);
     return (response.data as List)
         .map((result) => AnimalModel.fromJson(result))
         .toList();
@@ -29,7 +37,7 @@ class AnimalRepository implements Repository{
   @override
   Future<List<AnimalModel>> getAll() async{
     var url = "${Settings.apiUrl}animal";
-    Response response = await Dio().get(url);
+    Response response = await dio.get(url);
     return (response.data as List)
         .map((result) => AnimalModel.fromJson(result))
         .toList();
