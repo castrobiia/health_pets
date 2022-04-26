@@ -1,14 +1,14 @@
 class VacinaModel {
-  int? id;
-  String? nome;
+  int? idVacina;
+  String? nomeVacina;
   String? dataAplicacao;
   String? fabricante;
   String? lote;
   int? idAnimal;
 
   VacinaModel(
-      {this.id,
-      this.nome,
+      {this.idVacina,
+      this.nomeVacina,
       this.dataAplicacao,
       this.fabricante,
       this.lote,
@@ -16,8 +16,8 @@ class VacinaModel {
       });
 
   VacinaModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nome = json['nome'];
+    idVacina = json['id_vacina'];
+    nomeVacina = json['nome_vacina'];
     dataAplicacao = json['data_aplicacao'];
     fabricante = json['fabricante'];
     lote = json['lote'];
@@ -26,8 +26,8 @@ class VacinaModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['nome'] = this.nome;
+    data['id_vacina'] = this.idVacina;
+    data['nome_vacina'] = this.nomeVacina;
     data['data_aplicacao'] = this.dataAplicacao;
     data['fabricante'] = this.fabricante;
     data['lote'] = this.lote;

@@ -140,7 +140,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                 String lote = loteController.text;
                 print(lote);
                 int id_animal = this.idAnimal;
-                print(this.idAnimal);
+                print('idAnimal: ${this.idAnimal}');
 
                 // VacinaEntity().createVacina(nomeVacina, data_aplicacao,
                 //     fabricante, lote, this.idAnimal);

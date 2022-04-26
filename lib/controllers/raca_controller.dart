@@ -1,5 +1,5 @@
 // #50
-import 'package:health_pets/http/racas-repository.dart';
+import 'package:health_pets/http/raca-repository.dart';
 import 'package:health_pets/models/racas-model.dart';
 
 class RacasController {
