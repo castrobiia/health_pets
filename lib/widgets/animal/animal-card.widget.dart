@@ -59,7 +59,7 @@ class AnimalCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        item.nome,
+                        item.nome!,
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w500),
                       ),

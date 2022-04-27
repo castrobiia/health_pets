@@ -18,7 +18,7 @@ class HomeBloc extends ChangeNotifier{
   //TODO implementar para pegar apenas os animais do usuário logado
   getAnimais(){
     animalRepository.getByUser().then((data) {
-      this.animais = data;
+      this.animais = data as List<AnimalModel>;
       notifyListeners();
     });
   }

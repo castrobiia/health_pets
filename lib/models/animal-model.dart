@@ -4,12 +4,12 @@ import 'package:http/http.dart' as http;
 import 'dart:async' show Future;
 
 class AnimalModel {
-  late final int id;
-  late final String nome;
-  late final String dataNascimento;
-  late final int idEspecie;
-  late final int idRaca;
-  late final String foto;
+  late final int? id;
+  late final String? nome;
+  late final String? dataNascimento;
+  late final int? idEspecie;
+  late final int? idRaca;
+  late String? foto;
 
   AnimalModel(){}
 
@@ -22,23 +22,26 @@ class AnimalModel {
     this.foto = foto;
   }
 
-  AnimalModel.fromJson(Map<String, dynamic> json) :
-        id = json['id'],
-        nome = json['nome'],
-        dataNascimento = json['data_nascimento'],
-        idEspecie = json['id_especie'],
-        idRaca = json['id_raca'],
-        foto = json['foto'];
+  AnimalModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    nome = json['nome'];
+    dataNascimento = json['data_nascimento'];
+    idEspecie = json['id_especie'];
+    idRaca = json['id_raca'];
+    foto = json['foto'];
+  }
 
 
-  Map<String, dynamic> toJson() => {
-    'id' : this.id,
-    'nome' : this.nome,
-    'data_nascimento' : this.dataNascimento,
-    'id_especie' : this.idEspecie,
-    'id_raca' : this.idRaca,
-    'foto' : this.foto
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['nome'] = this.nome;
+    data['data_nascimento'] = this.dataNascimento;
+    data['id_especie'] = this.idEspecie;
+    data['id_raca'] = this.idRaca;
+    data['foto'] = this.foto;
+    return data;
+  }
 
   @override
   String toString(){

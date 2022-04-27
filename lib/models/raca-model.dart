@@ -3,7 +3,8 @@ class RacaModel {
   String? nome;
   int? idEspecie;
 
-  RacaModel(
+  RacaModel(){}
+  RacaModel.withParams(
       {this.id,
       this.nome,
       this.idEspecie,

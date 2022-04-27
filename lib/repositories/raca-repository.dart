@@ -1,26 +1,31 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
+
+import '../class/api/header.dart';
 import './repository.dart';
 import '../settings.dart';
-import 'package:dio/dio.dart';
 import 'package:health_pets/models/raca-model.dart';
 import 'package:health_pets/repositories/repository.dart';
+import 'package:http/http.dart' as http;
 
 class RacaRepository implements Repository{
 
-  Dio dio = new Dio();
-
-
-  RacaRepository(){
-    dio.options.headers['content-Type'] = 'application/json';
-    dio.options.headers['accept'] = 'application/json';
-  }
+  var client = http.Client();
 
   @override
   Future<List<RacaModel>> getAll() async {
-    var url = "${Settings.apiUrl}animal";
-    Response response = await dio.get(url);
-    return (response.data as List)
-        .map((result) => RacaModel.fromJson(result))
-        .toList();
+    var url = Uri.parse("${Settings.apiUrl}animal");
+    var response = await client.get(url, headers: Header().getHeader());
+    debugPrint(" Body Response Raca ${response.body.toString()}");
+
+    if(response.body.toString() != []){
+      return (json.decode(response.body))
+          .map((result) => List.from(result))
+          .toList();
+    }
+
+    return [];
   }
 
   @override

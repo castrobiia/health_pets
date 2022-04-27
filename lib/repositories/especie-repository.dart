@@ -1,26 +1,22 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import '../class/api/header.dart';
 import './repository.dart';
 import '../settings.dart';
-import 'package:dio/dio.dart';
 import 'package:health_pets/models/especie-model.dart';
 import 'package:health_pets/repositories/repository.dart';
 
 class EspecieRepository implements Repository{
 
-  Dio dio = new Dio();
-
-
-  EspecieRepository(){
-    dio.options.headers['content-Type'] = 'application/json';
-    dio.options.headers['accept'] = 'application/json';
-  }
+  var client = http.Client();
 
   @override
   Future<List<EspecieModel>> getAll() async {
-    var url = "${Settings.apiUrl}animal";
-    Response response = await dio.get(url);
-    return (response.data as List)
-        .map((result) => EspecieModel.fromJson(result))
-        .toList();
+      var url = Uri.parse("${Settings.apiUrl}animal");
+      var response = await client.get(url, headers: Header().getHeader());
+      return (json.decode(response.body))
+          .map((result) => EspecieModel.fromJson(result))
+          .toList();
   }
 
   @override

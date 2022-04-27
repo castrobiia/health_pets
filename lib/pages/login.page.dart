@@ -7,6 +7,7 @@ import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../blocs/animal.bloc.dart';
 import '../settings.dart';
 
 import '../themes/color_theme.dart';
@@ -111,12 +112,14 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: boxDecoration(ColorTheme.rosa5),
                             child: TextButton(
                               onPressed: () async {
-
+                                    print("onpressed");
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
+                                  print("form saved status");
                                   var user = await context.read<UserBloc>().authenticate(auth);
                                     if(user != null){
                                       Settings.user = user;
+                                      print(AnimalBloc().animais);
                                       setarMaterialPageRoute(context, TabsPage());
                                     }
                                     final snackBar = SnackBar(content: Text("Usuario ou senha invalidos!"));

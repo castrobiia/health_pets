@@ -3,6 +3,7 @@ import 'package:health_pets/pages/calendario.page.dart';
 import 'package:health_pets/pages/perfil-usuario.page.dart';
 import 'package:health_pets/ui/pages/home.page.dart';
 
+import '../settings.dart';
 import 'gasto.page.dart';
 
 class TabsPage extends StatelessWidget {
@@ -10,6 +11,7 @@ class TabsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Settings.user.token);
     return DefaultTabController(
       length: 4,
       child: Scaffold(

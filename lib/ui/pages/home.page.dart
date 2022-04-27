@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/models/animal-model.dart';
 import 'package:health_pets/pages/cadastro-animal.page.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +31,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Container(
         child: AnimalList(
-          animais: bloc.animais,
+          animais: bloc.animais as List<AnimalModel>,
         ),
       ) ,
     );

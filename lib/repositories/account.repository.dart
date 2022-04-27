@@ -7,12 +7,12 @@ import '../models/user-cadastro-model.dart';
 import '../settings.dart';
 
 class AccountRepository{
-  Dio dio = new Dio();
+  Dio dio = new Dio((BaseOptions(contentType: Headers.jsonContentType,responseType: ResponseType.json,validateStatus: (_)=>true,)));
 
 
   AccountRepository(){
-    dio.options.headers['content-Type'] = 'application/json';
-    dio.options.headers['accept'] = 'application/json';
+    // dio.options.headers['content-Type'] = 'application/json';
+    // dio.options.headers['accept'] = 'application/json';
   }
 
   Future<UserModel> authenticate(AuthenticateModel model) async{

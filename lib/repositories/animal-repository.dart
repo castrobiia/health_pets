@@ -1,46 +1,43 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'package:health_pets/class/api/header.dart';
 import 'package:health_pets/models/animal-model.dart';
-
 import './repository.dart';
 import '../settings.dart';
-import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class AnimalRepository implements Repository{
-
-  Dio dio = new Dio();
-
-
-  AnimalRepository(){
-    dio.options.headers['content-Type'] = 'application/json';
-    dio.options.headers['accept'] = 'application/json';
-  }
-
+  var client = http.Client();
 
   @override
   Future<AnimalModel> getOne(id) async {
-    var url = "${Settings.apiUrl}animal/$id";
-    Response response = await dio.get(url);
-    return (response.data)
-        .map((result) => AnimalModel.fromJson(result))
+    var url = Uri.parse("${Settings.apiUrl}animal/$id");
+    var response = await client.get(url, headers: Header().getHeader());
+    return (json.decode(response.body))
+        .map((result) => AnimalModel.fromJson(result) as Map<dynamic, dynamic>)
         .toList();
   }
 
-  Future<List<AnimalModel>> getByUser() async{
-    var url = "${Settings.apiUrl}animal";
-    Response response = await dio.get(url);
-    return (response.data as List)
+  Future<AnimalModel> getByUser() async{
+    var url = Uri.parse("${Settings.apiUrl}animal");
+    var response = await client.get(url, headers: Header().getHeader());
+    var jsonDecoded = jsonDecode(response.body);
+    return jsonDecoded
         .map((result) => AnimalModel.fromJson(result))
         .toList();
   }
 
   @override
-  Future<List<AnimalModel>> getAll() async{
-    var url = "${Settings.apiUrl}animal";
-    Response response = await dio.get(url);
-    return (response.data as List)
-        .map((result) => AnimalModel.fromJson(result))
-        .toList();
+  Future<List<Map<String, dynamic>>> getAll() async{
+    var url = Uri.parse("${Settings.apiUrl}animal");
+    var response = await client.get(url, headers: Header().getHeader());
+    if(response.statusCode == 200){
+      return jsonDecode(jsonDecode(response.body))
+          .map((result) => new Map.from(result))
+          .toList();
+      //return List<Map<String, AnimalModel>>.from(json.decode(response.body));
+    }else{
+      throw Exception('Failed to load Categories from API');
+    }
   }
 
   @override
