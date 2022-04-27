@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:health_pets/class/api/header.dart';
-import 'package:health_pets/models/racas-model.dart';
+import 'package:health_pets/models/raca-model.dart';
 import 'package:http/http.dart' as http;
 
 class RacaEntity {

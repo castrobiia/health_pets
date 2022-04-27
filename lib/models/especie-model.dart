@@ -1,24 +1,24 @@
 class EspecieModel {
   int id;
-  String descricao;
+  String nome;
 
   EspecieModel({
     required this.id,
-    required this.descricao,
+    required this.nome,
   });
 
   //serialização
   factory EspecieModel.fromJson(Map<String, dynamic> json) =>
-      EspecieModel(id: json["id"], descricao: json["descricao"]);
+      EspecieModel(id: json["id"], nome: json["nome"]);
 
   //retornar o objeto
   Map<String, dynamic> toJson() => {
         'id': id,
-        'descricao': descricao,
+        'nome': nome,
       };
 
   @override
   String toString() {
-    return '{id: $id, descricao: $descricao}';
+    return '{id: $id, nome: $nome}';
   }
 }
