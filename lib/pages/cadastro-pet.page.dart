@@ -134,6 +134,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   builder: (context, snapshot) {
                     List<dynamic> listaEspecies =
                         EspecieEntity().toList(snapshot.data);
+
+                    print('listaEspecies: $listaEspecies');
                     return Column(
                       children: <Widget>[
                         Form(
@@ -186,7 +188,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 items: listaEspecies.map((item) {
                                   return DropdownMenuItem(
                                     child: new Text(
-                                      item.descricao,
+                                      item.nome,
                                       style: TextStyle(fontSize: 17),
                                     ),
                                     value: item.id,
@@ -219,7 +221,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 items: listaRacas.map((item) {
                                   return DropdownMenuItem(
                                     child: new Text(
-                                      item.descricao,
+                                      item.nome,
                                       style: TextStyle(fontSize: 17),
                                     ),
                                     value: item.id,
