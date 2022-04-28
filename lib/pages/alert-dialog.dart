@@ -3,6 +3,7 @@ import 'package:health_pets/controllers/animal_controller.dart';
 import 'package:health_pets/controllers/usuario_controller.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
+import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
@@ -109,4 +110,47 @@ animalCompartilhado(BuildContext context) {
           ],
         );
       });
+}
+
+compartilharAnimal(BuildContext context, id) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("Compartilhar Animal"),
+        content: Container(
+          height: 105,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Insira o e-mail com quem deseja compartilhar este animal"),
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                maxLines: 1,
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop();
+            },
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              exibirMensagem(context,
+                  'Enviado e-mail ao usuário com o código para compartilhamento');
+              setarMaterialPageRoute(context, PerfilPetPage(id));
+            },
+            child: const Text(
+              'Confirmar',
+              style: TextStyle(color: ColorTheme.rosa1),
+            ),
+          ),
+        ],
+      );
+    },
+  );
 }
