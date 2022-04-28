@@ -35,7 +35,6 @@ class _VacinaPageState extends State<VacinaPage> {
           backgroundColor: Colors.white,
           title: Text("Vacinas"),
           centerTitle: true,
-          automaticallyImplyLeading: false,
           elevation: 1,
           actions: [
             PopupMenuButton<MenuItemVacina>(
