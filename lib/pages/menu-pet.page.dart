@@ -63,6 +63,6 @@ void onSelected(BuildContext context, MenuItemPet item, dynamic id) {
       confirmarExclusaoAnimal(context, id);
       break;
     case MenuItemsPet.itemCompartilhar:
-      setarMaterialPageRoute(context, PetPage());
+      compartilharAnimal(context, id);
   }
 }
