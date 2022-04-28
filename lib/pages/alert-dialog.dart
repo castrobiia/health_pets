@@ -3,6 +3,7 @@ import 'package:health_pets/controllers/animal_controller.dart';
 import 'package:health_pets/controllers/usuario_controller.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
+import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
@@ -141,7 +142,7 @@ compartilharAnimal(BuildContext context, id) {
             onPressed: () {
               exibirMensagem(context,
                   'Enviado e-mail ao usuário com o código para compartilhamento');
-              setarMaterialPageRoute(context, TabsPage());
+              setarMaterialPageRoute(context, PerfilPetPage(id));
             },
             child: const Text(
               'Confirmar',
