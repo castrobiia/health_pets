@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:health_pets/links/links-pages.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -123,7 +124,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
         title: Text(
           "Editar Pet",
           style: TextStyle(
-            color: Color(0xFFF6BD87),
+            color: ColorTheme.salmao1,
           ),
         ),
       ),
@@ -236,7 +237,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                     child: FloatingActionButton(
                                       child: Icon(Icons
                                           .add_a_photo), //ou upload, add, image
-                                      backgroundColor: Color(0xFFF6BD87),
+                                      backgroundColor: ColorTheme.salmao1,
                                       //cor do ícone
                                       foregroundColor: Colors.white,
                                       onPressed: () {},
@@ -251,7 +252,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                 decoration: InputDecoration(
                                   labelText: "Nome",
                                   labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
+                                    //color: ColorTheme.rosa5,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 17,
                                   ),
@@ -266,7 +267,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                 decoration: InputDecoration(
                                   labelText: "Data de Nascimento",
                                   labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
+                                    //color: ColorTheme.rosa5,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 17,
                                   ),
@@ -289,7 +290,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                 decoration: InputDecoration(
                                   labelText: "Espécie",
                                   labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
+                                    //color: ColorTheme.rosa5,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 17,
                                   ),
@@ -305,7 +306,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                 decoration: InputDecoration(
                                   labelText: "Raça",
                                   labelStyle: TextStyle(
-                                    //color: Color(0xFFCC9396),
+                                    //color: ColorTheme.rosa5,
                                     fontWeight: FontWeight.w400,
                                     fontSize: 17,
                                   ),
@@ -317,7 +318,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                               Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: Color(0xFFF6BD87),
+                                  color: ColorTheme.salmao1,
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(5),
                                   ),

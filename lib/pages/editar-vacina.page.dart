@@ -62,7 +62,7 @@ class EditarVacinaState extends State<EditarVacina> {
                   decoration: InputDecoration(
                     labelText: "Nome da Vacina",
                     labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
+                      //color: ColorTheme.rosa5,
                       fontWeight: FontWeight.w400,
                       fontSize: 17,
                     ),
@@ -78,7 +78,7 @@ class EditarVacinaState extends State<EditarVacina> {
                   decoration: InputDecoration(
                     labelText: "Data da Aplicação",
                     labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
+                      //color: ColorTheme.rosa5,
                       fontWeight: FontWeight.w400,
                       fontSize: 17,
                     ),
@@ -96,7 +96,7 @@ class EditarVacinaState extends State<EditarVacina> {
                   decoration: InputDecoration(
                     labelText: "Lote",
                     labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
+                      //color: ColorTheme.rosa5,
                       fontWeight: FontWeight.w400,
                       fontSize: 17,
                     ),
@@ -112,7 +112,7 @@ class EditarVacinaState extends State<EditarVacina> {
                   decoration: InputDecoration(
                     labelText: "Fabricante",
                     labelStyle: TextStyle(
-                      //color: Color(0xFFCC9396),
+                      //color: ColorTheme.rosa5,
                       fontWeight: FontWeight.w400,
                       fontSize: 17,
                     ),

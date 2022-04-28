@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 
@@ -49,7 +50,7 @@ class CadastroUsuario extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFFF6BD87)),
+                            color: ColorTheme.salmao1),
                       ),
                     ],
                   ),
@@ -63,7 +64,7 @@ class CadastroUsuario extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: "Nome",
                       labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
+                        color: ColorTheme.rosa5,
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
@@ -78,7 +79,7 @@ class CadastroUsuario extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: "E-mail",
                       labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
+                        color: ColorTheme.rosa5,
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
@@ -101,7 +102,7 @@ class CadastroUsuario extends StatelessWidget {
                       ),
                       labelText: "Senha",
                       labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
+                        color: ColorTheme.rosa5,
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
@@ -117,7 +118,7 @@ class CadastroUsuario extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: "Confirmar Senha",
                       labelStyle: TextStyle(
-                          color: Color(0xFFCC9396),
+                          color: ColorTheme.rosa5,
                           fontWeight: FontWeight.w400,
                           fontSize: 17),
                     ),
@@ -140,7 +141,7 @@ class CadastroUsuario extends StatelessWidget {
                   ),
                   Container(
                     width: double.infinity,
-                    decoration: boxDecoration(Color(0xFFCC9396)),
+                    decoration: boxDecoration(ColorTheme.rosa5),
                     child: TextButton(
                       onPressed: () {
                         setarMaterialPageRouteTab(context, TabsPage());

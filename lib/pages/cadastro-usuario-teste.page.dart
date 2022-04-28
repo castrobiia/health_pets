@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:health_pets/widgets/widgets.dart';
@@ -142,7 +143,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                         style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFFF6BD87)),
+                            color: ColorTheme.salmao1),
                       ),
                     ],
                   ),
@@ -155,7 +156,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.name,
                       labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
+                        color: ColorTheme.rosa5,
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
@@ -171,7 +172,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.email,
                       labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
+                        color: ColorTheme.rosa5,
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
@@ -194,7 +195,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                       ),
                       labelText: AppLocalizations.of(context)!.password,
                       labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
+                        color: ColorTheme.rosa5,
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
@@ -211,7 +212,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.confirmPassword,
                       labelStyle: TextStyle(
-                          color: Color(0xFFCC9396),
+                          color: ColorTheme.rosa5,
                           fontWeight: FontWeight.w400,
                           fontSize: 17),
                     ),
@@ -235,7 +236,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                   ),
                   Container(
                     width: double.infinity,
-                    decoration: boxDecoration(Color(0xFFCC9396)),
+                    decoration: boxDecoration(ColorTheme.rosa5),
                     child: TextButton(
                       onPressed: () async {
                         String nome = nomeController.text;
