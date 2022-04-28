@@ -58,9 +58,9 @@ class VacinaLista extends StatelessWidget {
                 VacinaModel vacina = list[index];
                 return Container(
                   child: VacinaCard(
-                    idVacina: vacina.idVacina ?? 0,
-                    nomeVacina: vacina.nomeVacina ?? '',
-                    dataAplicacao: vacina.dataAplicacao ?? '',
+                    idVacina: vacina.id ?? 0,
+                    nomeVacina: vacina.nome ?? '',
+                    dataAplicacao: vacina.data_aplicacao ?? '',
                     fabricante: vacina.fabricante ?? '',
                     lote: vacina.lote ?? '',
                     idAnimal: vacina.idAnimal ?? 0,

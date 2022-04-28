@@ -80,42 +80,42 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
 
     _CadastrarVacinaState(this.idAnimal);
 
-    Future<CadastroVacinaModel?> submitVacina(
-        String nomeVacina,
-        String data_aplicacao,
-        String fabricante,
-        String lote,
-        String id_animal) async {
-      print('id_animal - linha 89: $id_animal');
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String token = await prefs.get('token').toString();
-
-      var headerToken = {
-        "Accept": "application/json",
-        "Authorization": "Bearer ${token}"
-      };
-      final response = await http.post(
-        Uri.https('healthpets.app.br', 'api/vacina/${id_animal}'),
-        headers: headerToken,
-        body: {
-          'nome': nomeVacina,
-          'data_aplicacao': data_aplicacao,
-          'fabricante': fabricante,
-          'lote': lote,
-          'id_animal': id_animal
-        },
-      );
-      var status = response.statusCode;
-      print('status: $status');
-      var dados_vacina = response.body;
-      print('dados_vacina: $dados_vacina');
-      if (status == 200) {
-        exibirMensagem(context, 'Vacina cadastrada com sucesso');
-        setarMaterialPageRoute(context, VacinaPage(this.idAnimal));
-      } else {
-        print("Erro ao cadastrar vacina");
-      }
-    }
+    // Future<CadastroVacinaModel?> submitVacina(
+    //     String nomeVacina,
+    //     String data_aplicacao,
+    //     String fabricante,
+    //     String lote,
+    //     String id_animal) async {
+    //   print('id_animal - linha 89: $id_animal');
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   String token = await prefs.get('token').toString();
+    //
+    //   var headerToken = {
+    //     "Accept": "application/json",
+    //     "Authorization": "Bearer ${token}"
+    //   };
+    //   final response = await http.post(
+    //     Uri.https('healthpets.app.br', 'api/vacina/${id_animal}'),
+    //     headers: headerToken,
+    //     body: {
+    //       'nome': nomeVacina,
+    //       'data_aplicacao': data_aplicacao,
+    //       'fabricante': fabricante,
+    //       'lote': lote,
+    //       'id_animal': id_animal
+    //     },
+    //   );
+    //   var status = response.statusCode;
+    //   print('status: $status');
+    //   var dados_vacina = response.body;
+    //   print('dados_vacina: $dados_vacina');
+    //   if (status == 200) {
+    //     exibirMensagem(context, 'Vacina cadastrada com sucesso');
+    //     setarMaterialPageRoute(context, VacinaPage(this.idAnimal));
+    //   } else {
+    //     print("Erro ao cadastrar vacina");
+    //   }
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -129,22 +129,22 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                 _formKey.currentState!.save();
 
                 String nomeVacina = nomeVacinaController.text;
-                print(nomeVacina);
+                // print(nomeVacina);
                 String data_aplicacao = dataAplicacaoController.text;
-                print(data_aplicacao);
+                // print(data_aplicacao);
                 String fabricante = fabricanteController.text;
-                print(fabricante);
+                // print(fabricante);
                 String lote = loteController.text;
-                print(lote);
+                // print(lote);
                 int id_animal = this.idAnimal;
-                print('idAnimal: ${this.idAnimal}');
+                // print('idAnimal: ${this.idAnimal}');
 
                 var vacina = await VacinaEntity()
                     .createVacina(id_animal, nomeVacina, data_aplicacao,
                         fabricante, lote, id_animal)
                     .then((value) => value);
 
-                print(vacina);
+                // print(vacina);
 
                 // if (await VacinaRepository().postVacina(id_animal, nomeVacina,
                 //         data_aplicacao, fabricante, lote) ==

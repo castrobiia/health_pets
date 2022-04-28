@@ -94,6 +94,14 @@ class Util {
     return dataFormatada;
   }
 
+  formatarDataEn(dataSemFormatacao){
+    var dataFormatada = DateFormat("yyyy/MM/dd")
+        .format(DateTime.parse(dataSemFormatacao))
+        .toString();
+
+    return dataFormatada;
+  }
+
   String textToMd5 (String text) {
     return md5.convert(utf8.encode(text)).toString();
   }
