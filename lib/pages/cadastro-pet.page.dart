@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/http/animal-repository.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
 import 'package:health_pets/pages/tabs.page.dart';
@@ -96,7 +97,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         title: Text(
           "Cadastrar Pet",
           style: TextStyle(
-            color: Color(0xFFF6BD87),
+            color: ColorTheme.salmao1,
           ),
         ),
       ),
@@ -120,7 +121,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                       left: 120,
                       child: FloatingActionButton(
                           child: Icon(Icons.add_a_photo),
-                          backgroundColor: Color(0xFFF6BD87),
+                          backgroundColor: ColorTheme.salmao1,
                           //cor do ícone
                           foregroundColor: Colors.white,
                           onPressed: () {

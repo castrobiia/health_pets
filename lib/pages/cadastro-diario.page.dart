@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 
@@ -57,7 +58,7 @@ class _CadastroDiarioState extends State<CadastroDiario> {
         title: Text(
           "Cadastrar Diário",
           style: TextStyle(
-            color: Color(0xFFF6BD87),
+            color: ColorTheme.salmao1,
           ),
         ),
       ),

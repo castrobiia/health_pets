@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 import '../widgets/widgets.dart';
@@ -19,7 +20,7 @@ class GeraisGastos extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: Color(0xFFF6BD87),
+        backgroundColor: ColorTheme.salmao1,
         //cor do ícone
         foregroundColor: Colors.white,
         onPressed: () {

@@ -53,7 +53,7 @@ class ResetSenha extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.email,
                 labelStyle: TextStyle(
-                  color: Color(0xFFCC9396),
+                  color: ColorTheme.rosa5,
                   fontWeight: FontWeight.w400,
                   fontSize: 17,
                 ),
@@ -65,7 +65,7 @@ class ResetSenha extends StatelessWidget {
             Container(
               height: 60,
               width: double.infinity,
-              decoration: boxDecoration(Color(0xFFCC9396)),
+              decoration: boxDecoration(ColorTheme.rosa5),
               child: TextButton(
                 onPressed: () {
                   SnackBar(
