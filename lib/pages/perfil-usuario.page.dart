@@ -60,7 +60,8 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                       ),
                     );
                   }
-                  final usuario = snapshot.data;
+                  final usuario = snapshot.data["user"];
+                  final qntdAnimais = snapshot.data["animais"];
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -68,17 +69,19 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                       //carregar imagem
                       BoxDecorationImagem(200, "assets/perfil-usuario1.png"),
                       Text(
-                        usuario['name'] ?? '',
+                        usuario['nome'] ?? '',
                         style: TextStyle(
                             fontSize: 23, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 15,
                       ),
-                      setarRowPerfil(AppLocalizations.of(context)!.email, usuario['email'] ?? ''),
+                      setarRowPerfil(AppLocalizations.of(context)!.email,
+                          usuario['email'] ?? ''),
                       divider(),
                       // alterar
-                      setarRowPerfil(AppLocalizations.of(context)!.animals, "5"),
+                      setarRowPerfil(AppLocalizations.of(context)!.animals,
+                          qntdAnimais.toString()),
                       divider(),
                     ],
                   );
