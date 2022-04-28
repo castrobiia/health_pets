@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../http/vacina-repository.dart';
 import '../themes/color_theme.dart';
 
 class CadastrarVacina extends StatefulWidget {
@@ -44,11 +45,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         },
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Selecione uma data'),
-        ),
-      );
+      exibirMensagem(context, 'Selecione uma data');
     }
 
     dataAplicacaoController.text =
@@ -142,25 +139,27 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                 int id_animal = this.idAnimal;
                 print('idAnimal: ${this.idAnimal}');
 
-                // VacinaEntity().createVacina(nomeVacina, data_aplicacao,
-                //     fabricante, lote, this.idAnimal);
+                if (await VacinaRepository().postVacina(id_animal, nomeVacina,
+                        data_aplicacao, fabricante, lote) ==
+                    '200') {}
 
-                print(VacinaEntity()
-                    .createVacina(context, nomeVacina, data_aplicacao,
-                        fabricante, lote, this.idAnimal)
-                    .then((value) => value));
-                // CadastroVacinaModel dadosVacina = (await submitVacina(
-                //     nomeVacina,
-                //     data_aplicacao,
-                //     fabricante,
-                //     lote,
-                //     id_animal)) as CadastroVacinaModel;
+                setarMaterialPageRoute(context, VacinaPage(id_animal));
 
-                // setState(
-                //   () {
-                //     _cadastrarVacinaPage = dadosVacina;
-                //   },
-                //);
+                print(
+                    'VacinaEntity: ${VacinaEntity().createVacina(context, nomeVacina, data_aplicacao, fabricante, lote, this.idAnimal).then((value) => value)}');
+
+                //   CadastroVacinaModel dadosVacina = (await submitVacina(
+                //       nomeVacina,
+                //       data_aplicacao,
+                //       fabricante,
+                //       lote,
+                //       idAnimal)) as CadastroVacinaModel;
+
+                //   setState(
+                //     () {
+                //       _cadastrarVacinaPage = dadosVacina;
+                //     },
+                //   );
               }
             },
             child: const Text("Salvar"),
