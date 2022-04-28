@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/menu-pet-compartilhado.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/cadastro-pet.page.dart';
 import 'package:health_pets/widgets/pet/pet-list.widget.dart';
@@ -27,6 +28,14 @@ class PetPage extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.pets),
         centerTitle: true,
         elevation: 1,
+        actions: [
+          PopupMenuButton<MenuItemPetCompartilhado>(
+            onSelected: (item) => onSelected(context, item),
+            itemBuilder: (context) => [
+              ...MenuItemsPetCompartilhado.items.map(buildItem).toList(),
+            ],
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -3,7 +3,9 @@ import 'package:health_pets/controllers/animal_controller.dart';
 import 'package:health_pets/controllers/usuario_controller.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
+import 'package:health_pets/pages/tabs.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/repository/animal-repository.dart';
@@ -61,6 +63,48 @@ confirmarExclusaoUsuario(BuildContext context) {
                 });
               },
               child: const Text('Sim'),
+            ),
+          ],
+        );
+      });
+}
+
+animalCompartilhado(BuildContext context) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Animal Compartilhado"),
+          content: Container(
+            height: 90,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Insira o código enviado por e-mail"),
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  maxLength: 6,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                exibirMensagem(context, 'Animal compartilhado com sucesso');
+                setarMaterialPageRoute(context, TabsPage());
+              },
+              child: const Text(
+                'Confirmar',
+                style: TextStyle(color: ColorTheme.rosa1),
+              ),
             ),
           ],
         );
