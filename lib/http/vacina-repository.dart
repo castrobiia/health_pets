@@ -27,7 +27,7 @@ class VacinaRepository {
     var vacinas = jsonDecode(response.body);
   }
 
-  postVacina(int id_animal) async {
+  postVacina(int id_animal, String nomeVacina, String data_aplicacao, String fabricante, String lote) async {
     String url = 'https://www.healthpets.app.br/api/vacina/${id_animal}';
 
     print('URL POST VACINA: $url');
