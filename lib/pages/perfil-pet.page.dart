@@ -93,7 +93,7 @@ class _PerfilPetState extends State<PerfilPet> {
                         builder: (context, snapshot) {
                           final especie = snapshot.data;
                           return setarRowPerfil(
-                              "Espécie", especie['descricao'] ?? '');
+                              "Espécie", especie['nome'] ?? '');
                         },
                       ),
                       divider(),
