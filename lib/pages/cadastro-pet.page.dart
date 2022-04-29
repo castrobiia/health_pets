@@ -208,6 +208,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 height: 10,
                               ),
                               DropdownButtonFormField(
+                                isExpanded: true,
                                 hint: Text("Raça"),
                                 validator: (value) {
                                   if (value == null) {
