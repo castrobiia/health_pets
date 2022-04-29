@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/menu-calendario.page.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendario extends StatefulWidget {
@@ -9,9 +10,16 @@ class Calendario extends StatefulWidget {
 }
 
 class _CalendarioState extends State<Calendario> {
+  //CalendarController _calendarController;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+
+  @override
+  void initState() {
+    super.initState();
+    //_calendarController = CalendarController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +30,14 @@ class _CalendarioState extends State<Calendario> {
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 1,
+        actions: [
+          PopupMenuButton<MenuItemCalendario>(
+            onSelected: (item) => onSelected(context, item),
+            itemBuilder: (context) => [
+              ...MenuItemsCalendario.items.map(buildItem).toList(),
+            ],
+          ),
+        ],
       ),
       body: Container(
         color: Colors.white,
