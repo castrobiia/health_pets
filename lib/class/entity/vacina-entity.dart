@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
 import 'package:health_pets/class/api/header.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/vacina-model.dart';
@@ -22,7 +23,7 @@ class VacinaEntity {
     listaVacinas = vacinas;
   }
 
-  Future<void> createVacina(context, String? nomeVacina, String? dataAplicacao,
+  Future<VacinaModel> createVacina(context, String? nomeVacina, String? dataAplicacao,
       String? fabricante, String? lote, int? id_animal) async {
     String? _nomeVacina = nomeVacina;
     String? _dataAplicacao = dataAplicacao;
@@ -39,17 +40,22 @@ class VacinaEntity {
       'id_animal': _id_animal,
     });
 
-    if (_id_animal != null) {
-      url = 'https://www.healthpets.app.br/api/vacina/${_id_animal}';
-    }
+    // if (_id_animal != null) {
+    //   url = 'https://www.healthpets.app.br/api/vacina/${_id_animal}';
+    // }
+
+    url = 'https://www.healthpets.app.br/api/vacina/';
 
     final response =
         await http.post(Uri.parse(url), headers: Header().getHeader());
 
     var vacinas = jsonDecode(response.body);
     listaVacinas = vacinas;
-    if (response.statusCode == 200) {
-      return setarMaterialPageRoute(context, VacinaPage(_id_animal!));
-    }
+    debugPrint('vacina entity 2: $vacinas');
+    print('response body: ${response.body}');
+    //if (response.statusCode == 200) {
+      //return setarMaterialPageRoute(context, VacinaPage(_id_animal!));
+      return vacinas;
+    //}
   }
 }

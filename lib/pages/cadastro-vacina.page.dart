@@ -139,14 +139,21 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                 int id_animal = this.idAnimal;
                 print('idAnimal: ${this.idAnimal}');
 
-                if (await VacinaRepository().postVacina(id_animal, nomeVacina,
-                        data_aplicacao, fabricante, lote) ==
-                    '200') {}
+                var vacina = await VacinaEntity()
+                    .createVacina(id_animal, nomeVacina, data_aplicacao,
+                        fabricante, lote, id_animal)
+                    .then((value) => value);
 
-                setarMaterialPageRoute(context, VacinaPage(id_animal));
+                print(vacina);
 
-                print(
-                    'VacinaEntity: ${VacinaEntity().createVacina(context, nomeVacina, data_aplicacao, fabricante, lote, this.idAnimal).then((value) => value)}');
+                // if (await VacinaRepository().postVacina(id_animal, nomeVacina,
+                //         data_aplicacao, fabricante, lote) ==
+                //     '200') {}
+
+                //  setarMaterialPageRoute(context, VacinaPage(id_animal));
+
+                // print(
+                //     'VacinaEntity: ${VacinaEntity().createVacina(context, nomeVacina, data_aplicacao, fabricante, lote, this.idAnimal).then((value) => value)}');
 
                 //   CadastroVacinaModel dadosVacina = (await submitVacina(
                 //       nomeVacina,
@@ -162,7 +169,21 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                 //   );
               }
             },
-            child: const Text("Salvar"),
+            child: const Text(
+              "Salvar",
+              style: TextStyle(
+                color: ColorTheme.vermelho1,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            //     style: ButtonStyle(
+            //       padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+            // foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+            // shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            //   RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(18.0),
+            //     side: BorderSide(color: Colors.white)
+            //     ),
           ),
         ],
         title: Text(

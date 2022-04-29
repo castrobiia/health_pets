@@ -132,10 +132,9 @@ validarCampo(value) {
   return null;
 }
 
-void autenticacao(BuildContext context) async {
-  var token = Token().getToken();
-
-  if (token == null || token == '') {
-    setarMaterialPageRoute(context, LoginPage());
+autenticacao(BuildContext context) async {
+  var token = await Token().getToken().then((token)=>token ?? 0);
+  if (token.toString().compareTo("null") == 0) {
+      Navigator.pushNamed(context, '/login');
   }
 }
