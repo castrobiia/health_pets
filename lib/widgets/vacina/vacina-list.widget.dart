@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/vacina-entity.dart';
-import 'package:health_pets/models/vacina-model.dart';
 
 import 'vacina-card.widget.dart';
 
@@ -11,14 +10,8 @@ class VacinaLista extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var id_animal;
-
-    //List vacinas = [];
 
     VacinaEntity().getVacina(idAnimal);
-
-    print('print da instância vacina: ${VacinaEntity().getVacina(idAnimal)}');
-    print('idAnimal: $idAnimal');
 
     return Scaffold(
       body: FutureBuilder<dynamic>(

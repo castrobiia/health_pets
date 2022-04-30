@@ -16,10 +16,7 @@ class VacinaEntity {
     final response =
         await http.post(Uri.parse(url), headers: Header().getHeader());
 
-    print(response.body);
-
     return (jsonDecode(response.body)) as List;
-    //listaVacinas = vacinas;
   }
 
   Future<int> createVacina(context, String? nomeVacina, String? dataAplicacao,
@@ -30,15 +27,6 @@ class VacinaEntity {
     String? _lote = lote;
     int? _id_animal = id_animal;
 
-    // VacinaModel vacina = VacinaModel.fromJson({
-    //   'id': 0,
-    //   'nome': _nomeVacina,
-    //   'dataAplicacao': _dataAplicacao,
-    //   'fabricante': _fabricante,
-    //   'lote': _lote,
-    //   'id_animal': _id_animal,
-    // });
-
     VacinaModel vacina = new VacinaModel();
 
     vacina.nome = _nomeVacina;
@@ -47,28 +35,11 @@ class VacinaEntity {
     vacina.lote = _lote;
     vacina.idAnimal = _id_animal;
 
-    // print("VacinaEntity Vacina criada: ${vacina.toString()}");
-    //
-    // // if (_id_animal != null) {
-    // //   url = 'https://www.healthpets.app.br/api/vacina/${_id_animal}';
-    // // }
-    //
     url = 'https://www.healthpets.app.br/api/vacina';
-    print(url);
-    //
+
     final response = await http.post(Uri.parse(url),
         headers: Header().getHeader(), body: jsonEncode(vacina.toJson()));
 
-    print(response.body);
-    //
-    // var vacinas = jsonDecode(response.body);
-    // listaVacinas = vacinas;
-    // debugPrint('vacina entity 2: $vacinas');
-    // print('response body: ${response.body}');
-    // //if (response.statusCode == 200) {
-    //   //return setarMaterialPageRoute(context, VacinaPage(_id_animal!));
-    //   return vacinas;
-    // //}
     return response.statusCode;
   }
 }
