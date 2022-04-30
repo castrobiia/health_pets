@@ -139,6 +139,9 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                 int id_animal = this.idAnimal;
                 // print('idAnimal: ${this.idAnimal}');
 
+                String data_aplicacao_teste = dataAplicacaoController.text;
+                print('teste: $data_aplicacao_teste');
+
                 var vacina = await VacinaEntity()
                     .createVacina(id_animal, nomeVacina, data_aplicacao,
                         fabricante, lote, id_animal)
