@@ -5,10 +5,7 @@ import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-vacina-model.dart';
 import 'package:health_pets/pages/vacina.page.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
-import '../http/vacina-repository.dart';
 import '../themes/color_theme.dart';
 
 class CadastrarVacina extends StatefulWidget {
