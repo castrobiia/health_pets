@@ -130,7 +130,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
 
                 String nomeVacina = nomeVacinaController.text;
                 // print(nomeVacina);
-                String data_aplicacao = dataAplicacaoController.text;
+                String data_aplicacao = dataAplicacaoTesteController.text;
                 // print(data_aplicacao);
                 String fabricante = fabricanteController.text;
                 // print(fabricante);
@@ -147,29 +147,9 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                         fabricante, lote, id_animal)
                     .then((value) => value);
 
-                // print(vacina);
-
-                // if (await VacinaRepository().postVacina(id_animal, nomeVacina,
-                //         data_aplicacao, fabricante, lote) ==
-                //     '200') {}
-
-                //  setarMaterialPageRoute(context, VacinaPage(id_animal));
-
-                // print(
-                //     'VacinaEntity: ${VacinaEntity().createVacina(context, nomeVacina, data_aplicacao, fabricante, lote, this.idAnimal).then((value) => value)}');
-
-                //   CadastroVacinaModel dadosVacina = (await submitVacina(
-                //       nomeVacina,
-                //       data_aplicacao,
-                //       fabricante,
-                //       lote,
-                //       idAnimal)) as CadastroVacinaModel;
-
-                //   setState(
-                //     () {
-                //       _cadastrarVacinaPage = dadosVacina;
-                //     },
-                //   );
+                if (vacina == 200) {
+                  setarMaterialPageRoute(context, VacinaPage(id_animal));
+                }
               }
             },
             child: const Text(
@@ -179,14 +159,16 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            //     style: ButtonStyle(
-            //       padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
-            // foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
-            // shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            //   RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.circular(18.0),
-            //     side: BorderSide(color: Colors.white)
-            //     ),
+            // style: ButtonStyle(
+            //   padding:
+            //       MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
+            //   foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+            //   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            //     RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(18.0),
+            //         side: BorderSide(color: Colors.pink)),
+            //   ),
+            // ),
           ),
         ],
         title: Text(

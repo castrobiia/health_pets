@@ -55,15 +55,15 @@ class VacinaLista extends StatelessWidget {
             return ListView.builder(
               itemCount: list.length,
               itemBuilder: (context, index) {
-                VacinaModel vacina = list[index];
+                var vacina = list[index];
                 return Container(
                   child: VacinaCard(
-                    idVacina: vacina.id ?? 0,
-                    nomeVacina: vacina.nome ?? '',
-                    dataAplicacao: vacina.data_aplicacao ?? '',
-                    fabricante: vacina.fabricante ?? '',
-                    lote: vacina.lote ?? '',
-                    idAnimal: vacina.idAnimal ?? 0,
+                    idVacina: vacina['id'] ?? 0,
+                    nomeVacina: vacina['nome'] ?? '',
+                    dataAplicacao: vacina['data_aplicacao'] ?? '',
+                    fabricante: vacina['fabricante'] ?? '',
+                    lote: vacina['lote'] ?? '',
+                    idAnimal: vacina['idAnimal'] ?? 0,
                   ),
                 );
               },

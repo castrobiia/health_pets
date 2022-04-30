@@ -1,18 +1,14 @@
 import 'dart:convert';
 
-import 'package:flutter/widgets.dart';
 import 'package:health_pets/class/api/header.dart';
-import 'package:health_pets/class/util.dart';
-import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/vacina-model.dart';
-import 'package:health_pets/pages/vacina.page.dart';
 import 'package:http/http.dart' as http;
 
 class VacinaEntity {
   List listaVacinas = [];
   var url = 'https://www.healthpets.app.br/api/vacinas';
 
-  Future<VacinaModel?> getVacina(int? id) async {
+  Future<List?> getVacina(int? id) async {
     if (id != null) {
       url = 'https://www.healthpets.app.br/api/vacina/${id}';
     }
@@ -20,16 +16,14 @@ class VacinaEntity {
     final response =
         await http.post(Uri.parse(url), headers: Header().getHeader());
 
-    var vacinas = jsonDecode(response.body);
-    listaVacinas = vacinas;
+    print(response.body);
+
+    return (jsonDecode(response.body)) as List;
+    //listaVacinas = vacinas;
   }
 
-  Future<VacinaModel> createVacina(context, String? nomeVacina, String? dataAplicacao,
+  Future<int> createVacina(context, String? nomeVacina, String? dataAplicacao,
       String? fabricante, String? lote, int? id_animal) async {
-
-
-    print("Passei aqui");
-
     String? _nomeVacina = nomeVacina;
     String? _dataAplicacao = dataAplicacao;
     String? _fabricante = fabricante;
@@ -45,10 +39,7 @@ class VacinaEntity {
     //   'id_animal': _id_animal,
     // });
 
-
     VacinaModel vacina = new VacinaModel();
-
-
 
     vacina.nome = _nomeVacina;
     vacina.data_aplicacao = _dataAplicacao;
@@ -65,8 +56,8 @@ class VacinaEntity {
     url = 'https://www.healthpets.app.br/api/vacina';
     print(url);
     //
-    final response =
-        await http.post(Uri.parse(url), headers: Header().getHeader(), body: jsonEncode(vacina.toJson()));
+    final response = await http.post(Uri.parse(url),
+        headers: Header().getHeader(), body: jsonEncode(vacina.toJson()));
 
     print(response.body);
     //
@@ -78,6 +69,6 @@ class VacinaEntity {
     //   //return setarMaterialPageRoute(context, VacinaPage(_id_animal!));
     //   return vacinas;
     // //}
-    return new VacinaModel();
+    return response.statusCode;
   }
 }
