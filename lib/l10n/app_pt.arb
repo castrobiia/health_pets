@@ -2,7 +2,7 @@
     "invalidEmail": "E-mail inválido",
     "password": "Senha",
     "invalidPassword": "Senha inválida",
-    "login": "Conecte-se",
+    "login": "Entrar",
     "forgotPassword": "Esqueceu a senha?",
     "createAccount": "Criar conta",
     "@password":{
