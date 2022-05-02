@@ -155,8 +155,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                 if (snapshot.hasError) {
                   // return: show error widget
                   return Center(
-                      child:
-                          Container(child: Text('Erro ao carregar os dados')));
+                      child: Container(child: erroCarregarDados(context)));
                 }
 
                 final animal = snapshot.data;
@@ -183,8 +182,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                     if (snapshot.hasError) {
                       // return: show error widget
                       return Center(
-                          child: Container(
-                              child: Text('Erro ao carregar os dados')));
+                          child: Container(child: erroCarregarDados(context)));
                     }
 
                     final especie = snapshot.data;
@@ -210,7 +208,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                             // return: show error widget
                             return Center(
                                 child: Container(
-                                    child: Text('Erro ao carregar os dados')));
+                                    child: erroCarregarDados(context)));
                           }
 
                           final raca = snapshot.data;

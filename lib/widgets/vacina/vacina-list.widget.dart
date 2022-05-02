@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/vacina-entity.dart';
+import 'package:health_pets/widgets/widgets.dart';
 
 import 'vacina-card.widget.dart';
 
@@ -10,7 +11,6 @@ class VacinaLista extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     VacinaEntity().getVacina(idAnimal);
 
     return Scaffold(
@@ -27,7 +27,7 @@ class VacinaLista extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(
               child: Container(
-                child: Text('Erro ao carregar os dados'),
+                child: erroCarregarDados(context),
               ),
             );
           }
