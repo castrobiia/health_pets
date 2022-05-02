@@ -35,7 +35,7 @@ class CustomFirebaseMessaging{
   getTokenFirebase() async {
     // debugPrint(await FirebaseMessaging.instance.getToken());
     var device = await FirebaseMessaging.instance.getToken();
-
+    print('Firebase device Token : $device');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('device_token', device!);
   }
