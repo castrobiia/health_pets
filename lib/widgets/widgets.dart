@@ -133,8 +133,18 @@ validarCampo(value) {
 }
 
 autenticacao(BuildContext context) async {
-  var token = await Token().getToken().then((token)=>token ?? 0);
+  var token = await Token().getToken().then((token) => token ?? 0);
   if (token.toString().compareTo("null") == 0) {
-      Navigator.pushNamed(context, '/login');
+    Navigator.pushNamed(context, '/login');
   }
+}
+
+erroCarregarDados(BuildContext context) {
+  return Text(
+    'Erro ao carregar os dados',
+    style: TextStyle(
+      fontSize: 22,
+      fontWeight: FontWeight.w300,
+    ),
+  );
 }

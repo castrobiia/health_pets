@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/http/animal-repository.dart';
 import 'package:health_pets/models/animal-model.dart';
 import 'package:health_pets/widgets/pet/pet-card.widget.dart';
+import 'package:health_pets/widgets/widgets.dart';
 
 class PetLista extends StatelessWidget {
   const PetLista({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class PetLista extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(
               child: Container(
-                child: Text('Erro ao carregar os dados'),
+                child: erroCarregarDados(context),
               ),
             );
           }

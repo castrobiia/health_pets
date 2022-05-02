@@ -51,7 +51,7 @@ class _PerfilPetState extends State<PerfilPet> {
                     // return: show error widget
                     return Center(
                       child: Container(
-                        child: Text('Erro ao carregar os dados'),
+                        child: erroCarregarDados(context),
                       ),
                     );
                   }
