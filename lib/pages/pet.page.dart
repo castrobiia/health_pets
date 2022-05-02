@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/themes/color_theme.dart';
+import 'package:health_pets/pages/menu-pet-compartilhado.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/cadastro-pet.page.dart';
 import 'package:health_pets/widgets/pet/pet-list.widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PetPage extends StatelessWidget {
   const PetPage({Key? key}) : super(key: key);
@@ -13,7 +16,7 @@ class PetPage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: Color(0xFFF6BD87),
+        backgroundColor: ColorTheme.salmao1,
         //cor do ícone
         foregroundColor: Colors.white,
         onPressed: () {
@@ -23,9 +26,17 @@ class PetPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        title: Text("Pets"),
+        title: Text(AppLocalizations.of(context)!.pets),
         centerTitle: true,
         elevation: 1,
+        actions: [
+          PopupMenuButton<MenuItemPetCompartilhado>(
+            onSelected: (item) => onSelected(context, item),
+            itemBuilder: (context) => [
+              ...MenuItemsPetCompartilhado.items.map(buildItem).toList(),
+            ],
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

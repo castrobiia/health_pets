@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/usuario-model-teste.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'login.page.dart';
 
@@ -15,7 +17,7 @@ class CadastroUsuarioTeste extends StatefulWidget {
   State<CadastroUsuarioTeste> createState() => _CadastroUsuarioTesteState();
 }
 
-Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
+Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String nome,
     String email, String password, String password_confirmation) async {
   Map<String, String> requestHeaders = {
     'Content-type': 'application/json',
@@ -23,7 +25,7 @@ Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
   };
 
   final requestBody = jsonEncode({
-    'name': name,
+    'nome': nome,
     'email': email,
     'password': password,
     'password_confirmation': password_confirmation,
@@ -37,11 +39,11 @@ Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
 
   if (list['errors'] != null) {
     var msg = '';
-    if (list['errors']["name"] != null || list['errors']["name"] == "") {
+    if (list['errors']["nome"] != null || list['errors']["nome"] == "") {
       msg += '\n' +
-          list['errors']["name"]
+          list['errors']["nome"]
               .toString()
-              .substring(1, list['errors']["name"].toString().length - 1) +
+              .substring(1, list['errors']["nome"].toString().length - 1) +
           '\n';
     }
     if (list['errors']["email"] != null || list['errors']["email"] == "") {
@@ -65,6 +67,7 @@ Future<UsuarioModelTeste?> submitUsuario(BuildContext context, String name,
 
     exibirMensagem(context, msg);
   } else {
+    exibirMensagem(context, list['message']);
     setarMaterialPageRouteTab(context, LoginPage());
   }
 }
@@ -75,8 +78,26 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Informações sobre a senha"),
-            content: Text("Teste 2"),
+            title: Text(AppLocalizations.of(context)!.information),
+            content: Container(
+              height: 160,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("A senha deve conter, no mínimo:"),
+                  SizedBox(height: 15),
+                  Text('- 1 letra maiúscula'),
+                  SizedBox(height: 7),
+                  Text('- 1 letra minúscula'),
+                  SizedBox(height: 7),
+                  Text('- 1 número'),
+                  SizedBox(height: 7),
+                  Text('- 1 caractere especial'),
+                  SizedBox(height: 7),
+                  Text('- 8 caracteres'),
+                ],
+              ),
+            ),
             actions: <Widget>[
               IconButton(
                   onPressed: () {
@@ -118,11 +139,11 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        "Criar Conta",
+                        AppLocalizations.of(context)!.createAccount,
                         style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFFF6BD87)),
+                            color: ColorTheme.salmao1),
                       ),
                     ],
                   ),
@@ -133,9 +154,9 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     autofocus: false,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      labelText: "Nome",
+                      labelText: AppLocalizations.of(context)!.name,
                       labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
+                        color: ColorTheme.rosa5,
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
@@ -149,9 +170,9 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     autofocus: false,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      labelText: "E-mail",
+                      labelText: AppLocalizations.of(context)!.email,
                       labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
+                        color: ColorTheme.rosa5,
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
@@ -172,9 +193,9 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                         },
                         icon: Icon(Icons.info),
                       ),
-                      labelText: "Senha",
+                      labelText: AppLocalizations.of(context)!.password,
                       labelStyle: TextStyle(
-                        color: Color(0xFFCC9396),
+                        color: ColorTheme.rosa5,
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                       ),
@@ -189,9 +210,9 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                     keyboardType: TextInputType.text,
                     obscureText: true,
                     decoration: InputDecoration(
-                      labelText: "Confirmar Senha",
+                      labelText: AppLocalizations.of(context)!.confirmPassword,
                       labelStyle: TextStyle(
-                          color: Color(0xFFCC9396),
+                          color: ColorTheme.rosa5,
                           fontWeight: FontWeight.w400,
                           fontSize: 17),
                     ),
@@ -206,7 +227,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                       bottom: 15,
                     ),
                     child: Text(
-                      "Ao continuar, estou de acordo com as Termos de Uso e Políticas de Privacidade do Health Pets.",
+                      AppLocalizations.of(context)!.term,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -215,7 +236,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                   ),
                   Container(
                     width: double.infinity,
-                    decoration: boxDecoration(Color(0xFFCC9396)),
+                    decoration: boxDecoration(ColorTheme.rosa5),
                     child: TextButton(
                       onPressed: () async {
                         String nome = nomeController.text;
@@ -224,15 +245,28 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                         String confirmacaoSenha =
                             confirmacaoSenhaController.text;
 
-                        UsuarioModelTeste dadosUsuario = (await submitUsuario(
-                                context, nome, email, senha, confirmacaoSenha))
-                            as UsuarioModelTeste;
+                        RegExp senhaExp = new RegExp(
+                          r"^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
+                          caseSensitive: true,
+                        );
+                        bool resultado = senhaExp.hasMatch(senha);
 
-                        setState(() {
-                          _usuarioModelTeste = dadosUsuario;
-                        });
+                        if (resultado) {
+                          UsuarioModelTeste dadosUsuario = (await submitUsuario(
+                              context,
+                              nome,
+                              email,
+                              senha,
+                              confirmacaoSenha)) as UsuarioModelTeste;
+                          setState(() {
+                            _usuarioModelTeste = dadosUsuario;
+                          });
+                        } else {
+                          exibirMensagem(context,
+                              'A senha não cumpre os requisitos. Para saber mais, clique no ícone de informação no campo Senha.');
+                        }
                       },
-                      child: textBotao("Salvar"),
+                      child: textBotao(AppLocalizations.of(context)!.save),
                     ),
                   ),
                 ],

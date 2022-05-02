@@ -1,12 +1,11 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/http/animal-repository.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
 import 'package:health_pets/pages/tabs.page.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -98,7 +97,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         title: Text(
           "Cadastrar Pet",
           style: TextStyle(
-            color: Color(0xFFF6BD87),
+            color: ColorTheme.salmao1,
           ),
         ),
       ),
@@ -122,7 +121,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                       left: 120,
                       child: FloatingActionButton(
                           child: Icon(Icons.add_a_photo),
-                          backgroundColor: Color(0xFFF6BD87),
+                          backgroundColor: ColorTheme.salmao1,
                           //cor do ícone
                           foregroundColor: Colors.white,
                           onPressed: () {
@@ -136,6 +135,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   builder: (context, snapshot) {
                     List<dynamic> listaEspecies =
                         EspecieEntity().toList(snapshot.data);
+
+                    print('listaEspecies: $listaEspecies');
                     return Column(
                       children: <Widget>[
                         Form(
@@ -188,7 +189,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 items: listaEspecies.map((item) {
                                   return DropdownMenuItem(
                                     child: new Text(
-                                      item.descricao,
+                                      item.nome,
                                       style: TextStyle(fontSize: 17),
                                     ),
                                     value: item.id,
@@ -207,6 +208,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 height: 10,
                               ),
                               DropdownButtonFormField(
+                                isExpanded: true,
                                 hint: Text("Raça"),
                                 validator: (value) {
                                   if (value == null) {
@@ -221,7 +223,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 items: listaRacas.map((item) {
                                   return DropdownMenuItem(
                                     child: new Text(
-                                      item.descricao,
+                                      item.nome,
                                       style: TextStyle(fontSize: 17),
                                     ),
                                     value: item.id,

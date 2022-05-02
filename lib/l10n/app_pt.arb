@@ -3,8 +3,21 @@
     "password": "Senha",
     "invalidPassword": "Senha inválida",
     "login": "Entrar",
-    "forgotPassword": "Esqueceu a senha?",
+    "forgotPassword": "Esqueceu sua senha?",
     "createAccount": "Criar conta",
+    "name": "Nome",
+    "confirmPassword": "Confirmar senha",
+    "save": "Salvar",
+    "term": "Ao continuar, concordo com os Termos de Uso e Política de Privacidade da Health Pets.",
+    "email": "E-mail",
+    "information": "Informações sobre a senha",
+    "informationRecovery": "Informe seu e-mail cadastrado, em instantes enviaremos um link com as instruções para a criação de uma nova senha.",
+    "send": "Enviar",
+    "emailSent": "E-mail enviado com sucesso!",
+    "myProfile": "Meu Perfil",
+    "errorLoading": "Erro ao carregar os dados",
+    "animals": "Animais",
+    "pets": "Animais de estimação",
     "@password":{
         "description": "Bem-vindo ao HealthPets!"
     }

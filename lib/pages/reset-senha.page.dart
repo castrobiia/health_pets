@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/login.page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResetSenha extends StatelessWidget {
   const ResetSenha({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class ResetSenha extends StatelessWidget {
               child: Image.asset("assets/reset-password.png"),
             ),
             Text(
-              "Esqueceu sua senha?",
+              AppLocalizations.of(context)!.forgotPassword,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 32,
@@ -36,7 +37,7 @@ class ResetSenha extends StatelessWidget {
               height: 25,
             ),
             Text(
-              "Informe seu e-mail cadastrado, em instantes enviaremos um link com as instruções para a criação de uma nova senha.",
+              AppLocalizations.of(context)!.informationRecovery,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,
@@ -50,9 +51,9 @@ class ResetSenha extends StatelessWidget {
               autofocus: false,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                labelText: "E-mail",
+                labelText: AppLocalizations.of(context)!.email,
                 labelStyle: TextStyle(
-                  color: Color(0xFFCC9396),
+                  color: ColorTheme.rosa5,
                   fontWeight: FontWeight.w400,
                   fontSize: 17,
                 ),
@@ -64,7 +65,7 @@ class ResetSenha extends StatelessWidget {
             Container(
               height: 60,
               width: double.infinity,
-              decoration: boxDecoration(Color(0xFFCC9396)),
+              decoration: boxDecoration(ColorTheme.rosa5),
               child: TextButton(
                 onPressed: () {
                   SnackBar(
@@ -76,14 +77,14 @@ class ResetSenha extends StatelessWidget {
                           width: 20,
                         ),
                         Expanded(
-                          child: Text("E-mail enviado com sucesso!"),
+                          child: Text(AppLocalizations.of(context)!.emailSent),
                         ),
                       ],
                     ),
                   );
                   setarMaterialPageRoute(context, LoginPage());
                 },
-                child: textBotao("Enviar"),
+                child: textBotao(AppLocalizations.of(context)!.send),
               ),
             ),
           ],

@@ -67,18 +67,19 @@ class _PerfilPetState extends State<PerfilPet> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                        Container(
-                            width: 200,
-                            height: 200,
-                            margin: EdgeInsets.only(top: 15, left: 10),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: FileImage(File(image!.path)) as ImageProvider ,
-                                ),
-                              ),
+                      Container(
+                        width: 200,
+                        height: 200,
+                        margin: EdgeInsets.only(top: 15, left: 10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image:
+                                FileImage(File(image!.path)) as ImageProvider,
+                          ),
                         ),
+                      ),
                       Text(
                         animal['nome'],
                         style: TextStyle(
@@ -93,7 +94,7 @@ class _PerfilPetState extends State<PerfilPet> {
                         builder: (context, snapshot) {
                           final especie = snapshot.data;
                           return setarRowPerfil(
-                              "Espécie", especie['descricao'] ?? '');
+                              "Espécie", especie['nome'] ?? '');
                         },
                       ),
                       divider(),

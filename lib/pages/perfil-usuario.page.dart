@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/pages/menu-usuario.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PerfilUsuario extends StatefulWidget {
   const PerfilUsuario({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: Text("Meu Perfil"),
+        title: Text(AppLocalizations.of(context)!.myProfile),
         elevation: 1,
         centerTitle: true,
         actions: [
@@ -55,11 +56,12 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                   if (snapshot.hasError) {
                     return Center(
                       child: Container(
-                        child: Text('Erro ao carregar os dados'),
+                        child: Text(AppLocalizations.of(context)!.errorLoading),
                       ),
                     );
                   }
-                  final usuario = snapshot.data;
+                  final usuario = snapshot.data["user"];
+                  final qntdAnimais = snapshot.data["animais"];
 
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -67,17 +69,19 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                       //carregar imagem
                       BoxDecorationImagem(200, "assets/perfil-usuario1.png"),
                       Text(
-                        usuario['name'] ?? '',
+                        usuario['nome'] ?? '',
                         style: TextStyle(
                             fontSize: 23, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 15,
                       ),
-                      setarRowPerfil("Email", usuario['email'] ?? ''),
+                      setarRowPerfil(AppLocalizations.of(context)!.email,
+                          usuario['email'] ?? ''),
                       divider(),
                       // alterar
-                      setarRowPerfil("Animais", "5"),
+                      setarRowPerfil(AppLocalizations.of(context)!.animals,
+                          qntdAnimais.toString()),
                       divider(),
                     ],
                   );

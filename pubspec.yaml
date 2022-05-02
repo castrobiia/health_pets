@@ -57,6 +57,7 @@ dependencies:
   fluttertoast: ^8.0.9
   intl: ^0.17.0
   back_button_interceptor: ^5.0.2
+  table_calendar: ^3.0.5
 
 
 dev_dependencies:

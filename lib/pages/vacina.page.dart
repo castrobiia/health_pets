@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/widgets/vacina/vacina-list.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/cadastro-vacina.page.dart';
 import 'package:health_pets/pages/menu-vacina.page.dart';
-import 'package:health_pets/widgets/vacina/tabela-vacina.widget.dart';
 
 import '../themes/color_theme.dart';
 
@@ -35,7 +35,6 @@ class _VacinaPageState extends State<VacinaPage> {
           backgroundColor: Colors.white,
           title: Text("Vacinas"),
           centerTitle: true,
-          automaticallyImplyLeading: false,
           elevation: 1,
           actions: [
             PopupMenuButton<MenuItemVacina>(
@@ -52,7 +51,7 @@ class _VacinaPageState extends State<VacinaPage> {
             Expanded(
               child: Container(
                 color: Colors.white,
-                child: TabelaVacina(),
+                child: VacinaLista(id),
               ),
             ),
           ],

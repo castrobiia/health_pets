@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:health_pets/pages/menu-calendario.page.dart';
+import 'package:table_calendar/table_calendar.dart';
 
-class CalendarioPage extends StatefulWidget {
-  const CalendarioPage({Key? key}) : super(key: key);
+class Calendario extends StatefulWidget {
+  const Calendario({Key? key}) : super(key: key);
 
   @override
-  _CalendarioPageState createState() => _CalendarioPageState();
+  _CalendarioState createState() => _CalendarioState();
 }
 
-class _CalendarioPageState extends State<CalendarioPage> {
+class _CalendarioState extends State<Calendario> {
+  //CalendarController _calendarController;
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+
+  @override
+  void initState() {
+    super.initState();
+    //_calendarController = CalendarController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,43 +30,47 @@ class _CalendarioPageState extends State<CalendarioPage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 1,
+        actions: [
+          PopupMenuButton<MenuItemCalendario>(
+            onSelected: (item) => onSelected(context, item),
+            itemBuilder: (context) => [
+              ...MenuItemsCalendario.items.map(buildItem).toList(),
+            ],
+          ),
+        ],
       ),
-      body: Padding(
-        padding: EdgeInsets.only(left: 20, right: 20),
-        child: SfCalendar(
-          //mostrar caléndario por mês
-          view: CalendarView.month,
-          //dia da semana começando no domingo
-          firstDayOfWeek: 7,
-          dataSource: CompromissoCalendario(getAppointments()),
-          //data de exibição
-          //initialDisplayDate: DateTime(2022, 02, 02),
+      body: Container(
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.only(left: 20, right: 20, top: 30),
+          child: TableCalendar(
+            firstDay: DateTime.utc(2010, 10, 16),
+            lastDay: DateTime.utc(2030, 3, 14),
+            focusedDay: _focusedDay,
+            selectedDayPredicate: (day) {
+              return isSameDay(_selectedDay, day);
+            },
+            onDaySelected: (selectedDay, focusedDay) {
+              if (!isSameDay(_selectedDay, selectedDay)) {
+                setState(() {
+                  _selectedDay = selectedDay;
+                  _focusedDay = focusedDay;
+                });
+              }
+            },
+            onFormatChanged: (format) {
+              if (_calendarFormat != format) {
+                setState(() {
+                  _calendarFormat = format;
+                });
+              }
+            },
+            onPageChanged: (focusedDay) {
+              _focusedDay = focusedDay;
+            },
+          ),
         ),
       ),
     );
-  }
-}
-
-List<Appointment> getAppointments() {
-  List<Appointment> compromissos = <Appointment>[];
-  final DateTime today = DateTime.now();
-  final DateTime horaInicio =
-      DateTime(today.year, today.month, today.day, 22, 0, 0);
-  final DateTime horaFim = horaInicio.add(const Duration(hours: 1));
-
-  compromissos.add(Appointment(
-    startTime: horaInicio,
-    endTime: horaFim,
-    subject: 'Consulta',
-    recurrenceRule: 'FREQ=DAILY;COUNT=5',
-    color: Colors.yellow,
-  ));
-
-  return compromissos;
-}
-
-class CompromissoCalendario extends CalendarDataSource {
-  CompromissoCalendario(List<Appointment> source) {
-    appointments = source;
   }
 }

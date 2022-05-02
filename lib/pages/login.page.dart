@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:health_pets/widgets/widgets.dart';
@@ -20,12 +21,16 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-Future<LoginModel?> login(
-    BuildContext context, String email, String password) async {
+Future<LoginModel?> login(BuildContext context, String email, String password) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var deviceToken = prefs.getString('device_token');
+  print('Making Login $deviceToken');
+
   var response =
       await http.post(Uri.https('healthpets.app.br', 'api/auth/login'), body: {
     'email': email,
     'password': password,
+    'device_token': deviceToken,
   });
 
   Map mapResponse = jsonDecode(response.body);
@@ -102,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                             onSaved: (input) => _email = input!,
                             controller: emailController,
                             decoration: InputDecoration(
-                              labelText: "E-mail",
+                              labelText: AppLocalizations.of(context)!.email,
                               labelStyle: TextStyle(
                                 color: ColorTheme.rosa5,
                                 fontWeight: FontWeight.w400,
@@ -149,8 +154,8 @@ class _LoginPageState extends State<LoginPage> {
 
                                   String email = emailController.text;
                                   String password = passwordController.text;
-
                                   LoginModel loginUsuario =
+                                      // (await login(context, email, password, device_token!))
                                       (await login(context, email, password))
                                           as LoginModel;
 
