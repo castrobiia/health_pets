@@ -126,152 +126,142 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: double.maxFinite,
-          padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-          child: Container(
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.only(left: 15, right: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          color: Colors.white,
+          height: MediaQuery.of(context).size.height * 1,
+          padding: EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 20),
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        AppLocalizations.of(context)!.createAccount,
-                        style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.w500,
-                            color: ColorTheme.salmao1),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.name,
-                      labelStyle: TextStyle(
-                        color: ColorTheme.rosa5,
+                  Text(
+                    AppLocalizations.of(context)!.createAccount,
+                    style: TextStyle(
+                        fontSize: 30,
                         fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
-                    ),
-                    controller: nomeController,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.email,
-                      labelStyle: TextStyle(
-                        color: ColorTheme.rosa5,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
-                    ),
-                    controller: emailController,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextField(
-                    autofocus: false,
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          createInfoDialog(context);
-                        },
-                        icon: Icon(Icons.info),
-                      ),
-                      labelText: AppLocalizations.of(context)!.password,
-                      labelStyle: TextStyle(
-                        color: ColorTheme.rosa5,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
-                    ),
-                    controller: senhaController,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: AppLocalizations.of(context)!.confirmPassword,
-                      labelStyle: TextStyle(
-                          color: ColorTheme.rosa5,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17),
-                    ),
-                    controller: confirmacaoSenhaController,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 15,
-                      bottom: 15,
-                    ),
-                    child: Text(
-                      AppLocalizations.of(context)!.term,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    decoration: boxDecoration(ColorTheme.rosa5),
-                    child: TextButton(
-                      onPressed: () async {
-                        String nome = nomeController.text;
-                        String email = emailController.text;
-                        String senha = senhaController.text;
-                        String confirmacaoSenha =
-                            confirmacaoSenhaController.text;
-
-                        RegExp senhaExp = new RegExp(
-                          r"^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
-                          caseSensitive: true,
-                        );
-                        bool resultado = senhaExp.hasMatch(senha);
-
-                        if (resultado) {
-                          UsuarioModelTeste dadosUsuario = (await submitUsuario(
-                              context,
-                              nome,
-                              email,
-                              senha,
-                              confirmacaoSenha)) as UsuarioModelTeste;
-                          setState(() {
-                            _usuarioModelTeste = dadosUsuario;
-                          });
-                        } else {
-                          exibirMensagem(context,
-                              'A senha não cumpre os requisitos. Para saber mais, clique no ícone de informação no campo Senha.');
-                        }
-                      },
-                      child: textBotao(AppLocalizations.of(context)!.save),
-                    ),
+                        color: ColorTheme.salmao1),
                   ),
                 ],
               ),
-            ),
+              SizedBox(
+                height: 30,
+              ),
+              TextFormField(
+                autofocus: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.name,
+                  labelStyle: TextStyle(
+                    color: ColorTheme.rosa5,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 17,
+                  ),
+                ),
+                controller: nomeController,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                autofocus: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.email,
+                  labelStyle: TextStyle(
+                    color: ColorTheme.rosa5,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 17,
+                  ),
+                ),
+                controller: emailController,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextField(
+                autofocus: false,
+                keyboardType: TextInputType.text,
+                obscureText: true,
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      createInfoDialog(context);
+                    },
+                    icon: Icon(Icons.info),
+                  ),
+                  labelText: AppLocalizations.of(context)!.password,
+                  labelStyle: TextStyle(
+                    color: ColorTheme.rosa5,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 17,
+                  ),
+                ),
+                controller: senhaController,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                autofocus: false,
+                keyboardType: TextInputType.text,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.confirmPassword,
+                  labelStyle: TextStyle(
+                      color: ColorTheme.rosa5,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 17),
+                ),
+                controller: confirmacaoSenhaController,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  top: 15,
+                  bottom: 15,
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.term,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                decoration: boxDecoration(ColorTheme.rosa5),
+                child: TextButton(
+                  onPressed: () async {
+                    String nome = nomeController.text;
+                    String email = emailController.text;
+                    String senha = senhaController.text;
+                    String confirmacaoSenha = confirmacaoSenhaController.text;
+
+                    RegExp senhaExp = new RegExp(
+                      r"^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
+                      caseSensitive: true,
+                    );
+                    bool resultado = senhaExp.hasMatch(senha);
+
+                    if (resultado) {
+                      UsuarioModelTeste dadosUsuario = (await submitUsuario(
+                              context, nome, email, senha, confirmacaoSenha))
+                          as UsuarioModelTeste;
+                      setState(() {
+                        _usuarioModelTeste = dadosUsuario;
+                      });
+                    } else {
+                      exibirMensagem(context,
+                          'A senha não cumpre os requisitos. Para saber mais, clique no ícone de informação no campo Senha.');
+                    }
+                  },
+                  child: textBotao(AppLocalizations.of(context)!.save),
+                ),
+              ),
+            ],
           ),
         ),
       ),
