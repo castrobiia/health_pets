@@ -21,6 +21,7 @@ class PetCard extends StatelessWidget {
     image = XFile(fotoPet);
 
     return Container(
+      width: MediaQuery.of(context).size.width * 1,
       height: 121,
       child: Column(
         children: <Widget>[
@@ -34,8 +35,10 @@ class PetCard extends StatelessWidget {
                 },
                 child: Container(
                   width: 100,
+                  //MediaQuery.of(context).size.width * 0.3,
                   height: 100,
-                  margin: EdgeInsets.only(top: 5, left: 10, bottom: 10),
+                  margin:
+                      EdgeInsets.only(top: 5, left: 10, bottom: 10, right: 10),
                   child: Column(
                     children: [
                       Expanded(
@@ -55,8 +58,8 @@ class PetCard extends StatelessWidget {
                 },
                 child: Container(
                   padding: EdgeInsets.only(right: 10),
-                  width: 200,
-                  alignment: Alignment.topLeft,
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  alignment: Alignment.centerLeft,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -73,7 +76,8 @@ class PetCard extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 80,
+                height: 120,
+                width: MediaQuery.of(context).size.width * 0.2,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

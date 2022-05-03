@@ -14,7 +14,7 @@ class VacinaCard extends StatelessWidget {
     required this.nomeVacina,
     required this.dataAplicacao,
     required this.fabricante,
-    required this.lote, 
+    required this.lote,
     required this.idAnimal,
   });
 
@@ -33,7 +33,7 @@ class VacinaCard extends StatelessWidget {
                       builder: (context) => VacinaPage(idAnimal)));
                 },
                 child: Container(
-                  width: 100,
+                  width: MediaQuery.of(context).size.width * 0.3,
                   height: 100,
                   margin: EdgeInsets.only(top: 5, left: 10, bottom: 10),
                 ),
@@ -45,7 +45,7 @@ class VacinaCard extends StatelessWidget {
                 },
                 child: Container(
                   padding: EdgeInsets.only(right: 10),
-                  width: 200,
+                  width: MediaQuery.of(context).size.width * 0.4,
                   alignment: Alignment.topLeft,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,7 +63,7 @@ class VacinaCard extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 80,
+                width: MediaQuery.of(context).size.width * 0.2,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
