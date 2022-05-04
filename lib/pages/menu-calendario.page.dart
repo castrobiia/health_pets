@@ -44,6 +44,6 @@ void onSelected(BuildContext context, MenuItemCalendario item) {
     case MenuItemsCalendario.itemDiario:
       break;
     case MenuItemsCalendario.itemLembrete:
-    //setarMaterialPageRoute(context, CadastroLembrete());
+      setarMaterialPageRoute(context, CadastroLembrete());
   }
 }
