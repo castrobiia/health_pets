@@ -58,6 +58,7 @@ dependencies:
   intl: ^0.17.0
   back_button_interceptor: ^5.0.2
   table_calendar: ^3.0.5
+  flutter_clean_calendar: ^1.1.0
 
 
 dev_dependencies:
