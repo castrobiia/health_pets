@@ -21,58 +21,72 @@ class VacinaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 121,
+      height: 100,
+      width: double.maxFinite,
+      margin: EdgeInsets.only(left: 15, top: 10),
       child: Column(
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => VacinaPage(idAnimal)));
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  height: 100,
-                  margin: EdgeInsets.only(top: 5, left: 10, bottom: 10),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => VacinaPage(idAnimal)));
-                },
-                child: Container(
-                  padding: EdgeInsets.only(right: 10),
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  alignment: Alignment.topLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        dataAplicacao,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                    ],
+              Column(
+                children: [
+                  Container(
+                    width: 300,
+                    height: 35,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Vacina: $nomeVacina",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 300,
+                    height: 30,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Fabricante: $fabricante',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: 300,
+                    height: 30,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Lote: $lote',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.2,
+                width: 80,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => VacinaPage(idAnimal)));
-                        },
-                        icon: Icon(Icons.navigate_next))
+                    Text(
+                          dataAplicacao,
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        
                   ],
                 ),
               ),
@@ -82,11 +96,54 @@ class VacinaCard extends StatelessWidget {
             height: 1,
             thickness: 1,
             color: Colors.black12,
-            indent: 15,
             endIndent: 15,
           ),
         ],
       ),
     );
+
+
+    // return Container(
+    //   height: 121,
+    //   child: Column(
+    //     children: <Widget>[
+    //       Row(
+    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //         children: <Widget>[
+    //             Container(
+    //               width: MediaQuery.of(context).size.width * 0.3,
+    //               height: 100,
+    //               margin: EdgeInsets.only(top: 5, left: 10, bottom: 10),
+    //             ),
+    //             Container(
+    //               padding: EdgeInsets.only(right: 10),
+    //               width: MediaQuery.of(context).size.width * 0.4,
+    //               alignment: Alignment.centerLeft,
+    //               child: Column(
+    //                 crossAxisAlignment: CrossAxisAlignment.center,
+    //                 children: <Widget>[
+    //                   Text(
+    //                     nomeVacina,
+    //                     style: TextStyle(
+    //                         fontSize: 15, fontWeight: FontWeight.w500),
+    //                   ),
+    //                   SizedBox(
+    //                     height: 5,
+    //                   ),
+    //                 ],
+    //               ),
+    //             ),
+    //         ],
+    //       ),
+    //       Divider(
+    //         height: 1,
+    //         thickness: 1,
+    //         color: Colors.black12,
+    //         indent: 15,
+    //         endIndent: 15,
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 }
