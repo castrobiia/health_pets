@@ -83,7 +83,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                 String data_nascimento = dataNascimentoTesteController.text;
                 var id_especie = especieController.text;
                 String id_raca = racaController.text;
-                String foto = pickedFile!.path;
+                String foto = pickedFile?.path ?? 'default.png';
 
                 if (await AnimalRepository().postAnimal(
                         nome, data_nascimento, id_especie, id_raca, foto) ==
