@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/menu-diario.page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InformacaoDiario extends StatefulWidget {
   const InformacaoDiario({Key? key}) : super(key: key);

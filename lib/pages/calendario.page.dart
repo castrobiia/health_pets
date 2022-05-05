@@ -3,6 +3,7 @@ import 'package:health_pets/pages/menu-calendario.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_clean_calendar/flutter_clean_calendar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Calendario extends StatefulWidget {
   const Calendario({Key? key}) : super(key: key);

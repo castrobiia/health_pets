@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/widgets.dart';
 import 'cadastro-gasto.page.dart';

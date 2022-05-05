@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/editar-vacina.page.dart';
 import 'package:health_pets/pages/vacina.page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MenuItemVacina {
   final String texto;

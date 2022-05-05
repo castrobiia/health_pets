@@ -3,6 +3,7 @@ import 'package:health_pets/pages/diario-pet.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/vacina.page.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HistoricoPet extends StatefulWidget {
   //const HistoricoPet({Key? key}) : super(key: key);
@@ -62,7 +63,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                               height: 5,
                             ),
                             Text(
-                              "Vacinas",
+                              AppLocalizations.of(context)!.vaccines,
                               style: TextStyle(fontSize: 15),
                             ),
                             SizedBox(
@@ -92,7 +93,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                               height: 5,
                             ),
                             Text(
-                              "Diário",
+                              AppLocalizations.of(context)!.diary,
                               style: TextStyle(fontSize: 15),
                             ),
                             SizedBox(
@@ -110,7 +111,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                   ),
                   SfCartesianChart(
                     primaryXAxis: CategoryAxis(),
-                    title: ChartTitle(text: "Peso"),
+                    title: ChartTitle(text: AppLocalizations.of(context)!.weight),
                     series: <ChartSeries<HistoricoPet, String>>[
                       LineSeries<HistoricoPet, String>(
                           dataSource: <HistoricoPet>[

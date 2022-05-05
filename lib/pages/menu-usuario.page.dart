@@ -3,6 +3,7 @@ import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MenuItemUsuario {
   final String texto;

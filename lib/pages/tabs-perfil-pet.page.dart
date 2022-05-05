@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/pages/historico-pet.page.dart';
 import 'package:health_pets/pages/menu-pet.page.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PerfilPetPage extends StatefulWidget {
   final id;
@@ -23,12 +24,12 @@ class _PerfilPetPageState extends State<PerfilPetPage> {
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
-              Tab(text: "Perfil"),
-              Tab(text: "Histórico"),
+              Tab(text: AppLocalizations.of(context)!.profile),
+              Tab(text: AppLocalizations.of(context)!.historic),
             ],
           ),
           backgroundColor: Colors.white,
-          title: Text("Sobre o Pet"),
+          title: Text(AppLocalizations.of(context)!.aboutPet),
           elevation: 0,
           centerTitle: true,
           actions: [

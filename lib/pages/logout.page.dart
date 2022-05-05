@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'login.page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LogoutPage extends StatefulWidget {
   const LogoutPage({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class _LogoutPageState extends State<LogoutPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Saindo..."),
+              Text(AppLocalizations.of(context)!.leaving),
               SizedBox(height: 10),
               Container(
                 child: CircularProgressIndicator(),

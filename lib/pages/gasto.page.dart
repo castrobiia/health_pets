@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/pages/gasto-relatorio.page.dart';
 import 'gasto-geral.page.dart';
 import 'gasto-meta.page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GastoPage extends StatefulWidget {
   @override

@@ -84,17 +84,17 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("A senha deve conter, no mínimo:"),
+                  Text(AppLocalizations.of(context)!.passwordContent),
                   SizedBox(height: 15),
-                  Text('- 1 letra maiúscula'),
+                  Text(AppLocalizations.of(context)!.uppercase),
                   SizedBox(height: 7),
-                  Text('- 1 letra minúscula'),
+                  Text(AppLocalizations.of(context)!.lowercase),
                   SizedBox(height: 7),
-                  Text('- 1 número'),
+                  Text(AppLocalizations.of(context)!.number),
                   SizedBox(height: 7),
-                  Text('- 1 caractere especial'),
+                  Text(AppLocalizations.of(context)!.specialCharacter),
                   SizedBox(height: 7),
-                  Text('- 8 caracteres'),
+                  Text(AppLocalizations.of(context)!.character),
                 ],
               ),
             ),
@@ -255,7 +255,7 @@ class _CadastroUsuarioTesteState extends State<CadastroUsuarioTeste> {
                       });
                     } else {
                       exibirMensagem(context,
-                          'A senha não cumpre os requisitos. Para saber mais, clique no ícone de informação no campo Senha.');
+                          AppLocalizations.of(context)!.passwordRequirements);
                     }
                   },
                   child: textBotao(AppLocalizations.of(context)!.save),
