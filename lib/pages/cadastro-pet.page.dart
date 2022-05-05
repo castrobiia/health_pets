@@ -11,6 +11,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:health_pets/class/util.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CadastrarPetPage extends StatefulWidget {
   @override

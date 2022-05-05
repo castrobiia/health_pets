@@ -5,6 +5,7 @@ import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/editar-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/repository/animal-repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MenuItemPet {
   final String texto;

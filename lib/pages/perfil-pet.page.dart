@@ -8,6 +8,7 @@ import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/class/util.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PerfilPet extends StatefulWidget {
   final id;
@@ -94,7 +95,7 @@ class _PerfilPetState extends State<PerfilPet> {
                         builder: (context, snapshot) {
                           final especie = snapshot.data;
                           return setarRowPerfil(
-                              "Espécie", especie['nome'] ?? '');
+                              AppLocalizations.of(context)!.species, especie['nome'] ?? '');
                         },
                       ),
                       divider(),
@@ -102,13 +103,13 @@ class _PerfilPetState extends State<PerfilPet> {
                         future: RacaEntity().getRaca(animal['id_raca']),
                         builder: (context, snapshot) {
                           final raca = snapshot.data;
-                          return setarRowPerfil("Raça", raca['nome'] ?? '');
+                          return setarRowPerfil(AppLocalizations.of(context)!.breed, raca['nome'] ?? '');
                         },
                       ),
                       divider(),
-                      setarRowPerfil("Idade", idade),
+                      setarRowPerfil(AppLocalizations.of(context)!.age, idade),
                       divider(),
-                      setarRowPerfil("Data de Nascimento", dataFormatada),
+                      setarRowPerfil(AppLocalizations.of(context)!.birthDate, dataFormatada),
                       divider(),
                       // add campo peso somente quando habilitar cadastro de peso
                       /*

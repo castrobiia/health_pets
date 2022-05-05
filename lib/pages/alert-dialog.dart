@@ -10,6 +10,7 @@ import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/repository/animal-repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 confirmarExclusaoAnimal(BuildContext context, id) {
   var animalController = AnimalController(AnimalRepositoryy());
