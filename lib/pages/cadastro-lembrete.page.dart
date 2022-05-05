@@ -119,7 +119,6 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
             children: <Widget>[
               TextFormField(
                 autofocus: false,
-                keyboardType: TextInputType.text,
                 controller: tituloController,
                 maxLength: 30,
                 validator: (value) => validarCampo(value),
@@ -165,7 +164,6 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                   Expanded(
                     child: TextFormField(
                       autofocus: false,
-                      keyboardType: TextInputType.text,
                       controller: horaInicioController,
                       validator: (value) => validarCampo(value),
                       onSaved: (input) => _titulo = input!,
@@ -190,7 +188,6 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                   Expanded(
                     child: TextFormField(
                       autofocus: false,
-                      keyboardType: TextInputType.text,
                       readOnly: true,
                       controller: horaFimController,
                       validator: (value) => validarCampo(value),

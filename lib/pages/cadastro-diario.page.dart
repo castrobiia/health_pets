@@ -52,7 +52,8 @@ class _CadastroDiarioState extends State<CadastroDiario> {
         actions: <Widget>[
           TextButton(
             onPressed: () {},
-            child: const Text("Salvar"),
+            child:
+                const Text("Salvar", style: TextStyle(color: ColorTheme.rosa1)),
           ),
         ],
         title: Text(
@@ -90,7 +91,7 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                           },
                           onSaved: (input) => _data = input!,
                           decoration: InputDecoration(
-                            labelText: "Data do Diário",
+                            labelText: "Data",
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 17,
@@ -109,8 +110,20 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                         setarCampoForms(humorController, "Humor", _humor,
                             validator: (value) => validarCampo(value)),
                         //peso mudar para receber apenas numeros
-                        setarCampoForms(pesoController, "Peso", _peso,
-                            validator: (value) => validarCampo(value)),
+                        TextFormField(
+                          autofocus: false,
+                          keyboardType: TextInputType.number,
+                          controller: pesoController,
+                          //validator: (value) => validarCampo(value),
+                          onSaved: (input) => _peso = input!,
+                          decoration: InputDecoration(
+                            labelText: "Peso",
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
                         TextFormField(
                           decoration: InputDecoration(
                             labelText: "Descrição",

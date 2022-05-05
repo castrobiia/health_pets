@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/cadastro-diario.page.dart';
 import 'package:health_pets/pages/cadastro-lembrete.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
@@ -42,6 +43,7 @@ PopupMenuItem<MenuItemCalendario> buildItem(MenuItemCalendario item) =>
 void onSelected(BuildContext context, MenuItemCalendario item) {
   switch (item) {
     case MenuItemsCalendario.itemDiario:
+      setarMaterialPageRoute(context, CadastroDiario());
       break;
     case MenuItemsCalendario.itemLembrete:
       setarMaterialPageRoute(context, CadastroLembrete());
