@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-// import 'package:health_pets/links/links-pages.dart';
-import 'package:health_pets/pages/perfil-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:intl/intl.dart';
@@ -338,13 +336,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                   onPressed: () {
                                     setarMaterialPageRoute(context, PetPage());
                                   },
-                                  child: Text(
-                                    "Salvar",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 17),
-                                  ),
+                                  child: textBotao("Salvar"),
                                 ),
                               ),
                               /* DropdownButtonFormField(
