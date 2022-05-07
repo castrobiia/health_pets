@@ -106,10 +106,11 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
             child: const Text(
               "Salvar",
               style: TextStyle(
-                color: ColorTheme.vermelho1,
+                color: ColorTheme.rosa3,
                 fontWeight: FontWeight.bold,
               ),
             ),
+
             // style: ButtonStyle(
             //   padding:
             //       MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
@@ -120,6 +121,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
             //         side: BorderSide(color: Colors.pink)),
             //   ),
             // ),
+
           ),
         ],
         title: Text(
