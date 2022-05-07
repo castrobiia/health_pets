@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/api/token.dart';
-import 'package:health_pets/pages/login.page.dart';
+import 'package:health_pets/themes/color_theme.dart';
 
 void setarMaterialPageRoute(BuildContext context, page) {
   Navigator.push(
@@ -125,6 +125,16 @@ textBotao(texto) {
   );
 }
 
+botaoSalvarAppBar() {
+  return Text(
+    "Salvar",
+    style: TextStyle(
+      color: ColorTheme.salmao1,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+}
+
 validarCampo(value) {
   if (value!.isEmpty) {
     return "Preencha o campo";
@@ -148,3 +158,5 @@ erroCarregarDados(BuildContext context) {
     ),
   );
 }
+
+
