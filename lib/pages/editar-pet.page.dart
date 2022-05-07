@@ -336,13 +336,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                   onPressed: () {
                                     setarMaterialPageRoute(context, PetPage());
                                   },
-                                  child: Text(
-                                    "Salvar",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 17),
-                                  ),
+                                  child: textBotao("Salvar"),
                                 ),
                               ),
                               /* DropdownButtonFormField(
