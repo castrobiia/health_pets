@@ -217,12 +217,9 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                               SizedBox(
                                 height: 30,
                               ),
-
-                              //aqui
                               Container(
                                  width: double.infinity,
-                                decoration: botaoRetangulo(),
-                                
+                                decoration: botaoRetangulo(),    
                                 child: TextButton(
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
