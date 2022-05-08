@@ -125,37 +125,28 @@ textBotao(texto) {
   );
 }
 
-botaoSalvarEstrutura() {
+botaoRetangulo() {
   return BoxDecoration(
-      color: ColorTheme.salmao1,
-      borderRadius: BorderRadius.all(
-        Radius.circular(5),
+    color: ColorTheme.salmao1,
+    borderRadius: BorderRadius.all(
+      Radius.circular(5),
+    ),
+    boxShadow: [
+      new BoxShadow(
+        //cor do fundo (em volta) do container
+        color: Colors.black12,
+        //qnt de sombra
+        offset: new Offset(1, 2.0),
+        //expansao da sombra
+        blurRadius: 5,
+        //intensidade da borda
+        spreadRadius: 3,
       ),
-      boxShadow: [
-        new BoxShadow(
-          //cor do fundo (em volta) do container
-          color: Colors.black12,
-          //qnt de sombra
-          offset: new Offset(1, 2.0),
-          //expansao da sombra
-          blurRadius: 5,
-          //intensidade da borda
-          spreadRadius: 3,
-        ),
-      ],
-    );
+    ],
+  );
 }
 
-// botaoSalvar(context, page) {
-//   return TextButton(
-//     onPressed: () {
-//     setarMaterialPageRoute(context, page);
-//   },
-//   child: textBotao("Salvar"),
-//   );
-// }
-
-//Substituido
+//Substituido pelo botao embaixo (botaoRetangulo + textBotao)
 botaoSalvarAppBar() {
   return Text(
     "Salvar",
