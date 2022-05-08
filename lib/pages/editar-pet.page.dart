@@ -314,24 +314,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                               ),
                               Container(
                                 width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: ColorTheme.salmao1,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(5),
-                                  ),
-                                  boxShadow: [
-                                    new BoxShadow(
-                                      //cor do fundo (em volta) do container
-                                      color: Colors.black12,
-                                      //qnt de sombra
-                                      offset: new Offset(1, 2.0),
-                                      //expansao da sombra
-                                      blurRadius: 5,
-                                      //intensidade da borda
-                                      spreadRadius: 3,
-                                    ),
-                                  ],
-                                ),
+                                decoration: botaoRetangulo(),
                                 child: TextButton(
                                   onPressed: () {
                                     setarMaterialPageRoute(context, PetPage());
