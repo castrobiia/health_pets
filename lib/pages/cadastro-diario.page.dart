@@ -131,7 +131,6 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                           maxLines: 8,
                           maxLength: 1000,
                         ),
-
                         SizedBox(
                           height: 30,
                         ),
