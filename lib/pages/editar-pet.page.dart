@@ -314,7 +314,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                               ),
                               Container(
                                 width: double.infinity,
-                                decoration: botaoSalvarEstrutura(),
+                                decoration: botaoRetangulo(),
                                 child: TextButton(
                                   onPressed: () {
                                     setarMaterialPageRoute(context, PetPage());
