@@ -72,6 +72,32 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         backgroundColor: Colors.white,
         elevation: 1,
         centerTitle: true,
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                //salvar o estado do formulário
+                _formKey.currentState!.save();
+
+                String nome = nomeController.text;
+                String data_nascimento = dataNascimentoTesteController.text;
+                var id_especie = especieController.text;
+                String id_raca = racaController.text;
+                String foto = pickedFile?.path ?? 'default.png';
+
+                // print("Picked file path: ${pickedFile?.path }");
+                // print("Foto: $foto");
+
+                if (await AnimalRepository().postAnimal(
+                        nome, data_nascimento, id_especie, id_raca, foto) ==
+                    '200') {}
+
+                setarMaterialPageRoute(context, TabsPage());
+              }
+            },
+            child: const Text("Salvar"),
+          ),
+        ],
         title: Text(
           "Cadastrar Pet",
           style: TextStyle(
