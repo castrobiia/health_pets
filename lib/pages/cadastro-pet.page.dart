@@ -85,6 +85,9 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                 String id_raca = racaController.text;
                 String foto = pickedFile?.path ?? 'default.png';
 
+                // print("Picked file path: ${pickedFile?.path }");
+                // print("Foto: $foto");
+
                 if (await AnimalRepository().postAnimal(
                         nome, data_nascimento, id_especie, id_raca, foto) ==
                     '200') {}

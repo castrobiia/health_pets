@@ -40,17 +40,33 @@ class AnimalRepository {
       "Authorization": "Bearer ${token}"
     };
 
-    var body = jsonEncode({
-      'nome': nome,
-      'data_nascimento': data_nascimento,
-      'id_especie': id_especie,
-      'id_raca': id_raca,
-      'foto': foto,
-    });
+    // var body = jsonEncode({
+    //   'nome': nome,
+    //   'data_nascimento': data_nascimento,
+    //   'id_especie': id_especie,
+    //   'id_raca': id_raca,
+    //   'foto': foto,
+    // });
 
-    final response =
-        await http.post(Uri.parse(url), body: body, headers: headerToken);
-    return jsonDecode(response.statusCode.toString());
+    var pic = await http.MultipartFile.fromPath("foto", foto);
+
+    var request = http.MultipartRequest(
+        "POST", Uri.https('healthpets.app.br', 'api/animal'));
+    request.headers.addAll(headerToken);
+    request.fields["nome"] = nome;
+    request.fields["data_nascimento"] = data_nascimento;
+    request.fields["id_especie"] = id_especie;
+    request.fields["id_raca"] = id_raca;
+    request.files.add(pic);
+
+    var response = await request.send();
+
+    var resp = await http.Response.fromStream(response);
+
+    // final response =
+    //     await http.post(Uri.parse(url), body: body, headers: headerToken);
+    // return jsonDecode(response.statusCode.toString());
+    return jsonDecode(resp.statusCode.toString());
   }
 
   Future<List> findAllAnimais() async {
