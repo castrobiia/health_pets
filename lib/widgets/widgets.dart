@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/api/token.dart';
-import 'package:health_pets/pages/login.page.dart';
+import 'package:health_pets/themes/color_theme.dart';
 
 void setarMaterialPageRoute(BuildContext context, page) {
   Navigator.push(
@@ -122,6 +122,38 @@ textBotao(texto) {
     texto,
     style: TextStyle(
         color: Colors.white, fontWeight: FontWeight.w700, fontSize: 17),
+  );
+}
+
+botaoRetangulo() {
+  return BoxDecoration(
+    color: ColorTheme.salmao1,
+    borderRadius: BorderRadius.all(
+      Radius.circular(5),
+    ),
+    boxShadow: [
+      new BoxShadow(
+        //cor do fundo (em volta) do container
+        color: Colors.black12,
+        //qnt de sombra
+        offset: new Offset(1, 2.0),
+        //expansao da sombra
+        blurRadius: 5,
+        //intensidade da borda
+        spreadRadius: 3,
+      ),
+    ],
+  );
+}
+
+//Substituido pelo botao embaixo (botaoRetangulo + textBotao)
+botaoSalvarAppBar() {
+  return Text(
+    "Salvar",
+    style: TextStyle(
+      color: ColorTheme.salmao1,
+      fontWeight: FontWeight.bold,
+    ),
   );
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/calendario.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
@@ -50,13 +51,6 @@ class _CadastroDiarioState extends State<CadastroDiario> {
         backgroundColor: Colors.white,
         elevation: 1,
         centerTitle: true,
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {},
-            child:
-                const Text("Salvar", style: TextStyle(color: ColorTheme.rosa1)),
-          ),
-        ],
         title: Text(
           "Cadastrar Diário",
           style: TextStyle(
@@ -136,6 +130,19 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                           keyboardType: TextInputType.multiline,
                           maxLines: 8,
                           maxLength: 1000,
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: botaoRetangulo(),
+                          child: TextButton(
+                            onPressed: () {
+                              setarMaterialPageRoute(context, Calendario());
+                            },
+                            child: textBotao("Salvar"),
+                          ),
                         ),
                       ],
                     ),

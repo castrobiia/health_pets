@@ -103,23 +103,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                 }
               }
             },
-            child: const Text(
-              "Salvar",
-              style: TextStyle(
-                color: ColorTheme.vermelho1,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            // style: ButtonStyle(
-            //   padding:
-            //       MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
-            //   foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-            //   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            //     RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(18.0),
-            //         side: BorderSide(color: Colors.pink)),
-            //   ),
-            // ),
+            child: botaoSalvarAppBar(),
           ),
         ],
         title: Text(

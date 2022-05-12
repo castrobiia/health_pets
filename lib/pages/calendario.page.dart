@@ -92,6 +92,7 @@ class _CalendarioState extends State<Calendario> {
 
   @override
   Widget build(BuildContext context) {
+    print("current locale ${Localizations.localeOf(context).languageCode}");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -113,6 +114,7 @@ class _CalendarioState extends State<Calendario> {
         child: Padding(
           padding: EdgeInsets.only(left: 20, right: 20, top: 10),
           child: Calendar(
+            locale: Localizations.localeOf(context).languageCode,
             selectedColor: ColorTheme.rosa1,
             eventColor: ColorTheme.salmao1,
             eventDoneColor: Colors.pink,
@@ -122,7 +124,7 @@ class _CalendarioState extends State<Calendario> {
             },
             isExpanded: true,
             //expandableDateFormat: 'EEEE, dd. MMMM yyyy',
-            events: events,
+            events: events,    
           ),
         ),
       ),

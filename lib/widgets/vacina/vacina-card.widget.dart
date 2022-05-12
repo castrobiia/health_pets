@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/vacina.page.dart';
 
 class VacinaCard extends StatelessWidget {
   final int idVacina;
@@ -101,49 +100,5 @@ class VacinaCard extends StatelessWidget {
         ],
       ),
     );
-
-
-    // return Container(
-    //   height: 121,
-    //   child: Column(
-    //     children: <Widget>[
-    //       Row(
-    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //         children: <Widget>[
-    //             Container(
-    //               width: MediaQuery.of(context).size.width * 0.3,
-    //               height: 100,
-    //               margin: EdgeInsets.only(top: 5, left: 10, bottom: 10),
-    //             ),
-    //             Container(
-    //               padding: EdgeInsets.only(right: 10),
-    //               width: MediaQuery.of(context).size.width * 0.4,
-    //               alignment: Alignment.centerLeft,
-    //               child: Column(
-    //                 crossAxisAlignment: CrossAxisAlignment.center,
-    //                 children: <Widget>[
-    //                   Text(
-    //                     nomeVacina,
-    //                     style: TextStyle(
-    //                         fontSize: 15, fontWeight: FontWeight.w500),
-    //                   ),
-    //                   SizedBox(
-    //                     height: 5,
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //         ],
-    //       ),
-    //       Divider(
-    //         height: 1,
-    //         thickness: 1,
-    //         color: Colors.black12,
-    //         indent: 15,
-    //         endIndent: 15,
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }
