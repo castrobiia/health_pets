@@ -8,7 +8,7 @@ class PetCard extends StatelessWidget {
   final int idPet;
   final String fotoPet;
   final String nomePet;
-  XFile? image;
+  // XFile? image;
 
   PetCard({
     required this.idPet,
@@ -18,7 +18,7 @@ class PetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    image = XFile(fotoPet);
+    // image = XFile(fotoPet);
 
     return Container(
       width: MediaQuery.of(context).size.width * 1,
@@ -43,9 +43,10 @@ class PetCard extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: (!kIsWeb && image != null
-                            ? Image.file(File(image!.path))
-                            : Container()),
+                        // child: (!kIsWeb && image != null
+                        //     ? Image.file(File(image!.path))
+                        //     : Container()),
+                            child: Image.network("https://healthpets.app.br/storage/pets/$fotoPet"),
                       ),
                     ],
                   ),
