@@ -76,8 +76,8 @@ class _PerfilPetState extends State<PerfilPet> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image:
-                                FileImage(File(image!.path)) as ImageProvider,
+                            image: Image.network("https://healthpets.app.br/storage/pets/${animal['foto']}").image
+                                // FileImage(File(image!.path)) as ImageProvider,
                           ),
                         ),
                       ),
