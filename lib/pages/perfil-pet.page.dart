@@ -42,14 +42,11 @@ class _PerfilPetState extends State<PerfilPet> {
               child: FutureBuilder<dynamic>(
                 future: AnimalEntity().getAnimal(id),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done) {
-                    // return: show loading widget
-                    //todo mostrar o loading
+                  if (!snapshot.hasData) {
                     return Center(
                         child: Container(child: CircularProgressIndicator()));
                   }
                   if (snapshot.hasError) {
-                    // return: show error widget
                     return Center(
                       child: Container(
                         child: erroCarregarDados(context),
@@ -65,58 +62,65 @@ class _PerfilPetState extends State<PerfilPet> {
                   var idade = Util().calculoIdade(dataFormatada);
                   image = XFile(animal['foto']);
 
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Container(
-                        width: 200,
-                        height: 200,
-                        margin: EdgeInsets.only(top: 15, left: 10),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: Image.network("https://healthpets.app.br/storage/pets/${animal['foto']}").image
-                                // FileImage(File(image!.path)) as ImageProvider,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        animal['nome'],
-                        style: TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      FutureBuilder<dynamic>(
-                        future:
-                            EspecieEntity().getEspecie(animal['id_especie']),
-                        builder: (context, snapshot) {
-                          final especie = snapshot.data;
-                          return setarRowPerfil(
-                              AppLocalizations.of(context)!.species, especie['nome'] ?? '');
-                        },
-                      ),
-                      divider(),
-                      FutureBuilder<dynamic>(
+                  return FutureBuilder<dynamic>(
+                    future: EspecieEntity().getEspecie(animal['id_especie']),
+                    builder: (context, snapshot) {
+                      final especie = snapshot.data;
+                      return FutureBuilder<dynamic>(
                         future: RacaEntity().getRaca(animal['id_raca']),
                         builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return Center(
+                                child: Container(
+                                    child: CircularProgressIndicator()));
+                          }
                           final raca = snapshot.data;
-                          return setarRowPerfil(AppLocalizations.of(context)!.breed, raca['nome'] ?? '');
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Container(
+                                width: 200,
+                                height: 200,
+                                margin: EdgeInsets.only(top: 15, left: 10),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: Image.network(
+                                              "https://healthpets.app.br/storage/pets/${animal['foto']}")
+                                          .image
+                                      // FileImage(File(image!.path)) as ImageProvider,
+                                      ),
+                                ),
+                              ),
+                              Text(
+                                animal['nome'],
+                                style: TextStyle(
+                                    fontSize: 23, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              setarRowPerfil(
+                                  AppLocalizations.of(context)!.species,
+                                  especie['nome'] ?? ''),
+                              divider(),
+                              setarRowPerfil(
+                                  AppLocalizations.of(context)!.breed,
+                                  raca['nome'] ?? ''),
+                              divider(),
+                              setarRowPerfil(
+                                  AppLocalizations.of(context)!.age, idade),
+                              divider(),
+                              setarRowPerfil(
+                                  AppLocalizations.of(context)!.birthDate,
+                                  dataFormatada),
+                              divider(),
+                            ],
+                          );
                         },
-                      ),
-                      divider(),
-                      setarRowPerfil(AppLocalizations.of(context)!.age, idade),
-                      divider(),
-                      setarRowPerfil(AppLocalizations.of(context)!.birthDate, dataFormatada),
-                      divider(),
-                      // add campo peso somente quando habilitar cadastro de peso
-                      /*
-                        setarRowPerfil("Peso", "10 kg"),
-                        divider(),
-                         */
-                    ],
+                      );
+                    },
                   );
                 },
               ),
