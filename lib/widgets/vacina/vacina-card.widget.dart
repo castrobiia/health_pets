@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/themes/color_theme.dart';
+import 'package:health_pets/widgets/widgets.dart';
 
 class VacinaCard extends StatelessWidget {
   final int idVacina;
@@ -22,10 +24,20 @@ class VacinaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      key: ValueKey(nomeVacina),
-      startActionPane: ActionPane(
+      //key: ValueKey(nomeVacina),
+      endActionPane: ActionPane(
         motion: ScrollMotion(),
         children: [
+          SlidableAction(
+            backgroundColor: ColorTheme.cinza2,
+            label: 'Editar',
+            icon: Icons.edit,
+            onPressed: (context) {
+              //setarMaterialPageRoute(context, confirmarExclusaoVacina(idAnimal));
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text('Vacina editada')));
+            },
+          ),
           SlidableAction(
             backgroundColor: ColorTheme.vermelho1,
             label: 'Deletar',
@@ -37,9 +49,6 @@ class VacinaCard extends StatelessWidget {
           ),
         ],
       ),
-      // height: 100,
-      // width: double.maxFinite,
-      // margin: EdgeInsets.only(left: 15, top: 10),
       child: Column(
         children: <Widget>[
           Row(
