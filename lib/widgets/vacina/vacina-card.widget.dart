@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:health_pets/themes/color_theme.dart';
 
 class VacinaCard extends StatelessWidget {
   final int idVacina;
@@ -19,10 +21,25 @@ class VacinaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: double.maxFinite,
-      margin: EdgeInsets.only(left: 15, top: 10),
+    return Slidable(
+      key: ValueKey(nomeVacina),
+      startActionPane: ActionPane(
+        motion: ScrollMotion(),
+        children: [
+          SlidableAction(
+            backgroundColor: ColorTheme.vermelho1,
+            label: 'Deletar',
+            icon: Icons.delete,
+            onPressed: (context) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text('Vacina deletada')));
+            },
+          ),
+        ],
+      ),
+      // height: 100,
+      // width: double.maxFinite,
+      // margin: EdgeInsets.only(left: 15, top: 10),
       child: Column(
         children: <Widget>[
           Row(
@@ -82,10 +99,9 @@ class VacinaCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text(
-                          dataAplicacao,
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        
+                      dataAplicacao,
+                      style: TextStyle(fontSize: 15),
+                    ),
                   ],
                 ),
               ),
