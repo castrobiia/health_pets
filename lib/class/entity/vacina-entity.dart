@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:health_pets/class/api/header.dart';
 import 'package:health_pets/models/vacina-model.dart';
+import 'package:health_pets/repository/repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class VacinaEntity {
+class VacinaEntity extends RepositoryV {
   List listaVacinas = [];
   var url = 'https://www.healthpets.app.br/api/vacinas';
 
@@ -44,23 +45,23 @@ class VacinaEntity {
     return response.statusCode;
   }
 
-  // Future<String> deleteVacina(id) async {
-  //   String urlHP = 'https://www.healthpets.app.br/api/vacina';
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String token = await prefs.get('token').toString();
+  Future<String> deleteVacina(id) async {
+    String urlHP = 'https://www.healthpets.app.br/api/vacina';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
 
-  //   var headerToken = {
-  //     "Content-Type": "application/json",
-  //     "Accept": "application/json",
-  //     "Authorization": "Bearer ${token}"
-  //   };
+    var headerToken = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
 
-  //   var url = Uri.parse('$urlHP/${id}');
-  //   var response = await http.delete(url, headers: headerToken);
+    var url = Uri.parse('$urlHP/${id}');
+    var response = await http.delete(url, headers: headerToken);
 
-  //   var vacina = jsonDecode(response.body);
-  //   var mensagem = vacina['message'];
+    var vacina = jsonDecode(response.body);
+    var mensagem = vacina['message'];
 
-  //   return mensagem;
-  // }
+    return mensagem;
+  }
 }
