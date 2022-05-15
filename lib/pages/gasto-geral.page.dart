@@ -19,15 +19,6 @@ class GeraisGastos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        backgroundColor: ColorTheme.salmao1,
-        //cor do ícone
-        foregroundColor: Colors.white,
-        onPressed: () {
-          setarMaterialPageRouteTab(context, CadastrarGastoPage());
-        },
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
