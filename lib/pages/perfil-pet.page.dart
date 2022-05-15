@@ -65,6 +65,11 @@ class _PerfilPetState extends State<PerfilPet> {
                   return FutureBuilder<dynamic>(
                     future: EspecieEntity().getEspecie(animal['id_especie']),
                     builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                            child:
+                                Container(child: CircularProgressIndicator()));
+                      }
                       final especie = snapshot.data;
                       return FutureBuilder<dynamic>(
                         future: RacaEntity().getRaca(animal['id_raca']),
