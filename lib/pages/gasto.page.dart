@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/gasto-relatorio.page.dart';
+import 'package:health_pets/pages/menu-gasto.page.dart';
 import 'gasto-geral.page.dart';
 import 'gasto-meta.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -32,6 +33,14 @@ class _GastoPageState extends State<GastoPage> {
           title: Text("Gastos"),
           elevation: 0,
           centerTitle: true,
+          actions: [
+          PopupMenuButton<MenuItemGasto>(
+            onSelected: (item) => onSelected(context, item),
+            itemBuilder: (context) => [
+              ...MenuItemsGasto.items.map(buildItem).toList(),
+            ],
+          ),
+        ],
         ),
         body: TabBarView(
           children: <Widget>[

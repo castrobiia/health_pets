@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/pages/cadastro-usuario.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
-import 'package:splashscreen/splashscreen.dart';
 
 import 'package:health_pets/firebase_messaging/custom_firebase_messaging.dart';
 import 'package:health_pets/pages/login.page.dart';
@@ -41,7 +40,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale('en', ''),
         Locale('es', ''),
-        Locale('pt', ''),],
+        Locale('pt', ''),
+      ],
       title: 'Health Pets',
       //tirar o banner de debug da tela
       debugShowCheckedModeBanner: false,
@@ -50,10 +50,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/' : (context)=> _introScreen(),
-        '/home' : (context)=> const TabsPage(),
-        '/login' : (context)=> const LoginPage(),
-        '/register' : (context)=> const CadastroUsuario(),
+        '/': (context) => const LoginPage(),
+        '/home': (context) => const TabsPage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const CadastroUsuario(),
       },
       //Para usar as rotas :
       // Navigator.pushNamed(context, '/home');
@@ -63,35 +63,35 @@ class MyApp extends StatelessWidget {
   }
 }
 
-Widget _introScreen() {
-  return Stack(
-    children: <Widget>[
-      SplashScreen(
-        seconds: 3,
-        gradientBackground: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            ColorTheme.branco1,
-            ColorTheme.salmao1,
-            ColorTheme.salmao2,
-            ColorTheme.rosa1,
-            ColorTheme.rosa2,
-            ColorTheme.rosa3,
-            ColorTheme.rosa4,
-            ColorTheme.rosa5,
-            ColorTheme.roxo1,
-            ColorTheme.roxo2,
-            ColorTheme.cinza1,
-            ColorTheme.cinza2
-          ],
-        ),
-        navigateAfterSeconds: LoginPage(),
-        loaderColor: Colors.transparent,
-      ),
-      Center(
-        child: BoxDecorationImagem(400, "assets/logo_health_pets.png"),
-      ),
-    ],
-  );
-}
+// Widget _introScreen() {
+//   return Stack(
+//     children: <Widget>[
+//       SplashScreen(
+//         seconds: 3,
+//         gradientBackground: LinearGradient(
+//           begin: Alignment.topCenter,
+//           end: Alignment.bottomCenter,
+//           colors: [
+//             ColorTheme.branco1,
+//             ColorTheme.salmao1,
+//             ColorTheme.salmao2,
+//             ColorTheme.rosa1,
+//             ColorTheme.rosa2,
+//             ColorTheme.rosa3,
+//             ColorTheme.rosa4,
+//             ColorTheme.rosa5,
+//             ColorTheme.roxo1,
+//             ColorTheme.roxo2,
+//             ColorTheme.cinza1,
+//             ColorTheme.cinza2
+//           ],
+//         ),
+//         navigateAfterSeconds: LoginPage(),
+//         loaderColor: Colors.transparent,
+//       ),
+//       Center(
+//         child: BoxDecorationImagem(400, "assets/logo_health_pets.png"),
+//       ),
+//     ],
+//   );
+// }

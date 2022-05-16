@@ -81,7 +81,6 @@ class _CalendarioState extends State<Calendario> {
       _selectedDay = date;
       selectedEvent = events[_selectedDay] ?? [];
     });
-    print('_selectedDay: $_selectedDay');
   }
 
   @override
@@ -124,7 +123,7 @@ class _CalendarioState extends State<Calendario> {
             },
             isExpanded: true,
             //expandableDateFormat: 'EEEE, dd. MMMM yyyy',
-            events: events,    
+            events: events,
           ),
         ),
       ),
