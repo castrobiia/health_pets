@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:health_pets/class/util.dart';
 
 import 'package:health_pets/models/animal-model.dart';
@@ -83,4 +84,28 @@ class AnimalRepository {
     final List<dynamic> decodedJson = jsonDecode(response.body);
     return decodedJson.map((json) => AnimalModel.fromJson(json)).toList();
   }
+
+  getAnimal(int id) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = await prefs.get('token').toString();
+
+  var header = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer ${token}"
+  };
+
+  const url = 'https://www.healthpets.app.br/api/animal/';
+  final response =
+      await http.get(Uri.parse(url + id.toString()), headers: header);
+
+  // dynamic animal = jsonDecode(response.body);
+
+  // print('Animal Function ${animal}');
+  var animal = AnimalModel.fromJson(jsonDecode(response.body));
+
+  // debugPrint("Variavel animal: ${animal.toString()}");
+  // debugPrint("Objeto teste: ${test}");
+  return animal;
+}
 }
