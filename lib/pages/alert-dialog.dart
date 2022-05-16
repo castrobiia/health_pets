@@ -188,3 +188,36 @@ compartilharAnimal(BuildContext context, id) {
     },
   );
 }
+
+opcoesVacina(BuildContext context) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("Vacina: V8"),
+        content: Container(
+          height: MediaQuery.of(context).size.height * 0.15,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Editar",
+                  style: TextStyle(fontSize: 20, color: ColorTheme.rosa1),
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Excluir",
+                  style: TextStyle(fontSize: 20, color: ColorTheme.rosa1),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/vacina-entity.dart';
+import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
 import 'vacina-card.widget.dart';
@@ -50,13 +51,18 @@ class VacinaLista extends StatelessWidget {
               itemBuilder: (context, index) {
                 var vacina = list[index];
                 return Container(
-                  child: VacinaCard(
-                    idVacina: vacina['id'] ?? 0,
-                    nomeVacina: vacina['nome'] ?? '',
-                    dataAplicacao: vacina['data_aplicacao'] ?? '',
-                    fabricante: vacina['fabricante'] ?? '',
-                    lote: vacina['lote'] ?? '',
-                    idAnimal: vacina['idAnimal'] ?? 0,
+                  child: GestureDetector(
+                    onTap: () {
+                      opcoesVacina(context);
+                    },
+                    child: VacinaCard(
+                      idVacina: vacina['id'] ?? 0,
+                      nomeVacina: vacina['nome'] ?? '',
+                      dataAplicacao: vacina['data_aplicacao'] ?? '',
+                      fabricante: vacina['fabricante'] ?? '',
+                      lote: vacina['lote'] ?? '',
+                      idAnimal: vacina['idAnimal'] ?? 0,
+                    ),
                   ),
                 );
               },
