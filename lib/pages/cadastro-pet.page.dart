@@ -139,8 +139,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   builder: (context, snapshot) {
                     List<dynamic> listaEspecies =
                         EspecieEntity().toList(snapshot.data);
-
-                    print('listaEspecies: $listaEspecies');
                     return Column(
                       children: <Widget>[
                         Form(
@@ -244,8 +242,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 height: 30,
                               ),
                               Container(
-                                 width: double.infinity,
-                                decoration: botaoRetangulo(),    
+                                width: double.infinity,
+                                decoration: botaoRetangulo(),
                                 child: TextButton(
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
