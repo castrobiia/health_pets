@@ -13,8 +13,8 @@ class RacaEntity {
         await http.get(Uri.parse(url), headers: Header().getHeader());
     var racas = jsonDecode(response.body);
 
-    listaRacas = toList(racas);
-    return listaRacas;
+    // listaRacas = toList(racas);
+    return racas;
   }
 
   List<RacasModel> toList(dynamic listaRacas) {
