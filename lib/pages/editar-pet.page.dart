@@ -138,7 +138,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
   List listaRacas = [];
 
   setRacas(id) async {
-    var list = await RacaEntity().getRacasPorEspecie(id);
+    var list = await RacaEntity().getRacasPorEspecie(id.toString());
     setState(() {
       listaRacas = list;
     });
@@ -151,9 +151,6 @@ class _EditarPetPageState extends State<EditarPetPage> {
     print(this.id);
 
     catchAnimal(this.id);
-    print("ANimal retornado: ${animal}");
-    // nomeController.text = animal.nome;
-    // dataNascimentoController.text = animal.dataNascimento;
 
     return Scaffold(
       appBar: AppBar(
@@ -212,6 +209,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
             this.animal = snapshot.data;
             nomeController.text = animal.nome;
             dataNascimentoController.text = animal.dataNascimento;
+            // setRacas(animal.idEspecie as int);
 
             return Container(
               height: double.maxFinite,
@@ -260,6 +258,18 @@ class _EditarPetPageState extends State<EditarPetPage> {
                     FutureBuilder<dynamic>(
                       future: EspecieEntity().getEspecies(),
                       builder: (context, snapshot) {
+                        if (snapshot.connectionState != ConnectionState.done) {
+                          return Center(
+                              child: Container(child: CircularProgressIndicator()));
+                        }
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Container(
+                              child: Text(
+                                  AppLocalizations.of(context)!.errorLoading),
+                            ),
+                          );
+                        }
                         List<dynamic> listaEspecies =
                         EspecieEntity().toList(snapshot.data);
 
@@ -318,26 +328,13 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Container(
+                                  Container( //Especie
                                     width: double.infinity,
-                                    decoration: const BoxDecoration(
-                                      // border: Border(
-                                      //   bottom: BorderSide(width: 1.0, color: Color(0xFF000000)),
-                                      // ),
-                                    ),
                                     child: SizedBox(
                                       width: double.infinity,
                                       child: DropdownButton(
                                         value: animal.idEspecie,
                                         hint: Text("Espécie"),
-                                        // validator: (value) {
-                                        //   if (value == null) {
-                                        //     return "Selecione a espécie";
-                                        //   }
-                                        //   return null;
-                                        // },
-                                        // onSaved: (input) =>
-                                        // _especie = input!.toString(),
                                         style: TextStyle(
                                             fontSize: 17, color: Colors.black),
                                         items: listaEspecies.map((item) {
@@ -356,89 +353,14 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                             setRacas(especieController.text);
                                           });
                                         },
-                                        // value: especieId,
                                       ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    decoration: const BoxDecoration(
-                                      // border: Border(
-                                      //   bottom: BorderSide(width: 1.0, color: Color(0xFF000000)),
-                                      // ),
-                                    ),
-                                    child: SizedBox(
-                                        width: double.infinity,
-                                        child: DropdownButton(
-                                          value: animal.idRaca,
-                                          hint: Text("Raça"),
-                                          // validator: (value) {
-                                          //   if (value == null) {
-                                          //     return "Selecione a raça";
-                                          //   }
-                                          //   return null;
-                                          // },
-                                          // onChanged: (input) =>
-                                          // _especie = input!.toString(),
-                                          style: TextStyle(
-                                              fontSize: 17, color: Colors.black),
-                                          items: listaRacas.map((item) {
-                                            return DropdownMenuItem(
-                                              child: new Text(
-                                                item.nome,
-                                                style: TextStyle(fontSize: 17),
-                                              ),
-                                              value: item.id,
-                                            );
-                                          }).toList(),
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              racaController.text = newValue.toString();
-                                            });
-                                          },
-                                          // value: racaId,
-                                        ),
                                     ),
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
 
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    decoration: botaoRetangulo(),
-                                    child: TextButton(
-                                      onPressed: () async {
-                                        if (_formKey.currentState!.validate()) {
-                                          //salvar o estado do formulário
-                                          _formKey.currentState!.save();
 
-                                          String nome = nomeController.text;
-                                          String data_nascimento =
-                                              dataNascimentoTesteController.text;
-                                          var id_especie = especieController.text;
-                                          String id_raca = racaController.text;
-                                          String foto =
-                                              pickedFile?.path ?? 'default.png';
-
-                                          if (await AnimalRepository().postAnimal(
-                                              nome,
-                                              data_nascimento,
-                                              id_especie,
-                                              id_raca,
-                                              foto) ==
-                                              '200') {}
-
-                                          setarMaterialPageRoute(
-                                              context, TabsPage());
-                                        }
-                                      },
-                                      child: textBotao("Salvar"),
-                                    ),
-                                  )
                                 ],
                               ),
                             ),
@@ -446,6 +368,91 @@ class _EditarPetPageState extends State<EditarPetPage> {
                         );
                       },
                     ),
+                FutureBuilder<dynamic>(
+                  future: RacaEntity().getRacasPorEspecie(animal.idEspecie.toString()),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return Center(
+                          child: Container(child: CircularProgressIndicator()));
+                    }
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Container(
+                          child: Text(
+                              AppLocalizations.of(context)!.errorLoading),
+                        ),
+                      );
+                    }
+                    List<dynamic> listaRacas = RacaEntity().toList(snapshot.data);
+
+                    // print('listaEspecies: $listaEspecies');
+                    return Column(
+                      children: <Widget>[
+                        Container( //Raça
+                          width: double.infinity,
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: DropdownButton(
+                              value: animal.idRaca,
+                              hint: Text("Raça"),
+                              style: TextStyle(
+                                  fontSize: 17, color: Colors.black),
+                              items: listaRacas.map((item) {
+                                return DropdownMenuItem(
+                                  child: new Text(
+                                    item.nome,
+                                    style: TextStyle(fontSize: 17),
+                                  ),
+                                  value: item.id,
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  racaController.text = newValue.toString();
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: botaoRetangulo(),
+                      child: TextButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            //salvar o estado do formulário
+                            _formKey.currentState!.save();
+
+                            String nome = nomeController.text;
+                            String data_nascimento =
+                                dataNascimentoTesteController.text;
+                            var id_especie = especieController.text;
+                            String id_raca = racaController.text;
+                            String foto =
+                                pickedFile?.path ?? 'default.png';
+
+                            if (await AnimalRepository().postAnimal(
+                                nome,
+                                data_nascimento,
+                                id_especie,
+                                id_raca,
+                                foto) ==
+                                '200') {}
+
+                            setarMaterialPageRoute(
+                                context, TabsPage());
+                          }
+                        },
+                        child: textBotao("Salvar"),
+                      ),
+                    )
                   ],
                 ),
               ),
