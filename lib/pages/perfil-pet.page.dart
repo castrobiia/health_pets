@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/animal-entity.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';

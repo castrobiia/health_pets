@@ -48,70 +48,21 @@ class _HistoricoPetState extends State<HistoricoPet> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          setarMaterialPageRoute(context, VacinaPage(id));
-                        }, // Image tapped
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: Image.asset("assets/injection.png"),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              AppLocalizations.of(context)!.vaccines,
-                              style: TextStyle(fontSize: 15),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "5",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
+                      iconesHistorico(
+                        context,
+                        VacinaPage(id),
+                        Image.asset("assets/injection.png"),
+                        AppLocalizations.of(context)!.vaccines,
+                        "5",
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          setarMaterialPageRoute(
-                              context, DiarioPet()); // corrigir
-                        }, // Image tapped
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: Image.asset("assets/diario.png"),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              AppLocalizations.of(context)!.diary,
-                              style: TextStyle(fontSize: 15),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "5",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                      ),
+                      iconesHistorico(context, DiarioPet(), Image.asset("assets/diario.png"), AppLocalizations.of(context)!.diary, "1"),
+                      
                     ],
                   ),
                   SfCartesianChart(
                     primaryXAxis: CategoryAxis(),
-                    title: ChartTitle(text: AppLocalizations.of(context)!.weight),
+                    title:
+                        ChartTitle(text: AppLocalizations.of(context)!.weight),
                     series: <ChartSeries<HistoricoPet, String>>[
                       LineSeries<HistoricoPet, String>(
                           dataSource: <HistoricoPet>[
