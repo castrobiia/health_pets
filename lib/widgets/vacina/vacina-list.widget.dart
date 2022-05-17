@@ -51,18 +51,13 @@ class VacinaLista extends StatelessWidget {
               itemBuilder: (context, index) {
                 var vacina = list[index];
                 return Container(
-                  child: GestureDetector(
-                    onTap: () {
-                      opcoesVacina(context);
-                    },
-                    child: VacinaCard(
-                      idVacina: vacina['id'] ?? 0,
-                      nomeVacina: vacina['nome'] ?? '',
-                      dataAplicacao: vacina['data_aplicacao'] ?? '',
-                      fabricante: vacina['fabricante'] ?? '',
-                      lote: vacina['lote'] ?? '',
-                      idAnimal: vacina['idAnimal'] ?? 0,
-                    ),
+                  child: VacinaCard(
+                    idVacina: vacina['id'] ?? 0,
+                    nomeVacina: vacina['nome'] ?? '',
+                    dataAplicacao: vacina['data_aplicacao'] ?? '',
+                    fabricante: vacina['fabricante'] ?? '',
+                    lote: vacina['lote'] ?? '',
+                    idAnimal: vacina['idAnimal'] ?? 0,
                   ),
                 );
               },
