@@ -180,3 +180,31 @@ erroCarregarDados(BuildContext context) {
     ),
   );
 }
+
+iconesHistorico(context, page, image_icon, titulo, qnt_cadastrado) {
+  return GestureDetector(
+    onTap: () {
+      setarMaterialPageRoute(context, page);
+    }, // Image tapped
+    child: Column(
+      children: <Widget>[
+        SizedBox(
+          width: 50,
+          height: 50,
+          child: image_icon,
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(titulo),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          qnt_cadastrado,
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+        ),
+      ],
+    ),
+  );
+}
