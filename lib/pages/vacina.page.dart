@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/widgets/vacina/vacina-list.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/cadastro-vacina.page.dart';
-import 'package:health_pets/pages/menu-vacina.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../themes/color_theme.dart';
@@ -37,14 +36,6 @@ class _VacinaPageState extends State<VacinaPage> {
           title: Text(AppLocalizations.of(context)!.vaccines),
           centerTitle: true,
           elevation: 1,
-          actions: [
-            PopupMenuButton<MenuItemVacina>(
-              onSelected: (item) => onSelected(context, item),
-              itemBuilder: (context) => [
-                ...MenuItensVacina.items.map(buildItem).toList(),
-              ],
-            ),
-          ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
