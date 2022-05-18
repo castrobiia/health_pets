@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [
         Locale('en', ''),
-        Locale('es', ''),
+        //Locale('es', ''),
         Locale('pt', ''),
       ],
       title: 'Health Pets',
