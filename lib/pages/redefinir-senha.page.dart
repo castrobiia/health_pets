@@ -4,8 +4,49 @@ import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class RedefinirSenha extends StatelessWidget {
+class RedefinirSenha extends StatefulWidget {
   const RedefinirSenha({Key? key}) : super(key: key);
+
+  @override
+  State<RedefinirSenha> createState() => _RedefinirSenhaState();
+}
+
+class _RedefinirSenhaState extends State<RedefinirSenha> {
+  createInfoDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(AppLocalizations.of(context)!.information),
+            content: Container(
+              height: 160,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(AppLocalizations.of(context)!.passwordContent),
+                  SizedBox(height: 15),
+                  Text(AppLocalizations.of(context)!.uppercase),
+                  SizedBox(height: 7),
+                  Text(AppLocalizations.of(context)!.lowercase),
+                  SizedBox(height: 7),
+                  Text(AppLocalizations.of(context)!.number),
+                  SizedBox(height: 7),
+                  Text(AppLocalizations.of(context)!.specialCharacter),
+                  SizedBox(height: 7),
+                  Text(AppLocalizations.of(context)!.character),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  },
+                  icon: Icon(Icons.close))
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +79,17 @@ class RedefinirSenha extends StatelessWidget {
               SizedBox(
                 height: 25,
               ),
-              TextFormField(
+              TextField(
                 autofocus: false,
                 keyboardType: TextInputType.text,
+                obscureText: true,
                 decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      createInfoDialog(context);
+                    },
+                    icon: Icon(Icons.info),
+                  ),
                   labelText: AppLocalizations.of(context)!.password,
                   labelStyle: TextStyle(
                     color: ColorTheme.rosa5,
