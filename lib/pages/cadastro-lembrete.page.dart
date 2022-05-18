@@ -13,23 +13,26 @@ class CadastroLembrete extends StatefulWidget {
 }
 
 class _CadastroLembreteState extends State<CadastroLembrete> {
-  TextEditingController tituloController = TextEditingController();
+  TextEditingController categoriaController = TextEditingController();
+  TextEditingController subcategoriaController = TextEditingController();
+  TextEditingController animalController = TextEditingController();
   TextEditingController descricaoController = TextEditingController();
   TextEditingController localizacaoController = TextEditingController();
   TextEditingController dataController = TextEditingController();
-  TextEditingController prioridadeController = TextEditingController();
-  TextEditingController horaInicioController = TextEditingController();
-  TextEditingController horaFimController = TextEditingController();
+  TextEditingController valorController = TextEditingController();
 
-  String? _titulo;
-  String? _localizacao;
-  String? _data;
-  String? _lembrete;
+  String? _animal,
+      _localizacao,
+      _data,
+      _subcategoria,
+      _categoria,
+      _valor,
+      _descricao;
 
   bool checkedValue = false;
   DateTime _dataHoje = DateTime.now();
 
-  var _datePicker, _timePickerInicio, _timePickerFim;
+  var _datePicker;
 
   Future _dataSelecionada(BuildContext context) async {
     _datePicker = await showDatePicker(
@@ -51,42 +54,6 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
 
     dataController.text =
         DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
-  }
-
-  Future _horaInicioSelecionada(BuildContext context) async {
-    _timePickerInicio = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-
-    setState(
-      () {
-        horaInicioController.text = _timePickerInicio!.format(context);
-      },
-    );
-  }
-
-  Future _horaFimSelecionada(BuildContext context) async {
-    _timePickerFim = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-
-    //validar se hora fim não é menor que hora início
-    var earlier = _timePickerInicio;
-    bool verificarHora = earlier.isBefore(_timePickerFim);
-
-    if (_timePickerFim == _timePickerInicio) {
-      exibirMensagem(context, 'Hora Início e Fim não podem ser iguais');
-    } else if (verificarHora) {
-      exibirMensagem(context, 'Hora Fim não pode ser menor que hora Início');
-    } else {
-      setState(
-        () {
-          horaFimController.text = _timePickerFim!.format(context);
-        },
-      );
-    }
   }
 
   @override
@@ -112,17 +79,51 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
             children: <Widget>[
               TextFormField(
                 autofocus: false,
-                controller: tituloController,
-                maxLength: 30,
+                controller: categoriaController,
                 validator: (value) => validarCampo(value),
-                onSaved: (input) => _titulo = input!,
+                onSaved: (input) => _categoria = input!,
                 decoration: InputDecoration(
-                  labelText: "Título",
+                  labelText: "Categoria",
                   labelStyle: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 17,
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                autofocus: false,
+                controller: subcategoriaController,
+                validator: (value) => validarCampo(value),
+                onSaved: (input) => _subcategoria = input!,
+                decoration: InputDecoration(
+                  labelText: "Subcategoria",
+                  labelStyle: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                autofocus: false,
+                controller: animalController,
+                validator: (value) => validarCampo(value),
+                onSaved: (input) => _animal = input!,
+                decoration: InputDecoration(
+                  labelText: "Animal",
+                  labelStyle: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               TextFormField(
                 autofocus: false,
@@ -151,57 +152,8 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                   );
                 },
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      autofocus: false,
-                      controller: horaInicioController,
-                      validator: (value) => validarCampo(value),
-                      onSaved: (input) => _titulo = input!,
-                      decoration: InputDecoration(
-                        labelText: "Início",
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
-                        ),
-                      ),
-                      readOnly: true,
-                      onTap: () {
-                        setState(
-                          () {
-                            _horaInicioSelecionada(context);
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(width: 25),
-                  Expanded(
-                    child: TextFormField(
-                      autofocus: false,
-                      readOnly: true,
-                      controller: horaFimController,
-                      validator: (value) => validarCampo(value),
-                      onSaved: (input) => _titulo = input!,
-                      decoration: InputDecoration(
-                        labelText: "Fim",
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
-                        ),
-                      ),
-                      onTap: () {
-                        setState(
-                          () {
-                            _horaFimSelecionada(context);
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: 10,
               ),
               TextFormField(
                 autofocus: false,
@@ -217,19 +169,25 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               TextFormField(
                 autofocus: false,
-                keyboardType: TextInputType.text,
-                controller: prioridadeController,
+                keyboardType: TextInputType.number,
+                controller: valorController,
                 validator: (value) => validarCampo(value),
-                onSaved: (input) => _lembrete = input!,
+                onSaved: (input) => _valor = input!,
                 decoration: InputDecoration(
-                  labelText: "Prioridade",
+                  labelText: "Valor",
                   labelStyle: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 17,
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               TextFormField(
                 autofocus: false,
@@ -238,7 +196,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                 maxLines: 3,
                 maxLength: 150,
                 validator: (value) => validarCampo(value),
-                onSaved: (input) => _lembrete = input!,
+                onSaved: (input) => _descricao = input!,
                 decoration: InputDecoration(
                   labelText: "Descrição",
                   labelStyle: TextStyle(
@@ -246,6 +204,20 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                     fontSize: 17,
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              CheckboxListTile(
+                title: Text("Adicionar lembrete"),
+                value: checkedValue,
+                onChanged: (newValue) {
+                  setState(() {
+                    checkedValue = newValue!;
+                  });
+                },
+                controlAffinity:
+                    ListTileControlAffinity.leading, //  <-- leading Checkbox
               ),
               SizedBox(
                 height: 30,

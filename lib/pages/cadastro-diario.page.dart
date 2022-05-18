@@ -59,6 +59,7 @@ class _CadastroDiarioState extends State<CadastroDiario> {
         ),
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height * 1,
         color: Colors.white,
         child: SingleChildScrollView(
           child: Container(
