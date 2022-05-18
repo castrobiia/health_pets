@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/redefinir-senha.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ResetSenha extends StatelessWidget {
-  const ResetSenha({Key? key}) : super(key: key);
+class RedefinirSenha extends StatelessWidget {
+  const RedefinirSenha({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class ResetSenha extends StatelessWidget {
                 child: Image.asset("assets/reset-password.png"),
               ),
               Text(
-                AppLocalizations.of(context)!.forgotPassword,
+                AppLocalizations.of(context)!.resetPassword,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 32,
@@ -39,22 +38,24 @@ class ResetSenha extends StatelessWidget {
               SizedBox(
                 height: 25,
               ),
-              Text(
-                AppLocalizations.of(context)!.informationRecovery,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
               TextFormField(
                 autofocus: false,
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.email,
+                  labelText: AppLocalizations.of(context)!.password,
+                  labelStyle: TextStyle(
+                    color: ColorTheme.rosa5,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                autofocus: false,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.confirmPassword,
                   labelStyle: TextStyle(
                     color: ColorTheme.rosa5,
                     fontWeight: FontWeight.w400,
@@ -71,12 +72,12 @@ class ResetSenha extends StatelessWidget {
                 decoration: boxDecoration(ColorTheme.rosa5),
                 child: TextButton(
                   onPressed: () {
-                    exibirMensagem(
-                        context, AppLocalizations.of(context)!.emailSent);
+                    exibirMensagem(context,
+                        AppLocalizations.of(context)!.resetPasswordSend);
 
-                    setarMaterialPageRoute(context, RedefinirSenha());
+                    setarMaterialPageRoute(context, LoginPage());
                   },
-                  child: textBotao(AppLocalizations.of(context)!.send),
+                  child: textBotao(AppLocalizations.of(context)!.reset),
                 ),
               ),
             ],

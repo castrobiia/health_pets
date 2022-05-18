@@ -51,7 +51,10 @@
     "deleteAccount": "Deseja excluir sua conta?",
     "deleteVaccine": "Deseja excluir esta vacina?",
     "yes": "Sim",
-    "no": "Não"
+    "no": "Não",
+    "reset": "Redefinir",
+    "resetPassword": "Redefinir Senha",
+    "resetPasswordSend": "Senha redefinida com sucesso"
 }
 
 
