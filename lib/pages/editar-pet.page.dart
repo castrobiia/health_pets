@@ -332,7 +332,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                     width: double.infinity,
                                     child: DropdownButtonFormField(
                                       value: animal.idEspecie,
-                                      hint: Text("Espécie"),
+                                      hint: Text(AppLocalizations.of(context)!.species),
                                       style: TextStyle(
                                           fontSize: 17, color: Colors.black),
                                       items: listaEspecies.map((item) {

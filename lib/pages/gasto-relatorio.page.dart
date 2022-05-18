@@ -25,8 +25,8 @@ class _RelatoriosGastosState extends State<RelatoriosGastos> {
             child: Column(
               children: [
                 const SizedBox(height: 8.0),
-                const Text(
-                  "Gastos por pet",
+                Text(
+                  AppLocalizations.of(context)!.expensesPets,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 24.0),

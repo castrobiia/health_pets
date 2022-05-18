@@ -24,8 +24,8 @@ class _GastoPageState extends State<GastoPage> {
               Tab(
                 text: AppLocalizations.of(context)!.overview,
               ),
-              Tab(text: "Relatórios"),
-              Tab(text: " Metas"),
+              Tab(text: AppLocalizations.of(context)!.reports),
+              Tab(text: AppLocalizations.of(context)!.goals),
             ],
           ),
           automaticallyImplyLeading: false,

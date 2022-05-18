@@ -27,7 +27,7 @@ class _DiarioPetState extends State<DiarioPet> {
       ),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Diário"),
+        title: Text(AppLocalizations.of(context)!.diary),
         centerTitle: true,
         elevation: 1,
       ),

@@ -12,7 +12,7 @@ class CadastroUsuario extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Informações sobre a senha"),
+            title: Text(AppLocalizations.of(context)!.passwordInformation),
             content: Text("Teste 2"),
             actions: <Widget>[
               IconButton(
