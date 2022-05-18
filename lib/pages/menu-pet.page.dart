@@ -21,7 +21,6 @@ class MenuItemsPet {
   static const List<MenuItemPet> items = [
     itemEditar,
     itemExcluir,
-    itemCompartilhar,
   ];
 
   static const itemEditar = MenuItemPet(
@@ -32,11 +31,6 @@ class MenuItemsPet {
   static const itemExcluir = MenuItemPet(
     texto: "Excluir",
     icone: Icons.delete,
-  );
-
-  static const itemCompartilhar = MenuItemPet(
-    texto: "Compartilhar",
-    icone: Icons.share,
   );
 }
 
@@ -63,7 +57,5 @@ void onSelected(BuildContext context, MenuItemPet item, dynamic id) {
     case MenuItemsPet.itemExcluir:
       confirmarExclusaoAnimal(context, id);
       break;
-    case MenuItemsPet.itemCompartilhar:
-      compartilharAnimal(context, id);
   }
 }
