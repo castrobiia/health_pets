@@ -50,16 +50,55 @@ class _HistoricoPetState extends State<HistoricoPet> {
                       iconesHistorico(
                         context,
                         VacinaPage(id),
+                        Image.asset("assets/consultation.png"),
+                        AppLocalizations.of(context)!.consultations,
+                        "5",
+                      ),
+                      iconesHistorico(
+                        context,
+                        DiarioPet(),
+                        Image.asset("assets/diario.png"),
+                        AppLocalizations.of(context)!.diary,
+                        "1",
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      iconesHistorico(
+                        context,
+                        VacinaPage(id),
+                        Image.asset("assets/microscope.png"),
+                        AppLocalizations.of(context)!.exams,
+                        "5",
+                      ),
+                      iconesHistorico(
+                        context,
+                        DiarioPet(),
+                        Image.asset("assets/medicine.png"),
+                        AppLocalizations.of(context)!.medicines,
+                        "1",
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      iconesHistorico(
+                        context,
+                        DiarioPet(),
+                        Image.asset("assets/surgery.png"),
+                        AppLocalizations.of(context)!.exams,
+                        "1",
+                      ),
+                      iconesHistorico(
+                        context,
+                        VacinaPage(id),
                         Image.asset("assets/injection.png"),
                         AppLocalizations.of(context)!.vaccines,
                         "5",
                       ),
-                      iconesHistorico(
-                          context,
-                          DiarioPet(),
-                          Image.asset("assets/diario.png"),
-                          AppLocalizations.of(context)!.diary,
-                          "1"),
                     ],
                   ),
                 ],
