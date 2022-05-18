@@ -206,6 +206,20 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                 ),
               ),
               SizedBox(
+                height: 10,
+              ),
+              CheckboxListTile(
+                title: Text("Adicionar lembrete"),
+                value: checkedValue,
+                onChanged: (newValue) {
+                  setState(() {
+                    checkedValue = newValue!;
+                  });
+                },
+                controlAffinity:
+                    ListTileControlAffinity.leading, //  <-- leading Checkbox
+              ),
+              SizedBox(
                 height: 30,
               ),
               Container(
