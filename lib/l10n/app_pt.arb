@@ -54,7 +54,11 @@
     "no": "Não",
     "reset": "Redefinir",
     "resetPassword": "Redefinir Senha",
-    "resetPasswordSend": "Senha redefinida com sucesso"
+    "resetPasswordSend": "Senha redefinida com sucesso",
+    "registerPet": "Cadastrar animal",
+    "editPet": "Editar Animal",
+
+
 }
 
 

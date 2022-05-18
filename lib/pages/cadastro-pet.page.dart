@@ -95,11 +95,11 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                 setarMaterialPageRoute(context, TabsPage());
               }
             },
-            child: const Text("Salvar"),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
         title: Text(
-          "Cadastrar Pet",
+          AppLocalizations.of(context)!.registerPet,
           style: TextStyle(
             color: ColorTheme.salmao1,
           ),
@@ -145,7 +145,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              setarCampoForms(nomeController, "Nome", _nome,
+                              setarCampoForms(nomeController, AppLocalizations.of(context)!.name, _nome,
                                   validator: (value) => validarCampo(value)),
                               TextFormField(
                                 autofocus: false,
@@ -177,7 +177,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 height: 10,
                               ),
                               DropdownButtonFormField(
-                                hint: Text("Espécie"),
+                                hint: AppLocalizations.of(context)!.species,
                                 validator: (value) {
                                   if (value == null) {
                                     return "Selecione a espécie";
@@ -211,7 +211,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                               ),
                               DropdownButtonFormField(
                                 isExpanded: true,
-                                hint: Text("Raça"),
+                                hint: AppLocalizations.of(context)!.breed,
                                 validator: (value) {
                                   if (value == null) {
                                     return "Selecione a raça";
@@ -270,7 +270,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                           context, TabsPage());
                                     }
                                   },
-                                  child: textBotao("Salvar"),
+                                  child: textBotao(AppLocalizations.of(context)!.save),
                                 ),
                               )
                             ],

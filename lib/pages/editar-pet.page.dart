@@ -1,16 +1,11 @@
-import 'dart:convert';
-// import 'dart:html';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 import '../class/entity/especie-entity.dart';
 import '../class/entity/raca-entity.dart';
@@ -180,11 +175,11 @@ class _EditarPetPageState extends State<EditarPetPage> {
                 setarMaterialPageRoute(context, TabsPage());
               }
             },
-            child: const Text("Salvar"),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
         title: Text(
-          "Editar Pet",
+          AppLocalizations.of(context)!.editPet,
           style: TextStyle(
             color: ColorTheme.salmao1,
           ),
@@ -400,7 +395,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                               child: DropdownButtonFormField(
                                 isExpanded: true,
                                 value: animal.idRaca,
-                                hint: Text("Raça"),
+                                hint: Text(AppLocalizations.of(context)!.breed),
                                 style: TextStyle(
                                     fontSize: 17, color: Colors.black),
                                 items: listaRacas.map((item) {
@@ -450,7 +445,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           setarMaterialPageRoute(context, TabsPage());
                         }
                       },
-                      child: textBotao("Salvar"),
+                      child: textBotao(AppLocalizations.of(context)!.save),
                     ),
                   )
                 ],
