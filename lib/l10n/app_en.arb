@@ -45,7 +45,13 @@
     "weight": "Weight",
     "@forgotPassword":{
         "description": "Welcome to HealthPets!"
-    }
+    },
+    "alert": "Alert",
+    "deleteAnimal": "Do you want to delete this animal?",
+    "deleteAccount": "Do you want to delete your account?",
+    "deleteVaccine": "Do you want to delete this vaccine?",
+    "yes": "Yes",
+    "no": "No"
 }
 
 

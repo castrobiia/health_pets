@@ -22,14 +22,14 @@ confirmarExclusaoAnimal(BuildContext context, id) {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Alerta"),
-          content: Text("Deseja excluir este animal?"),
+          title: Text(AppLocalizations.of(context)!.alert),
+          content: Text(AppLocalizations.of(context)!.deleteAnimal),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context, rootNavigator: true).pop();
               },
-              child: const Text('Não'),
+              child: Text(AppLocalizations.of(context)!.no),
             ),
             TextButton(
               onPressed: () {
@@ -38,7 +38,7 @@ confirmarExclusaoAnimal(BuildContext context, id) {
                   setarMaterialPageRoute(context, PetPage());
                 });
               },
-              child: const Text('Sim'),
+              child: Text(AppLocalizations.of(context)!.yes),
             ),
           ],
         );
@@ -51,14 +51,14 @@ confirmarExclusaoUsuario(BuildContext context) {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Alerta"),
-          content: Text("Deseja excluir sua conta?"),
+          title: Text(AppLocalizations.of(context)!.alert),
+          content: Text(AppLocalizations.of(context)!.deleteAccount),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context, rootNavigator: true).pop();
               },
-              child: const Text('Não'),
+              child: Text(AppLocalizations.of(context)!.no),
             ),
             TextButton(
               onPressed: () {
@@ -68,7 +68,7 @@ confirmarExclusaoUsuario(BuildContext context) {
                   setarMaterialPageRoute(context, LoginPage());
                 });
               },
-              child: const Text('Sim'),
+              child: Text(AppLocalizations.of(context)!.yes),
             ),
           ],
         );
@@ -81,14 +81,14 @@ confirmarExclusaoVacina(BuildContext context, id) {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Alerta"),
-          content: Text("Deseja excluir este vacina?"),
+          title: Text(AppLocalizations.of(context)!.alert),
+          content: Text(AppLocalizations.of(context)!.deleteVaccine),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context, rootNavigator: true).pop();
               },
-              child: const Text('Não'),
+              child: Text(AppLocalizations.of(context)!.no),
             ),
             TextButton(
               onPressed: () {
@@ -97,7 +97,7 @@ confirmarExclusaoVacina(BuildContext context, id) {
                   setarMaterialPageRoute(context, VacinaPage(id));
                 });
               },
-              child: const Text('Sim'),
+              child: Text(AppLocalizations.of(context)!.yes),
             ),
           ],
         );

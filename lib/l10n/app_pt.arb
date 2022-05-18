@@ -45,7 +45,13 @@
     "weight": "Peso",
     "@password":{
         "description": "Bem-vindo ao HealthPets!"
-    }
+    },
+    "alert": "Alerta",
+    "deleteAnimal": "Deseja excluir este animal?",
+    "deleteAccount": "Deseja excluir sua conta?",
+    "deleteVaccine": "Deseja excluir esta vacina?",
+    "yes": "Sim",
+    "no": "Não"
 }
 
 
