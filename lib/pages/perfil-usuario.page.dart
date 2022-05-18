@@ -38,11 +38,7 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
               height: 20,
             ),
             Container(
-              margin: EdgeInsets.only(left: 20, right: 20, bottom: 80),
-              padding: EdgeInsets.only(
-                left: 40,
-                right: 40,
-              ),
+              margin: EdgeInsets.only(left: 30, right: 30, bottom: 80),
               width: double.infinity,
               height: 450,
               //decoration: boxDecoration(Colors.white),
@@ -67,7 +63,19 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       //carregar imagem
-                      BoxDecorationImagem(200, "assets/perfil-usuario1.png"),
+                      Container(
+                        width: 200,
+                        height: 200,
+                        margin: EdgeInsets.only(top: 15, left: 10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: Image.network(
+                                      "https://healthpets.app.br/storage/user/${usuario['foto']}")
+                                  .image),
+                        ),
+                      ),
                       Text(
                         usuario['nome'] ?? '',
                         style: TextStyle(
