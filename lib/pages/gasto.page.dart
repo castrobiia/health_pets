@@ -22,7 +22,7 @@ class _GastoPageState extends State<GastoPage> {
           bottom: TabBar(
             tabs: [
               Tab(
-                text: "Visão geral",
+                text: AppLocalizations.of(context)!.overview,
               ),
               Tab(text: "Relatórios"),
               Tab(text: " Metas"),
@@ -30,7 +30,7 @@ class _GastoPageState extends State<GastoPage> {
           ),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
-          title: Text("Gastos"),
+          title: Text(AppLocalizations.of(context)!.budget),
           elevation: 0,
           centerTitle: true,
           actions: [

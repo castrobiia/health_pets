@@ -56,7 +56,9 @@
     "resetPassword": "Reset Password",
     "resetPasswordSend": "Password successfully reset",
     "registerPet": "Register Pet",
-    "editPet": "Edit Pet"
+    "editPet": "Edit Pet",
+    "budget": "Budget",
+    "overview": "Overview"
 }
 
 
