@@ -177,7 +177,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 height: 10,
                               ),
                               DropdownButtonFormField(
-                                hint: AppLocalizations.of(context)!.species,
+                                hint: Text(AppLocalizations.of(context)!.species),
                                 validator: (value) {
                                   if (value == null) {
                                     return "Selecione a espécie";
@@ -211,7 +211,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                               ),
                               DropdownButtonFormField(
                                 isExpanded: true,
-                                hint: AppLocalizations.of(context)!.breed,
+                                hint: Text(AppLocalizations.of(context)!.breed),
                                 validator: (value) {
                                   if (value == null) {
                                     return "Selecione a raça";

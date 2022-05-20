@@ -67,7 +67,9 @@
     "vaccineApplied": "Vacina aplicada",
     "diaryTitle": "Título do diário",
     "diaryInformation": "Informações do diário",
-    "passwordInformation": "Informações sobre a senha"
+    "passwordInformation": "Informações sobre a senha",
+    "editedVaccine": "Edited Vaccine",
+    "deletedVaccine": "Deleted Vaccine"
 }
 
 
