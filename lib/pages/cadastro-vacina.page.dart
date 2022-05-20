@@ -127,7 +127,7 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 CheckboxListTile(
-                  title: Text("Vacina aplicada"),
+                  title: Text(AppLocalizations.of(context)!.vaccineApplied),
                   value: checkedValue,
                   onChanged: (newValue) {
                     setState(() {

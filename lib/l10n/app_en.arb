@@ -54,7 +54,22 @@
     "no": "No",
     "reset": "Reset",
     "resetPassword": "Reset Password",
-    "resetPasswordSend": "Password successfully reset"
+    "resetPasswordSend": "Password successfully reset",
+    "registerPet": "Register Pet",
+    "editPet": "Edit Pet",
+    "budget": "Budget",
+    "overview": "Overview",
+    "reports": "Reports",
+    "goals": "Goals",
+    "expensesPets": "Expenses for Pet",
+    "addAlert": "Add alert",
+    "calendar": "Calendar",
+    "vaccineApplied": "Vaccine applied",
+    "diaryTitle": "Diary title",
+    "diaryInformation": "Diary information",
+    "passwordInformation": "Password information",
+    "editedVaccine": "Edited Vaccine",
+    "deletedVaccine": "Deleted Vaccine"
 }
 
 

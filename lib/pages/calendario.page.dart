@@ -95,7 +95,7 @@ class _CalendarioState extends State<Calendario> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Calendário"),
+        title: Text(AppLocalizations.of(context)!.calendar),
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 1,

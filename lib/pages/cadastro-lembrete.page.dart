@@ -209,7 +209,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                 height: 10,
               ),
               CheckboxListTile(
-                title: Text("Adicionar lembrete"),
+                title: Text(AppLocalizations.of(context)!.addAlert),
                 value: checkedValue,
                 onChanged: (newValue) {
                   setState(() {

@@ -36,7 +36,7 @@ class VacinaCard extends StatelessWidget {
             onPressed: (context) {
               //setarMaterialPageRoute(context, confirmarExclusaoVacina(idAnimal));
               ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Vacina editada')));
+                  .showSnackBar(SnackBar(content: Text("vacina editada")));
             },
           ),
           SlidableAction(
@@ -45,7 +45,7 @@ class VacinaCard extends StatelessWidget {
             icon: Icons.delete,
             onPressed: (context) {
               ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Vacina deletada')));
+                  .showSnackBar(SnackBar(content: Text("'vacina deletada")));
             },
           ),
         ],

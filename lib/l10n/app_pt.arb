@@ -54,7 +54,22 @@
     "no": "Não",
     "reset": "Redefinir",
     "resetPassword": "Redefinir Senha",
-    "resetPasswordSend": "Senha redefinida com sucesso"
+    "resetPasswordSend": "Senha redefinida com sucesso",
+    "registerPet": "Cadastrar animal",
+    "editPet": "Editar Animal",
+    "budget": "Gastos",
+    "overview": "Visão Geral",
+    "reports": "Relatórios",
+    "goals": "Goals",
+    "expensesPets": "Gastos por animal",
+    "addAlert": "Adicionar lembrete",
+    "calendar": "Calendário",
+    "vaccineApplied": "Vacina aplicada",
+    "diaryTitle": "Título do diário",
+    "diaryInformation": "Informações do diário",
+    "passwordInformation": "Informações sobre a senha",
+    "editedVaccine": "Edited Vaccine",
+    "deletedVaccine": "Deleted Vaccine"
 }
 
 

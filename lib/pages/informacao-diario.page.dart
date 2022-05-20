@@ -23,14 +23,14 @@ class InformacaoDiarioState extends State<InformacaoDiario> {
           ),
         ],
         backgroundColor: Colors.white,
-        title: Text("Título do Diário"),
+        title: Text(AppLocalizations.of(context)!.diaryTitle),
         centerTitle: true,
         elevation: 1,
       ),
       body: Container(
         color: Colors.white,
         child: Center(
-          child: Text('Informação Diário'),
+          child: Text(AppLocalizations.of(context)!.diaryInformation),
         ),
       ),
     );
