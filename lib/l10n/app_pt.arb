@@ -69,7 +69,14 @@
     "diaryInformation": "Informações do diário",
     "passwordInformation": "Informações sobre a senha",
     "editedVaccine": "Edited Vaccine",
-    "deletedVaccine": "Deleted Vaccine"
+    "deletedVaccine": "Deleted Vaccine",
+    "food": "Alimentação",
+    "hygiene": "Higiene",
+    "medicalExpenses": "Despesas Médicas",
+    "leisureFun": "Lazer e Diversão",
+    "accessories": "Acessórios",
+    "others": "Outros",
+    "expensesCategory": "Despesas por categoria"
 }
 
 

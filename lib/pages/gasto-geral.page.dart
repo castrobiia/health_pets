@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/themes/color_theme.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../widgets/widgets.dart';
-import 'cadastro-gasto.page.dart';
 
 class GeraisGastos extends StatelessWidget {
   Map<String, double> categorias = {
@@ -26,8 +22,7 @@ class GeraisGastos extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 8.0),
-                const Text(
-                  "Despesas por categoria",
+                Text(AppLocalizations.of(context)!.expensesCategory,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 50.0),
