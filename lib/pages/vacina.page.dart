@@ -42,6 +42,7 @@ class _VacinaPageState extends State<VacinaPage> {
           children: <Widget>[
             Expanded(
               child: Container(
+                height: MediaQuery.of(context).size.height * 1,
                 color: Colors.white,
                 child: VacinaLista(id),
               ),
