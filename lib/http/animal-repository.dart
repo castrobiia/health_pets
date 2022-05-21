@@ -41,13 +41,14 @@ class AnimalRepository {
       "Authorization": "Bearer ${token}"
     };
 
-    // var body = jsonEncode({
-    //   'nome': nome,
-    //   'data_nascimento': data_nascimento,
-    //   'id_especie': id_especie,
-    //   'id_raca': id_raca,
-    //   'foto': foto,
-    // });
+    var body = jsonEncode({
+      'nome': nome,
+      'data_nascimento': data_nascimento,
+      'id_especie': id_especie,
+      'id_raca': id_raca,
+      'foto': foto,
+    });
+
     var pic;
     if(foto != 'default.png'){
       pic = await http.MultipartFile.fromPath("foto", foto);
@@ -62,18 +63,18 @@ class AnimalRepository {
     request.fields["id_raca"] = id_raca;
     request.files.add(pic);
 
-    print('Nome: ${nome}');
-    print('data_nascimento: ${data_nascimento}');
-    print('id_especie: ${id_especie}');
-    print('id_raca: ${id_raca}');
-    print('foto: ${pic}');
+    // print('Nome: ${nome}');
+    // print('data_nascimento: ${data_nascimento}');
+    // print('id_especie: ${id_especie}');
+    // print('id_raca: ${id_raca}');
+    // print('foto: ${pic}');
     // var response = await request.send();
+
     //
+    final response =
+        await http.post(Uri.parse(url), body: body, headers: headerToken);
+    return jsonDecode(response.statusCode.toString());
     // var resp = await http.Response.fromStream(response);
-    //
-    // // final response =
-    // //     await http.post(Uri.parse(url), body: body, headers: headerToken);
-    // // return jsonDecode(response.statusCode.toString());
     // return jsonDecode(resp.statusCode.toString());
   }
 
