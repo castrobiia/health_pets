@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/pages/cadastro-usuario.page.dart';
+import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 
 import 'package:health_pets/firebase_messaging/custom_firebase_messaging.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const TabsPage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const CadastroUsuario(),
+        '/resetPassword': (context) => const ResetSenha(),
       },
       //Para usar as rotas :
       // Navigator.pushNamed(context, '/home');
