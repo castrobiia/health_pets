@@ -72,32 +72,6 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         backgroundColor: Colors.white,
         elevation: 1,
         centerTitle: true,
-        actions: <Widget>[
-          TextButton(
-            onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                //salvar o estado do formulário
-                _formKey.currentState!.save();
-
-                String nome = nomeController.text;
-                String data_nascimento = dataNascimentoTesteController.text;
-                var id_especie = especieController.text;
-                String id_raca = racaController.text;
-                String foto = pickedFile?.path ?? 'default.png';
-
-                // print("Picked file path: ${pickedFile?.path }");
-                // print("Foto: $foto");
-
-                if (await AnimalRepository().postAnimal(
-                        nome, data_nascimento, id_especie, id_raca, foto) ==
-                    '200') {}
-
-                setarMaterialPageRoute(context, TabsPage());
-              }
-            },
-            child: Text(AppLocalizations.of(context)!.save),
-          ),
-        ],
         title: Text(
           AppLocalizations.of(context)!.registerPet,
           style: TextStyle(
@@ -145,7 +119,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              setarCampoForms(nomeController, AppLocalizations.of(context)!.name, _nome,
+                              setarCampoForms(nomeController,
+                                  AppLocalizations.of(context)!.name, _nome,
                                   validator: (value) => validarCampo(value)),
                               TextFormField(
                                 autofocus: false,
@@ -177,7 +152,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 height: 10,
                               ),
                               DropdownButtonFormField(
-                                hint: Text(AppLocalizations.of(context)!.species),
+                                hint:
+                                    Text(AppLocalizations.of(context)!.species),
                                 validator: (value) {
                                   if (value == null) {
                                     return "Selecione a espécie";
@@ -270,7 +246,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                           context, TabsPage());
                                     }
                                   },
-                                  child: textBotao(AppLocalizations.of(context)!.save),
+                                  child: textBotao(
+                                      AppLocalizations.of(context)!.save),
                                 ),
                               )
                             ],
