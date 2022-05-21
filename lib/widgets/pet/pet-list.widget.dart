@@ -54,6 +54,7 @@ class PetLista extends StatelessWidget {
               itemBuilder: (context, index) {
                 AnimalModel pet = list[index];
                 return Container(
+                  color: Colors.white,
                   child: PetCard(
                     idPet: pet.id ?? 0,
                     fotoPet: pet.foto ?? '',

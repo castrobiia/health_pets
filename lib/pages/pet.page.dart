@@ -29,17 +29,7 @@ class PetPage extends StatelessWidget {
         centerTitle: true,
         elevation: 1,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              color: Colors.white,
-              child: PetLista(),
-            ),
-          ),
-        ],
-      ),
+      body: PetLista(),
     );
   }
 }
