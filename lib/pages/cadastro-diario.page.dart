@@ -13,17 +13,14 @@ class CadastroDiario extends StatefulWidget {
 }
 
 class _CadastroDiarioState extends State<CadastroDiario> {
-  String? _peso;
-  String? _titulo;
-  String? _data;
-  String? _descricao;
-  String? _humor;
+  String? _peso, _titulo, _data, _descricao, _humor, _animal;
 
   TextEditingController pesoController = TextEditingController();
   TextEditingController dataController = TextEditingController();
   TextEditingController descricaoController = TextEditingController();
   TextEditingController humorController = TextEditingController();
   TextEditingController tituloController = TextEditingController();
+  TextEditingController animalController = TextEditingController();
 
   Future _dataSelecionada(BuildContext context) async {
     var _datePicker = await showDatePicker(
@@ -77,6 +74,22 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                       children: [
                         setarCampoForms(tituloController, "Título", _titulo,
                             validator: (value) => validarCampo(value)),
+                        TextFormField(
+                          autofocus: false,
+                          controller: animalController,
+                          validator: (value) => validarCampo(value),
+                          onSaved: (input) => _animal = input!,
+                          decoration: InputDecoration(
+                            labelText: "Animal",
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         TextFormField(
                           autofocus: false,
                           validator: (value) {
