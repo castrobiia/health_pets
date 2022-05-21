@@ -201,10 +201,10 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 items: listaRacas.map((item) {
                                   return DropdownMenuItem(
                                     child: new Text(
-                                      item.nome,
+                                      item['nome'],
                                       style: TextStyle(fontSize: 17),
                                     ),
-                                    value: item.id,
+                                    value: item['id'],
                                   );
                                 }).toList(),
                                 onChanged: (newValue) {
