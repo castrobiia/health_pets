@@ -407,6 +407,10 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                     value: item.id,
                                   );
                                 }).toList(),
+                                onSaved: (newValue) {
+                                  setState(() {
+                                    racaController.text = newValue.toString();
+                                  });},
                                 onChanged: (newValue) {
                                   setState(() {
                                     racaController.text = newValue.toString();
@@ -430,16 +434,25 @@ class _EditarPetPageState extends State<EditarPetPage> {
                         if (_formKey.currentState!.validate()) {
                           //salvar o estado do formulário
                           _formKey.currentState!.save();
+                          if(especieController.text.isEmpty){
 
-                          String nome = nomeController.text;
-                          String data_nascimento =
-                              dataNascimentoTesteController.text;
-                          var id_especie = especieController.text;
-                          String id_raca = racaController.text;
-                          String foto = pickedFile?.path ?? 'default.png';
+                          }
+                          print(especieController.text.isEmpty);
+                          String? nome, data_nascimento, id_raca, foto;
+                          var id_especie;
 
-                          if (await AnimalRepository().postAnimal(nome,
-                                  data_nascimento, id_especie, id_raca, foto) ==
+                          if(nomeController.text.isEmpty == true)nome = animal.nome; else nome = nomeController.text;
+                          if(dataNascimentoTesteController.text.isEmpty == true)data_nascimento = animal.dataNascimento;
+                          if(especieController.text.isEmpty == true)id_especie = animal.idEspecie.toString();
+                          if(racaController.text.isEmpty == true)id_raca = animal.idRaca.toString();
+                          if(pickedFile?.path == null || pickedFile?.path == ''){
+                            foto = 'default.png';
+                          } else{
+                            foto = animal.foto;
+                          }
+
+                          if (await AnimalRepository().postAnimal(nome!,
+                                  data_nascimento!, id_especie, id_raca!, foto!) ==
                               '200') {}
 
                           setarMaterialPageRoute(context, TabsPage());

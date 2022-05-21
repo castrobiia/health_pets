@@ -48,8 +48,10 @@ class AnimalRepository {
     //   'id_raca': id_raca,
     //   'foto': foto,
     // });
-
-    var pic = await http.MultipartFile.fromPath("foto", foto);
+    var pic;
+    if(foto != 'default.png'){
+      pic = await http.MultipartFile.fromPath("foto", foto);
+    }
 
     var request = http.MultipartRequest(
         "POST", Uri.https('healthpets.app.br', 'api/animal'));
@@ -60,14 +62,19 @@ class AnimalRepository {
     request.fields["id_raca"] = id_raca;
     request.files.add(pic);
 
-    var response = await request.send();
-
-    var resp = await http.Response.fromStream(response);
-
-    // final response =
-    //     await http.post(Uri.parse(url), body: body, headers: headerToken);
-    // return jsonDecode(response.statusCode.toString());
-    return jsonDecode(resp.statusCode.toString());
+    print('Nome: ${nome}');
+    print('data_nascimento: ${data_nascimento}');
+    print('id_especie: ${id_especie}');
+    print('id_raca: ${id_raca}');
+    print('foto: ${pic}');
+    // var response = await request.send();
+    //
+    // var resp = await http.Response.fromStream(response);
+    //
+    // // final response =
+    // //     await http.post(Uri.parse(url), body: body, headers: headerToken);
+    // // return jsonDecode(response.statusCode.toString());
+    // return jsonDecode(resp.statusCode.toString());
   }
 
   Future<List> findAllAnimais() async {
@@ -81,7 +88,7 @@ class AnimalRepository {
     };
 
     final response = await http.get(Uri.parse(url), headers: header);
-    final List<dynamic> decodedJson = jsonDecode(response.body);
+    final List decodedJson = jsonDecode(response.body);
     return decodedJson.map((json) => AnimalModel.fromJson(json)).toList();
   }
 
