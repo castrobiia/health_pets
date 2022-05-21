@@ -107,10 +107,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
         lastDate: DateTime.now());
 
     if (_datePicker != null && _datePicker != _data) {
-      setState(() {
-        dataNascimentoController.text = _datePicker.toString();
-        dataNascimentoTesteController.text = dataNascimentoController.text;
-      });
+      dataNascimentoController.text = _datePicker.toString();
+      dataNascimentoTesteController.text = dataNascimentoController.text;
     } else {
       exibirMensagem(context, 'Selecione uma data');
     }
@@ -134,9 +132,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
 
   setRacas(id) async {
     var list = await RacaEntity().getRacasPorEspecie(id.toString());
-    setState(() {
-      listaRacas = list;
-    });
+
+    listaRacas = list;
   }
 
   @override
@@ -315,11 +312,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                   // initialValue: animal.dataNascimento,
                                   readOnly: true,
                                   onTap: () {
-                                    setState(
-                                      () {
-                                        _dataSelecionada(context);
-                                      },
-                                    );
+                                    _dataSelecionada(context);
                                   },
                                 ),
                                 SizedBox(
@@ -332,7 +325,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                     width: double.infinity,
                                     child: DropdownButtonFormField(
                                       value: animal.idEspecie,
-                                      hint: Text(AppLocalizations.of(context)!.species),
+                                      hint: Text(AppLocalizations.of(context)!
+                                          .species),
                                       style: TextStyle(
                                           fontSize: 17, color: Colors.black),
                                       items: listaEspecies.map((item) {
@@ -345,11 +339,9 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                         );
                                       }).toList(),
                                       onChanged: (newValue) {
-                                        setState(() {
-                                          especieController.text =
-                                              newValue.toString();
-                                          setRacas(especieController.text);
-                                        });
+                                        especieController.text =
+                                            newValue.toString();
+                                        setRacas(especieController.text);
                                       },
                                     ),
                                   ),
@@ -408,13 +400,10 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                   );
                                 }).toList(),
                                 onSaved: (newValue) {
-                                  setState(() {
-                                    racaController.text = newValue.toString();
-                                  });},
+                                  racaController.text = newValue.toString();
+                                },
                                 onChanged: (newValue) {
-                                  setState(() {
-                                    racaController.text = newValue.toString();
-                                  });
+                                  racaController.text = newValue.toString();
                                 },
                               ),
                             ),
@@ -434,25 +423,34 @@ class _EditarPetPageState extends State<EditarPetPage> {
                         if (_formKey.currentState!.validate()) {
                           //salvar o estado do formulário
                           _formKey.currentState!.save();
-                          if(especieController.text.isEmpty){
-
-                          }
+                          if (especieController.text.isEmpty) {}
                           print(especieController.text.isEmpty);
                           String? nome, data_nascimento, id_raca, foto;
                           var id_especie;
 
-                          if(nomeController.text.isEmpty == true)nome = animal.nome; else nome = nomeController.text;
-                          if(dataNascimentoTesteController.text.isEmpty == true)data_nascimento = animal.dataNascimento;
-                          if(especieController.text.isEmpty == true)id_especie = animal.idEspecie.toString();
-                          if(racaController.text.isEmpty == true)id_raca = animal.idRaca.toString();
-                          if(pickedFile?.path == null || pickedFile?.path == ''){
+                          if (nomeController.text.isEmpty == true)
+                            nome = animal.nome;
+                          else
+                            nome = nomeController.text;
+                          if (dataNascimentoTesteController.text.isEmpty ==
+                              true) data_nascimento = animal.dataNascimento;
+                          if (especieController.text.isEmpty == true)
+                            id_especie = animal.idEspecie.toString();
+                          if (racaController.text.isEmpty == true)
+                            id_raca = animal.idRaca.toString();
+                          if (pickedFile?.path == null ||
+                              pickedFile?.path == '') {
                             foto = 'default.png';
-                          } else{
+                          } else {
                             foto = animal.foto;
                           }
 
-                          if (await AnimalRepository().postAnimal(nome!,
-                                  data_nascimento!, id_especie, id_raca!, foto!) ==
+                          if (await AnimalRepository().postAnimal(
+                                  nome!,
+                                  data_nascimento!,
+                                  id_especie,
+                                  id_raca!,
+                                  foto!) ==
                               '200') {}
 
                           setarMaterialPageRoute(context, TabsPage());
