@@ -12,12 +12,12 @@ class TabsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         body: TabBarView(
           children: [
             PetPage(),
-            GastoPage(),
+            //GastoPage(),
             Calendario(),
             PerfilUsuario(),
           ],
@@ -27,9 +27,9 @@ class TabsPage extends StatelessWidget {
             Tab(
               icon: new Icon(Icons.pets),
             ),
-            Tab(
-              icon: new Icon(Icons.attach_money),
-            ),
+            // Tab(
+            //   icon: new Icon(Icons.attach_money),
+            // ),
             Tab(
               icon: new Icon(Icons.calendar_today),
             ),
