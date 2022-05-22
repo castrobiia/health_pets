@@ -24,6 +24,7 @@
     "myProfile": "My Profile",
     "errorLoading": "Error loading data",
     "animals": "Animals",
+    "animal": "Animal",
     "pets": "Pets",
     "edit": "Edit",
     "delete": "Delete",
