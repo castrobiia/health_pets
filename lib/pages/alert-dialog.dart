@@ -4,6 +4,7 @@ import 'package:health_pets/controllers/usuario_controller.dart';
 import 'package:health_pets/controllers/vacina_controller.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
+import 'package:health_pets/pages/tabs.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/repository/vacina-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
@@ -32,7 +33,7 @@ confirmarExclusaoAnimal(BuildContext context, id) {
               onPressed: () {
                 animalController.deleteAnimal(id).then((value) {
                   exibirMensagem(context, '$value');
-                  setarMaterialPageRoute(context, PetPage());
+                  setarMaterialPageRoute(context, TabsPage());
                 });
               },
               child: Text(AppLocalizations.of(context)!.yes),
