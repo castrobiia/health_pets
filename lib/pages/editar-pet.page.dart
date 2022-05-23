@@ -17,73 +17,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditarPetPage extends StatefulWidget {
   final id;
-
   const EditarPetPage(this.id);
 
   @override
   State<EditarPetPage> createState() => _EditarPetPageState(this.id);
 }
-
-// Future<dynamic?> getAnimal(int id) async {
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   String token = await prefs.get('token').toString();
-//
-//   var header = {
-//     "Content-Type": "application/json",
-//     "Accept": "application/json",
-//     "Authorization": "Bearer ${token}"
-//   };
-//
-//   const url = 'https://www.healthpets.app.br/api/animal/';
-//   final response =
-//       await http.get(Uri.parse(url + id.toString()), headers: header);
-//
-//   dynamic animal = jsonDecode(response.body);
-//
-//   // print('Animal Function ${animal}');
-//
-//   return animal;
-// }
-//
-// Future<dynamic?> getEspecie(int id) async {
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   String token = await prefs.get('token').toString();
-//
-//   var header = {
-//     "Content-Type": "application/json",
-//     "Accept": "application/json",
-//     "Authorization": "Bearer ${token}"
-//   };
-//
-//   const url = 'https://www.healthpets.app.br/api/especie/';
-//   final response =
-//       await http.get(Uri.parse(url + id.toString()), headers: header);
-//
-//   dynamic especie = jsonDecode(response.body);
-//
-//   return especie;
-// }
-//
-// Future<dynamic?> getRaca(int id) async {
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   String token = await prefs.get('token').toString();
-//
-//   var header = {
-//     "Content-Type": "application/json",
-//     "Accept": "application/json",
-//     "Authorization": "Bearer ${token}"
-//   };
-//
-//   const url = 'https://www.healthpets.app.br/api/raca/';
-//   final response =
-//       await http.get(Uri.parse(url + id.toString()), headers: header);
-//
-//   dynamic raca = jsonDecode(response.body);
-//
-//   return raca;
-// }
-
-// var dataNascimento;
 
 class _EditarPetPageState extends State<EditarPetPage> {
   final id;
@@ -132,15 +70,15 @@ class _EditarPetPageState extends State<EditarPetPage> {
 
   setRacas(id) async {
     var list = await RacaEntity().getRacasPorEspecie(id.toString());
-
     listaRacas = list;
   }
 
   @override
   Widget build(BuildContext context) {
-    var especieId, racaId;
+    // var ;
+    var nome, data_nascimento, especieId, racaId;
 
-    print(this.id);
+    // print(this.id);
 
     catchAnimal(this.id);
 
@@ -200,7 +138,6 @@ class _EditarPetPageState extends State<EditarPetPage> {
           this.animal = snapshot.data;
           nomeController.text = animal.nome;
           dataNascimentoController.text = animal.dataNascimento;
-          // setRacas(animal.idEspecie as int);
 
           return Container(
             height: double.maxFinite,
@@ -215,10 +152,6 @@ class _EditarPetPageState extends State<EditarPetPage> {
                 children: <Widget>[
                   Stack(
                     children: <Widget>[
-                      // BoxDecorationImagem(180, Image.network("https://healthpets.app.br/storage/pets/${animal.foto}").image),
-                      // BoxDecoration(
-                      //   image: Image.network("https://healthpets.app.br/storage/pets/${animal.foto}"),
-                      // ),
                       Container(
                         width: 200,
                         height: 200,
@@ -227,11 +160,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: Image.network(
-                                      "https://healthpets.app.br/storage/pets/${animal.foto}")
-                                  .image
-                              // FileImage(File(image!.path)) as ImageProvider,
-                              ),
+                              image: Image.network("https://healthpets.app.br/storage/pets/${animal.foto}").image
+                          ),
                         ),
                       ),
                       Positioned(
@@ -264,10 +194,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           ),
                         );
                       }
-                      List<dynamic> listaEspecies =
-                          EspecieEntity().toList(snapshot.data);
+                      List<dynamic> listaEspecies = EspecieEntity().toList(snapshot.data);
 
-                      // print('listaEspecies: $listaEspecies');
                       return Column(
                         children: <Widget>[
                           Form(
@@ -277,10 +205,9 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                 TextFormField(
                                   autofocus: false,
                                   keyboardType: TextInputType.text,
-                                  // initialValue: animal.nome.toString(),
                                   controller: nomeController,
                                   validator: (value) => validarCampo(value),
-                                  onSaved: (input) => _nome = input!,
+                                  onSaved: (input) => nome = input!,
                                   decoration: InputDecoration(
                                     labelText: "Nome",
                                     labelStyle: TextStyle(
@@ -309,7 +236,6 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                     ),
                                   ),
                                   controller: dataNascimentoController,
-                                  // initialValue: animal.dataNascimento,
                                   readOnly: true,
                                   onTap: () {
                                     _dataSelecionada(context);
@@ -338,10 +264,11 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                           value: item.id,
                                         );
                                       }).toList(),
+                                      onSaved: (newValue) {
+                                        especieId = newValue.toString();
+                                      },
                                       onChanged: (newValue) {
-                                        especieController.text =
-                                            newValue.toString();
-                                        setRacas(especieController.text);
+                                        especieId = newValue.toString();
                                       },
                                     ),
                                   ),
@@ -357,8 +284,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                     },
                   ),
                   FutureBuilder<dynamic>(
-                    future: RacaEntity()
-                        .getRacasPorEspecie(animal.idEspecie.toString()),
+                    future: RacaEntity().getRacasPorEspecie(animal.idEspecie.toString()),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState != ConnectionState.done) {
                         return Center(
@@ -373,10 +299,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           ),
                         );
                       }
-                      List<dynamic> listaRacas =
-                          RacaEntity().toList(snapshot.data);
+                      List<dynamic> listaRacas = RacaEntity().toList(snapshot.data);
 
-                      // print('listaEspecies: $listaEspecies');
                       return Column(
                         children: <Widget>[
                           Container(
@@ -400,16 +324,17 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                   );
                                 }).toList(),
                                 onSaved: (newValue) {
-                                  racaController.text = newValue.toString();
+                                  racaId = newValue.toString();
                                 },
                                 onChanged: (newValue) {
-                                  racaController.text = newValue.toString();
+                                  racaId = newValue.toString();
                                 },
                               ),
                             ),
                           ),
                         ],
                       );
+
                     },
                   ),
                   SizedBox(
@@ -423,37 +348,49 @@ class _EditarPetPageState extends State<EditarPetPage> {
                         if (_formKey.currentState!.validate()) {
                           //salvar o estado do formulário
                           _formKey.currentState!.save();
-                          if (especieController.text.isEmpty) {}
-                          print(especieController.text.isEmpty);
-                          String? nome, data_nascimento, id_raca, foto;
-                          var id_especie;
 
-                          if (nomeController.text.isEmpty == true)
-                            nome = animal.nome;
-                          else
-                            nome = nomeController.text;
-                          if (dataNascimentoTesteController.text.isEmpty ==
-                              true) data_nascimento = animal.dataNascimento;
-                          if (especieController.text.isEmpty == true)
-                            id_especie = animal.idEspecie.toString();
-                          if (racaController.text.isEmpty == true)
-                            id_raca = animal.idRaca.toString();
+
+                          // String? nome, data_nascimento, raca, foto;
+                          var foto;
+                          //
+                          // //todo fazer apena sum saved atribundo os valores das
+                          // // todo variaveis aos controllers de uma vez apenas
+                          //
+                          if (nomeController.text.isEmpty != true)
+                            animal.nome = nomeController.text;
+                            // nome = animal.nome;
+                          // else
+
+
+                          if (dataNascimentoTesteController.text.isEmpty != true)
+                            animal.dataNascimento = dataNascimentoTesteController.text;
+                            // data_nascimento = animal.dataNascimento;
+                          // else data_nascimento = dataNascimentoTesteController.text;
+                          //
+                          if (especieController.text.isEmpty != true)
+                            animal.idEspecie = especieController.text;
+                          if (racaController.text.isEmpty != true)
+                            animal.idRaca.toString();
                           if (pickedFile?.path == null ||
                               pickedFile?.path == '') {
-                            foto = 'default.png';
-                          } else {
-                            foto = animal.foto;
+                            animal.foto = 'default.png';
+                          }
+                          //
+                          // setState(() {
+                          //   nomeController.text = nome!;
+                          //   especieController.text = especie;
+                          //   racaController.text = raca!;
+                          // });
+                          //
+                          // //todo pegar os valores das variaveis temporarias e jogar na
+                          // //todo  aplicacao para nao usar o set state
+
+                          var code =  await AnimalRepository().putAnimal(animal, animal.id);
+                          if (code == '200') {
+                            setarMaterialPageRoute(context, TabsPage());
                           }
 
-                          if (await AnimalRepository().postAnimal(
-                                  nome!,
-                                  data_nascimento!,
-                                  id_especie,
-                                  id_raca!,
-                                  foto!) ==
-                              '200') {}
-
-                          setarMaterialPageRoute(context, TabsPage());
+                          //
                         }
                       },
                       child: textBotao(AppLocalizations.of(context)!.save),

@@ -4,12 +4,12 @@ import 'package:http/http.dart' as http;
 import 'dart:async' show Future;
 
 class AnimalModel {
-  final int? id;
-  final String? nome;
-  final String? dataNascimento;
-  final int? idEspecie;
-  final int? idRaca;
-  final String? foto;
+  int? id;
+  String? nome;
+  String? dataNascimento;
+  int? idEspecie;
+  int? idRaca;
+  String? foto;
 
   AnimalModel({
       this.id,

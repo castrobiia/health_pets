@@ -63,19 +63,9 @@ class AnimalRepository {
     request.fields["id_raca"] = id_raca;
     request.files.add(pic);
 
-    // print('Nome: ${nome}');
-    // print('data_nascimento: ${data_nascimento}');
-    // print('id_especie: ${id_especie}');
-    // print('id_raca: ${id_raca}');
-    // print('foto: ${pic}');
-    // var response = await request.send();
-
-    //
     final response =
         await http.post(Uri.parse(url), body: body, headers: headerToken);
     return jsonDecode(response.statusCode.toString());
-    // var resp = await http.Response.fromStream(response);
-    // return jsonDecode(resp.statusCode.toString());
   }
 
   Future<List> findAllAnimais() async {
@@ -115,5 +105,49 @@ class AnimalRepository {
   // debugPrint("Variavel animal: ${animal.toString()}");
   // debugPrint("Objeto teste: ${test}");
   return animal;
-}
+  }
+
+  putAnimal(AnimalModel animal, int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var headerToken = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    var body = jsonEncode({
+      'nome': animal.nome,
+      'data_nascimento': animal.dataNascimento,
+      'id_especie': animal.idEspecie,
+      'id_raca': animal.idRaca,
+      'foto': animal.foto,
+    });
+
+    var pic;
+    if (animal.foto != 'default.png') {
+      pic = await http.MultipartFile.fromPath("foto", animal.foto!);
+    }
+
+    // var request = http.MultipartRequest("PUT", Uri.https('healthpets.app.br', 'api/animal/', {'id':'$id'} ));
+    // var request = http.MultipartRequest("PUT", Uri(scheme: 'https', host: 'healthpets.app.br', path: 'api/animal/', queryParameters: {'id':'$id'} ));
+    var uri = Uri.parse("https://healthpets.app.br/api/animal/update/10");
+    var request = http.MultipartRequest('put', uri);
+
+    print("Metodo ${request.method}");
+    request.headers.addAll(headerToken);
+    request.fields["nome"] = animal.nome!;
+    request.fields["data_nascimento"] = animal.dataNascimento!;
+    request.fields["id_especie"] = animal.idEspecie.toString();
+    request.fields["id_raca"] = animal.idEspecie.toString();
+    request.files.add(pic);
+
+    final response = await http.put(Uri.parse(url), body: body, headers: headerToken);
+    print("URL usada: $uri");
+    print(response.statusCode.toString());
+    print(response.body);
+    return jsonDecode(response.statusCode.toString());
+  }
+
 }
