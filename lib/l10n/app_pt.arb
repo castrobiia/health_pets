@@ -66,6 +66,7 @@
     "addAlert": "Adicionar lembrete",
     "calendar": "Calendário",
     "vaccineApplied": "Vacina aplicada",
+    "appDate": "Data da aplicação",
     "diaryTitle": "Título do diário",
     "diaryInformation": "Informações do diário",
     "passwordInformation": "Informações sobre a senha",
@@ -77,7 +78,9 @@
     "leisureFun": "Lazer e Diversão",
     "accessories": "Acessórios",
     "others": "Outros",
-    "expensesCategory": "Despesas por categoria"
+    "expensesCategory": "Despesas por categoria",
+    "addVaccine": "Adicionar Vacina",
+    "selectDate": "Selecione uma data"
 }
 
 

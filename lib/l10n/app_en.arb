@@ -31,6 +31,7 @@
     "share": "Share",
     "leaving": "Leaving...",
     "vaccines": "Vaccines",
+    "vaccine": "Vaccine",
     "exams": "Exams",
     "consultations": "Consultations",
     "medicines": "Medicines",
@@ -66,6 +67,7 @@
     "addAlert": "Add alert",
     "calendar": "Calendar",
     "vaccineApplied": "Vaccine applied",
+    "appDate": "Application date",
     "diaryTitle": "Diary title",
     "diaryInformation": "Diary information",
     "passwordInformation": "Password information",
@@ -77,7 +79,9 @@
     "leisureFun": "Leisure and Fun",
     "accessories": "Accessories",
     "others": "Others",
-    "expensesCategory": "Expenses by Category"
+    "expensesCategory": "Expenses by Category",
+    "addVaccine": "Add Vaccine",
+    "selectDate": "Select a date"
 }
 
 
