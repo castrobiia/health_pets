@@ -22,6 +22,7 @@ class _CadastroDiarioState extends State<CadastroDiario> {
   TextEditingController humorController = TextEditingController();
   TextEditingController tituloController = TextEditingController();
   TextEditingController animalController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   Future _dataSelecionada(BuildContext context) async {
     var _datePicker = await showDatePicker(
@@ -70,6 +71,7 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                 top: 20,
               ),
               child: Form(
+                key: _formKey,
                 child: Column(children: [
                   setarCampoForms(tituloController, "Título", _titulo,
                       validator: (value) => validarCampo(value)),
@@ -89,8 +91,10 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                         //     ),
                         //   );
                         // }
+
                         List<dynamic> listaAnimais =
                             AnimalRepository().toListAnimal(snapshot.data);
+
                         return DropdownButtonFormField(
                           hint: Text(AppLocalizations.of(context)!.animal),
                           validator: (value) {
@@ -165,6 +169,7 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                     ),
                   ),
                   TextFormField(
+                    controller: descricaoController,
                     decoration: InputDecoration(
                       labelText: "Descrição",
                       labelStyle: TextStyle(
@@ -184,6 +189,24 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                     decoration: botaoRetangulo(),
                     child: TextButton(
                       onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+
+                          String titulo = tituloController.text;
+                          var idAnimal = animalController.text;
+                          String data = dataController.text;
+                          String humor = humorController.text;
+                          var peso = pesoController.text;
+                          String descricao = descricaoController.text;
+
+                          print('titulo: $titulo');
+                          print('idAnimal: $idAnimal');
+                          print(data);
+                          print(humor);
+                          print(peso);
+                          print(descricao);
+                        }
+
                         setarMaterialPageRoute(context, Calendario());
                       },
                       child: textBotao("Salvar"),
