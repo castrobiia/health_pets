@@ -64,6 +64,14 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
   }
 
   @override
+  var conexao;
+  initState() {
+    setState(() {
+      conexao = EspecieEntity().getEspecies();
+    });
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     var especieId, racaId;
 
@@ -81,39 +89,51 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: double.maxFinite,
-          color: Colors.white,
+          height: MediaQuery.of(context).size.height * 1,
+          width: double.infinity,
+          decoration: boxDecoration(Colors.white),
           child: Padding(
             padding: EdgeInsets.only(
               left: 30,
               right: 30,
               top: 30,
             ),
-            child: Column(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    BoxDecorationImagem(180, "assets/perfil-cao1.jpeg"),
-                    Positioned(
-                      top: 120,
-                      left: 120,
-                      child: FloatingActionButton(
-                          child: Icon(Icons.add_a_photo),
-                          backgroundColor: ColorTheme.salmao1,
-                          //cor do ícone
-                          foregroundColor: Colors.white,
-                          onPressed: () {
-                            pickImage();
-                          }),
+            child: FutureBuilder<dynamic>(
+              future: conexao,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return Center(
+                      child: Container(child: CircularProgressIndicator()));
+                }
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Container(
+                      child: Text(AppLocalizations.of(context)!.errorLoading),
                     ),
-                  ],
-                ),
-                FutureBuilder<dynamic>(
-                  future: EspecieEntity().getEspecies(),
-                  builder: (context, snapshot) {
-                    List<dynamic> listaEspecies =
-                        EspecieEntity().toList(snapshot.data);
-                    return Column(
+                  );
+                }
+                List<dynamic> listaEspecies =
+                    EspecieEntity().toList(snapshot.data);
+                return Column(
+                  children: <Widget>[
+                    Stack(
+                      children: <Widget>[
+                        BoxDecorationImagem(180, "assets/perfil-cao1.jpeg"),
+                        Positioned(
+                          top: 120,
+                          left: 120,
+                          child: FloatingActionButton(
+                              child: Icon(Icons.add_a_photo),
+                              backgroundColor: ColorTheme.salmao1,
+                              //cor do ícone
+                              foregroundColor: Colors.white,
+                              onPressed: () {
+                                pickImage();
+                              }),
+                        ),
+                      ],
+                    ),
+                    Column(
                       children: <Widget>[
                         Form(
                           key: _formKey,
@@ -254,10 +274,10 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                           ),
                         ),
                       ],
-                    );
-                  },
-                ),
-              ],
+                    )
+                  ],
+                );
+              },
             ),
           ),
         ),
