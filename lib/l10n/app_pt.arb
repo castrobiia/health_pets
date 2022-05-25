@@ -57,6 +57,7 @@
     "resetPassword": "Redefinir Senha",
     "resetPasswordSend": "Senha redefinida com sucesso",
     "registerPet": "Cadastrar animal",
+    "registerDiary": "Cadastrar Diário",
     "editPet": "Editar Animal",
     "budget": "Gastos",
     "overview": "Visão Geral",
@@ -80,7 +81,13 @@
     "others": "Outros",
     "expensesCategory": "Despesas por categoria",
     "addVaccine": "Adicionar Vacina",
-    "selectDate": "Selecione uma data"
+    "selectDate": "Selecione uma data",
+    "selectAnimal": "Selecione um animal",
+    "title": "Título",
+    "date": "Data",
+    "mood": "Humor",
+    "weight": "Peso",
+    "description": "Descrição"
 }
 
 
