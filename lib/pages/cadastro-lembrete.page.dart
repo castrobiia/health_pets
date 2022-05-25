@@ -72,7 +72,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height * 1,
+          height: MediaQuery.of(context).size.height * 1.2,
           color: Colors.white,
           padding: EdgeInsets.only(left: 30, right: 30, top: 30),
           child: Column(
