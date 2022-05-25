@@ -58,6 +58,7 @@
     "resetPassword": "Reset Password",
     "resetPasswordSend": "Password successfully reset",
     "registerPet": "Register Pet",
+    "registerDiary": "Register Diary",
     "editPet": "Edit Pet",
     "budget": "Budget",
     "overview": "Overview",
@@ -81,7 +82,13 @@
     "others": "Others",
     "expensesCategory": "Expenses by Category",
     "addVaccine": "Add Vaccine",
-    "selectDate": "Select a date"
+    "selectDate": "Select a date",
+    "selectAnimal": "Select a animal",
+    "title": "Title",
+    "date": "Date",
+    "mood": "Mood",
+    "weight": "Weight",
+    "description": "Description"
 }
 
 
