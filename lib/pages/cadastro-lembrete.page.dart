@@ -118,7 +118,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                       validator: (value) => validarCampo(value),
                       onSaved: (input) => _categoria = input!,
                       decoration: InputDecoration(
-                        labelText: "Categoria",
+                        labelText: AppLocalizations.of(context)!.category,
                         labelStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 17,
@@ -134,7 +134,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                       validator: (value) => validarCampo(value),
                       onSaved: (input) => _subcategoria = input!,
                       decoration: InputDecoration(
-                        labelText: "Subcategoria",
+                        labelText: AppLocalizations.of(context)!.subcategory,
                         labelStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 17,
@@ -148,7 +148,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                       hint: Text(AppLocalizations.of(context)!.animal),
                       validator: (value) {
                         if (value == null) {
-                          return "Selecione o animal";
+                          return AppLocalizations.of(context)!.selectAnimal;
                         }
                         return null;
                       },
@@ -179,13 +179,13 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                       controller: dataController,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Selecione uma data";
+                          return AppLocalizations.of(context)!.selectDate;
                         }
                         return null;
                       },
                       onSaved: (input) => _data = input!,
                       decoration: InputDecoration(
-                        labelText: "Data",
+                        labelText: AppLocalizations.of(context)!.date,
                         labelStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 17,
@@ -210,7 +210,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                       validator: (value) => validarCampo(value),
                       onSaved: (input) => _localizacao = input!,
                       decoration: InputDecoration(
-                        labelText: "Localização",
+                        labelText: AppLocalizations.of(context)!.localization,
                         labelStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 17,
@@ -227,7 +227,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                       validator: (value) => validarCampo(value),
                       onSaved: (input) => _valor = input!,
                       decoration: InputDecoration(
-                        labelText: "Valor",
+                        labelText: AppLocalizations.of(context)!.price,
                         labelStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 17,
@@ -246,7 +246,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                       validator: (value) => validarCampo(value),
                       onSaved: (input) => _descricao = input!,
                       decoration: InputDecoration(
-                        labelText: "Descrição",
+                        labelText: AppLocalizations.of(context)!.description,
                         labelStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 17,
@@ -277,7 +277,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                         onPressed: () {
                           setarMaterialPageRoute(context, Calendario());
                         },
-                        child: textBotao("Salvar"),
+                        child: textBotao(AppLocalizations.of(context)!.save),
                       ),
                     ),
                   ],

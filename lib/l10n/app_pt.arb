@@ -87,7 +87,11 @@
     "date": "Data",
     "mood": "Humor",
     "weight": "Peso",
-    "description": "Descrição"
+    "description": "Descrição",
+    "category": "Categoria",
+    "subcategory": "Subcategoria",
+    "localization": "Localização",
+    "price": "Valor"
 }
 
 
