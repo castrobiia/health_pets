@@ -44,6 +44,14 @@ class _CadastroDiarioState extends State<CadastroDiario> {
   }
 
   @override
+  var conexao;
+  initState() {
+    setState(() {
+      conexao = AnimalRepository().getAnimais();
+    });
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     var animalId;
     return Scaffold(
@@ -63,39 +71,40 @@ class _CadastroDiarioState extends State<CadastroDiario> {
         color: Colors.white,
         child: SingleChildScrollView(
           child: Container(
-            height: double.maxFinite,
+            height: MediaQuery.of(context).size.height * 1,
+            width: double.infinity,
+            decoration: boxDecoration(Colors.white),
             child: Padding(
               padding: EdgeInsets.only(
                 left: 30,
                 right: 30,
                 top: 20,
               ),
-              child: Form(
-                key: _formKey,
-                child: Column(children: [
-                  setarCampoForms(tituloController, "Título", _titulo,
-                      validator: (value) => validarCampo(value)),
-                  FutureBuilder<dynamic>(
-                      future: AnimalRepository().getAnimais(),
-                      builder: (context, snapshot) {
-                        // if (snapshot.connectionState != ConnectionState.done) {
-                        //   return Center(
-                        //       child: Container(
-                        //           child: CircularProgressIndicator()));
-                        // }
-                        // if (snapshot.hasError) {
-                        //   return Center(
-                        //     child: Container(
-                        //       child: Text(
-                        //           AppLocalizations.of(context)!.errorLoading),
-                        //     ),
-                        //   );
-                        // }
+              child: FutureBuilder<dynamic>(
+                future: conexao,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return Center(
+                        child: Container(child: CircularProgressIndicator()));
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Container(
+                        child: Text(AppLocalizations.of(context)!.errorLoading),
+                      ),
+                    );
+                  }
 
-                        List<dynamic> listaAnimais =
-                            AnimalRepository().toListAnimal(snapshot.data);
+                  List<dynamic> listaAnimais =
+                      AnimalRepository().toListAnimal(snapshot.data);
 
-                        return DropdownButtonFormField(
+                  return Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        setarCampoForms(tituloController, "Título", _titulo,
+                            validator: (value) => validarCampo(value)),
+                        DropdownButtonFormField(
                           hint: Text(AppLocalizations.of(context)!.animal),
                           validator: (value) {
                             if (value == null) {
@@ -120,99 +129,102 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                             });
                           },
                           value: animalId,
-                        );
-                      }),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Selecione uma data";
-                      }
-                      return null;
-                    },
-                    onSaved: (input) => _data = input!,
-                    decoration: InputDecoration(
-                      labelText: "Data",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
-                    ),
-                    controller: dataController,
-                    readOnly: true,
-                    onTap: () {
-                      setState(
-                        () {
-                          _dataSelecionada(context);
-                        },
-                      );
-                    },
-                  ),
-                  setarCampoForms(humorController, "Humor", _humor,
-                      validator: (value) => validarCampo(value)),
-                  //peso mudar para receber apenas numeros
-                  TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.number,
-                    controller: pesoController,
-                    //validator: (value) => validarCampo(value),
-                    onSaved: (input) => _peso = input!,
-                    decoration: InputDecoration(
-                      labelText: "Peso",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                  TextFormField(
-                    controller: descricaoController,
-                    decoration: InputDecoration(
-                      labelText: "Descrição",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                      ),
-                    ),
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 8,
-                    maxLength: 1000,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    decoration: botaoRetangulo(),
-                    child: TextButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
+                        ),
 
-                          String titulo = tituloController.text;
-                          var idAnimal = animalController.text;
-                          String data = dataController.text;
-                          String humor = humorController.text;
-                          var peso = pesoController.text;
-                          String descricao = descricaoController.text;
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          autofocus: false,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Selecione uma data";
+                            }
+                            return null;
+                          },
+                          onSaved: (input) => _data = input!,
+                          decoration: InputDecoration(
+                            labelText: "Data",
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
+                          ),
+                          controller: dataController,
+                          readOnly: true,
+                          onTap: () {
+                            setState(
+                              () {
+                                _dataSelecionada(context);
+                              },
+                            );
+                          },
+                        ),
+                        setarCampoForms(humorController, "Humor", _humor,
+                            validator: (value) => validarCampo(value)),
+                        //peso mudar para receber apenas numeros
+                        TextFormField(
+                          autofocus: false,
+                          keyboardType: TextInputType.number,
+                          controller: pesoController,
+                          //validator: (value) => validarCampo(value),
+                          onSaved: (input) => _peso = input!,
+                          decoration: InputDecoration(
+                            labelText: "Peso",
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                        TextFormField(
+                          controller: descricaoController,
+                          decoration: InputDecoration(
+                            labelText: "Descrição",
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17,
+                            ),
+                          ),
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 8,
+                          maxLength: 1000,
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: botaoRetangulo(),
+                          child: TextButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
 
-                          print('titulo: $titulo');
-                          print('idAnimal: $idAnimal');
-                          print(data);
-                          print(humor);
-                          print(peso);
-                          print(descricao);
-                        }
+                                String titulo = tituloController.text;
+                                var idAnimal = animalController.text;
+                                String data = dataController.text;
+                                String humor = humorController.text;
+                                var peso = pesoController.text;
+                                String descricao = descricaoController.text;
 
-                        setarMaterialPageRoute(context, Calendario());
-                      },
-                      child: textBotao("Salvar"),
+                                print('titulo: $titulo');
+                                print('idAnimal: $idAnimal');
+                                print('data: $data');
+                                print('humor: $humor');
+                                print('peso: $peso');
+                                print('descricao: $descricao');
+                              }
+
+                              setarMaterialPageRoute(context, Calendario());
+                            },
+                            child: textBotao("Salvar"),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ]),
+                  );
+                },
               ),
             ),
           ),
