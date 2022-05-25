@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/http/animal-repository.dart';
 import 'package:health_pets/pages/calendario.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
@@ -57,7 +58,17 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
   }
 
   @override
+  var conexao;
+  initState() {
+    setState(() {
+      conexao = AnimalRepository().getAnimais();
+    });
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
+    var animalId;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -72,167 +83,207 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height * 1.2,
-          color: Colors.white,
-          padding: EdgeInsets.only(left: 30, right: 30, top: 30),
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                autofocus: false,
-                controller: categoriaController,
-                validator: (value) => validarCampo(value),
-                onSaved: (input) => _categoria = input!,
-                decoration: InputDecoration(
-                  labelText: "Categoria",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                autofocus: false,
-                controller: subcategoriaController,
-                validator: (value) => validarCampo(value),
-                onSaved: (input) => _subcategoria = input!,
-                decoration: InputDecoration(
-                  labelText: "Subcategoria",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                autofocus: false,
-                controller: animalController,
-                validator: (value) => validarCampo(value),
-                onSaved: (input) => _animal = input!,
-                decoration: InputDecoration(
-                  labelText: "Animal",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                autofocus: false,
-                keyboardType: TextInputType.text,
-                controller: dataController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Selecione uma data";
-                  }
-                  return null;
-                },
-                onSaved: (input) => _data = input!,
-                decoration: InputDecoration(
-                  labelText: "Data",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 17,
-                  ),
-                ),
-                readOnly: true,
-                onTap: () {
-                  setState(
-                    () {
-                      _dataSelecionada(context);
-                    },
+          height: MediaQuery.of(context).size.height * 1,
+          width: double.infinity,
+          decoration: boxDecoration(Colors.white),
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 30,
+              right: 30,
+              top: 20,
+            ),
+            child: FutureBuilder<dynamic>(
+              future: conexao,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return Center(
+                      child: Container(child: CircularProgressIndicator()));
+                }
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Container(
+                      child: Text(AppLocalizations.of(context)!.errorLoading),
+                    ),
                   );
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                autofocus: false,
-                keyboardType: TextInputType.text,
-                controller: localizacaoController,
-                validator: (value) => validarCampo(value),
-                onSaved: (input) => _localizacao = input!,
-                decoration: InputDecoration(
-                  labelText: "Localização",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                autofocus: false,
-                keyboardType: TextInputType.number,
-                controller: valorController,
-                validator: (value) => validarCampo(value),
-                onSaved: (input) => _valor = input!,
-                decoration: InputDecoration(
-                  labelText: "Valor",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                autofocus: false,
-                keyboardType: TextInputType.text,
-                controller: descricaoController,
-                maxLines: 3,
-                maxLength: 150,
-                validator: (value) => validarCampo(value),
-                onSaved: (input) => _descricao = input!,
-                decoration: InputDecoration(
-                  labelText: "Descrição",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              CheckboxListTile(
-                title: Text(AppLocalizations.of(context)!.addAlert),
-                value: checkedValue,
-                onChanged: (newValue) {
-                  setState(() {
-                    checkedValue = newValue!;
-                  });
-                },
-                controlAffinity:
-                    ListTileControlAffinity.leading, //  <-- leading Checkbox
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                width: double.infinity,
-                decoration: botaoRetangulo(),
-                child: TextButton(
-                  onPressed: () {
-                    setarMaterialPageRoute(context, Calendario());
-                  },
-                  child: textBotao("Salvar"),
-                ),
-              ),
-            ],
+                }
+
+                List<dynamic> listaAnimais =
+                    AnimalRepository().toListAnimal(snapshot.data);
+
+                return Column(
+                  children: <Widget>[
+                    TextFormField(
+                      autofocus: false,
+                      controller: categoriaController,
+                      validator: (value) => validarCampo(value),
+                      onSaved: (input) => _categoria = input!,
+                      decoration: InputDecoration(
+                        labelText: "Categoria",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      autofocus: false,
+                      controller: subcategoriaController,
+                      validator: (value) => validarCampo(value),
+                      onSaved: (input) => _subcategoria = input!,
+                      decoration: InputDecoration(
+                        labelText: "Subcategoria",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    DropdownButtonFormField(
+                      hint: Text(AppLocalizations.of(context)!.animal),
+                      validator: (value) {
+                        if (value == null) {
+                          return "Selecione o animal";
+                        }
+                        return null;
+                      },
+                      onSaved: (input) => _animal = input!.toString(),
+                      style: TextStyle(fontSize: 17, color: Colors.black),
+                      items: listaAnimais.map((item) {
+                        return DropdownMenuItem(
+                          child: new Text(
+                            item.nome,
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          value: item.id,
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          animalController.text = newValue.toString();
+                        });
+                      },
+                      value: animalId,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      autofocus: false,
+                      keyboardType: TextInputType.text,
+                      controller: dataController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Selecione uma data";
+                        }
+                        return null;
+                      },
+                      onSaved: (input) => _data = input!,
+                      decoration: InputDecoration(
+                        labelText: "Data",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                      readOnly: true,
+                      onTap: () {
+                        setState(
+                          () {
+                            _dataSelecionada(context);
+                          },
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      autofocus: false,
+                      keyboardType: TextInputType.text,
+                      controller: localizacaoController,
+                      validator: (value) => validarCampo(value),
+                      onSaved: (input) => _localizacao = input!,
+                      decoration: InputDecoration(
+                        labelText: "Localização",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      autofocus: false,
+                      keyboardType: TextInputType.number,
+                      controller: valorController,
+                      validator: (value) => validarCampo(value),
+                      onSaved: (input) => _valor = input!,
+                      decoration: InputDecoration(
+                        labelText: "Valor",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      autofocus: false,
+                      keyboardType: TextInputType.text,
+                      controller: descricaoController,
+                      maxLines: 3,
+                      maxLength: 150,
+                      validator: (value) => validarCampo(value),
+                      onSaved: (input) => _descricao = input!,
+                      decoration: InputDecoration(
+                        labelText: "Descrição",
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CheckboxListTile(
+                      title: Text(AppLocalizations.of(context)!.addAlert),
+                      value: checkedValue,
+                      onChanged: (newValue) {
+                        setState(() {
+                          checkedValue = newValue!;
+                        });
+                      },
+                      controlAffinity: ListTileControlAffinity
+                          .leading, //  <-- leading Checkbox
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: botaoRetangulo(),
+                      child: TextButton(
+                        onPressed: () {
+                          setarMaterialPageRoute(context, Calendario());
+                        },
+                        child: textBotao("Salvar"),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
