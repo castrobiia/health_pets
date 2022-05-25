@@ -88,7 +88,11 @@
     "date": "Date",
     "mood": "Mood",
     "weight": "Weight",
-    "description": "Description"
+    "description": "Description",
+    "category": "Category",
+    "subcategory": "Subcategory",
+    "localization": "Localization",
+    "price": "Price"
 }
 
 
