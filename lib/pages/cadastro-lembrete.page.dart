@@ -50,7 +50,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
         },
       );
     } else {
-      exibirMensagem(context, 'Selecione uma data');
+      exibirMensagem(context, AppLocalizations.of(context)!.selectDate);
     }
 
     dataController.text =

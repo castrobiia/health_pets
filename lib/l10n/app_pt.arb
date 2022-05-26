@@ -91,7 +91,9 @@
     "category": "Categoria",
     "subcategory": "Subcategoria",
     "localization": "Localização",
-    "price": "Valor"
+    "price": "Valor",
+    "selectSpecie": "Selecione a espécie",
+    "selectBreed": "Selecione a raça"
 }
 
 
