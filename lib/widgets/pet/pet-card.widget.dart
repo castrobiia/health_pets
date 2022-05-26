@@ -20,6 +20,24 @@ class PetCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // image = XFile(fotoPet);
 
+    getImage(foto){
+      if(foto == '' || foto == null){
+        return Column(
+          children: [
+            Image.network("https://healthpets.app.br/storage/pets/default.png")
+          ],
+        );
+
+      }
+      else{
+        return Column(
+          children: [
+              Image.network("https://healthpets.app.br/storage/pets/${foto}")
+            ],
+          );
+      }
+    };
+
     return Container(
       width: MediaQuery.of(context).size.width * 1,
       height: 121,
@@ -46,7 +64,8 @@ class PetCard extends StatelessWidget {
                         // child: (!kIsWeb && image != null
                         //     ? Image.file(File(image!.path))
                         //     : Container()),
-                            child: Image.network("https://healthpets.app.br/storage/pets/$fotoPet"),
+                        //     child: Image.network("https://healthpets.app.br/storage/pets/$fotoPet"),
+                            child: getImage(fotoPet)
                       ),
                     ],
                   ),
