@@ -138,6 +138,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
           this.animal = snapshot.data;
           nomeController.text = animal.nome;
           dataNascimentoController.text = animal.dataNascimento;
+          print(animal.foto);
 
           return Container(
             height: double.maxFinite,
@@ -160,7 +161,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: Image.network("https://healthpets.app.br/storage/pets/${animal.foto}").image
+                              image: animal.foto == '' || animal.foto == null ?Image.network("https://healthpets.app.br/storage/pets/default.png").image : Image.network("https://healthpets.app.br/storage/pets/${animal.foto}").image
                           ),
                         ),
                       ),
@@ -352,21 +353,14 @@ class _EditarPetPageState extends State<EditarPetPage> {
 
                           // String? nome, data_nascimento, raca, foto;
                           var foto;
-                          //
-                          // //todo fazer apena sum saved atribundo os valores das
-                          // // todo variaveis aos controllers de uma vez apenas
-                          //
+
                           if (nomeController.text.isEmpty != true)
                             animal.nome = nomeController.text;
-                            // nome = animal.nome;
-                          // else
 
 
                           if (dataNascimentoTesteController.text.isEmpty != true)
                             animal.dataNascimento = dataNascimentoTesteController.text;
-                            // data_nascimento = animal.dataNascimento;
-                          // else data_nascimento = dataNascimentoTesteController.text;
-                          //
+
                           if (especieController.text.isEmpty != true)
                             animal.idEspecie = especieController.text;
                           if (racaController.text.isEmpty != true)
@@ -375,22 +369,9 @@ class _EditarPetPageState extends State<EditarPetPage> {
                               pickedFile?.path == '') {
                             animal.foto = 'default.png';
                           }
-                          //
-                          // setState(() {
-                          //   nomeController.text = nome!;
-                          //   especieController.text = especie;
-                          //   racaController.text = raca!;
-                          // });
-                          //
-                          // //todo pegar os valores das variaveis temporarias e jogar na
-                          // //todo  aplicacao para nao usar o set state
 
-                          var code =  await AnimalRepository().putAnimal(animal, animal.id);
-                          if (code == '200') {
-                            setarMaterialPageRoute(context, TabsPage());
-                          }
-
-                          //
+                          var code =  await AnimalRepository().putAnimal(animal.nome, animal.dataNascimento, animal.idEspecie.toString(),
+                              animal.idRaca.toString(), animal.foto, id, context);
                         }
                       },
                       child: textBotao(AppLocalizations.of(context)!.save),
