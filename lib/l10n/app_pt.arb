@@ -24,6 +24,7 @@
     "myProfile": "Meu Perfil",
     "errorLoading": "Erro ao carregar os dados",
     "animals": "Animais",
+    "animal": "Animal",
     "pets": "Animais de estimação",
     "edit": "Editar",
     "delete": "Excluir",
@@ -56,6 +57,7 @@
     "resetPassword": "Redefinir Senha",
     "resetPasswordSend": "Senha redefinida com sucesso",
     "registerPet": "Cadastrar animal",
+    "registerDiary": "Cadastrar Diário",
     "editPet": "Editar Animal",
     "budget": "Gastos",
     "overview": "Visão Geral",
@@ -65,6 +67,7 @@
     "addAlert": "Adicionar lembrete",
     "calendar": "Calendário",
     "vaccineApplied": "Vacina aplicada",
+    "appDate": "Data da aplicação",
     "diaryTitle": "Título do diário",
     "diaryInformation": "Informações do diário",
     "passwordInformation": "Informações sobre a senha",
@@ -76,7 +79,21 @@
     "leisureFun": "Lazer e Diversão",
     "accessories": "Acessórios",
     "others": "Outros",
-    "expensesCategory": "Despesas por categoria"
+    "expensesCategory": "Despesas por categoria",
+    "addVaccine": "Adicionar Vacina",
+    "selectDate": "Selecione uma data",
+    "selectAnimal": "Selecione um animal",
+    "title": "Título",
+    "date": "Data",
+    "mood": "Humor",
+    "weight": "Peso",
+    "description": "Descrição",
+    "category": "Categoria",
+    "subcategory": "Subcategoria",
+    "localization": "Localização",
+    "price": "Valor",
+    "selectSpecie": "Selecione a espécie",
+    "selectBreed": "Selecione a raça"
 }
 
 

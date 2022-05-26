@@ -48,7 +48,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
       dataNascimentoController.text = _datePicker.toString();
       dataNascimentoTesteController.text = dataNascimentoController.text;
     } else {
-      exibirMensagem(context, 'Selecione uma data');
+      exibirMensagem(context, AppLocalizations.of(context)!.selectDate);
     }
 
     dataNascimentoController.text =

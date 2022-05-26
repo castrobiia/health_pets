@@ -17,6 +17,7 @@ import '../pages/tabs.page.dart';
 import '../widgets/widgets.dart';
 
 class AnimalRepository {
+  List listaAnimais = [];
   var url = "https://www.healthpets.app.br/api/animal";
   Future<List<AnimalModel>> fetchAnimais() async {
     Dio dio = Dio();
@@ -35,7 +36,38 @@ class AnimalRepository {
       final animal = AnimalModel.fromJson(json);
       animais.add(animal);
     }
+    print('animais: $animais');
     return animais;
+  }
+
+  Future<dynamic> getAnimais() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+    final response = await http.get(Uri.parse(url), headers: header);
+    var animais = jsonDecode(response.body);
+    return animais;
+  }
+
+  List<AnimalModel> toListAnimal(dynamic listaAnimais) {
+    List<AnimalModel> list = [];
+    list = (listaAnimais as List)
+        .map((item) => AnimalModel.fromJson(item))
+        .toList();
+    return list;
+  }
+
+  List<AnimalModel> toList(dynamic animais) {
+    List<AnimalModel> list = [];
+    list = (listaAnimais as List)
+        .map((item) => AnimalModel.fromJson(item))
+        .toList();
+    return list;
   }
 
   postAnimal(String nome, String data_nascimento, String id_especie,
@@ -58,7 +90,7 @@ class AnimalRepository {
     });
 
     var pic;
-    if(foto != 'default.png'){
+    if (foto != 'default.png') {
       pic = await http.MultipartFile.fromPath("foto", foto);
     }
 
@@ -93,84 +125,31 @@ class AnimalRepository {
   }
 
   getAnimal(int id) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String token = await prefs.get('token').toString();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
 
-  var header = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer ${token}"
-  };
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
 
-  const url = 'https://www.healthpets.app.br/api/animal/';
-  final response =
-      await http.get(Uri.parse(url + id.toString()), headers: header);
+    const url = 'https://www.healthpets.app.br/api/animal/';
+    final response =
+        await http.get(Uri.parse(url + id.toString()), headers: header);
 
-  // dynamic animal = jsonDecode(response.body);
+    // dynamic animal = jsonDecode(response.body);
 
-  // print('Animal Function ${animal}');
-  var animal = AnimalModel.fromJson(jsonDecode(response.body));
+    // print('Animal Function ${animal}');
+    var animal = AnimalModel.fromJson(jsonDecode(response.body));
+
 
   // debugPrint("Variavel animal: ${animal.toString()}");
   // debugPrint("Objeto teste: ${test}");
   return animal;
   }
 
-  // putAnimal(AnimalModel animal, int id) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String token = await prefs.get('token').toString();
-  //
-  //   var headerToken = {
-  //     "Accept": "application/json",
-  //     "Authorization": "Bearer ${token}"
-  //   };
-  //
-  //   // var body = jsonEncode({
-  //   //   'nome': animal.nome,
-  //   //   'data_nascimento': animal.dataNascimento,
-  //   //   'id_especie': animal.idEspecie,
-  //   //   'id_raca': animal.idRaca,
-  //   //   'foto': animal.foto,
-  //   // });
-  //
-  //   var pic;
-  //
-  //   // print(animal.foto);
-  //   if (animal.foto != 'default.png') {
-  //     pic = await http.MultipartFile.fromPath('foto', animal.foto!, contentType: MediaType('image', 'png'));
-  //   }
-  //
-  //   var uri = Uri.parse("https://healthpets.app.br/api/animal/${id}");
-  //   var request = http
-  //       .MultipartRequest(
-  //       'PUT',
-  //       uri)..fields.addAll({
-  //     'nome': animal.nome!,
-  //       'data_nascimento': animal.dataNascimento!,
-  //       'id_especie': animal.idEspecie!.toString(),
-  //       'id_raca': animal.idRaca!.toString(),
-  //       'foto': animal.foto!,
-  //   });
-  //       // ..fields["nome"] = animal.nome!
-  //       // ..fields["data_nascimento"] = animal.dataNascimento!
-  //       // ..fields["id_especie"] = animal.idEspecie.toString()
-  //       // ..fields["id_raca"] = animal.idEspecie.toString()
-  //       // ..files.add(pic);
-  //   request.headers.addAll(headerToken);
-  //   if(pic != null){
-  //     request.files.add(pic);
-  //   }
-  //
-  //   http.StreamedResponse retorno = await request.send();
-  //
-  //   final response = await retorno.stream.bytesToString();
-  //   print(response);
-  //   print(request.headers);
-  //   print(retorno.request);
-  //   print(retorno.reasonPhrase);
-  //   print(retorno.statusCode);
-  //   print(animal);
-  // }
+  
   putAnimal(String nome, String data_nascimento, String id_especie,
       String id_raca, String foto, int id, context) async {
 
@@ -199,5 +178,6 @@ class AnimalRepository {
       Navigator.pushNamed(context, '/home');
     }
   }
+
 
 }
