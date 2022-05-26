@@ -92,7 +92,9 @@
     "category": "Category",
     "subcategory": "Subcategory",
     "localization": "Localization",
-    "price": "Price"
+    "price": "Price",
+    "selectSpecie": "Select the specie",
+    "selectBreed": "Select the breed"
 }
 
 

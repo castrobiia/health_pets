@@ -36,7 +36,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         dataNascimentoTesteController.text = dataNascimentoController.text;
       });
     } else {
-      exibirMensagem(context, 'Selecione uma data');
+      exibirMensagem(context, AppLocalizations.of(context)!.selectDate);
     }
 
     dataNascimentoController.text =
@@ -146,13 +146,15 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 autofocus: false,
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return "Selecione uma data";
+                                    return AppLocalizations.of(context)!
+                                        .selectDate;
                                   }
                                   return null;
                                 },
                                 onSaved: (input) => _dataNascimento = input!,
                                 decoration: InputDecoration(
-                                  labelText: "Data de Nascimento",
+                                  labelText:
+                                      AppLocalizations.of(context)!.birthDate,
                                   labelStyle: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 17,
@@ -176,7 +178,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                     Text(AppLocalizations.of(context)!.species),
                                 validator: (value) {
                                   if (value == null) {
-                                    return "Selecione a espécie";
+                                    return AppLocalizations.of(context)!
+                                        .selectSpecie;
                                   }
                                   return null;
                                 },
@@ -210,7 +213,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                 hint: Text(AppLocalizations.of(context)!.breed),
                                 validator: (value) {
                                   if (value == null) {
-                                    return "Selecione a raça";
+                                    return AppLocalizations.of(context)!
+                                        .selectBreed;
                                   }
                                   return null;
                                 },
