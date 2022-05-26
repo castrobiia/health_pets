@@ -57,6 +57,8 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
         DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
   }
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   var conexao;
   initState() {
@@ -110,177 +112,180 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                 List<dynamic> listaAnimais =
                     AnimalRepository().toListAnimal(snapshot.data);
 
-                return Column(
-                  children: <Widget>[
-                    TextFormField(
-                      autofocus: false,
-                      controller: categoriaController,
-                      validator: (value) => validarCampo(value),
-                      onSaved: (input) => _categoria = input!,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.category,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      autofocus: false,
-                      controller: subcategoriaController,
-                      validator: (value) => validarCampo(value),
-                      onSaved: (input) => _subcategoria = input!,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.subcategory,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    DropdownButtonFormField(
-                      hint: Text(AppLocalizations.of(context)!.animal),
-                      validator: (value) {
-                        if (value == null) {
-                          return AppLocalizations.of(context)!.selectAnimal;
-                        }
-                        return null;
-                      },
-                      onSaved: (input) => _animal = input!.toString(),
-                      style: TextStyle(fontSize: 17, color: Colors.black),
-                      items: listaAnimais.map((item) {
-                        return DropdownMenuItem(
-                          child: new Text(
-                            item.nome,
-                            style: TextStyle(fontSize: 17),
+                return Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        autofocus: false,
+                        controller: categoriaController,
+                        validator: (value) => validarCampo(value),
+                        onSaved: (input) => _categoria = input!,
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.category,
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
                           ),
-                          value: item.id,
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          animalController.text = newValue.toString();
-                        });
-                      },
-                      value: animalId,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      autofocus: false,
-                      keyboardType: TextInputType.text,
-                      controller: dataController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return AppLocalizations.of(context)!.selectDate;
-                        }
-                        return null;
-                      },
-                      onSaved: (input) => _data = input!,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.date,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
                         ),
                       ),
-                      readOnly: true,
-                      onTap: () {
-                        setState(
-                          () {
-                            _dataSelecionada(context);
-                          },
-                        );
-                      },
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      autofocus: false,
-                      keyboardType: TextInputType.text,
-                      controller: localizacaoController,
-                      validator: (value) => validarCampo(value),
-                      onSaved: (input) => _localizacao = input!,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.localization,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        autofocus: false,
+                        controller: subcategoriaController,
+                        validator: (value) => validarCampo(value),
+                        onSaved: (input) => _subcategoria = input!,
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.subcategory,
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      autofocus: false,
-                      keyboardType: TextInputType.number,
-                      controller: valorController,
-                      validator: (value) => validarCampo(value),
-                      onSaved: (input) => _valor = input!,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.price,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
-                        ),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      autofocus: false,
-                      keyboardType: TextInputType.text,
-                      controller: descricaoController,
-                      maxLines: 3,
-                      maxLength: 150,
-                      validator: (value) => validarCampo(value),
-                      onSaved: (input) => _descricao = input!,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.description,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    CheckboxListTile(
-                      title: Text(AppLocalizations.of(context)!.addAlert),
-                      value: checkedValue,
-                      onChanged: (newValue) {
-                        setState(() {
-                          checkedValue = newValue!;
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity
-                          .leading, //  <-- leading Checkbox
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: botaoRetangulo(),
-                      child: TextButton(
-                        onPressed: () {
-                          setarMaterialPageRoute(context, Calendario());
+                      DropdownButtonFormField(
+                        hint: Text(AppLocalizations.of(context)!.animal),
+                        validator: (value) {
+                          if (value == null) {
+                            return AppLocalizations.of(context)!.selectAnimal;
+                          }
+                          return null;
                         },
-                        child: textBotao(AppLocalizations.of(context)!.save),
+                        onSaved: (input) => _animal = input!.toString(),
+                        style: TextStyle(fontSize: 17, color: Colors.black),
+                        items: listaAnimais.map((item) {
+                          return DropdownMenuItem(
+                            child: new Text(
+                              item.nome,
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            value: item.id,
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            animalController.text = newValue.toString();
+                          });
+                        },
+                        value: animalId,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.text,
+                        controller: dataController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return AppLocalizations.of(context)!.selectDate;
+                          }
+                          return null;
+                        },
+                        onSaved: (input) => _data = input!,
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.date,
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
+                          ),
+                        ),
+                        readOnly: true,
+                        onTap: () {
+                          setState(
+                            () {
+                              _dataSelecionada(context);
+                            },
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.text,
+                        controller: localizacaoController,
+                        validator: (value) => validarCampo(value),
+                        onSaved: (input) => _localizacao = input!,
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.localization,
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.number,
+                        controller: valorController,
+                        validator: (value) => validarCampo(value),
+                        onSaved: (input) => _valor = input!,
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.price,
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.text,
+                        controller: descricaoController,
+                        maxLines: 3,
+                        maxLength: 150,
+                        validator: (value) => validarCampo(value),
+                        onSaved: (input) => _descricao = input!,
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.description,
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CheckboxListTile(
+                        title: Text(AppLocalizations.of(context)!.addAlert),
+                        value: checkedValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            checkedValue = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity
+                            .leading, //  <-- leading Checkbox
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        decoration: botaoRetangulo(),
+                        child: TextButton(
+                          onPressed: () {
+                            setarMaterialPageRoute(context, Calendario());
+                          },
+                          child: textBotao(AppLocalizations.of(context)!.save),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
