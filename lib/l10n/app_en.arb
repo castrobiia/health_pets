@@ -94,7 +94,8 @@
     "localization": "Localization",
     "price": "Price",
     "selectSpecie": "Select the specie",
-    "selectBreed": "Select the breed"
+    "selectBreed": "Select the breed",
+    "selectCategory": "Select the category"
 }
 
 

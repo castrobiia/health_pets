@@ -93,7 +93,8 @@
     "localization": "Localização",
     "price": "Valor",
     "selectSpecie": "Selecione a espécie",
-    "selectBreed": "Selecione a raça"
+    "selectBreed": "Selecione a raça",
+    "selectCategory": "Selecione a categoria"
 }
 
 
