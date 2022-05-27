@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/http/animal-repository.dart';
-import 'package:health_pets/pages/calendario.page.dart';
+import 'package:health_pets/models/diario-model.dart';
+import 'package:health_pets/pages/tabs.page.dart';
+import 'package:health_pets/repository/diario-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +20,7 @@ class _CadastroDiarioState extends State<CadastroDiario> {
 
   TextEditingController pesoController = TextEditingController();
   TextEditingController dataController = TextEditingController();
+  TextEditingController dataSemFormatacaoController = TextEditingController();
   TextEditingController descricaoController = TextEditingController();
   TextEditingController humorController = TextEditingController();
   TextEditingController tituloController = TextEditingController();
@@ -34,6 +37,7 @@ class _CadastroDiarioState extends State<CadastroDiario> {
     if (_datePicker != null && _datePicker != _data) {
       setState(() {
         dataController.text = _datePicker.toString();
+        dataSemFormatacaoController.text = dataController.text;
       });
     } else {
       exibirMensagem(context, AppLocalizations.of(context)!.selectDate);
@@ -196,26 +200,40 @@ class _CadastroDiarioState extends State<CadastroDiario> {
                         width: double.infinity,
                         decoration: botaoRetangulo(),
                         child: TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
 
                               String titulo = tituloController.text;
-                              var idAnimal = animalController.text;
-                              String data = dataController.text;
+                              var id_animal = animalController.text;
+                              String data = dataSemFormatacaoController.text;
                               String humor = humorController.text;
-                              var peso = pesoController.text;
+                              String peso = pesoController.text;
                               String descricao = descricaoController.text;
 
                               print('titulo: $titulo');
-                              print('idAnimal: $idAnimal');
+                              print('id_animal: $id_animal');
                               print('data: $data');
                               print('humor: $humor');
                               print('peso: $peso');
                               print('descricao: $descricao');
-                            }
 
-                            setarMaterialPageRoute(context, Calendario());
+                              if (await DiarioRepository().postDiario(
+                                      titulo,
+                                      id_animal,
+                                      data,
+                                      humor,
+                                      peso,
+                                      descricao) ==
+                                  200) {
+                                exibirMensagem(
+                                    context, 'Diário cadastrado com sucesso');
+                                setarMaterialPageRoute(context, TabsPage());
+                              } else {
+                                exibirMensagem(context,
+                                    'Não foi possível cadastrar diário');
+                              }
+                            }
                           },
                           child: textBotao(AppLocalizations.of(context)!.save),
                         ),
