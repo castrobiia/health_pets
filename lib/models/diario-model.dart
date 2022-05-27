@@ -1,16 +1,16 @@
 class DiarioModel {
   int? id;
   String? titulo;
-  int? idAnimal;
+  String? id_animal;
   String? data;
   String? humor;
-  int? peso;
+  String? peso;
   String? descricao;
 
   DiarioModel(
       {this.id,
       this.titulo,
-      this.idAnimal,
+      this.id_animal,
       this.data,
       this.humor,
       this.peso,
@@ -19,7 +19,7 @@ class DiarioModel {
   DiarioModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     titulo = json['titulo'];
-    idAnimal = json['id_animal'];
+    id_animal = json['id_animal'];
     data = json['data'];
     humor = json['humor'];
     peso = json['peso'];
@@ -31,7 +31,7 @@ class DiarioModel {
     data['id'] = this.id;
     data['titulo'] = this.titulo;
     data['data'] = this.data;
-    data['id_animal'] = this.idAnimal;
+    data['id_animal'] = this.id_animal;
     data['humor'] = this.humor;
     data['peso'] = this.peso;
     data['descricao'] = this.descricao;
