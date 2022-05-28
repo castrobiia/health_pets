@@ -87,32 +87,6 @@ class _EditarPetPageState extends State<EditarPetPage> {
         backgroundColor: Colors.white,
         elevation: 1,
         centerTitle: true,
-        actions: <Widget>[
-          TextButton(
-            onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                //salvar o estado do formulário
-                _formKey.currentState!.save();
-
-                String nome = nomeController.text;
-                String data_nascimento = dataNascimentoTesteController.text;
-                var id_especie = especieController.text;
-                String id_raca = racaController.text;
-                String foto = pickedFile?.path ?? 'default.png';
-
-                // print("Picked file path: ${pickedFile?.path }");
-                // print("Foto: $foto");
-
-                if (await AnimalRepository().postAnimal(
-                        nome, data_nascimento, id_especie, id_raca, foto) ==
-                    '200') {}
-
-                setarMaterialPageRoute(context, TabsPage());
-              }
-            },
-            child: Text(AppLocalizations.of(context)!.save),
-          ),
-        ],
         title: Text(
           AppLocalizations.of(context)!.editPet,
           style: TextStyle(
@@ -161,8 +135,13 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: animal.foto == '' || animal.foto == null ?Image.network("https://healthpets.app.br/storage/pets/default.png").image : Image.network("https://healthpets.app.br/storage/pets/${animal.foto}").image
-                          ),
+                              image: animal.foto == '' || animal.foto == null
+                                  ? Image.network(
+                                          "https://healthpets.app.br/storage/pets/default.png")
+                                      .image
+                                  : Image.network(
+                                          "https://healthpets.app.br/storage/pets/${animal.foto}")
+                                      .image),
                         ),
                       ),
                       Positioned(
@@ -195,7 +174,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           ),
                         );
                       }
-                      List<dynamic> listaEspecies = EspecieEntity().toList(snapshot.data);
+                      List<dynamic> listaEspecies =
+                          EspecieEntity().toList(snapshot.data);
 
                       return Column(
                         children: <Widget>[
@@ -285,7 +265,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
                     },
                   ),
                   FutureBuilder<dynamic>(
-                    future: RacaEntity().getRacasPorEspecie(animal.idEspecie.toString()),
+                    future: RacaEntity()
+                        .getRacasPorEspecie(animal.idEspecie.toString()),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState != ConnectionState.done) {
                         return Center(
@@ -300,7 +281,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           ),
                         );
                       }
-                      List<dynamic> listaRacas = RacaEntity().toList(snapshot.data);
+                      List<dynamic> listaRacas =
+                          RacaEntity().toList(snapshot.data);
 
                       return Column(
                         children: <Widget>[
@@ -335,7 +317,6 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           ),
                         ],
                       );
-
                     },
                   ),
                   SizedBox(
@@ -350,16 +331,16 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           //salvar o estado do formulário
                           _formKey.currentState!.save();
 
-
                           // String? nome, data_nascimento, raca, foto;
                           var foto;
 
                           if (nomeController.text.isEmpty != true)
                             animal.nome = nomeController.text;
 
-
-                          if (dataNascimentoTesteController.text.isEmpty != true)
-                            animal.dataNascimento = dataNascimentoTesteController.text;
+                          if (dataNascimentoTesteController.text.isEmpty !=
+                              true)
+                            animal.dataNascimento =
+                                dataNascimentoTesteController.text;
 
                           if (especieController.text.isEmpty != true)
                             animal.idEspecie = especieController.text;
@@ -370,8 +351,14 @@ class _EditarPetPageState extends State<EditarPetPage> {
                             animal.foto = 'default.png';
                           }
 
-                          var code =  await AnimalRepository().putAnimal(animal.nome, animal.dataNascimento, animal.idEspecie.toString(),
-                              animal.idRaca.toString(), animal.foto, id, context);
+                          var code = await AnimalRepository().putAnimal(
+                              animal.nome,
+                              animal.dataNascimento,
+                              animal.idEspecie.toString(),
+                              animal.idRaca.toString(),
+                              animal.foto,
+                              id,
+                              context);
                         }
                       },
                       child: textBotao(AppLocalizations.of(context)!.save),
