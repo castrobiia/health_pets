@@ -5,14 +5,12 @@ import 'package:health_pets/controllers/vacina_controller.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
+import 'package:health_pets/pages/vacina.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/repository/vacina-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/repository/animal-repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'vacina.page.dart';
 
 confirmarExclusaoAnimal(BuildContext context, id) {
   var animalController = AnimalController(AnimalRepositoryy());
