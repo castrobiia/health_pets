@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/tabs.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -75,7 +74,6 @@ class _EditarPetPageState extends State<EditarPetPage> {
 
   @override
   Widget build(BuildContext context) {
-    // var ;
     var nome, data_nascimento, especieId, racaId;
 
     // print(this.id);
