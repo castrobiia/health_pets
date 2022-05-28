@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:health_pets/pages/alert-dialog.dart';
+import 'package:health_pets/pages/editar-vacina.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
+import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 
 class VacinaCard extends StatelessWidget {
@@ -34,9 +37,9 @@ class VacinaCard extends StatelessWidget {
             label: 'Editar',
             icon: Icons.edit,
             onPressed: (context) {
-              //setarMaterialPageRoute(context, confirmarExclusaoVacina(idAnimal));
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("vacina editada")));
+              setarMaterialPageRoute(context, EditarVacina());
+              // ScaffoldMessenger.of(context)
+              //     .showSnackBar(SnackBar(content: Text("Vacina editada")));
             },
           ),
           SlidableAction(
@@ -44,8 +47,9 @@ class VacinaCard extends StatelessWidget {
             label: 'Deletar',
             icon: Icons.delete,
             onPressed: (context) {
+              // setarMaterialPageRoute(context, confirmarExclusaoVacina(context, idVacina));
               ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("'vacina deletada")));
+                  .showSnackBar(SnackBar(content: Text("Vacina deletada")));
             },
           ),
         ],
