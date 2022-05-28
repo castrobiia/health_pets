@@ -79,33 +79,6 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
         backgroundColor: Colors.white,
         elevation: 1,
         centerTitle: true,
-        actions: <Widget>[
-          TextButton(
-            onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-
-                String nomeVacina = nomeVacinaController.text;
-                String data_aplicacao = dataAplicacaoTesteController.text;
-                String fabricante = fabricanteController.text;
-                String lote = loteController.text;
-                int id_animal = this.idAnimal;
-
-                String data_aplicacao_teste = dataAplicacaoController.text;
-
-                var vacina = await VacinaEntity()
-                    .createVacina(id_animal, nomeVacina, data_aplicacao,
-                        fabricante, lote, id_animal)
-                    .then((value) => value);
-
-                if (vacina == 200) {
-                  setarMaterialPageRoute(context, VacinaPage(id_animal));
-                }
-              }
-            },
-            child: botaoSalvarAppBar(),
-          ),
-        ],
         title: Text(
           "Adicionar Vacina",
           style: TextStyle(
@@ -178,6 +151,45 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                           setarCampoForms(
                               fabricanteController, "Fabricante", _fabricante,
                               validator: (value) => validarCampo(value)),
+                          SizedBox(height: 10),
+                          Container(
+                            width: double.infinity,
+                            decoration: botaoRetangulo(),
+                            child: TextButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
+
+                                  String nomeVacina = nomeVacinaController.text;
+                                  String data_aplicacao =
+                                      dataAplicacaoTesteController.text;
+                                  String fabricante = fabricanteController.text;
+                                  String lote = loteController.text;
+                                  int id_animal = this.idAnimal;
+
+                                  String data_aplicacao_teste =
+                                      dataAplicacaoController.text;
+
+                                  var vacina = await VacinaEntity()
+                                      .createVacina(
+                                          id_animal,
+                                          nomeVacina,
+                                          data_aplicacao,
+                                          fabricante,
+                                          lote,
+                                          id_animal)
+                                      .then((value) => value);
+
+                                  if (vacina == 200) {
+                                    setarMaterialPageRoute(
+                                        context, VacinaPage(id_animal));
+                                  }
+                                }
+                              },
+                              child: textBotao(
+                                      AppLocalizations.of(context)!.save),
+                            ),
+                          ),
                         ],
                       ),
                     ),
