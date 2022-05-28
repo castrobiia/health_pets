@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/historico-pet.page.dart';
 import 'package:health_pets/pages/menu-pet.page.dart';
+import 'package:health_pets/pages/outras-categorias-pet.page.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -19,13 +20,14 @@ class _PerfilPetPageState extends State<PerfilPetPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
               Tab(text: AppLocalizations.of(context)!.profile),
-              Tab(text: AppLocalizations.of(context)!.historic),
+              Tab(text: AppLocalizations.of(context)!.health),
+              Tab(text: AppLocalizations.of(context)!.others),
             ],
           ),
           backgroundColor: Colors.white,
@@ -42,7 +44,11 @@ class _PerfilPetPageState extends State<PerfilPetPage> {
           ],
         ),
         body: TabBarView(
-          children: <Widget>[PerfilPet(id), HistoricoPet("dia", 10, id)],
+          children: <Widget>[
+            PerfilPet(id),
+            HistoricoPet("dia", 10, id),
+            OutrasCategoriasPet()
+          ],
         ),
       ),
     );
