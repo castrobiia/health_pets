@@ -47,7 +47,7 @@ class VacinaCard extends StatelessWidget {
             label: 'Deletar',
             icon: Icons.delete,
             onPressed: (context) {
-              // setarMaterialPageRoute(context, confirmarExclusaoVacina(context, idVacina));
+              setarMaterialPageRoute(context, confirmarExclusaoVacina(context, idVacina));
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text("Vacina deletada")));
             },
