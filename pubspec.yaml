@@ -94,13 +94,12 @@ flutter:
   assets:
     - assets/logo.png
     - assets/logo_health_pets.png
+    - assets/logo_health_pets_fundo.png
     - assets/reset-password.png
-    - assets/perfil-cao1.jpeg
-    - assets/perfil-cao2.jpeg
     - assets/veterinarian.png
     - assets/injection.png
     - assets/microscope.png
-    - assets/perfil-usuario1.png
+    - assets/perfil-usuario.png
     - assets/dog.png
     - assets/money.png
     - assets/diario.png
