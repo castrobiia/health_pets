@@ -95,7 +95,10 @@
     "selectSpecie": "Selecione a espécie",
     "selectBreed": "Selecione a raça",
     "selectCategory": "Selecione a categoria",
-    "health": "Saúde"
+    "health": "Saúde",
+    "animalsRegistered": "Não há animais cadastrados",
+    "diariesRegistered": "Não há diários cadastrados",
+    "fillField": "Preencha o campo"
 }
 
 

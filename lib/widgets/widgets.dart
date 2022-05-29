@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/class/api/token.dart';
 import 'package:health_pets/themes/color_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void setarMaterialPageRoute(BuildContext context, page) {
   Navigator.push(
@@ -147,9 +148,9 @@ botaoRetangulo() {
 }
 
 //Substituido pelo botao embaixo (botaoRetangulo + textBotao)
-botaoSalvarAppBar() {
+botaoSalvarAppBar(BuildContext context) {
   return Text(
-    "Salvar",
+    AppLocalizations.of(context)!.save,
     style: TextStyle(
       color: ColorTheme.salmao1,
       fontWeight: FontWeight.bold,
@@ -157,6 +158,7 @@ botaoSalvarAppBar() {
   );
 }
 
+// aplicar internacionalização
 validarCampo(value) {
   if (value!.isEmpty) {
     return "Preencha o campo";
@@ -173,7 +175,7 @@ autenticacao(BuildContext context) async {
 
 erroCarregarDados(BuildContext context) {
   return Text(
-    'Erro ao carregar os dados',
+    AppLocalizations.of(context)!.errorLoading,
     style: TextStyle(
       fontSize: 22,
       fontWeight: FontWeight.w300,

@@ -96,7 +96,10 @@
     "selectSpecie": "Select the specie",
     "selectBreed": "Select the breed",
     "selectCategory": "Select the category",
-    "health": "Health"
+    "health": "Health",
+    "animalsRegistered": "Don't have animals registered",
+    "diariesRegistered": "Don't have diaries registered",
+    "fillField": "Fill the field"
 }
 
 
