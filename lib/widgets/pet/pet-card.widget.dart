@@ -1,8 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
 class PetCard extends StatelessWidget {
   final int idPet;
@@ -32,11 +29,11 @@ class PetCard extends StatelessWidget {
       else{
         return Column(
           children: [
-              Image.network("https://healthpets.app.br/storage/${foto}")
+              Expanded(child: Image.network("https://healthpets.app.br/storage/${foto}"))
             ],
           );
       }
-    };
+    }
 
     return Container(
       width: MediaQuery.of(context).size.width * 1,
