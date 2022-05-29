@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/pages/cadastro-usuario.page.dart';
+import 'package:health_pets/pages/editar-pet.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:health_pets/pages/tabs.page.dart';
 
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const CadastroUsuario(),
         '/resetPassword': (context) => const ResetSenha(),
+        EditarPetPage.routeName :(context) => const EditarPetPage(),
       },
       //Para usar as rotas :
       // Navigator.pushNamed(context, '/home');
@@ -63,6 +65,12 @@ class MyApp extends StatelessWidget {
       //Navigator,push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
     );
   }
+}
+
+class Argumentos{
+  final int id;
+
+  Argumentos(this.id);
 }
 
 // Widget _introScreen() {
