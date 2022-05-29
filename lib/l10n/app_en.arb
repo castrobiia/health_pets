@@ -95,7 +95,8 @@
     "price": "Price",
     "selectSpecie": "Select the specie",
     "selectBreed": "Select the breed",
-    "selectCategory": "Select the category"
+    "selectCategory": "Select the category",
+    "health": "Health"
 }
 
 
