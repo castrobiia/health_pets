@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/http/animal-repository.dart';
 import 'package:health_pets/pages/calendario.page.dart';
 import 'package:health_pets/repository/categoria-repository.dart';
+import 'package:health_pets/repository/subcategoria-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
@@ -22,6 +23,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
   TextEditingController localizacaoController = TextEditingController();
   TextEditingController dataController = TextEditingController();
   TextEditingController valorController = TextEditingController();
+  List listaSubcategorias = [];
 
   String? _animal,
       _localizacao,
@@ -60,6 +62,13 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
 
   final _formKey = GlobalKey<FormState>();
 
+  setSubcategorias(id) async {
+    var list = await SubcategoriaRepository().getSubcategoriasPorCategoria(id);
+    setState(() {
+      listaSubcategorias = list;
+    });
+  }
+
   @override
   var conexao, conexaoCategoria;
   initState() {
@@ -71,7 +80,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
   }
 
   Widget build(BuildContext context) {
-    var animalId, categoriaId;
+    var animalId, categoriaId, subcategoriaId;
 
     return Scaffold(
       appBar: AppBar(
@@ -165,6 +174,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                                 setState(() {
                                   categoriaController.text =
                                       newValue.toString();
+                                  setSubcategorias(categoriaController.text);
                                 });
                               },
                               value: categoriaId,
@@ -172,19 +182,37 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                             SizedBox(
                               height: 10,
                             ),
-                            TextFormField(
-                              autofocus: false,
-                              controller: subcategoriaController,
-                              validator: (value) => validarCampo(value),
-                              onSaved: (input) => _subcategoria = input!,
-                              decoration: InputDecoration(
-                                labelText:
-                                    AppLocalizations.of(context)!.subcategory,
-                                labelStyle: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 17,
-                                ),
-                              ),
+                            DropdownButtonFormField(
+                              isExpanded: true,
+                              hint: Text(
+                                  AppLocalizations.of(context)!.subcategory),
+                              validator: (value) {
+                                if (value == null) {
+                                  return AppLocalizations.of(context)!
+                                      .selectBreed;
+                                }
+                                return null;
+                              },
+                              onSaved: (input) =>
+                                  _subcategoria = input!.toString(),
+                              style:
+                                  TextStyle(fontSize: 17, color: Colors.black),
+                              items: listaSubcategorias.map((item) {
+                                return DropdownMenuItem(
+                                  child: new Text(
+                                    item['nome'],
+                                    style: TextStyle(fontSize: 17),
+                                  ),
+                                  value: item['id'],
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  subcategoriaController.text =
+                                      newValue.toString();
+                                });
+                              },
+                              value: subcategoriaId,
                             ),
                             SizedBox(
                               height: 10,
