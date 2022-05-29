@@ -118,7 +118,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   children: <Widget>[
                     Stack(
                       children: <Widget>[
-                        BoxDecorationImagem(180, "assets/perfil-cao1.jpeg"),
+                        BoxDecorationImagem(180, "assets/logo_health_pets_fundo.png"),
                         Positioned(
                           top: 120,
                           left: 120,
