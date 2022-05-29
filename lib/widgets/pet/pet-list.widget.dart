@@ -3,6 +3,7 @@ import 'package:health_pets/http/animal-repository.dart';
 import 'package:health_pets/models/animal-model.dart';
 import 'package:health_pets/widgets/pet/pet-card.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PetLista extends StatelessWidget {
   const PetLista({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class PetLista extends StatelessWidget {
           if (list.length == 0) {
             return Center(
               child: Text(
-                'Não há animais cadastrados',
+                AppLocalizations.of(context)!.animalsRegistered,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w300,

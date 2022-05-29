@@ -24,7 +24,7 @@ class EditarVacinaState extends State<EditarVacina> {
         actions: <Widget>[
           TextButton(
             onPressed: () {},
-            child: botaoSalvarAppBar(),
+            child: botaoSalvarAppBar(context),
           ),
         ],
         title: Text(
