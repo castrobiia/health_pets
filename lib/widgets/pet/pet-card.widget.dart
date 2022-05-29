@@ -32,7 +32,7 @@ class PetCard extends StatelessWidget {
       else{
         return Column(
           children: [
-              Image.network("https://healthpets.app.br/storage/pets/${foto}")
+              Image.network("https://healthpets.app.br/storage/${foto}")
             ],
           );
       }

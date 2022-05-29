@@ -10,21 +10,27 @@ import '../class/entity/especie-entity.dart';
 import '../class/entity/raca-entity.dart';
 import '../class/util.dart';
 import '../http/animal-repository.dart';
+import '../main.dart';
 import '../models/cadastro-animal-model.dart';
 import '../widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditarPetPage extends StatefulWidget {
-  final id;
-  const EditarPetPage(this.id);
+  static const routeName = '/editarPet/';
+  // final id;
+  // const EditarPetPage(this.id);
+  const EditarPetPage();
 
   @override
-  State<EditarPetPage> createState() => _EditarPetPageState(this.id);
+  // State<EditarPetPage> createState() => _EditarPetPageState(this.id);
+  State<EditarPetPage> createState() => _EditarPetPageState();
 }
 
 class _EditarPetPageState extends State<EditarPetPage> {
-  final id;
-  _EditarPetPageState(this.id);
+  // final id;
+  // _EditarPetPageState(this.id);
+  // final id;
+  _EditarPetPageState();
 
   DateTime _data = DateTime.now();
   final ImagePicker _picker = ImagePicker();
@@ -75,10 +81,11 @@ class _EditarPetPageState extends State<EditarPetPage> {
   @override
   Widget build(BuildContext context) {
     var nome, data_nascimento, especieId, racaId;
+    final argumentos = ModalRoute.of(context)?.settings.arguments as Argumentos;
 
     // print(this.id);
 
-    catchAnimal(this.id);
+    catchAnimal(argumentos.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -94,7 +101,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
       ),
       body: SingleChildScrollView(
           child: FutureBuilder(
-        future: catchAnimal(this.id),
+        future: catchAnimal(argumentos.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(child: Container(child: CircularProgressIndicator()));
@@ -138,7 +145,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                           "https://healthpets.app.br/storage/pets/default.png")
                                       .image
                                   : Image.network(
-                                          "https://healthpets.app.br/storage/pets/${animal.foto}")
+                                          "https://healthpets.app.br/storage/${animal.foto}")
                                       .image),
                         ),
                       ),
@@ -151,7 +158,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                             //cor do ícone
                             foregroundColor: Colors.white,
                             onPressed: () {
-                              pickImage();
+                              pickImage(argumentos.id);
                             }),
                       ),
                     ],
@@ -337,17 +344,14 @@ class _EditarPetPageState extends State<EditarPetPage> {
 
                           if (dataNascimentoTesteController.text.isEmpty !=
                               true)
-                            animal.dataNascimento =
-                                dataNascimentoTesteController.text;
+                            animal.dataNascimento = dataNascimentoTesteController.text;
 
-                          if (especieController.text.isEmpty != true)
-                            animal.idEspecie = especieController.text;
-                          if (racaController.text.isEmpty != true)
-                            animal.idRaca.toString();
-                          if (pickedFile?.path == null ||
-                              pickedFile?.path == '') {
+                          if (especieController.text.isEmpty != true || animal.idEspecie.toString() != especieController.text) animal.idEspecie = int.parse(especieId);
+                          if (racaController.text.isEmpty != true || animal.idRaca.toString() != racaController.text) animal.idRaca = int.parse(racaId);
+                          if (pickedFile?.path == null || pickedFile?.path == '') {
                             animal.foto = 'default.png';
                           }
+
 
                           var code = await AnimalRepository().putAnimal(
                               animal.nome,
@@ -355,7 +359,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                               animal.idEspecie.toString(),
                               animal.idRaca.toString(),
                               animal.foto,
-                              id,
+                              argumentos.id,
                               context);
                         }
                       },
@@ -371,25 +375,29 @@ class _EditarPetPageState extends State<EditarPetPage> {
     );
   }
 
-  void pickImage() async {
+  void pickImage(id) async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() {
         pickedFile = image;
       });
 
-      saveImage(image);
+      saveImage(image, id);
     }
   }
 
-  void saveImage(XFile img) async {
+  void saveImage(XFile img, id) async {
+    // print('Imagem: ${img.path}');
     final String path = (await getApplicationDocumentsDirectory()).path;
 
     File convertedImg = File(img.path);
 
     final String fileName = Util().textToMd5(DateTime.now().toString());
     final File localImage = await convertedImg.copy('$path/$fileName');
-    print("Saved Image under: $path/$fileName");
+    // print("Saved Image under: $path/$fileName");
+    AnimalRepository().updateFoto(context, '$path/$fileName', id);
+    // catchAnimal(id);
+    setState(() {});
   }
 
   void loadImage(String imgName) async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/controllers/animal_controller.dart';
+import 'package:health_pets/main.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/editar-pet.page.dart';
@@ -52,7 +53,8 @@ void onSelected(BuildContext context, MenuItemPet item, dynamic id) {
   var animalController = AnimalController(AnimalRepositoryy());
   switch (item) {
     case MenuItemsPet.itemEditar:
-      setarMaterialPageRoute(context, EditarPetPage(idPet));
+      // setarMaterialPageRoute(context, EditarPetPage(idPet));
+      Navigator.pushNamed(context, '/editarPet/', arguments: Argumentos(idPet));
       break;
     case MenuItemsPet.itemExcluir:
       confirmarExclusaoAnimal(context, id);

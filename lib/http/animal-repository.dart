@@ -13,6 +13,7 @@ import 'package:health_pets/models/animal-model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../main.dart';
 import '../pages/tabs.page.dart';
 import '../widgets/widgets.dart';
 
@@ -103,10 +104,9 @@ class AnimalRepository {
     request.fields["id_raca"] = id_raca;
     request.files.add(pic);
 
-    print(request.headers.toString());
-    // final response =
-    //     await http.post(Uri.parse(url), body: body, headers: headerToken);
-    // return jsonDecode(response.statusCode.toString());
+    final response =
+        await http.post(Uri.parse(url), body: body, headers: headerToken);
+    return jsonDecode(response.statusCode.toString());
   }
 
   Future<List> findAllAnimais() async {
@@ -164,6 +164,7 @@ class AnimalRepository {
         'id_raca':id_raca,
         'foto': foto,
       });
+
     var response = await http.put(
           uri,
           body: body,
@@ -177,6 +178,28 @@ class AnimalRepository {
     if(response.statusCode == 200){
       Navigator.pushNamed(context, '/home');
     }
+  }
+
+  updateFoto(context, String foto, id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var headerToken = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    var pic = await http.MultipartFile.fromPath("foto", foto);
+
+    var request = http.MultipartRequest(
+        "POST", Uri.https('healthpets.app.br', 'api/animal/foto'));
+    request.headers.addAll(headerToken);
+    request.fields['id'] = id.toString();
+    request.files.add(pic);
+
+    final response = await request.send();
+    Navigator.pushNamed(context, '/editarPet/', arguments: Argumentos(id));
   }
 
 
