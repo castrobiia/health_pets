@@ -312,10 +312,14 @@ class _EditarPetPageState extends State<EditarPetPage> {
                                   );
                                 }).toList(),
                                 onSaved: (newValue) {
-                                  racaId = newValue.toString();
+                                  racaId = (newValue.toString() == '' ||
+                                          newValue.toString() == null)
+                                      ? animal.racaId
+                                      : newValue.toString();
                                 },
                                 onChanged: (newValue) {
                                   racaId = newValue.toString();
+                                  racaController.text = newValue.toString();
                                 },
                               ),
                             ),
@@ -344,14 +348,21 @@ class _EditarPetPageState extends State<EditarPetPage> {
 
                           if (dataNascimentoTesteController.text.isEmpty !=
                               true)
-                            animal.dataNascimento = dataNascimentoTesteController.text;
+                            animal.dataNascimento =
+                                dataNascimentoTesteController.text;
 
-                          if (especieController.text.isEmpty != true || animal.idEspecie.toString() != especieController.text) animal.idEspecie = int.parse(especieId);
-                          if (racaController.text.isEmpty != true || animal.idRaca.toString() != racaController.text) animal.idRaca = int.parse(racaId);
-                          if (pickedFile?.path == null || pickedFile?.path == '') {
+                          if (especieController.text.isEmpty != true ||
+                              animal.idEspecie.toString() !=
+                                  especieController.text)
+                            animal.idEspecie = int.parse(especieId);
+
+                          if (racaController.text.isEmpty != true) {
+                            animal.idRaca = int.parse(racaId);
+                          }
+                          if (pickedFile?.path == null ||
+                              pickedFile?.path == '') {
                             animal.foto = 'default.png';
                           }
-
 
                           var code = await AnimalRepository().putAnimal(
                               animal.nome,
