@@ -17,21 +17,21 @@ class PetCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // image = XFile(fotoPet);
 
-    getImage(foto) {
-      if (foto == '' || foto == null) {
+    getImage(foto){
+      if(foto == '' || foto == null){
         return Column(
           children: [
             Image.network("https://healthpets.app.br/storage/pets/default.png")
           ],
         );
-      } else {
+
+      }
+      else{
         return Column(
           children: [
-            Expanded(
-                child:
-                    Image.network("https://healthpets.app.br/storage/${foto}"))
-          ],
-        );
+              Expanded(child: Image.network("https://healthpets.app.br/storage/${foto}"))
+            ],
+          );
       }
     }
 
@@ -57,12 +57,13 @@ class PetCard extends StatelessWidget {
                   child: Column(
                     children: [
                       Expanded(
-                          flex: 1,
-                          // child: (!kIsWeb && image != null
-                          //     ? Image.file(File(image!.path))
-                          //     : Container()),
-                          //     child: Image.network("https://healthpets.app.br/storage/pets/$fotoPet"),
-                          child: getImage(fotoPet)),
+                        flex: 1,
+                        // child: (!kIsWeb && image != null
+                        //     ? Image.file(File(image!.path))
+                        //     : Container()),
+                        //     child: Image.network("https://healthpets.app.br/storage/pets/$fotoPet"),
+                            child: getImage(fotoPet)
+                      ),
                     ],
                   ),
                 ),
