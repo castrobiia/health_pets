@@ -47,7 +47,7 @@ class _PerfilPetPageState extends State<PerfilPetPage> {
           children: <Widget>[
             PerfilPet(id),
             HistoricoPet("dia", 10, id),
-            OutrasCategoriasPet()
+            OutrasCategorias()
           ],
         ),
       ),
