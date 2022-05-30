@@ -258,16 +258,25 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                       String foto =
                                           pickedFile?.path ?? 'default.png';
 
-                                      if (await AnimalRepository().postAnimal(
-                                              nome,
-                                              data_nascimento,
-                                              id_especie,
-                                              id_raca,
-                                              foto) ==
-                                          '200') {}
+                                      var animal = await AnimalRepository()
+                                          .postAnimal(nome, data_nascimento,
+                                              id_especie, id_raca, foto);
 
-                                      setarMaterialPageRoute(
-                                          context, TabsPage());
+                                      if (pickedFile != null) {
+                                        saveImage(pickedFile!, animal[0]['id']);
+                                      }
+                                      //print('animal 1: ${animal['id']}');
+                                      print('animal 1: ${animal}');
+                                      print('animal 1: ${animal[0]['id']}');
+                                      // print(
+                                      //     'animal 2: ${animal.id.toString()}');
+                                      if (animal[0]['id'] != null) {
+                                        setarMaterialPageRoute(
+                                            context, TabsPage());
+                                      } else {
+                                        exibirMensagem(context,
+                                            'Não foi possível cadastrar o animal');
+                                      }
                                     }
                                   },
                                   child: textBotao(
@@ -296,18 +305,19 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
         pickedFile = image;
       });
 
-      saveImage(image);
+      // saveImage(image, id);
     }
   }
 
-  void saveImage(XFile img) async {
+  void saveImage(XFile img, id) async {
     final String path = (await getApplicationDocumentsDirectory()).path;
 
     File convertedImg = File(img.path);
 
     final String fileName = Util().textToMd5(DateTime.now().toString());
     final File localImage = await convertedImg.copy('$path/$fileName');
-    print("Saved Image under: $path/$fileName");
+    AnimalRepository().updateFoto(context, '$path/$fileName', id);
+    // print("Saved Image under: $path/$fileName");
   }
 
   void loadImage(String imgName) async {

@@ -106,7 +106,8 @@ class AnimalRepository {
 
     final response =
         await http.post(Uri.parse(url), body: body, headers: headerToken);
-    return jsonDecode(response.statusCode.toString());
+
+    return jsonDecode(response.body);
   }
 
   Future<List> findAllAnimais() async {
@@ -143,39 +144,33 @@ class AnimalRepository {
     // print('Animal Function ${animal}');
     var animal = AnimalModel.fromJson(jsonDecode(response.body));
 
-
-  // debugPrint("Variavel animal: ${animal.toString()}");
-  // debugPrint("Objeto teste: ${test}");
-  return animal;
+    // debugPrint("Variavel animal: ${animal.toString()}");
+    // debugPrint("Objeto teste: ${test}");
+    return animal;
   }
 
-  
   putAnimal(String nome, String data_nascimento, String id_especie,
       String id_raca, String foto, int id, context) async {
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
-      String token = await prefs.get('token').toString();
+    String token = await prefs.get('token').toString();
 
     var uri = Uri.parse("https://healthpets.app.br/api/animal/${id}");
     var body = jsonEncode({
-        'nome': nome,
-        'data_nascimento': data_nascimento,
-        'id_especie': id_especie,
-        'id_raca':id_raca,
-        'foto': foto,
-      });
+      'nome': nome,
+      'data_nascimento': data_nascimento,
+      'id_especie': id_especie,
+      'id_raca': id_raca,
+      'foto': foto,
+    });
 
-    var response = await http.put(
-          uri,
-          body: body,
-          headers: {"Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": "Bearer ${token}",
-          }
-        );
+    var response = await http.put(uri, body: body, headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}",
+    });
 
     print(response.statusCode);
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       Navigator.pushNamed(context, '/home');
     }
   }
@@ -201,6 +196,4 @@ class AnimalRepository {
     final response = await request.send();
     Navigator.pushNamed(context, '/editarPet/', arguments: Argumentos(id));
   }
-
-
 }
