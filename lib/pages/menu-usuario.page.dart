@@ -25,7 +25,7 @@ class MenuItemsUsuario {
   );
 
   static const itemExcluir = MenuItemUsuario(
-    texto: "Excluir",
+    texto: "Excluir Conta",
     icone: Icons.delete,
   );
 
