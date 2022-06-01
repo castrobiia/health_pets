@@ -94,6 +94,7 @@ flutter:
   assets:
     - assets/logo.png
     - assets/logo_health_pets.png
+    - assets/logo_health_pets_fundo.png
     - assets/reset-password.png
     - assets/perfil-cao1.jpeg
     - assets/perfil-cao2.jpeg
