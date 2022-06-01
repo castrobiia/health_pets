@@ -5,9 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class SubcategoriaRepository {
-  Future<dynamic> getSubcategoriasPorCategoria(String int) async {
+  Future<dynamic> getSubcategoriasPorCategoria(String id) async {
     // alterar url com o id categoria
-    var url = 'https://www.healthpets.app.br/api/subcategoria';
+    var url = 'https://www.healthpets.app.br/api/subcategoria/categoria/${id}';
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
