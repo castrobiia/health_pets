@@ -89,7 +89,7 @@ class _HistoricoPetState extends State<HistoricoPet> {
                         context,
                         DiarioPet(),
                         Image.asset("assets/surgery.png"),
-                        AppLocalizations.of(context)!.exams,
+                        AppLocalizations.of(context)!.procedures,
                         "1",
                       ),
                       iconesHistorico(
