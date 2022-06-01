@@ -62,20 +62,7 @@ class _PerfilUsuarioState extends State<PerfilUsuario> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      //carregar imagem
-                      Container(
-                        width: 200,
-                        height: 200,
-                        margin: EdgeInsets.only(top: 15, left: 10),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: Image.network(
-                                      "https://healthpets.app.br/storage/user/${usuario['foto']}")
-                                  .image),
-                        ),
-                      ),
+                      BoxDecorationImagem(200, "assets/perfil-usuario.png"),
                       Text(
                         usuario['nome'] ?? '',
                         style: TextStyle(
