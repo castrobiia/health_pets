@@ -287,7 +287,22 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                         decoration: botaoRetangulo(),
                         child: TextButton(
                           onPressed: () {
-                            setarMaterialPageRoute(context, Calendario());
+                            var id_categoria = categoriaController.text;
+                            var id_subcategoria = subcategoriaController.text;
+                            String data = dataController.text;
+                            String localizacao = localizacaoController.text;
+                            var valor = valorController.text;
+                            String descricao = descricaoController.text;
+                            bool lembrete = checkedValue;
+
+                            print(id_categoria);
+                            print(id_subcategoria);
+                            print(data);
+                            print(localizacao);
+                            print(valor);
+                            print(descricao);
+                            print(lembrete);
+                            //setarMaterialPageRoute(context, Calendario());
                           },
                           child: textBotao(AppLocalizations.of(context)!.save),
                         ),
