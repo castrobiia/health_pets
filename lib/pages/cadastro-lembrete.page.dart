@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/http/animal-repository.dart';
 import 'package:health_pets/pages/calendario.page.dart';
 import 'package:health_pets/repository/categoria-repository.dart';
 import 'package:health_pets/repository/subcategoria-repository.dart';
