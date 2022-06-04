@@ -14,14 +14,14 @@ class InformacaoDiarioState extends State<InformacaoDiario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          PopupMenuButton<MenuItemDiario>(
-            onSelected: (item) => onSelected(context, item),
-            itemBuilder: (context) => [
-              ...MenuItemsDiario.items.map(buildItem).toList(),
-            ],
-          ),
-        ],
+        // actions: [
+        //   PopupMenuButton<MenuItemDiario>(
+        //     onSelected: (item) => onSelected(context, item),
+        //     itemBuilder: (context) => [
+        //       ...MenuItemsDiario.items.map(buildItem).toList(),
+        //     ],
+        //   ),
+        // ],
         backgroundColor: Colors.white,
         title: Text(AppLocalizations.of(context)!.diaryTitle),
         centerTitle: true,

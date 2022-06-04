@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/informacao-diario.page.dart';
+import 'package:intl/intl.dart';
 
 class DiarioCard extends StatelessWidget {
+  int idDiario;
+  String tituloDiario;
+  String dataDiario;
+  String descricaoDiario;
+  int idAnimal;
+
+  DiarioCard({
+    required this.idDiario,
+    required this.tituloDiario,
+    required this.dataDiario,
+    required this.descricaoDiario,
+    required this.idAnimal,
+  });
+
   @override
   Widget build(BuildContext context) {
+    var dataDiarioFormatada =
+        DateFormat("dd/MM/yyyy").format(DateTime.parse(dataDiario));
+
+    if (descricaoDiario.length > 30) {
+      descricaoDiario = descricaoDiario.substring(0, 35) + '...';
+    }
+
     return Container(
       height: 100,
       width: double.maxFinite,
@@ -24,7 +46,7 @@ class DiarioCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          'Título do diário',
+                          tituloDiario,
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500),
                         ),
@@ -39,7 +61,7 @@ class DiarioCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          '12/03/2022',
+                          dataDiarioFormatada,
                           style: TextStyle(fontSize: 15),
                         ),
                       ],
@@ -53,7 +75,7 @@ class DiarioCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          'Descrição do diário',
+                          descricaoDiario,
                           style: TextStyle(fontSize: 15),
                         ),
                       ],

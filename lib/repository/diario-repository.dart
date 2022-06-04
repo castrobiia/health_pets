@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:health_pets/class/api/header.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,9 +30,15 @@ class DiarioRepository {
 
     var response =
         await http.post(Uri.parse(url), headers: header, body: requestBody);
-    print('url: $url');
-    print('statusCode: ${response.statusCode}');
-    print('body: ${response.body}');
     return jsonDecode(response.statusCode.toString());
+  }
+
+  Future<List?> getDiarios(int? id) async {
+    url = 'https://www.healthpets.app.br/api/diario/${id}';
+
+    var response =
+        await http.post(Uri.parse(url), headers: Header().getHeader());
+    print(response.body);
+    return (jsonDecode(response.body)) as List;
   }
 }
