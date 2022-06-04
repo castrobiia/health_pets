@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/diario-pet.page.dart';
+import 'package:health_pets/repository/diario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/vacina.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,89 +24,118 @@ class _HistoricoPetState extends State<HistoricoPet> {
   _HistoricoPetState(this.id);
 
   @override
+  var conexaoDiario;
+  initState() {
+    setState(() {
+      conexaoDiario = DiarioRepository().getDiarios(id);
+    });
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: ListView(
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              padding: EdgeInsets.only(
-                left: 20,
-                right: 20,
+      body: FutureBuilder<dynamic>(
+        future: conexaoDiario,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return Center(
+              child: Container(
+                child: CircularProgressIndicator(),
               ),
-              width: double.infinity,
-              height: 500,
-              decoration: boxDecoration(Colors.white),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      iconesHistorico(
-                        context,
-                        VacinaPage(id),
-                        Image.asset("assets/consultation.png"),
-                        AppLocalizations.of(context)!.consultations,
-                        "5",
-                      ),
-                      iconesHistorico(
-                        context,
-                        DiarioPet(),
-                        Image.asset("assets/diario.png"),
-                        AppLocalizations.of(context)!.diary,
-                        "1",
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      iconesHistorico(
-                        context,
-                        VacinaPage(id),
-                        Image.asset("assets/microscope.png"),
-                        AppLocalizations.of(context)!.exams,
-                        "5",
-                      ),
-                      iconesHistorico(
-                        context,
-                        DiarioPet(),
-                        Image.asset("assets/medicine.png"),
-                        AppLocalizations.of(context)!.medicines,
-                        "1",
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      iconesHistorico(
-                        context,
-                        DiarioPet(),
-                        Image.asset("assets/surgery.png"),
-                        AppLocalizations.of(context)!.procedures,
-                        "1",
-                      ),
-                      iconesHistorico(
-                        context,
-                        VacinaPage(id),
-                        Image.asset("assets/injection.png"),
-                        AppLocalizations.of(context)!.vaccines,
-                        "5",
-                      ),
-                    ],
-                  ),
-                ],
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(
+              child: Container(
+                child: erroCarregarDados(context),
               ),
+            );
+          }
+
+          final listDiario = snapshot.data ?? [];
+          return Container(
+            color: Colors.white,
+            child: ListView(
+              children: <Widget>[
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                  padding: EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                  ),
+                  width: double.infinity,
+                  height: 500,
+                  decoration: boxDecoration(Colors.white),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          iconesHistorico(
+                            context,
+                            VacinaPage(id),
+                            Image.asset("assets/consultation.png"),
+                            AppLocalizations.of(context)!.consultations,
+                            "5",
+                          ),
+                          iconesHistorico(
+                            context,
+                            DiarioPet(id),
+                            Image.asset("assets/diario.png"),
+                            AppLocalizations.of(context)!.diary,
+                            listDiario.length.toString(),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          iconesHistorico(
+                            context,
+                            VacinaPage(id),
+                            Image.asset("assets/microscope.png"),
+                            AppLocalizations.of(context)!.exams,
+                            "5",
+                          ),
+                          iconesHistorico(
+                            context,
+                            DiarioPet(id),
+                            Image.asset("assets/medicine.png"),
+                            AppLocalizations.of(context)!.medicines,
+                            "1",
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          iconesHistorico(
+                            context,
+                            DiarioPet(id),
+                            Image.asset("assets/surgery.png"),
+                            AppLocalizations.of(context)!.procedures,
+                            "1",
+                          ),
+                          iconesHistorico(
+                            context,
+                            VacinaPage(id),
+                            Image.asset("assets/injection.png"),
+                            AppLocalizations.of(context)!.vaccines,
+                            "5",
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

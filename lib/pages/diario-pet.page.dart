@@ -6,13 +6,16 @@ import 'package:health_pets/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DiarioPet extends StatefulWidget {
-  const DiarioPet({Key? key}) : super(key: key);
+  final id;
+  DiarioPet(this.id);
 
   @override
-  _DiarioPetState createState() => _DiarioPetState();
+  _DiarioPetState createState() => _DiarioPetState(this.id);
 }
 
 class _DiarioPetState extends State<DiarioPet> {
+  final int id;
+  _DiarioPetState(this.id);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,7 @@ class _DiarioPetState extends State<DiarioPet> {
           Expanded(
             child: Container(
               color: Colors.white,
-              child: DiarioList(),
+              child: DiarioList(id),
             ),
           ),
         ],
