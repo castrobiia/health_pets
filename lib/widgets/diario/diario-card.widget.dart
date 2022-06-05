@@ -50,7 +50,9 @@ class DiarioCard extends StatelessWidget {
             backgroundColor: ColorTheme.vermelho1,
             label: 'Deletar',
             icon: Icons.delete,
-            onPressed: (context) {},
+            onPressed: (context) {
+              confirmarExclusaoDiario(context, idDiario, idAnimal);
+            },
           ),
         ],
       ),

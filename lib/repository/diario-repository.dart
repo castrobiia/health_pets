@@ -33,11 +33,29 @@ class DiarioRepository {
   }
 
   Future<List?> getDiarios(int? id) async {
-    url = 'https://www.healthpets.app.br/api/diario/${id}';
+    url = '${url}/${id}';
 
     var response =
         await http.post(Uri.parse(url), headers: Header().getHeader());
 
     return (jsonDecode(response.body)) as List;
+  }
+
+  Future<String> deleteDiario(id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var headerToken = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    var urlDelete = Uri.parse('$url/${id}');
+    var response = await http.delete(urlDelete, headers: headerToken);
+    var diario = jsonDecode(response.body);
+    var mensagem = diario['message'];
+
+    return mensagem;
   }
 }
