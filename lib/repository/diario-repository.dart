@@ -11,7 +11,6 @@ class DiarioRepository {
       String peso, String descricao) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
-    print('token: $token');
 
     var header = {
       "Content-Type": "application/json",
@@ -38,7 +37,7 @@ class DiarioRepository {
 
     var response =
         await http.post(Uri.parse(url), headers: Header().getHeader());
-    print(response.body);
+
     return (jsonDecode(response.body)) as List;
   }
 }
