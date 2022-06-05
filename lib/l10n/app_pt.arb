@@ -49,6 +49,7 @@
     },
     "alert": "Alerta",
     "deleteAnimal": "Deseja excluir este animal?",
+    "deleteDiary": "Deseja excluir este diário?",
     "deleteAccount": "Deseja excluir sua conta?",
     "deleteVaccine": "Deseja excluir esta vacina?",
     "yes": "Sim",
