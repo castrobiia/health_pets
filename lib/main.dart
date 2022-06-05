@@ -6,8 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/pages/cadastro-usuario.page.dart';
 import 'package:health_pets/pages/editar-pet.page.dart';
+import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
-import 'package:health_pets/pages/tabs.page.dart';
 
 import 'package:health_pets/firebase_messaging/custom_firebase_messaging.dart';
 import 'package:health_pets/pages/login.page.dart';
@@ -53,11 +53,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginPage(),
-        '/home': (context) => const TabsPage(),
+        '/home': (context) => const PetPage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const CadastroUsuario(),
         '/resetPassword': (context) => const ResetSenha(),
-        EditarPetPage.routeName :(context) => const EditarPetPage(),
+        EditarPetPage.routeName: (context) => const EditarPetPage(),
       },
       //Para usar as rotas :
       // Navigator.pushNamed(context, '/home');
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Argumentos{
+class Argumentos {
   final int id;
 
   Argumentos(this.id);
