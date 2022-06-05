@@ -25,7 +25,7 @@ class _DiarioPetState extends State<DiarioPet> {
         //cor do ícone
         foregroundColor: Colors.white,
         onPressed: () {
-          setarMaterialPageRoute(context, CadastroDiario());
+          setarMaterialPageRoute(context, CadastroDiario(this.id));
         },
       ),
       appBar: AppBar(

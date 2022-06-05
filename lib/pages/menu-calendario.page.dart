@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/cadastro-diario.page.dart';
 import 'package:health_pets/pages/cadastro-lembrete.page.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,14 +12,8 @@ class MenuItemCalendario {
 
 class MenuItemsCalendario {
   static const List<MenuItemCalendario> items = [
-    itemDiario,
     itemLembrete,
   ];
-
-  static const itemDiario = MenuItemCalendario(
-    texto: "Criar Diário",
-    icone: Icons.event,
-  );
 
   static const itemLembrete = MenuItemCalendario(
     texto: "Criar Lembrete",
@@ -43,9 +36,6 @@ PopupMenuItem<MenuItemCalendario> buildItem(MenuItemCalendario item) =>
 
 void onSelected(BuildContext context, MenuItemCalendario item) {
   switch (item) {
-    case MenuItemsCalendario.itemDiario:
-      setarMaterialPageRoute(context, CadastroDiario());
-      break;
     case MenuItemsCalendario.itemLembrete:
       setarMaterialPageRoute(context, CadastroLembrete());
   }
