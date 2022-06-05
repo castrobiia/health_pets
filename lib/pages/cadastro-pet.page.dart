@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/http/animal-repository.dart';
+import 'package:health_pets/pages/perfil-pet.page.dart';
+import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-animal-model.dart';
-import 'package:health_pets/pages/tabs.page.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -118,7 +119,8 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                   children: <Widget>[
                     Stack(
                       children: <Widget>[
-                        BoxDecorationImagem(180, "assets/logo_health_pets_fundo.png"),
+                        BoxDecorationImagem(
+                            180, "assets/logo_health_pets_fundo.png"),
                         Positioned(
                           top: 120,
                           left: 120,
@@ -271,8 +273,10 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                       // print(
                                       //     'animal 2: ${animal.id.toString()}');
                                       if (animal[0]['id'] != null) {
+                                        exibirMensagem(context,
+                                            'Animal cadastrado com sucesso');
                                         setarMaterialPageRoute(
-                                            context, TabsPage());
+                                            context, PetPage());
                                       } else {
                                         exibirMensagem(context,
                                             'Não foi possível cadastrar o animal');

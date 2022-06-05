@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:health_pets/pages/pet.page.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/login-model.dart';
 import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
-import 'package:health_pets/pages/tabs.page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -52,7 +52,7 @@ Future<LoginModel?> login(
     String token = mapResponse['access_token'];
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
-    setarMaterialPageRouteTab(context, TabsPage());
+    setarMaterialPageRouteTab(context, PetPage());
   }
 }
 
