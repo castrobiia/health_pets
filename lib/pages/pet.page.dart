@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/alert-dialog.dart';
+import 'package:health_pets/pages/calendario.page.dart';
+import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
@@ -85,25 +88,33 @@ class PetPage extends StatelessWidget {
                   onTap: () {},
                 ),
                 ListTile(
-                  leading: Icon(Icons.home),
+                  leading: Icon(Icons.delete),
                   title: const Text('Excluir Conta'),
-                  onTap: () {},
+                  onTap: () {
+                    confirmarExclusaoUsuario(context);
+                  },
                 ),
                 ListTile(
-                  leading: Icon(Icons.home),
+                  leading: Icon(Icons.logout),
                   title: const Text('Sair'),
-                  onTap: () {},
+                  onTap: () {
+                    setarMaterialPageRoute(context, LogoutPage());
+                  },
                 ),
                 Divider(color: Colors.black87),
                 ListTile(
-                  leading: Icon(Icons.home),
+                  leading: Icon(Icons.pets),
                   title: const Text('Pets'),
-                  onTap: () {},
+                  onTap: () {
+                    setarMaterialPageRoute(context, PetPage());
+                  },
                 ),
                 ListTile(
-                  leading: Icon(Icons.home),
+                  leading: Icon(Icons.calendar_today),
                   title: const Text('Calendário'),
-                  onTap: () {},
+                  onTap: () {
+                    setarMaterialPageRoute(context, Calendario());
+                  },
                 ),
               ],
             );
