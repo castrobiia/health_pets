@@ -50,7 +50,6 @@ class _CadastroDiarioState extends State<CadastroDiario> {
 
   @override
   Widget build(BuildContext context) {
-    var animalId;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

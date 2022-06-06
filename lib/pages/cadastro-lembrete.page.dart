@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/calendario.page.dart';
+import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
+import 'package:health_pets/repository/cadastro-geral-repository.dart';
 import 'package:health_pets/repository/categoria-repository.dart';
 import 'package:health_pets/repository/subcategoria-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
@@ -8,10 +9,11 @@ import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CadastroLembrete extends StatefulWidget {
-  const CadastroLembrete({Key? key}) : super(key: key);
+  int idAnimal;
+  CadastroLembrete(this.idAnimal);
 
   @override
-  _CadastroLembreteState createState() => _CadastroLembreteState();
+  _CadastroLembreteState createState() => _CadastroLembreteState(this.idAnimal);
 }
 
 class _CadastroLembreteState extends State<CadastroLembrete> {
@@ -21,19 +23,15 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
   TextEditingController descricaoController = TextEditingController();
   TextEditingController localizacaoController = TextEditingController();
   TextEditingController dataController = TextEditingController();
+  TextEditingController dataSemFormatacaoController = TextEditingController();
   TextEditingController valorController = TextEditingController();
   List listaSubcategorias = [];
 
-  String? _animal,
-      _localizacao,
-      _data,
-      _subcategoria,
-      _categoria,
-      _valor,
-      _descricao;
-
+  String? _localizacao, _data, _subcategoria, _categoria, _valor, _descricao;
+  int idAnimal;
   bool checkedValue = false;
   DateTime _dataHoje = DateTime.now();
+  _CadastroLembreteState(this.idAnimal);
 
   var _datePicker;
 
@@ -48,7 +46,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
       setState(
         () {
           dataController.text = _datePicker.toString();
-          //dataTesteController.text = dataController.text;
+          dataSemFormatacaoController.text = dataController.text;
         },
       );
     } else {
@@ -78,7 +76,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
   }
 
   Widget build(BuildContext context) {
-    var animalId, categoriaId, subcategoriaId;
+    var categoriaId, subcategoriaId;
 
     return Scaffold(
       appBar: AppBar(
@@ -286,11 +284,12 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                         width: double.infinity,
                         decoration: botaoRetangulo(),
                         child: TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             var id_categoria = categoriaController.text;
                             var id_subcategoria = subcategoriaController.text;
-                            String data = dataController.text;
-                            String localizacao = localizacaoController.text;
+                            var id_animal = this.idAnimal;
+                            String data = dataSemFormatacaoController.text;
+                            String local = localizacaoController.text;
                             var valor = valorController.text;
                             String descricao = descricaoController.text;
                             bool lembrete = checkedValue;
@@ -298,10 +297,30 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
                             print(id_categoria);
                             print(id_subcategoria);
                             print(data);
-                            print(localizacao);
+                            print(local);
                             print(valor);
                             print(descricao);
                             print(lembrete);
+                            print(id_animal);
+
+                            if (await CadastroGeralRepository()
+                                    .postCadastroGeral(
+                                        data,
+                                        descricao,
+                                        id_categoria,
+                                        id_subcategoria,
+                                        local,
+                                        valor,
+                                        id_animal.toString()) ==
+                                200) {
+                              exibirMensagem(context,
+                                  'Informações cadastradas com sucesso');
+                              setarMaterialPageRoute(
+                                  context, PerfilPetPage(idAnimal));
+                            } else {
+                              exibirMensagem(context,
+                                  'Não foi possível cadastrar informações');
+                            }
                             //setarMaterialPageRoute(context, Calendario());
                           },
                           child: textBotao(AppLocalizations.of(context)!.save),

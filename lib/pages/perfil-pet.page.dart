@@ -31,7 +31,7 @@ class _PerfilPetState extends State<PerfilPet> {
         //cor do ícone
         foregroundColor: Colors.white,
         onPressed: () {
-          setarMaterialPageRouteTab(context, CadastroLembrete());
+          setarMaterialPageRouteTab(context, CadastroLembrete(this.id));
         },
       ),
       body: Container(
