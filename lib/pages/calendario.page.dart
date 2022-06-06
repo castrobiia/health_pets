@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/logout.page.dart';
-import 'package:health_pets/pages/menu-calendario.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
@@ -103,14 +102,6 @@ class _CalendarioState extends State<Calendario> {
         title: Text(AppLocalizations.of(context)!.calendar),
         centerTitle: true,
         elevation: 1,
-        actions: [
-          PopupMenuButton<MenuItemCalendario>(
-            onSelected: (item) => onSelected(context, item),
-            itemBuilder: (context) => [
-              ...MenuItemsCalendario.items.map(buildItem).toList(),
-            ],
-          ),
-        ],
       ),
       drawer: Drawer(
         child: FutureBuilder<dynamic>(

@@ -3,6 +3,8 @@ import 'package:health_pets/class/entity/animal-entity.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/class/util.dart';
+import 'package:health_pets/pages/cadastro-lembrete.page.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,6 +25,15 @@ class _PerfilPetState extends State<PerfilPet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: ColorTheme.salmao1,
+        //cor do ícone
+        foregroundColor: Colors.white,
+        onPressed: () {
+          setarMaterialPageRouteTab(context, CadastroLembrete());
+        },
+      ),
       body: Container(
         color: Colors.white,
         child: ListView(
