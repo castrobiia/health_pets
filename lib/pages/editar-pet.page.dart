@@ -370,7 +370,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                               animal.idEspecie.toString(),
                               animal.idRaca.toString(),
                               animal.foto,
-                              argumentos.id,
+                              argumentos.id ?? 0,
                               context);
                         }
                       },
