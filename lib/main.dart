@@ -1,5 +1,7 @@
 //flutter run --no-sound-null-safety
 
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,12 +9,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/pages/cadastro-usuario.page.dart';
 import 'package:health_pets/pages/editar-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
+import 'package:health_pets/pages/redefinir-senha.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 
 import 'package:health_pets/firebase_messaging/custom_firebase_messaging.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
+import 'package:uni_links/uni_links.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
@@ -28,8 +32,14 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +66,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const PetPage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const CadastroUsuario(),
-        '/resetPassword': (context) => const ResetSenha(),
+        '/reset': (context) => const ResetSenha(),
+        RedefinirSenha.routeName:(context) => const RedefinirSenha(),
         EditarPetPage.routeName: (context) => const EditarPetPage(),
       },
       //Para usar as rotas :
@@ -68,9 +79,13 @@ class MyApp extends StatelessWidget {
 }
 
 class Argumentos {
-  final int id;
+  final int? id;
+  final String? token;
+  final String? email;
+  final String? password;
+  final String? confirmation;
 
-  Argumentos(this.id);
+  Argumentos([this.id,this.token, this.email, this.password, this.confirmation]);
 }
 
 // Widget _introScreen() {

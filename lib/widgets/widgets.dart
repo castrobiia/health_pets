@@ -32,6 +32,38 @@ void exibirMensagem(BuildContext context, mensagem) {
   );
 }
 
+setarCampoFormsObscure(variavelController, nomeCampo, variavel, context,
+    {required FormFieldValidator<String> validator} ){
+  return Column(
+    children: [
+      TextFormField(
+        autofocus: false,
+        keyboardType: TextInputType.text,
+        controller: variavelController,
+        obscureText: true,
+        validator: validator,
+        onSaved: (input) => variavel = input,
+        decoration: InputDecoration(
+          suffixIcon: IconButton(
+            onPressed: () {
+              createInfoDialog(context);
+            },
+            icon: Icon(Icons.info),
+          ),
+          labelText: "$nomeCampo",
+          labelStyle: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 17,
+          ),
+        ),
+      ),
+      SizedBox(
+        height: 10,
+      ),
+    ],
+  );
+}
+
 setarCampoForms(variavelController, nomeCampo, variavel,
     {required FormFieldValidator<String> validator}) {
   return Column(
@@ -55,6 +87,43 @@ setarCampoForms(variavelController, nomeCampo, variavel,
       ),
     ],
   );
+
+}
+
+createInfoDialog(BuildContext context) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context)!.information),
+          content: Container(
+            height: 160,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(AppLocalizations.of(context)!.passwordContent),
+                SizedBox(height: 15),
+                Text(AppLocalizations.of(context)!.uppercase),
+                SizedBox(height: 7),
+                Text(AppLocalizations.of(context)!.lowercase),
+                SizedBox(height: 7),
+                Text(AppLocalizations.of(context)!.number),
+                SizedBox(height: 7),
+                Text(AppLocalizations.of(context)!.specialCharacter),
+                SizedBox(height: 7),
+                Text(AppLocalizations.of(context)!.character),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context, rootNavigator: true).pop();
+                },
+                icon: Icon(Icons.close))
+          ],
+        );
+      });
 }
 
 setarRowPerfil(campo, texto) {

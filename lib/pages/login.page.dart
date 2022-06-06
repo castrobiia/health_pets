@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import 'package:health_pets/pages/cadastro-usuario-teste.page.dart';
 import 'package:health_pets/pages/reset-senha.page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:uni_links/uni_links.dart';
 
 import '../themes/color_theme.dart';
 
@@ -63,148 +66,175 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String? _email;
   String? _senha;
+  StreamSubscription? _sub;
 
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 40),
-            //coluna para colocar a imagem e o form
-            child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                //logo
-                SizedBox(
-                  height: 220,
-                  width: 220,
-                  child: Image.asset("assets/logo_health_pets.png"),
-                ),
-                //form (estilizacao)
-                Padding(
-                  padding: EdgeInsets.only(left: 15, right: 15, top: 20),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      //para a coluna ocupar todo o container
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        TextFormField(
-                          autofocus: false,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return (AppLocalizations.of(context)!
-                                  .invalidEmail);
-                            }
-                            return null;
-                          },
-                          onSaved: (input) => _email = input!,
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context)!.email,
-                            labelStyle: TextStyle(
-                              color: ColorTheme.rosa5,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 17,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          autofocus: false,
-                          keyboardType: TextInputType.text,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return (AppLocalizations.of(context)!
-                                  .invalidPassword);
-                            }
-                            return null;
-                          },
-                          onSaved: (input) => _senha = input!,
-                          obscureText: true,
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context)!.password,
-                            labelStyle: TextStyle(
+  Future<void>  initUniLinks() async {
+    _sub = linkStream.listen((String? link) {
+      if (link != null) {
+        print('Esta ouvindo os links');
+        var uri = Uri.parse(link);
+        if (uri.queryParameters['token'] != null &&
+            uri.queryParameters['email'] != null) {
+          print('Resete de senha completo');
+          // navigatorKey.currentState?.pushNamed('/reset');
+          Navigator.pushNamed(
+              context,
+              '/redefinir',
+              arguments: {
+                'token': uri.queryParameters['token'],
+                'email': uri.queryParameters['email']
+              }
+          );
+        }
+      }
+    }, onError: (err) {
+
+    }
+    );
+  }
+
+    @override
+    Widget build(BuildContext context) {
+      initUniLinks();
+      return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(left: 15, right: 15, top: 40),
+              //coluna para colocar a imagem e o form
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  //logo
+                  SizedBox(
+                    height: 220,
+                    width: 220,
+                    child: Image.asset("assets/logo_health_pets.png"),
+                  ),
+                  //form (estilizacao)
+                  Padding(
+                    padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        //para a coluna ocupar todo o container
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          TextFormField(
+                            autofocus: false,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return (AppLocalizations.of(context)!
+                                    .invalidEmail);
+                              }
+                              return null;
+                            },
+                            onSaved: (input) => _email = input!,
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              labelText: AppLocalizations.of(context)!.email,
+                              labelStyle: TextStyle(
                                 color: ColorTheme.rosa5,
                                 fontWeight: FontWeight.w400,
-                                fontSize: 17),
+                                fontSize: 17,
+                              ),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          width: double.infinity,
-                          decoration: boxDecoration(ColorTheme.rosa5),
-                          child: TextButton(
-                            onPressed: () async {
-                              //faz a validação do formulário
-                              if (_formKey.currentState!.validate()) {
-                                //salvar o estado do formulário
-                                _formKey.currentState!.save();
-
-                                String email = emailController.text;
-                                String password = passwordController.text;
-                                LoginModel loginUsuario =
-                                    // (await login(context, email, password, device_token!))
-                                    (await login(context, email, password))
-                                        as LoginModel;
-
-                                setState(
-                                  () {
-                                    _loginModel = loginUsuario;
-                                  },
-                                );
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            autofocus: false,
+                            keyboardType: TextInputType.text,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return (AppLocalizations.of(context)!
+                                    .invalidPassword);
                               }
+                              return null;
                             },
-                            child:
-                                textBotao(AppLocalizations.of(context)!.login),
+                            onSaved: (input) => _senha = input!,
+                            obscureText: true,
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                              labelText: AppLocalizations.of(context)!.password,
+                              labelStyle: TextStyle(
+                                  color: ColorTheme.rosa5,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 17),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          //color: Colors.grey,
-                          height: 40,
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () {
-                              setarMaterialPageRoute(context, ResetSenha());
-                            },
-                            child: Text(
-                                AppLocalizations.of(context)!.forgotPassword),
+                          SizedBox(
+                            height: 10,
                           ),
-                        ),
-                        Container(
-                          //color: Colors.grey,
-                          height: 40,
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () {
-                              setarMaterialPageRoute(
-                                  context, CadastroUsuarioTeste());
-                            },
-                            child: Text(
-                                AppLocalizations.of(context)!.createAccount),
+                          SizedBox(height: 20),
+                          Container(
+                            width: double.infinity,
+                            decoration: boxDecoration(ColorTheme.rosa5),
+                            child: TextButton(
+                              onPressed: () async {
+                                //faz a validação do formulário
+                                if (_formKey.currentState!.validate()) {
+                                  //salvar o estado do formulário
+                                  _formKey.currentState!.save();
+
+                                  String email = emailController.text;
+                                  String password = passwordController.text;
+                                  LoginModel loginUsuario =
+                                  // (await login(context, email, password, device_token!))
+                                  (await login(context, email, password))
+                                  as LoginModel;
+
+                                  setState(
+                                        () {
+                                      _loginModel = loginUsuario;
+                                    },
+                                  );
+                                }
+                              },
+                              child:
+                              textBotao(AppLocalizations.of(context)!.login),
+                            ),
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            //color: Colors.grey,
+                            height: 40,
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {
+                                setarMaterialPageRoute(context, ResetSenha());
+                              },
+                              child: Text(
+                                  AppLocalizations.of(context)!.forgotPassword),
+                            ),
+                          ),
+                          Container(
+                            //color: Colors.grey,
+                            height: 40,
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {
+                                setarMaterialPageRoute(
+                                    context, CadastroUsuarioTeste());
+                              },
+                              child: Text(
+                                  AppLocalizations.of(context)!.createAccount),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
-}
