@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/widgets/vacina/vacina-list.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/pages/desuso/cadastro-vacina.page.dart';
+import 'package:health_pets/pages/arquivado/cadastro-vacina.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../themes/color_theme.dart';

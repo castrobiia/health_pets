@@ -3,7 +3,7 @@ import 'package:health_pets/class/entity/vacina-entity.dart';
 
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/models/cadastro-vacina-model.dart';
-import 'package:health_pets/pages/desuso/vacina.page.dart';
+import 'package:health_pets/pages/arquivado/vacina.page.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -186,8 +186,8 @@ class _CadastrarVacinaState extends State<CadastrarVacina> {
                                   }
                                 }
                               },
-                              child: textBotao(
-                                      AppLocalizations.of(context)!.save),
+                              child:
+                                  textBotao(AppLocalizations.of(context)!.save),
                             ),
                           ),
                         ],

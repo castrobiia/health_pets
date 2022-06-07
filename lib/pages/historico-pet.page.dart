@@ -3,7 +3,7 @@ import 'package:health_pets/pages/diario-pet.page.dart';
 import 'package:health_pets/repository/cadastro-geral-repository.dart';
 import 'package:health_pets/repository/diario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/pages/desuso/vacina.page.dart';
+import 'package:health_pets/pages/arquivado/vacina.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HistoricoPet extends StatefulWidget {
