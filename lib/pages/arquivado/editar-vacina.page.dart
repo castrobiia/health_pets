@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
-import '../themes/color_theme.dart';
+import '../../themes/color_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditarVacina extends StatefulWidget {

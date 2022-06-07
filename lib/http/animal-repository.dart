@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
-import '../pages/tabs.page.dart';
+import '../pages/arquivado/tabs.page.dart';
 import '../widgets/widgets.dart';
 
 class AnimalRepository {
