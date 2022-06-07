@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/pages/tabs.page.dart';
+import 'package:health_pets/pages/desuso/tabs.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CadastroUsuario extends StatelessWidget {

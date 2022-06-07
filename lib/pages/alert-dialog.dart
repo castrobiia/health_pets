@@ -7,7 +7,7 @@ import 'package:health_pets/pages/diario-pet.page.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
-import 'package:health_pets/pages/vacina.page.dart';
+import 'package:health_pets/pages/desuso/vacina.page.dart';
 import 'package:health_pets/repository/diario-repository.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/repository/vacina-repository.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
-import 'package:health_pets/pages/editar-vacina.page.dart';
+import 'package:health_pets/pages/desuso/editar-vacina.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
