@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:health_pets/pages/cadastro-usuario.page.dart';
+import 'package:health_pets/pages/calendario.page.dart';
 import 'package:health_pets/pages/editar-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/pages/redefinir-senha.page.dart';
@@ -67,6 +68,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const CadastroUsuario(),
         '/reset': (context) => const ResetSenha(),
+        '/calendario': (context) => const Calendario(),
         RedefinirSenha.routeName:(context) => const RedefinirSenha(),
         EditarPetPage.routeName: (context) => const EditarPetPage(),
       },
