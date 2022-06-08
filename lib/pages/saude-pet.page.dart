@@ -6,23 +6,23 @@ import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/pages/arquivado/vacina.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HistoricoPet extends StatefulWidget {
-  //const HistoricoPet({Key? key}) : super(key: key);
+class SaudePet extends StatefulWidget {
+  //const SaudePet({Key? key}) : super(key: key);
 
-  HistoricoPet(this.dia, this.peso, this.id);
+  SaudePet(this.dia, this.peso, this.id);
 
   final String dia;
   final double peso;
   final int id;
 
   @override
-  _HistoricoPetState createState() => _HistoricoPetState(id);
+  _SaudePetState createState() => _SaudePetState(id);
 }
 
-class _HistoricoPetState extends State<HistoricoPet> {
+class _SaudePetState extends State<SaudePet> {
   final int id;
 
-  _HistoricoPetState(this.id);
+  _SaudePetState(this.id);
 
   @override
   var conexaoDiario, conexaoInfoSaude;
