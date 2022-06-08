@@ -60,7 +60,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
           ),
           child: const Center(
             child: Icon(
-              Icons.pets,
+              Icons.food_bank, //dining
               color: Colors.white,
               size: 36,
             ),
@@ -107,7 +107,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
           ),
           child: const Center(
             child: Icon(
-              Icons.pets,
+              Icons.shopping_bag, //military_tech
               color: Colors.white,
               size: 36,
             ),
@@ -154,7 +154,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
           ),
           child: const Center(
             child: Icon(
-              Icons.pets,
+              Icons.bubble_chart, //wash
               color: Colors.white,
               size: 36,
             ),
@@ -201,7 +201,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
           ),
           child: const Center(
             child: Icon(
-              Icons.pets,
+              Icons.pest_control_rodent, //eco
               color: Colors.white,
               size: 36,
             ),
