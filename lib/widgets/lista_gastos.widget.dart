@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 
 import '../models/relatorio-model.dart';
@@ -10,7 +11,27 @@ class ListaGastos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Slidable(
+      endActionPane: ActionPane(
+        motion: ScrollMotion(),
+        children: [
+          SlidableAction(
+            backgroundColor: ColorTheme.cinza2,
+            label: 'Editar',
+            icon: Icons.edit,
+            onPressed: (context) {},
+          ),
+          SlidableAction(
+            backgroundColor: ColorTheme.vermelho1,
+            label: 'Deletar',
+            icon: Icons.delete,
+            onPressed: (context) {
+              //confirmarExclusaoDiario(context, idDiario, idAnimal);
+            },
+          ),
+        ],
+      ),
+      child: Row(
       children: [
         Container(
           height: 50,
@@ -81,6 +102,7 @@ class ListaGastos extends StatelessWidget {
           ),
         ),
       ],
+      ),
     );
   }
 }
