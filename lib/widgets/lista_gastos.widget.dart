@@ -38,13 +38,13 @@ class ListaGastos extends StatelessWidget {
           width: 50,
           decoration: BoxDecoration(
             color: transaction.isIncome
-                ? ColorTheme.vermelho1
-                : ColorTheme.vermelho1,
+                ? ColorTheme.rosa0
+                : ColorTheme.rosa0,
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: Center(
             child: Icon(
-              Icons.paid_rounded,
+              Icons.pets,
               color: transaction.isIncome ? Colors.white : Colors.white,
               size: 36,
             ),

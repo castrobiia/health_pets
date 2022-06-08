@@ -5,6 +5,7 @@ class ColorTheme {
   static const Color branco1 = Color(0xFFE5E5E5);
   static const Color salmao1 = Color(0xFFF6BD87);
   static const Color salmao2 = Color(0xFFE79F84);
+  static const Color rosa0 = Color.fromARGB(255, 231, 198, 184);
   static const Color rosa1 = Color(0xFFEC9F94);
   static const Color rosa2 = Color(0xFFEB9B95);
   static const Color rosa3 = Color(0xFFE89A95);
