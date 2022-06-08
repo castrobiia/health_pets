@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/pages/historico-pet.page.dart';
+import 'package:health_pets/pages/saude-pet.page.dart';
 import 'package:health_pets/pages/menu-pet.page.dart';
 import 'package:health_pets/pages/outras-categorias-pet.page.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
@@ -46,7 +46,7 @@ class _PerfilPetPageState extends State<PerfilPetPage> {
         body: TabBarView(
           children: <Widget>[
             PerfilPet(id),
-            HistoricoPet("dia", 10, id),
+            SaudePet("dia", 10, id),
             OutrasCategorias()
           ],
         ),
