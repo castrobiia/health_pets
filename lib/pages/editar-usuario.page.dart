@@ -94,6 +94,16 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                             print(nome);
                             print(email);
                             print(usuario['id']);
+
+                            if (await UsuarioRepository()
+                                    .putUsuario(id.toString(), nome, email) ==
+                                200) {
+                              exibirMensagem(
+                                  context, 'Dados atualizados com sucesso');
+                            } else {
+                              exibirMensagem(
+                                  context, 'Não foi possível alterar os dados');
+                            }
                           }
                         },
                         child: textBotao(AppLocalizations.of(context)!.save),

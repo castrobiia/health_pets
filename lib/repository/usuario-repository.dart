@@ -55,8 +55,11 @@ class UsuarioRepository {
       'email': email,
     });
 
-    var response =
-        await http.put(Uri.parse(url + '/${id}'), body: body, headers: header);
+    var response = await http.put(
+        Uri.parse('https://healthpets.app.br/api/user/${id}'),
+        body: body,
+        headers: header);
     print('status: ${response.statusCode}');
+    return jsonDecode(response.statusCode.toString());
   }
 }
