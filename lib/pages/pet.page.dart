@@ -91,6 +91,14 @@ class PetPage extends StatelessWidget {
                   },
                 ),
                 ListTile(
+                  //Icons.vpn_key
+                  leading: Icon(Icons.password),
+                  title: const Text('Alterar Senha'),
+                  onTap: () {
+                    setarMaterialPageRoute(context, EditarUsuario());
+                  },
+                ),
+                ListTile(
                   leading: Icon(Icons.delete),
                   title: const Text('Excluir Conta'),
                   onTap: () {
