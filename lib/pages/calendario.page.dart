@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
+import 'package:health_pets/pages/editar-usuario.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
@@ -155,7 +156,17 @@ class _CalendarioState extends State<Calendario> {
                     Icons.person,
                   ),
                   title: const Text('Editar Perfil'),
-                  onTap: () {},
+                  onTap: () {
+                    setarMaterialPageRoute(context, EditarUsuario());
+                  },
+                ),
+                ListTile(
+                  //Icons.vpn_key
+                  leading: Icon(Icons.password),
+                  title: const Text('Alterar Senha'),
+                  onTap: () {
+                    setarMaterialPageRoute(context, EditarUsuario());
+                  },
                 ),
                 ListTile(
                   leading: Icon(Icons.delete),
