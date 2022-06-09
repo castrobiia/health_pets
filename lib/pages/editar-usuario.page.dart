@@ -70,35 +70,13 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    TextFormField(
-                      autofocus: false,
-                      keyboardType: TextInputType.text,
-                      controller: nomeController,
-                      validator: (value) => validarCampo(value),
-                      onSaved: (input) => nome = input!,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.name,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
+                    setarCampoForms(nomeController,
+                        AppLocalizations.of(context)!.name, nome,
+                        validator: validarCampo(nome)),
                     SizedBox(height: 10),
-                    TextFormField(
-                      autofocus: false,
-                      keyboardType: TextInputType.text,
-                      controller: emailController,
-                      validator: (value) => validarCampo(value),
-                      onSaved: (input) => email = input!,
-                      decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.email,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
+                    setarCampoForms(emailController,
+                        AppLocalizations.of(context)!.email, email,
+                        validator: validarCampo(email)),
                     SizedBox(
                       height: 30,
                     ),
