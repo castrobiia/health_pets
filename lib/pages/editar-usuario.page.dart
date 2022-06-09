@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -62,6 +63,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                   ),
                 );
               }
+
               final usuario = snapshot.data["user"];
               nomeController.text = usuario['nome'];
               emailController.text = usuario['email'];
@@ -70,13 +72,35 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    setarCampoForms(nomeController,
-                        AppLocalizations.of(context)!.name, nome,
-                        validator: validarCampo(nome)),
+                    TextFormField(
+                      autofocus: false,
+                      keyboardType: TextInputType.text,
+                      controller: nomeController,
+                      validator: (value) => validarCampo(value),
+                      onSaved: (input) => nome = input!,
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.name,
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
                     SizedBox(height: 10),
-                    setarCampoForms(emailController,
-                        AppLocalizations.of(context)!.email, email,
-                        validator: validarCampo(email)),
+                    TextFormField(
+                      autofocus: false,
+                      keyboardType: TextInputType.text,
+                      controller: emailController,
+                      validator: (value) => validarCampo(value),
+                      onSaved: (input) => email = input!,
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.email,
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: 30,
                     ),
@@ -91,15 +115,12 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                             var email = emailController.text;
                             var id = usuario['id'];
 
-                            print(nome);
-                            print(email);
-                            print(usuario['id']);
-
                             if (await UsuarioRepository()
                                     .putUsuario(id.toString(), nome, email) ==
                                 200) {
                               exibirMensagem(
                                   context, 'Dados atualizados com sucesso');
+                              setarMaterialPageRoute(context, PetPage());
                             } else {
                               exibirMensagem(
                                   context, 'Não foi possível alterar os dados');
