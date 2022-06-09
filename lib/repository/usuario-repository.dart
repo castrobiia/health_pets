@@ -39,4 +39,27 @@ class UsuarioRepository {
 
     return mensagem;
   }
+
+  putUsuario(String id, String nome, String email) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    var body = jsonEncode({
+      'nome': nome,
+      'email': email,
+    });
+
+    var response = await http.put(
+        Uri.parse('https://healthpets.app.br/api/user/${id}'),
+        body: body,
+        headers: header);
+    print('status: ${response.statusCode}');
+    return jsonDecode(response.statusCode.toString());
+  }
 }

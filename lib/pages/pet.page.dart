@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/calendario.page.dart';
+import 'package:health_pets/pages/editar-usuario.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
@@ -85,7 +86,9 @@ class PetPage extends StatelessWidget {
                     Icons.person,
                   ),
                   title: const Text('Editar Perfil'),
-                  onTap: () {},
+                  onTap: () {
+                    setarMaterialPageRoute(context, EditarUsuario());
+                  },
                 ),
                 ListTile(
                   leading: Icon(Icons.delete),
