@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
+import 'package:health_pets/pages/alterar-senha.page.dart';
 import 'package:health_pets/pages/calendario.page.dart';
 import 'package:health_pets/pages/editar-usuario.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
@@ -95,7 +96,7 @@ class PetPage extends StatelessWidget {
                   leading: Icon(Icons.password),
                   title: const Text('Alterar Senha'),
                   onTap: () {
-                    setarMaterialPageRoute(context, EditarUsuario());
+                    setarMaterialPageRoute(context, AlterarSenha());
                   },
                 ),
                 ListTile(
