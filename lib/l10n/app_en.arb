@@ -100,7 +100,9 @@
     "health": "Health",
     "animalsRegistered": "Don't have animals registered",
     "diariesRegistered": "Don't have diaries registered",
-    "fillField": "Fill the field"
+    "fillField": "Fill the field",
+    "changePassword": "Change Password",
+    "newPassword": "New password"
 }
 
 
