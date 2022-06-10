@@ -19,14 +19,17 @@ class CustomFirebaseMessaging{
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
 
+      print('Passei aqui');
+
       if(notification != null && android != null){
         _customLocalNotification.androidNotification(notification, android);
       }
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      if(message.data['goTo'] != null){
-        navigatorKey.currentState?.pushNamed(message.data['goTo']);
+      navigatorKey.currentState?.pushNamed('/calendario');
+      if(message.data['link'] != null){
+        navigatorKey.currentState?.pushNamed(message.data['link']);
       }
     });
   }

@@ -50,6 +50,7 @@ class _MyAppState extends State<MyApp> {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
       ],
+      navigatorKey: navigatorKey,
       supportedLocales: [
         Locale('en', ''),
         //Locale('es', ''),
