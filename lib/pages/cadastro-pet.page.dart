@@ -50,10 +50,7 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
   TextEditingController dataNascimentoController = TextEditingController();
   TextEditingController dataNascimentoTesteController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String? _nome;
-  String? _dataNascimento;
-  String? _especie;
-  String? _raca;
+  String? _nome, _dataNascimento, _especie, _raca;
   List listaRacas = [];
 
   setRacas(id) async {
