@@ -41,6 +41,24 @@ class DiarioRepository {
     return (jsonDecode(response.body)) as List;
   }
 
+  getDiario(int? id) async {
+    url = '${url}/${id}';
+    print(url);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    final response = await http.get(Uri.parse(url), headers: header);
+    print(response.body);
+    return (jsonDecode(response.body));
+  }
+
   Future<String> deleteDiario(id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
