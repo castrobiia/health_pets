@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/especie-entity.dart';
 import 'package:health_pets/class/entity/raca-entity.dart';
 import 'package:health_pets/http/animal-repository.dart';
-import 'package:health_pets/pages/perfil-pet.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
