@@ -5,6 +5,7 @@ import 'package:health_pets/pages/arquivado/editar-vacina.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VacinaCard extends StatelessWidget {
   final int idVacina;
@@ -34,7 +35,7 @@ class VacinaCard extends StatelessWidget {
         children: [
           SlidableAction(
             backgroundColor: ColorTheme.cinza2,
-            label: 'Editar',
+            label: AppLocalizations.of(context)!.edit,
             icon: Icons.edit,
             onPressed: (context) {
               setarMaterialPageRoute(context, EditarVacina());
@@ -44,7 +45,7 @@ class VacinaCard extends StatelessWidget {
           ),
           SlidableAction(
             backgroundColor: ColorTheme.vermelho1,
-            label: 'Deletar',
+            label: AppLocalizations.of(context)!.delete,
             icon: Icons.delete,
             onPressed: (context) {
               setarMaterialPageRoute(
