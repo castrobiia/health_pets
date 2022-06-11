@@ -60,6 +60,7 @@
     "resetPasswordSend": "Password successfully reset",
     "registerPet": "Register Pet",
     "registerDiary": "Register Diary",
+    "registerGeneral": "Register General",
     "editPet": "Edit Pet",
     "budget": "Budget",
     "overview": "Overview",

@@ -12,8 +12,8 @@ class CadastroGeralRepository {
       String descricao,
       String id_categoria,
       String id_subcategoria,
-      String local,
-      String valor,
+      String local, //ok
+      String valor, //ok
       String id_animal) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
