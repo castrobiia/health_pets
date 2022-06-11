@@ -15,13 +15,13 @@ class EditarDiario extends StatefulWidget {
 
 class _EditarDiarioState extends State<EditarDiario> {
   @override
-  // var conexao;
-  // initState() {
-  //   setState(() {
-  //     conexao = DiarioRepository().getDiario(idDiario);
-  //   });
-  //   super.initState();
-  // }
+  var conexao;
+  initState() {
+    setState(() {
+      conexao = DiarioRepository().getDiario(idDiario);
+    });
+    super.initState();
+  }
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController pesoController = TextEditingController();
@@ -61,7 +61,7 @@ class _EditarDiarioState extends State<EditarDiario> {
               top: 20,
             ),
             child: FutureBuilder<dynamic>(
-              future: DiarioRepository().getDiario(idDiario),
+              future: conexao,
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Center(
