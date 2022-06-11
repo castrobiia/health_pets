@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:health_pets/models/relatorio-model.dart';
+import 'package:health_pets/themes/color_theme.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../models/relatorio-model.dart';
-import '../themes/color_theme.dart';
 
 class ListaOutros extends StatelessWidget {
   final RelatorioModel transaction;
@@ -17,13 +18,13 @@ class ListaOutros extends StatelessWidget {
         children: [
           SlidableAction(
             backgroundColor: ColorTheme.cinza2,
-            label: 'Editar',
+            label: AppLocalizations.of(context)!.edit,
             icon: Icons.edit,
             onPressed: (context) {},
           ),
           SlidableAction(
             backgroundColor: ColorTheme.vermelho1,
-            label: 'Deletar',
+            label: AppLocalizations.of(context)!.delete,
             icon: Icons.delete,
             onPressed: (context) {
               //confirmarExclusaoDiario(context, idDiario, idAnimal);

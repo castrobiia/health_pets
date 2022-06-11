@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DiarioCard extends StatelessWidget {
   int idDiario;
@@ -42,13 +43,13 @@ class DiarioCard extends StatelessWidget {
         children: [
           SlidableAction(
             backgroundColor: ColorTheme.cinza2,
-            label: 'Editar',
+            label: AppLocalizations.of(context)!.edit,
             icon: Icons.edit,
             onPressed: (context) {},
           ),
           SlidableAction(
             backgroundColor: ColorTheme.vermelho1,
-            label: 'Deletar',
+            label: AppLocalizations.of(context)!.delete,
             icon: Icons.delete,
             onPressed: (context) {
               confirmarExclusaoDiario(context, idDiario, idAnimal);
