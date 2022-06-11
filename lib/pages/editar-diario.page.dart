@@ -4,6 +4,7 @@ import 'package:health_pets/repository/diario-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class EditarDiario extends StatefulWidget {
   int idDiario;
@@ -14,6 +15,8 @@ class EditarDiario extends StatefulWidget {
 }
 
 class _EditarDiarioState extends State<EditarDiario> {
+  _EditarDiarioState(this.idDiario);
+
   @override
   var conexao;
   initState() {
@@ -33,7 +36,26 @@ class _EditarDiarioState extends State<EditarDiario> {
 
   String? _peso, _titulo, _data, _descricao, _humor;
   int idDiario;
-  _EditarDiarioState(this.idDiario);
+
+  var _datePicker;
+
+  Future _dataSelecionada(BuildContext context) async {
+    _datePicker = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(DateTime.now().year - 30),
+        lastDate: DateTime.now());
+
+    if (_datePicker != null && _datePicker != _data) {
+      dataController.text = _datePicker.toString();
+      dataSemFormatacaoController.text = dataController.text;
+    } else {
+      exibirMensagem(context, AppLocalizations.of(context)!.selectDate);
+    }
+
+    dataController.text =
+        DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
+  }
 
   Widget build(BuildContext context) {
     print(idDiario);
@@ -80,8 +102,11 @@ class _EditarDiarioState extends State<EditarDiario> {
                 pesoController.text = diario['peso'].toString();
                 humorController.text = diario['humor'];
                 descricaoController.text = diario['descricao'];
-                dataController.text = diario['data'];
+                // dataController.text = diario['data'];
                 tituloController.text = diario['titulo'];
+
+                dataController.text = DateFormat("dd/MM/yyyy")
+                    .format(DateTime.parse(diario['data'].toString()));
 
                 return Form(
                   key: _formKey,
@@ -110,11 +135,7 @@ class _EditarDiarioState extends State<EditarDiario> {
                         controller: dataController,
                         readOnly: true,
                         onTap: () {
-                          setState(
-                            () {
-                              //_dataSelecionada(context);
-                            },
-                          );
+                          _dataSelecionada(context);
                         },
                       ),
                       SizedBox(height: 10),
@@ -160,12 +181,19 @@ class _EditarDiarioState extends State<EditarDiario> {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
 
-                              // String titulo = tituloController.text;
-                              // var id_animal = this.idAnimal;
-                              // String data = dataSemFormatacaoController.text;
-                              // String humor = humorController.text;
-                              // String peso = pesoController.text;
-                              // String descricao = descricaoController.text;
+                              String titulo = tituloController.text;
+                              var id_animal = diario['id_animal'].toString();
+                              String data = dataSemFormatacaoController.text;
+                              String humor = humorController.text;
+                              String peso = pesoController.text;
+                              String descricao = descricaoController.text;
+
+                              print(titulo);
+                              print(id_animal);
+                              print(data);
+                              print(humor);
+                              print(peso);
+                              print(descricao);
 
                               // if (await DiarioRepository().postDiario(
                               //         titulo,
