@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/relatorio-model.dart';
 import '../themes/color_theme.dart';
-import '../widgets/lista_gastos.widget.dart';
+import '../widgets/lista_outros.widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OutrasCategorias extends StatefulWidget {
@@ -75,7 +75,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                       vertical: 8.0,
                       horizontal: 16.0,
                     ),
-                    child: ListaGastos(
+                    child: ListaOutros(
                       transaction: e,
                     ),
                   ),
@@ -122,7 +122,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                       vertical: 8.0,
                       horizontal: 16.0,
                     ),
-                    child: ListaGastos(
+                    child: ListaOutros(
                       transaction: e,
                     ),
                   ),
@@ -169,7 +169,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                       vertical: 8.0,
                       horizontal: 16.0,
                     ),
-                    child: ListaGastos(
+                    child: ListaOutros(
                       transaction: e,
                     ),
                   ),
@@ -216,7 +216,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                       vertical: 8.0,
                       horizontal: 16.0,
                     ),
-                    child: ListaGastos(
+                    child: ListaOutros(
                       transaction: e,
                     ),
                   ),
