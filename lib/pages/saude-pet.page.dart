@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/diario-pet.page.dart';
-import 'package:health_pets/pages/listagem-geral.page.dart';
+import 'package:health_pets/pages/informacao-geral.page.dart';
 import 'package:health_pets/repository/cadastro-geral-repository.dart';
 import 'package:health_pets/repository/diario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
@@ -132,7 +132,7 @@ class _SaudePetState extends State<SaudePet> {
                             children: <Widget>[
                               iconesHistorico(
                                 context,
-                                ListagemPage(id),
+                                InformacaoPage(id),
                                 Image.asset("assets/consultation.png"),
                                 AppLocalizations.of(context)!.consultations,
                                 qtndeConsulta.toString(),
@@ -151,14 +151,14 @@ class _SaudePetState extends State<SaudePet> {
                             children: <Widget>[
                               iconesHistorico(
                                 context,
-                                ListagemPage(id),
+                                InformacaoPage(id),
                                 Image.asset("assets/microscope.png"),
                                 AppLocalizations.of(context)!.exams,
                                 qntdeExame.toString(),
                               ),
                               iconesHistorico(
                                 context,
-                                ListagemPage(id),
+                                InformacaoPage(id),
                                 Image.asset("assets/medicine.png"),
                                 AppLocalizations.of(context)!.medicines,
                                 qntdeMedicamento.toString(),
@@ -170,7 +170,7 @@ class _SaudePetState extends State<SaudePet> {
                             children: <Widget>[
                               iconesHistorico(
                                 context,
-                                ListagemPage(id),
+                                InformacaoPage(id),
                                 Image.asset("assets/surgery.png"),
                                 AppLocalizations.of(context)!.procedures,
                                 qntdeProcedimento.toString(),

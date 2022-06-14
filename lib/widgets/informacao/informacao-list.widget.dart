@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/repository/cadastro-geral-repository.dart';
-import 'package:health_pets/widgets/listagem-geral/listagem-card.widget.dart';
+import 'package:health_pets/widgets/informacao/informacao-card.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
-class ListagemLista extends StatelessWidget {
+class InformacaoLista extends StatelessWidget {
   final int idAnimal;
 
-  const ListagemLista(this.idAnimal);
+  const InformacaoLista(this.idAnimal);
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +47,17 @@ class ListagemLista extends StatelessWidget {
             return ListView.builder(
               itemCount: list.length,
               itemBuilder: (context, index) {
-                var listagem = list[index];
+                var informacao = list[index];
                 return Container(
-                  child: ListagemCard(
-                    id: listagem['id'] ?? 0,
-                    idCategoria: listagem['id_categoria'] ?? 0,
-                    idSubcategoria: listagem['id_subcategoria'] ?? 0,
-                    idAnimal: listagem['id_animal'] ?? 0,
-                    descricao: listagem['descricao'] ?? '',
-                    data: listagem['data'] ?? '',
-                    valor: listagem['valor'] ?? 0,
-                    local: listagem['local'] ?? '',
+                  child: InformacaoCard(
+                    id: informacao['id'] ?? 0,
+                    idCategoria: informacao['id_categoria'] ?? 0,
+                    idSubcategoria: informacao['id_subcategoria'] ?? 0,
+                    idAnimal: informacao['id_animal'] ?? 0,
+                    descricao: informacao['descricao'] ?? '',
+                    data: informacao['data'] ?? '',
+                    valor: informacao['valor'] ?? 0,
+                    local: informacao['local'] ?? '',
                   ),
                 );
               },

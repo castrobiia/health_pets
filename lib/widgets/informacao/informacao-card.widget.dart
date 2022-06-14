@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
@@ -9,7 +7,7 @@ import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ListagemCard extends StatelessWidget {
+class InformacaoCard extends StatelessWidget {
   final int id;
   final String data;
   final String descricao;
@@ -19,7 +17,7 @@ class ListagemCard extends StatelessWidget {
   final int valor;
   final int idAnimal;
 
-  ListagemCard({
+  InformacaoCard({
     required this.idAnimal,
     required this.id,
     required this.data,
@@ -32,8 +30,7 @@ class ListagemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var dataFormatada =
-        DateFormat("dd/MM/yyyy").format(DateTime.parse(data));
+    var dataFormatada = DateFormat("dd/MM/yyyy").format(DateTime.parse(data));
     return Slidable(
       //key: ValueKey(nomeVacina),
       endActionPane: ActionPane(
