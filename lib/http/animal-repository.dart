@@ -1,11 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:health_pets/class/util.dart';
 
@@ -14,8 +11,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
-import '../pages/arquivado/tabs.page.dart';
-import '../widgets/widgets.dart';
 
 class AnimalRepository {
   List listaAnimais = [];
