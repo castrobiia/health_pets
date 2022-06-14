@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/class/entity/vacina-entity.dart';
+import 'package:health_pets/repository/cadastro-geral-repository.dart';
+import 'package:health_pets/widgets/listagem-geral/listagem-card.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
-import 'vacina-card.widget.dart';
-
-class VacinaLista extends StatelessWidget {
+class ListagemLista extends StatelessWidget {
   final int idAnimal;
 
-  const VacinaLista(this.idAnimal);
+  const ListagemLista(this.idAnimal);
 
   @override
   Widget build(BuildContext context) {
-    VacinaEntity().getVacina(idAnimal);
+    CadastroGeralRepository().getInfosGeral(idAnimal);
 
     return Scaffold(
       body: FutureBuilder<dynamic>(
-        future: VacinaEntity().getVacina(idAnimal),
+        future: CadastroGeralRepository().getInfosGeral(idAnimal),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(
@@ -37,7 +36,7 @@ class VacinaLista extends StatelessWidget {
           if (list.length == 0) {
             return Center(
               child: Text(
-                'Não há vacinas cadastradas',
+                'Não há cadastro',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w300,
@@ -48,15 +47,17 @@ class VacinaLista extends StatelessWidget {
             return ListView.builder(
               itemCount: list.length,
               itemBuilder: (context, index) {
-                var vacina = list[index];
+                var listagem = list[index];
                 return Container(
-                  child: VacinaCard(
-                    idVacina: vacina['id'] ?? 0,
-                    nomeVacina: vacina['nome'] ?? '',
-                    dataAplicacao: vacina['data_aplicacao'] ?? '',
-                    fabricante: vacina['fabricante'] ?? '',
-                    lote: vacina['lote'] ?? '',
-                    idAnimal: vacina['idAnimal'] ?? 0,
+                  child: ListagemCard(
+                    id: listagem['id'] ?? 0,
+                    idCategoria: listagem['id_categoria'] ?? 0,
+                    idSubcategoria: listagem['id_subcategoria'] ?? 0,
+                    idAnimal: listagem['id_animal'] ?? 0,
+                    descricao: listagem['descricao'] ?? '',
+                    data: listagem['data'] ?? '',
+                    valor: listagem['valor'] ?? 0,
+                    local: listagem['local'] ?? '',
                   ),
                 );
               },
