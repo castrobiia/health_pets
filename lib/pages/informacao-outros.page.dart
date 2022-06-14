@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/relatorio-model.dart';
 import '../themes/color_theme.dart';
-import '../widgets/lista_outros.widget.dart';
+import '../widgets/informacao/lista_outros.widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OutrasCategorias extends StatefulWidget {

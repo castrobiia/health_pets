@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/saude-pet.page.dart';
 import 'package:health_pets/pages/menu-pet.page.dart';
-import 'package:health_pets/pages/outras-categorias-pet.page.dart';
+import 'package:health_pets/pages/informacao-outros.page.dart';
 import 'package:health_pets/pages/perfil-pet.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
