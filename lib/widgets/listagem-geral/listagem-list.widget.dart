@@ -56,7 +56,7 @@ class ListagemLista extends StatelessWidget {
                     idAnimal: listagem['id_animal'] ?? 0,
                     descricao: listagem['descricao'] ?? '',
                     data: listagem['data'] ?? '',
-                    valor: listagem['valor'] ?? 0.0,
+                    valor: listagem['valor'] ?? 0,
                     local: listagem['local'] ?? '',
                   ),
                 );

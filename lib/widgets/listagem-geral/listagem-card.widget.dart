@@ -16,7 +16,7 @@ class ListagemCard extends StatelessWidget {
   final int idCategoria;
   final int idSubcategoria;
   final String local;
-  final Float valor;
+  final int valor;
   final int idAnimal;
 
   ListagemCard({
