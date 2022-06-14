@@ -8,15 +8,16 @@ import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CadastroLembrete extends StatefulWidget {
+class CadastroInformacao extends StatefulWidget {
   int idAnimal;
-  CadastroLembrete(this.idAnimal);
+  CadastroInformacao(this.idAnimal);
 
   @override
-  _CadastroLembreteState createState() => _CadastroLembreteState(this.idAnimal);
+  _CadastroInformacaoState createState() =>
+      _CadastroInformacaoState(this.idAnimal);
 }
 
-class _CadastroLembreteState extends State<CadastroLembrete> {
+class _CadastroInformacaoState extends State<CadastroInformacao> {
   TextEditingController categoriaController = TextEditingController();
   TextEditingController subcategoriaController = TextEditingController();
   TextEditingController animalController = TextEditingController();
@@ -31,7 +32,7 @@ class _CadastroLembreteState extends State<CadastroLembrete> {
   int idAnimal;
   bool checkedValue = false;
   DateTime _dataHoje = DateTime.now();
-  _CadastroLembreteState(this.idAnimal);
+  _CadastroInformacaoState(this.idAnimal);
 
   var _datePicker;
 

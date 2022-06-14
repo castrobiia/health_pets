@@ -7,27 +7,30 @@ import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class VacinaCard extends StatelessWidget {
-  final int idVacina;
-  final String nomeVacina;
-  final String dataAplicacao;
-  final String fabricante;
-  final String lote;
+class InformacaoCard extends StatelessWidget {
+  final int id;
+  final String data;
+  final String descricao;
+  final int idCategoria;
+  final int idSubcategoria;
+  final String local;
+  final int valor;
   final int idAnimal;
 
-  VacinaCard({
-    required this.idVacina,
-    required this.nomeVacina,
-    required this.dataAplicacao,
-    required this.fabricante,
-    required this.lote,
+  InformacaoCard({
     required this.idAnimal,
+    required this.id,
+    required this.data,
+    required this.descricao,
+    required this.idCategoria,
+    required this.idSubcategoria,
+    required this.local,
+    required this.valor,
   });
 
   @override
   Widget build(BuildContext context) {
-    var dataAplicacaoFormatada =
-        DateFormat("dd/MM/yyyy").format(DateTime.parse(dataAplicacao));
+    var dataFormatada = DateFormat("dd/MM/yyyy").format(DateTime.parse(data));
     return Slidable(
       //key: ValueKey(nomeVacina),
       endActionPane: ActionPane(
@@ -49,9 +52,9 @@ class VacinaCard extends StatelessWidget {
             icon: Icons.delete,
             onPressed: (context) {
               setarMaterialPageRoute(
-                  context, confirmarExclusaoVacina(context, idVacina));
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("Vacina deletada")));
+                  context, confirmarExclusaoVacina(context, id));
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Deletado com sucesso")));
             },
           ),
         ],
@@ -74,7 +77,7 @@ class VacinaCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Vacina: $nomeVacina",
+                            "Descrição: $descricao",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w500),
                           ),
@@ -89,7 +92,7 @@ class VacinaCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Fabricante: $fabricante',
+                            'Valor: $valor',
                             style: TextStyle(fontSize: 15),
                           ),
                         ],
@@ -103,7 +106,7 @@ class VacinaCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Lote: $lote',
+                            'Local: $local',
                             style: TextStyle(fontSize: 15),
                           ),
                         ],
@@ -117,7 +120,7 @@ class VacinaCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Text(
-                        dataAplicacaoFormatada,
+                        dataFormatada,
                         style: TextStyle(fontSize: 15),
                       ),
                     ],

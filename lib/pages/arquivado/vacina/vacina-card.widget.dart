@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
@@ -9,31 +7,27 @@ import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ListagemCard extends StatelessWidget {
-  final int id;
-  final String data;
-  final String descricao;
-  final int idCategoria;
-  final int idSubcategoria;
-  final String local;
-  final int valor;
+class VacinaCard extends StatelessWidget {
+  final int idVacina;
+  final String nomeVacina;
+  final String dataAplicacao;
+  final String fabricante;
+  final String lote;
   final int idAnimal;
 
-  ListagemCard({
+  VacinaCard({
+    required this.idVacina,
+    required this.nomeVacina,
+    required this.dataAplicacao,
+    required this.fabricante,
+    required this.lote,
     required this.idAnimal,
-    required this.id,
-    required this.data,
-    required this.descricao,
-    required this.idCategoria,
-    required this.idSubcategoria,
-    required this.local,
-    required this.valor,
   });
 
   @override
   Widget build(BuildContext context) {
-    var dataFormatada =
-        DateFormat("dd/MM/yyyy").format(DateTime.parse(data));
+    var dataAplicacaoFormatada =
+        DateFormat("dd/MM/yyyy").format(DateTime.parse(dataAplicacao));
     return Slidable(
       //key: ValueKey(nomeVacina),
       endActionPane: ActionPane(
@@ -54,10 +48,10 @@ class ListagemCard extends StatelessWidget {
             label: AppLocalizations.of(context)!.delete,
             icon: Icons.delete,
             onPressed: (context) {
-              setarMaterialPageRoute(
-                  context, confirmarExclusaoVacina(context, id));
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Deletado com sucesso")));
+              // setarMaterialPageRoute(
+              //     context, confirmarExclusaoVacina(context, idVacina));
+              // ScaffoldMessenger.of(context)
+              //     .showSnackBar(SnackBar(content: Text("Vacina deletada")));
             },
           ),
         ],
@@ -80,7 +74,7 @@ class ListagemCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Descrição: $descricao",
+                            "Vacina: $nomeVacina",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w500),
                           ),
@@ -95,7 +89,7 @@ class ListagemCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Valor: $valor',
+                            'Fabricante: $fabricante',
                             style: TextStyle(fontSize: 15),
                           ),
                         ],
@@ -109,7 +103,7 @@ class ListagemCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Local: $local',
+                            'Lote: $lote',
                             style: TextStyle(fontSize: 15),
                           ),
                         ],
@@ -123,7 +117,7 @@ class ListagemCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       Text(
-                        dataFormatada,
+                        dataAplicacaoFormatada,
                         style: TextStyle(fontSize: 15),
                       ),
                     ],

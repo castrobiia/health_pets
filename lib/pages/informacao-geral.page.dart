@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/widgets/listagem-geral/listagem-list.widget.dart';
+import 'package:health_pets/widgets/informacao/informacao-list.widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ListagemPage extends StatefulWidget {
-  const ListagemPage(this.id);
+class InformacaoPage extends StatefulWidget {
+  const InformacaoPage(this.id);
   final int id;
 
   @override
-  State<ListagemPage> createState() => _ListagemPageState(this.id);
+  State<InformacaoPage> createState() => _InformacaoPageState(this.id);
 }
 
-class _ListagemPageState extends State<ListagemPage> {
+class _InformacaoPageState extends State<InformacaoPage> {
   final int id;
-  _ListagemPageState(this.id);
+  _InformacaoPageState(this.id);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _ListagemPageState extends State<ListagemPage> {
               child: Container(
                 height: MediaQuery.of(context).size.height * 1,
                 color: Colors.white,
-                child: ListagemLista(id),
+                child: InformacaoLista(id),
               ),
             ),
           ],
