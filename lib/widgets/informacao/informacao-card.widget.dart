@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
-import 'package:health_pets/pages/arquivado/editar-vacina.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InformacaoCard extends StatelessWidget {
-  final int id;
+  final int idInformacao;
   final String data;
   final String descricao;
   final int idCategoria;
@@ -19,7 +18,7 @@ class InformacaoCard extends StatelessWidget {
 
   InformacaoCard({
     required this.idAnimal,
-    required this.id,
+    required this.idInformacao,
     required this.data,
     required this.descricao,
     required this.idCategoria,
@@ -41,7 +40,7 @@ class InformacaoCard extends StatelessWidget {
             label: AppLocalizations.of(context)!.edit,
             icon: Icons.edit,
             onPressed: (context) {
-              setarMaterialPageRoute(context, EditarVacina());
+              //setarMaterialPageRoute(context, EditarVacina());
               // ScaffoldMessenger.of(context)
               //     .showSnackBar(SnackBar(content: Text("Vacina editada")));
             },
@@ -52,7 +51,7 @@ class InformacaoCard extends StatelessWidget {
             icon: Icons.delete,
             onPressed: (context) {
               setarMaterialPageRoute(
-                  context, confirmarExclusaoVacina(context, id));
+                  context, confirmarExclusaoInformacao(context, idInformacao, idAnimal));
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text("Deletado com sucesso")));
             },

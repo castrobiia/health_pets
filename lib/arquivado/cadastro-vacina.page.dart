@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:health_pets/class/entity/vacina-entity.dart';
 
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/models/cadastro-vacina-model.dart';
+import 'package:health_pets/arquivado/cadastro-vacina-model.dart';
 import 'package:health_pets/pages/arquivado/vacina.page.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../themes/color_theme.dart';
+import '../themes/color_theme.dart';
 
 class CadastrarVacina extends StatefulWidget {
   const CadastrarVacina(this.idAnimal);

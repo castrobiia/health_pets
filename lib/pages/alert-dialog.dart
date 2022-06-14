@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/controllers/animal_controller.dart';
 import 'package:health_pets/controllers/diario_controller.dart';
+import 'package:health_pets/controllers/informacao_controller.dart';
 import 'package:health_pets/controllers/usuario_controller.dart';
-import 'package:health_pets/controllers/vacina_controller.dart';
 import 'package:health_pets/pages/diario-pet.page.dart';
+import 'package:health_pets/pages/informacao-geral.page.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
-import 'package:health_pets/pages/arquivado/vacina.page.dart';
 import 'package:health_pets/repository/diario-repository.dart';
+import 'package:health_pets/repository/informacao-repository.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
-import 'package:health_pets/repository/vacina-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
 import 'package:health_pets/repository/animal-repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -74,8 +74,8 @@ confirmarExclusaoUsuario(BuildContext context) {
       });
 }
 
-confirmarExclusaoVacina(BuildContext context, id) {
-  var vacinaController = VacinaController(VacinaRepository());
+confirmarExclusaoInformacao(BuildContext context, idInformacao, idAnimal) {
+  var informacaoController = InformacaoController(InformacaoRepository());
   return showDialog(
       context: context,
       builder: (context) {
@@ -91,9 +91,9 @@ confirmarExclusaoVacina(BuildContext context, id) {
             ),
             TextButton(
               onPressed: () {
-                vacinaController.deleteVacina(id).then((value) {
+                informacaoController.deleteInfo(idInformacao).then((value) {
                   exibirMensagem(context, '$value');
-                  setarMaterialPageRoute(context, VacinaPage(id));
+                  setarMaterialPageRoute(context, InformacaoPage(idAnimal));
                 });
               },
               child: Text(AppLocalizations.of(context)!.yes),
