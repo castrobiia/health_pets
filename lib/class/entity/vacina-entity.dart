@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:health_pets/class/api/header.dart';
-import 'package:health_pets/models/vacina-model.dart';
+import 'package:health_pets/pages/arquivado/vacina-model.dart';
 import 'package:health_pets/repository/repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';

@@ -48,10 +48,10 @@ class VacinaCard extends StatelessWidget {
             label: AppLocalizations.of(context)!.delete,
             icon: Icons.delete,
             onPressed: (context) {
-              setarMaterialPageRoute(
-                  context, confirmarExclusaoVacina(context, idVacina));
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("Vacina deletada")));
+              // setarMaterialPageRoute(
+              //     context, confirmarExclusaoVacina(context, idVacina));
+              // ScaffoldMessenger.of(context)
+              //     .showSnackBar(SnackBar(content: Text("Vacina deletada")));
             },
           ),
         ],
