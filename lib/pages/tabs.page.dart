@@ -4,7 +4,7 @@ import 'package:health_pets/pages/perfil-usuario.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'gasto.page.dart';
+import '../arquivado/gasto.page.dart';
 
 class TabsPage extends StatelessWidget {
   const TabsPage({Key? key}) : super(key: key);
