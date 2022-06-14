@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_pets/repository/cadastro-geral-repository.dart';
+import 'package:health_pets/repository/informacao-repository.dart';
 import 'package:health_pets/widgets/informacao/informacao-card.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
@@ -10,11 +10,11 @@ class InformacaoLista extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CadastroGeralRepository().getInfosGeral(idAnimal);
+    InformacaoRepository().getInfosGeral(idAnimal);
 
     return Scaffold(
       body: FutureBuilder<dynamic>(
-        future: CadastroGeralRepository().getInfosGeral(idAnimal),
+        future: InformacaoRepository().getInfosGeral(idAnimal),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(

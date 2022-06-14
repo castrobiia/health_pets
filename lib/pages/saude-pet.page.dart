@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/diario-pet.page.dart';
 import 'package:health_pets/pages/informacao-geral.page.dart';
-import 'package:health_pets/repository/cadastro-geral-repository.dart';
+import 'package:health_pets/repository/informacao-repository.dart';
 import 'package:health_pets/repository/diario-repository.dart';
 import 'package:health_pets/widgets/widgets.dart';
-import 'package:health_pets/pages/arquivado/vacina.page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SaudePet extends StatefulWidget {
@@ -30,7 +29,7 @@ class _SaudePetState extends State<SaudePet> {
   initState() {
     setState(() {
       conexaoDiario = DiarioRepository().getDiarios(id);
-      conexaoInfoSaude = CadastroGeralRepository().getInfosGeral(id);
+      conexaoInfoSaude = InformacaoRepository().getInfosGeral(id);
     });
     super.initState();
   }
@@ -177,7 +176,7 @@ class _SaudePetState extends State<SaudePet> {
                               ),
                               iconesHistorico(
                                 context,
-                                VacinaPage(id),
+                                InformacaoPage(id),
                                 Image.asset("assets/injection.png"),
                                 AppLocalizations.of(context)!.vaccines,
                                 qntdeVacina.toString(),

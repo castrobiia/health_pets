@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
-import 'package:health_pets/repository/cadastro-geral-repository.dart';
+import 'package:health_pets/repository/informacao-repository.dart';
 import 'package:health_pets/repository/categoria-repository.dart';
 import 'package:health_pets/repository/subcategoria-repository.dart';
 import 'package:health_pets/themes/color_theme.dart';
@@ -304,15 +304,14 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                             print(lembrete);
                             print(id_animal);
 
-                            if (await CadastroGeralRepository()
-                                    .postCadastroGeral(
-                                        data,
-                                        descricao,
-                                        id_categoria,
-                                        id_subcategoria,
-                                        local,
-                                        valor,
-                                        id_animal.toString()) ==
+                            if (await InformacaoRepository().postInformacao(
+                                    data,
+                                    descricao,
+                                    id_categoria,
+                                    id_subcategoria,
+                                    local,
+                                    valor,
+                                    id_animal.toString()) ==
                                 200) {
                               exibirMensagem(context,
                                   'Informações cadastradas com sucesso');
