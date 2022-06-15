@@ -12,7 +12,7 @@ class DiarioCard extends StatelessWidget {
   String tituloDiario;
   String dataDiario;
   String descricaoDiario;
-  int peso;
+  double peso;
   String humor;
   int idAnimal;
 
