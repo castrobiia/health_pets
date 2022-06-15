@@ -81,7 +81,7 @@ confirmarExclusaoInformacao(BuildContext context, idInformacao, idAnimal) {
       builder: (context) {
         return AlertDialog(
           title: Text(AppLocalizations.of(context)!.alert),
-          content: Text(AppLocalizations.of(context)!.deleteVaccine),
+          content: Text(AppLocalizations.of(context)!.deleteItem),
           actions: <Widget>[
             TextButton(
               onPressed: () {
