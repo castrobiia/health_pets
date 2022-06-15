@@ -53,7 +53,7 @@ class DiarioList extends StatelessWidget {
                         dataDiario: diario['data'] ?? '',
                         descricaoDiario: diario['descricao'] ?? '',
                         humor: diario['humor'] ?? '',
-                        peso: diario['peso'] ?? '',
+                        peso: diario['peso'] ?? 0.0,
                         idAnimal: diario['id_animal'] ?? 0,
                       ),
                     );
