@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:health_pets/repository/informacao-repository.dart';
+import 'package:health_pets/repository/subcategoria-repository.dart';
 import 'package:health_pets/widgets/informacao/informacao-card.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
 class InformacaoLista extends StatelessWidget {
   final int idAnimal;
+  final String idSubcategoria;
 
-  const InformacaoLista(this.idAnimal);
+  const InformacaoLista(this.idAnimal, this.idSubcategoria);
 
   @override
   Widget build(BuildContext context) {
     InformacaoRepository().getInfosGeral(idAnimal);
+    SubcategoriaRepository().getSubcategoriasPorCategoria(idSubcategoria);
 
     return Scaffold(
       body: FutureBuilder<dynamic>(

@@ -282,3 +282,26 @@ iconesHistorico(context, page, image_icon, titulo, qnt_cadastrado) {
     ),
   );
 }
+
+// listagemInformacoes(context, titulo, page) {
+//   return Scaffold(
+//               appBar: AppBar(
+//                 backgroundColor: Colors.white,
+//                 title: Text(titulo),
+//                 centerTitle: true,
+//                 elevation: 1,
+//               ),
+//               body: Column(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: <Widget>[
+//                   Expanded(
+//                     child: Container(
+//                       height: MediaQuery.of(context).size.height * 1,
+//                       color: Colors.white,
+//                       child: page,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             );
+// }
