@@ -52,6 +52,7 @@
     "deleteDiary": "Deseja excluir este diário?",
     "deleteAccount": "Deseja excluir sua conta?",
     "deleteVaccine": "Deseja excluir esta vacina?",
+    "deleteItem": "Deseja excluir este item?",
     "yes": "Sim",
     "no": "Não",
     "reset": "Redefinir",
