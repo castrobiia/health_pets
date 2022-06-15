@@ -43,7 +43,6 @@ class DiarioRepository {
 
   getDiario(int? id) async {
     url = '${url}/${id}';
-    print(url);
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
@@ -55,8 +54,8 @@ class DiarioRepository {
     };
 
     final response = await http.get(Uri.parse(url), headers: header);
-    print(response.body);
-    return (jsonDecode(response.body));
+    var diario = jsonDecode(response.body);
+    return diario;
   }
 
   Future<String> deleteDiario(id) async {
@@ -75,5 +74,31 @@ class DiarioRepository {
     var mensagem = diario['message'];
 
     return mensagem;
+  }
+
+  putDiario(String id_diario, String peso, String humor, String descricao,
+      String data, String titulo, String id_animal) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    var body = jsonEncode({
+      'peso': peso,
+      'humor': humor,
+      'descricao': descricao,
+      'data': data,
+      'titulo': titulo,
+      'id_animal': id_animal,
+    });
+
+    var urlPut = Uri.parse('$url/${id_diario}');
+
+    var response = await http.put(urlPut, body: body, headers: header);
+    return jsonDecode(response.statusCode.toString());
   }
 }

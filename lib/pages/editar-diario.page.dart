@@ -104,7 +104,6 @@ class _EditarDiarioState extends State<EditarDiario> {
                 descricaoController.text = diario['descricao'];
                 // dataController.text = diario['data'];
                 tituloController.text = diario['titulo'];
-
                 dataController.text = DateFormat("dd/MM/yyyy")
                     .format(DateTime.parse(diario['data'].toString()));
 
@@ -112,21 +111,32 @@ class _EditarDiarioState extends State<EditarDiario> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      setarCampoForms(tituloController,
-                          AppLocalizations.of(context)!.title, _titulo,
-                          validator: (value) => validarCampo(value)),
-
+                      TextFormField(
+                        autofocus: false,
+                        keyboardType: TextInputType.text,
+                        controller: tituloController,
+                        validator: (value) => validarCampo(value),
+                        onSaved: (input) => _titulo = input!,
+                        decoration: InputDecoration(
+                          labelText: "Título",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
                       TextFormField(
                         autofocus: false,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return AppLocalizations.of(context)!.selectDate;
+                            return "Selecione uma data";
                           }
                           return null;
                         },
                         onSaved: (input) => _data = input!,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!.date,
+                          labelText: "Data",
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 17,
@@ -139,36 +149,51 @@ class _EditarDiarioState extends State<EditarDiario> {
                         },
                       ),
                       SizedBox(height: 10),
-                      setarCampoForms(humorController,
-                          AppLocalizations.of(context)!.mood, _humor,
-                          validator: (value) => validarCampo(value)),
-                      //peso mudar para receber apenas numeros
                       TextFormField(
                         autofocus: false,
-                        keyboardType: TextInputType.number,
-                        controller: pesoController,
-                        //validator: (value) => validarCampo(value),
-                        onSaved: (input) => _peso = input!,
+                        keyboardType: TextInputType.text,
+                        controller: humorController,
+                        validator: (value) => validarCampo(value),
+                        onSaved: (input) => _humor = input!,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!.weight,
+                          labelText: "Humor",
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 17,
                           ),
                         ),
                       ),
+                      SizedBox(height: 10),
                       TextFormField(
-                        controller: descricaoController,
+                        autofocus: false,
+                        keyboardType: TextInputType.text,
+                        controller: pesoController,
+                        validator: (value) => validarCampo(value),
+                        onSaved: (input) => _peso = input!,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!.description,
+                          labelText: "Peso",
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 17,
                           ),
                         ),
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        autofocus: false,
                         keyboardType: TextInputType.multiline,
                         maxLines: 5,
                         maxLength: 250,
+                        controller: descricaoController,
+                        validator: (value) => validarCampo(value),
+                        onSaved: (input) => _peso = input!,
+                        decoration: InputDecoration(
+                          labelText: "Descrição",
+                          labelStyle: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 17,
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 30,
@@ -182,35 +207,47 @@ class _EditarDiarioState extends State<EditarDiario> {
                               _formKey.currentState!.save();
 
                               String titulo = tituloController.text;
-                              var id_animal = diario['id_animal'].toString();
-                              String data = dataSemFormatacaoController.text;
+                              String id_diario = diario['id'].toString();
+                              String id_animal = diario['id_animal'].toString();
                               String humor = humorController.text;
                               String peso = pesoController.text;
                               String descricao = descricaoController.text;
+                              var data;
 
+                              var dataSemFormatacao =
+                                  dataSemFormatacaoController.text;
+
+                              if (dataSemFormatacao.isEmpty) {
+                                data = diario['data'];
+                              } else {
+                                data = dataSemFormatacaoController.text;
+                              }
+
+                              print('data: ${data}');
                               print(titulo);
+                              print(id_diario);
                               print(id_animal);
-                              print(data);
                               print(humor);
                               print(peso);
                               print(descricao);
 
-                              // if (await DiarioRepository().postDiario(
-                              //         titulo,
-                              //         id_animal.toString(),
-                              //         data,
-                              //         humor,
-                              //         peso,
-                              //         descricao) ==
-                              //     200) {
-                              //   exibirMensagem(
-                              //       context, 'Diário cadastrado com sucesso');
-                              //   setarMaterialPageRoute(
-                              //       context, DiarioPet(idAnimal));
-                              // } else {
-                              //   exibirMensagem(context,
-                              //       'Não foi possível cadastrar diário');
-                              // }
+                              if (await DiarioRepository().putDiario(
+                                      id_diario,
+                                      peso,
+                                      humor,
+                                      descricao,
+                                      data,
+                                      titulo,
+                                      id_animal) ==
+                                  200) {
+                                exibirMensagem(
+                                    context, 'Diário atualizado com sucesso');
+                                setarMaterialPageRoute(
+                                    context, DiarioPet(id_animal));
+                              } else {
+                                exibirMensagem(context,
+                                    'Não foi possível atualizar diário');
+                              }
                             }
                           },
                           child: textBotao(AppLocalizations.of(context)!.save),
