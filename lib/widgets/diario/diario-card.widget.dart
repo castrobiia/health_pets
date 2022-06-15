@@ -12,7 +12,7 @@ class DiarioCard extends StatelessWidget {
   String tituloDiario;
   String dataDiario;
   String descricaoDiario;
-  double peso;
+  String peso;
   String humor;
   int idAnimal;
 
@@ -133,7 +133,7 @@ class DiarioCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            peso.toString() + ' kg',
+                            '$peso kg',
                             style: TextStyle(fontSize: 15),
                           ),
                         ],
