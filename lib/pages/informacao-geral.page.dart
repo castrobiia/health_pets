@@ -49,7 +49,7 @@ class _InformacaoPageState extends State<InformacaoPage> {
             int tamanhoLista = listaInfosGeral.length;
 
             String titulo = 'Informação';
-            int idSubcategoria = 0;
+            String idSubcategoria = '';
 
             for (var i = 0; i < tamanhoLista; i++) {
               if (listaInfosGeral[i]['id_subcategoria'] == 84) {
