@@ -62,8 +62,7 @@ class UsuarioRepository {
     return jsonDecode(response.statusCode.toString());
   }
 
-  alterarSenha(String id, String nome, String email, String senha,
-      String confirmacaoSenha) async {
+  alterarSenha(String id, String senha, String confirmacaoSenha) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
 
@@ -72,6 +71,10 @@ class UsuarioRepository {
       "Accept": "application/json",
       "Authorization": "Bearer ${token}"
     };
+
+    var usuario = await getUsuario();
+    var nome = usuario['user']['nome'];
+    var email = usuario['user']['email'];
 
     var body = jsonEncode({
       'nome': nome,
@@ -84,6 +87,7 @@ class UsuarioRepository {
         Uri.parse('https://healthpets.app.br/api/user/${id}'),
         body: body,
         headers: header);
+
     return jsonDecode(response.statusCode.toString());
   }
 }

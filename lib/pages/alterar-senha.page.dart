@@ -118,8 +118,7 @@ class _AlterarSenhaState extends State<AlterarSenha> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            var nome = usuario['nome'];
-                            var email = usuario['email'];
+
                             var id = usuario['id'];
                             String senha = senhaController.text;
                             String confirmacaoSenha =
@@ -140,8 +139,10 @@ class _AlterarSenhaState extends State<AlterarSenha> {
                                     'A senha deve ter no mínimo 8 caracteres');
                               } else {
                                 if (senha == confirmacaoSenha) {
-                                  if (await UsuarioRepository().putUsuario(
-                                          id.toString(), nome, email) ==
+                                  if (await UsuarioRepository().alterarSenha(
+                                          id.toString(),
+                                          senha,
+                                          confirmacaoSenha) ==
                                       200) {
                                     exibirMensagem(
                                         context, 'Senha alterada com sucesso');
