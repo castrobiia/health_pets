@@ -70,9 +70,10 @@ class InformacaoLista extends StatelessWidget {
                     itemCount: listaAnimal.length,
                     itemBuilder: (context, index) {
                       var informacao = listaAnimal[index];
+
                       return Container(
                         child: InformacaoCard(
-                          idInformacao: informacao['id_informacao'] ?? 0,
+                          idInformacao: informacao['id'] ?? 0,
                           idCategoria: informacao['id_categoria'] ?? 0,
                           idSubcategoria: informacao['id_subcategoria'] ?? 0,
                           idAnimal: informacao['id_animal'] ?? 0,
