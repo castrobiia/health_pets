@@ -243,7 +243,7 @@ class _EditarDiarioState extends State<EditarDiario> {
                                 exibirMensagem(
                                     context, 'Diário atualizado com sucesso');
                                 setarMaterialPageRoute(
-                                    context, DiarioPet(id_animal));
+                                    context, DiarioPet(int.parse(id_animal)));
                               } else {
                                 exibirMensagem(context,
                                     'Não foi possível atualizar diário');
