@@ -99,6 +99,6 @@ class DiarioRepository {
     var urlPut = Uri.parse('$url/${id_diario}');
 
     var response = await http.put(urlPut, body: body, headers: header);
-    return jsonDecode(response.statusCode.toString());
+    return response.statusCode;
   }
 }
