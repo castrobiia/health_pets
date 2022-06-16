@@ -50,10 +50,7 @@ class InformacaoCard extends StatelessWidget {
             label: AppLocalizations.of(context)!.delete,
             icon: Icons.delete,
             onPressed: (context) {
-              setarMaterialPageRoute(
-                  context, confirmarExclusaoInformacao(context, idInformacao, idAnimal));
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Deletado com sucesso")));
+              confirmarExclusaoInformacao(context, idInformacao, idAnimal);
             },
           ),
         ],
