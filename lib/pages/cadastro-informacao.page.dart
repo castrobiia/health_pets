@@ -25,16 +25,23 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
   TextEditingController localizacaoController = TextEditingController();
   TextEditingController dataController = TextEditingController();
   TextEditingController dataSemFormatacaoController = TextEditingController();
+  TextEditingController horaController = TextEditingController();
   TextEditingController valorController = TextEditingController();
   List listaSubcategorias = [];
 
-  String? _localizacao, _data, _subcategoria, _categoria, _valor, _descricao;
+  String? _localizacao,
+      _data,
+      _subcategoria,
+      _categoria,
+      _valor,
+      _descricao,
+      _hora;
   int idAnimal;
   bool checkedValue = false;
   DateTime _dataHoje = DateTime.now();
   _CadastroInformacaoState(this.idAnimal);
 
-  var _datePicker;
+  var _datePicker, _timePicker;
 
   Future _dataSelecionada(BuildContext context) async {
     _datePicker = await showDatePicker(
@@ -56,6 +63,21 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
 
     dataController.text =
         DateFormat("dd/MM/yyyy").format(DateTime.parse(_datePicker.toString()));
+  }
+
+  Future _horaSelecionada(BuildContext context) async {
+    _timePicker =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+
+    if (_timePicker != null) {
+      setState(() {
+        horaController.text = _timePicker.toString();
+      });
+    }
+
+    MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    horaController.text = localizations.formatTimeOfDay(_timePicker,
+        alwaysUse24HourFormat: false);
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -184,33 +206,63 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                       SizedBox(
                         height: 10,
                       ),
-                      TextFormField(
-                        autofocus: false,
-                        keyboardType: TextInputType.text,
-                        controller: dataController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return AppLocalizations.of(context)!.selectDate;
-                          }
-                          return null;
-                        },
-                        onSaved: (input) => _data = input!,
-                        decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!.date,
-                          labelStyle: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 17,
+                      Row(children: [
+                        Expanded(
+                          child: TextFormField(
+                            autofocus: false,
+                            keyboardType: TextInputType.text,
+                            controller: dataController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return AppLocalizations.of(context)!.selectDate;
+                              }
+                              return null;
+                            },
+                            onSaved: (input) => _data = input!,
+                            decoration: InputDecoration(
+                              labelText: AppLocalizations.of(context)!.date,
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 17,
+                              ),
+                            ),
+                            readOnly: true,
+                            onTap: () {
+                              setState(
+                                () {
+                                  _dataSelecionada(context);
+                                },
+                              );
+                            },
                           ),
                         ),
-                        readOnly: true,
-                        onTap: () {
-                          setState(
-                            () {
-                              _dataSelecionada(context);
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            autofocus: false,
+                            keyboardType: TextInputType.text,
+                            controller: horaController,
+                            onSaved: (input) => _hora = input!,
+                            decoration: InputDecoration(
+                              labelText: AppLocalizations.of(context)!.hour,
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 17,
+                              ),
+                            ),
+                            readOnly: true,
+                            onTap: () {
+                              setState(
+                                () {
+                                  _horaSelecionada(context);
+                                },
+                              );
                             },
-                          );
-                        },
-                      ),
+                          ),
+                        )
+                      ]),
                       SizedBox(
                         height: 10,
                       ),
@@ -218,7 +270,7 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                         autofocus: false,
                         keyboardType: TextInputType.text,
                         controller: localizacaoController,
-                        validator: (value) => validarCampo(value),
+                        //validator: (value) => validarCampo(value),
                         onSaved: (input) => _localizacao = input!,
                         decoration: InputDecoration(
                           labelText: AppLocalizations.of(context)!.localization,
@@ -235,7 +287,7 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                         autofocus: false,
                         keyboardType: TextInputType.number,
                         controller: valorController,
-                        validator: (value) => validarCampo(value),
+                        //validator: (value) => validarCampo(value),
                         onSaved: (input) => _valor = input!,
                         decoration: InputDecoration(
                           labelText: AppLocalizations.of(context)!.price,
@@ -286,23 +338,38 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                         decoration: botaoRetangulo(),
                         child: TextButton(
                           onPressed: () async {
-                            var id_categoria = categoriaController.text;
-                            var id_subcategoria = subcategoriaController.text;
-                            var id_animal = this.idAnimal;
-                            String data = dataSemFormatacaoController.text;
-                            String local = localizacaoController.text;
-                            var valor = valorController.text;
-                            String descricao = descricaoController.text;
-                            bool lembrete = checkedValue;
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                              var id_categoria = categoriaController.text;
+                              var id_subcategoria = subcategoriaController.text;
+                              var id_animal = this.idAnimal;
+                              String data = dataSemFormatacaoController.text;
+                              String local = localizacaoController.text;
+                              var valor = valorController.text;
+                              String descricao = descricaoController.text;
+                              bool lembrete = checkedValue;
+                              var hora;
 
-                            print(id_categoria);
-                            print(id_subcategoria);
-                            print(data);
-                            print(local);
-                            print(valor);
-                            print(descricao);
-                            print(lembrete);
-                            print(id_animal);
+                              if (lembrete == true &&
+                                  horaController.text != null) {
+                                hora = horaController.text;
+                              }
+                              if (lembrete == true &&
+                                  horaController.text.isEmpty) {
+                                hora = '00:00';
+                              } else if (lembrete == false) {
+                                hora = '00:00';
+                              }
+
+                              print(id_categoria);
+                              print(id_subcategoria);
+                              print(data);
+                              print(local);
+                              print(valor);
+                              print(descricao);
+                              print(lembrete);
+                              print(id_animal);
+                              print(hora);
 
                             if (await InformacaoRepository().postInformacao(
                                     data,
@@ -323,7 +390,6 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                               exibirMensagem(context,
                                   'Não foi possível cadastrar informações');
                             }
-                            //setarMaterialPageRoute(context, Calendario());
                           },
                           child: textBotao(AppLocalizations.of(context)!.save),
                         ),
