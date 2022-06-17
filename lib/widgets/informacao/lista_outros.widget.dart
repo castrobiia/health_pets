@@ -5,10 +5,13 @@ import 'package:health_pets/themes/color_theme.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../models/info-model.dart';
+
 
 class ListaOutros extends StatelessWidget {
-  final RelatorioModel transaction;
-  const ListaOutros({Key? key, required this.transaction}) : super(key: key);
+  final InfoModel transaction;
+  const ListaOutros(this.transaction);
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +41,13 @@ class ListaOutros extends StatelessWidget {
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              color: transaction.isIncome ? ColorTheme.rosa0 : ColorTheme.rosa0,
+              color: transaction.valor != null ? ColorTheme.rosa0 : ColorTheme.rosa0,
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Center(
               child: Icon(
                 Icons.pets,
-                color: transaction.isIncome ? Colors.white : Colors.white,
+                color: transaction.valor != null ? Colors.white : Colors.white,
                 size: 36,
               ),
             ),
@@ -64,14 +67,14 @@ class ListaOutros extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Text(transaction.name),
+                        child: Text(transaction.descricao!),
                       ),
                       Text(
-                        "${transaction.isIncome ? "+" : "-"}${NumberFormat.simpleCurrency(
+                        "${transaction.valor != null ? "+" : "-"}${NumberFormat.simpleCurrency(
                           locale: 'pt_BR',
-                        ).format(transaction.total)}",
+                        ).format(transaction.valor)}",
                         style: TextStyle(
-                          color: transaction.isIncome
+                          color: transaction.valor != null
                               ? ColorTheme.roxo1
                               : ColorTheme.roxo1,
                         ),
@@ -89,10 +92,10 @@ class ListaOutros extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        DateFormat("dd MMM").format(transaction.createdAt),
+                        DateFormat("dd MMM").format(DateTime.parse(transaction.data!)),
                       ),
                       Text(
-                        transaction.description,
+                        transaction.descricao!,
                       ),
                     ],
                   ),

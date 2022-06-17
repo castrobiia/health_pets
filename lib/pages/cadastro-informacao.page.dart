@@ -311,6 +311,8 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                                     id_subcategoria,
                                     local,
                                     valor,
+                                    // hora,
+                                    // alerta,
                                     id_animal.toString()) ==
                                 200) {
                               exibirMensagem(context,
