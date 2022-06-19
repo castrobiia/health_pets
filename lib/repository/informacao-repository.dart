@@ -72,7 +72,7 @@ class InformacaoRepository {
       list.add(part);
     }
 
-    print('Retorno lista de comida: $list');
+    // print('Retorno lista de comida: $list');
 
     return (list);
   }
@@ -103,7 +103,7 @@ class InformacaoRepository {
       list.add(part);
     }
 
-    print('Retorno lista de higiene: $list');
+    // print('Retorno lista de higiene: $list');
 
     return (list);
   }
@@ -134,7 +134,7 @@ class InformacaoRepository {
       list.add(part);
     }
 
-    print('Lista de acessorios: $list');
+    // print('Lista de acessorios: $list');
 
     return (list);
   }
@@ -165,7 +165,7 @@ class InformacaoRepository {
       list.add(part);
     }
 
-    print('Retorno lista de Fun: $list');
+    // print('Retorno lista de Fun: $list');
 
     return (list);
   }
