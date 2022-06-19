@@ -370,7 +370,6 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                 print(lembrete);
                 print(id_animal);
                 print(hora);
-
                 if (await InformacaoRepository().postInformacao(
                 data,
                 descricao,
