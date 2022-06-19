@@ -371,24 +371,25 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                               print(id_animal);
                               print(hora);
 
-                            if (await InformacaoRepository().postInformacao(
-                                    data,
-                                    descricao,
-                                    id_categoria,
-                                    id_subcategoria,
-                                    local,
-                                    valor,
-                                    // hora,
-                                    // alerta,
-                                    id_animal.toString()) ==
-                                200) {
-                              exibirMensagem(context,
-                                  'Informações cadastradas com sucesso');
-                              setarMaterialPageRoute(
-                                  context, PerfilPetPage(idAnimal));
-                            } else {
-                              exibirMensagem(context,
-                                  'Não foi possível cadastrar informações');
+                              if (await InformacaoRepository().postInformacao(
+                                      data,
+                                      descricao,
+                                      id_categoria,
+                                      id_subcategoria,
+                                      local,
+                                      valor,
+                                      // hora,
+                                      // alerta,
+                                      id_animal.toString()) ==
+                                  200) {
+                                exibirMensagem(context,
+                                    'Informações cadastradas com sucesso');
+                                setarMaterialPageRoute(
+                                    context, PerfilPetPage(idAnimal));
+                              } else {
+                                exibirMensagem(context,
+                                    'Não foi possível cadastrar informações');
+                              }
                             }
                           },
                           child: textBotao(AppLocalizations.of(context)!.save),
