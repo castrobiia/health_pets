@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:health_pets/models/relatorio-model.dart';
+import 'package:health_pets/pages/editar-informacao.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,7 +24,10 @@ class ListaOutros extends StatelessWidget {
             backgroundColor: ColorTheme.cinza2,
             label: AppLocalizations.of(context)!.edit,
             icon: Icons.edit,
-            onPressed: (context) {},
+            onPressed: (context) {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> EditarInformacao(transaction.id!)));
+              ;
+            },
           ),
           SlidableAction(
             backgroundColor: ColorTheme.vermelho1,
