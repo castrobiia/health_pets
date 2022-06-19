@@ -46,6 +46,49 @@ class InformacaoRepository {
     return jsonDecode(response.statusCode.toString());
   }
 
+  Future<List<InfoModel>> getSubcategoriaInfo(id_animal, id_subcategoria) async {
+    var url = 'https://www.healthpets.app.br/api/saude';
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    final body = jsonEncode({
+      'id_subcategoria': id_subcategoria,
+      'id_animal': id_animal,
+    });
+
+    var response = await http.post(Uri.parse(url), headers: header, body: body);
+
+    List<InfoModel> list = [];
+    var resposta = jsonDecode(response.body) as List;
+
+
+    for(var item in resposta) {
+      var info = jsonDecode(jsonEncode(item));
+
+      InfoModel part = InfoModel(id: info['id'],
+          data: info['data'],
+          descricao: info['descricao'],
+          idCategoria: info['id_categoria'],
+          idSubcategoria: info['id_subcategoria'],
+          local: info['local'],
+          valor: double.parse(info['valor'].toString()),
+          idAnimal: info['id_animal']
+      );
+
+      list.add(part);
+    }
+
+    return (list);
+
+  }
+
   Future<List<InfoModel>> getInfoFood(int? id) async {
     url = 'https://www.healthpets.app.br/api/comida';
 
@@ -71,8 +114,6 @@ class InformacaoRepository {
 
       list.add(part);
     }
-
-    // print('Retorno lista de comida: $list');
 
     return (list);
   }
@@ -103,8 +144,6 @@ class InformacaoRepository {
       list.add(part);
     }
 
-    // print('Retorno lista de higiene: $list');
-
     return (list);
   }
 
@@ -133,8 +172,6 @@ class InformacaoRepository {
 
       list.add(part);
     }
-
-    // print('Lista de acessorios: $list');
 
     return (list);
   }
@@ -170,6 +207,17 @@ class InformacaoRepository {
     return (list);
   }
 
+  Future getInfo(int? id) async {
+    url = 'https://www.healthpets.app.br/api/info/$id';
+
+    var response =
+    await http.get(Uri.parse(url), headers: Header().getHeader());
+
+    var info = jsonDecode(response.body);
+
+    print(info);
+  }
+
     Future<List?> getInfosGeral(int? id) async {
       url = '${url}/${id}';
 
@@ -196,5 +244,7 @@ class InformacaoRepository {
 
     return mensagem;
   }
+
+
 
 }
