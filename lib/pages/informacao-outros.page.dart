@@ -26,17 +26,18 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
   var fun;
   var hygiene;
 
-  void getInformacaoComida(id) async {
-    fun = await InformacaoRepository().getInfoFun(id);
-    accessories = await InformacaoRepository().getInfoAccessories(id);
-    fun = await InformacaoRepository().getInfoHygiene(id);
-  }
+  // void getInformacaoComida(id) async {
+  //   food = await InformacaoRepository().getInfoFood(id);
+  //   fun = await InformacaoRepository().getInfoFun(id);
+  //   accessories = await InformacaoRepository().getInfoAccessories(id);
+  //   hygiene = await InformacaoRepository().getInfoHygiene(id);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    getInformacaoComida(id);
+    // getInformacaoComida(id);
 
-    print(food);
+    // print("Print Food $food");
 
     return Scaffold(
       body: SafeArea(
@@ -78,6 +79,8 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
               );
             }
             ;
+
+            food = snapshot.data;
 
             return ExpansionTile(
               tilePadding: const EdgeInsets.symmetric(
@@ -141,6 +144,8 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
             }
             ;
 
+            accessories = snapshot.data;
+
             return ExpansionTile(
               tilePadding: const EdgeInsets.symmetric(
                 vertical: 8.0,
@@ -203,6 +208,8 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
             }
             ;
 
+            hygiene = snapshot.data;
+
             return ExpansionTile(
                 tilePadding: const EdgeInsets.symmetric(
                   vertical: 8.0,
@@ -263,6 +270,8 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
               );
             }
             ;
+
+            fun = snapshot.data;
 
             return ExpansionTile(
               tilePadding: const EdgeInsets.symmetric(
