@@ -5,22 +5,25 @@ import 'package:health_pets/widgets/informacao/informacao-list.widget.dart';
 import 'package:health_pets/widgets/widgets.dart';
 
 class InformacaoPage extends StatefulWidget {
-  const InformacaoPage(this.idAnimal);
-  final int idAnimal;
+  const InformacaoPage(this.idAnimal, this.idSubcategoria);
+  final int idAnimal, idSubcategoria;
 
   @override
-  State<InformacaoPage> createState() => _InformacaoPageState(this.idAnimal);
+  State<InformacaoPage> createState() =>
+      _InformacaoPageState(this.idAnimal, this.idSubcategoria);
 }
 
 class _InformacaoPageState extends State<InformacaoPage> {
   final int idAnimal;
-  _InformacaoPageState(this.idAnimal);
+  final int idSubcategoria;
+  _InformacaoPageState(this.idAnimal, this.idSubcategoria);
 
   @override
   var conexaoInfoSaude;
   initState() {
     setState(() {
-      conexaoInfoSaude = InformacaoRepository().getInfosGeral(idAnimal);
+      conexaoInfoSaude =
+          InformacaoRepository().getSubcategoriaInfo(idAnimal, idSubcategoria);
     });
     super.initState();
   }
@@ -49,7 +52,7 @@ class _InformacaoPageState extends State<InformacaoPage> {
             int tamanhoLista = listaInfosGeral.length;
 
             String titulo = 'Informação';
-            String idSubcategoria = '';
+            //String idSubcategoria = '';
 
             for (var i = 0; i < tamanhoLista; i++) {
               if (listaInfosGeral[i]['id_subcategoria'] == 84) {
@@ -87,7 +90,7 @@ class _InformacaoPageState extends State<InformacaoPage> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 1,
                       color: Colors.white,
-                      child: InformacaoLista(idAnimal, idSubcategoria),
+                      child: InformacaoLista(idAnimal, idSubcategoria.toString()),
                     ),
                   ),
                 ],

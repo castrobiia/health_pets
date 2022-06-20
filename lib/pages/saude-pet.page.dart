@@ -131,7 +131,7 @@ class _SaudePetState extends State<SaudePet> {
                             children: <Widget>[
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id),
+                                InformacaoPage(id, 84),
                                 Image.asset("assets/consultation.png"),
                                 AppLocalizations.of(context)!.consultations,
                                 qtndeConsulta.toString(),
@@ -150,14 +150,14 @@ class _SaudePetState extends State<SaudePet> {
                             children: <Widget>[
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id),
+                                InformacaoPage(id, 85),
                                 Image.asset("assets/microscope.png"),
                                 AppLocalizations.of(context)!.exams,
                                 qntdeExame.toString(),
                               ),
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id),
+                                InformacaoPage(id, 86),
                                 Image.asset("assets/medicine.png"),
                                 AppLocalizations.of(context)!.medicines,
                                 qntdeMedicamento.toString(),
@@ -169,14 +169,14 @@ class _SaudePetState extends State<SaudePet> {
                             children: <Widget>[
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id),
+                                InformacaoPage(id, 87),
                                 Image.asset("assets/surgery.png"),
                                 AppLocalizations.of(context)!.procedures,
                                 qntdeProcedimento.toString(),
                               ),
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id),
+                                InformacaoPage(id, 88),
                                 Image.asset("assets/injection.png"),
                                 AppLocalizations.of(context)!.vaccines,
                                 qntdeVacina.toString(),
