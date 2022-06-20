@@ -74,7 +74,8 @@ confirmarExclusaoUsuario(BuildContext context) {
       });
 }
 
-confirmarExclusaoInformacao(BuildContext context, idInformacao, idAnimal) {
+confirmarExclusaoInformacao(BuildContext context, idInformacao, idAnimal,
+    {idSubcategoria}) {
   var informacaoController = InformacaoController(InformacaoRepository());
   return showDialog(
       context: context,
@@ -93,7 +94,8 @@ confirmarExclusaoInformacao(BuildContext context, idInformacao, idAnimal) {
               onPressed: () {
                 informacaoController.deleteInfo(idInformacao).then((value) {
                   exibirMensagem(context, '$value');
-                  setarMaterialPageRoute(context, InformacaoPage(idAnimal));
+                  setarMaterialPageRoute(
+                      context, InformacaoPage(idAnimal, idSubcategoria));
                 });
               },
               child: Text(AppLocalizations.of(context)!.yes),
