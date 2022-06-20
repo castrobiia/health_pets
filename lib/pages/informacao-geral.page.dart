@@ -28,6 +28,7 @@ class _InformacaoPageState extends State<InformacaoPage> {
     super.initState();
   }
 
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<dynamic>(

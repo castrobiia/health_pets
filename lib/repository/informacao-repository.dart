@@ -46,7 +46,8 @@ class InformacaoRepository {
     return jsonDecode(response.statusCode.toString());
   }
 
-  Future<List<InfoModel>> getSubcategoriaInfo(id_animal, id_subcategoria) async {
+  Future<List<InfoModel>> getSubcategoriaInfo(
+      id_animal, id_subcategoria) async {
     var url = 'https://www.healthpets.app.br/api/saude';
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -58,6 +59,9 @@ class InformacaoRepository {
       "Authorization": "Bearer ${token}"
     };
 
+    print('id_animal: {$id_animal}');
+    print('id_subcategoria: {$id_subcategoria}');
+
     final body = jsonEncode({
       'id_subcategoria': id_subcategoria,
       'id_animal': id_animal,
@@ -68,49 +72,46 @@ class InformacaoRepository {
     List<InfoModel> list = [];
     var resposta = jsonDecode(response.body) as List;
 
-
-    for(var item in resposta) {
+    for (var item in resposta) {
       var info = jsonDecode(jsonEncode(item));
 
-      InfoModel part = InfoModel(id: info['id'],
+      InfoModel part = InfoModel(
+          id: info['id'],
           data: info['data'],
           descricao: info['descricao'],
           idCategoria: info['id_categoria'],
           idSubcategoria: info['id_subcategoria'],
           local: info['local'],
           valor: double.parse(info['valor'].toString()),
-          idAnimal: info['id_animal']
-      );
+          idAnimal: info['id_animal']);
 
       list.add(part);
     }
 
     return (list);
-
   }
 
   Future<List<InfoModel>> getInfoFood(int? id) async {
     url = 'https://www.healthpets.app.br/api/comida';
 
-    var response =
-        await http.post(Uri.parse(url), headers: Header().getHeader(), body: jsonEncode({'id': id}));
+    var response = await http.post(Uri.parse(url),
+        headers: Header().getHeader(), body: jsonEncode({'id': id}));
 
     List<InfoModel> list = [];
     var resposta = jsonDecode(response.body) as List;
 
-
-    for(var item in resposta) {
+    for (var item in resposta) {
       var info = jsonDecode(jsonEncode(item));
 
-      InfoModel part = InfoModel(id: info['id'],
+      InfoModel part = InfoModel(
+          id: info['id'],
           data: info['data'],
           descricao: info['descricao'],
           idCategoria: info['id_categoria'],
           idSubcategoria: info['id_subcategoria'],
           local: info['local'],
           valor: double.parse(info['valor'].toString()),
-          idAnimal: info['id_animal']
-      );
+          idAnimal: info['id_animal']);
 
       list.add(part);
     }
@@ -121,25 +122,24 @@ class InformacaoRepository {
   Future getInfoHygiene(int? id) async {
     url = 'https://www.healthpets.app.br/api/higiene';
 
-    var response =
-    await http.post(Uri.parse(url), headers: Header().getHeader(), body: jsonEncode({'id': id}));
+    var response = await http.post(Uri.parse(url),
+        headers: Header().getHeader(), body: jsonEncode({'id': id}));
 
     List<InfoModel> list = [];
     var resposta = jsonDecode(response.body) as List;
 
-
-    for(var item in resposta) {
+    for (var item in resposta) {
       var info = jsonDecode(jsonEncode(item));
 
-      InfoModel part = InfoModel(id: info['id'],
+      InfoModel part = InfoModel(
+          id: info['id'],
           data: info['data'],
           descricao: info['descricao'],
           idCategoria: info['id_categoria'],
           idSubcategoria: info['id_subcategoria'],
           local: info['local'],
           valor: double.parse(info['valor'].toString()),
-          idAnimal: info['id_animal']
-      );
+          idAnimal: info['id_animal']);
 
       list.add(part);
     }
@@ -150,25 +150,24 @@ class InformacaoRepository {
   Future getInfoAccessories(int? id) async {
     url = 'https://www.healthpets.app.br/api/acessorios';
 
-    var response =
-    await http.post(Uri.parse(url), headers: Header().getHeader(), body: jsonEncode({'id': id}));
+    var response = await http.post(Uri.parse(url),
+        headers: Header().getHeader(), body: jsonEncode({'id': id}));
 
     List<InfoModel> list = [];
     var resposta = jsonDecode(response.body) as List;
 
-
-    for(var item in resposta) {
+    for (var item in resposta) {
       var info = jsonDecode(jsonEncode(item));
 
-      InfoModel part = InfoModel(id: info['id'],
+      InfoModel part = InfoModel(
+          id: info['id'],
           data: info['data'],
           descricao: info['descricao'],
           idCategoria: info['id_categoria'],
           idSubcategoria: info['id_subcategoria'],
           local: info['local'],
           valor: double.parse(info['valor'].toString()),
-          idAnimal: info['id_animal']
-      );
+          idAnimal: info['id_animal']);
 
       list.add(part);
     }
@@ -179,25 +178,24 @@ class InformacaoRepository {
   Future getInfoFun(int? id) async {
     url = 'https://www.healthpets.app.br/api/fun';
 
-    var response =
-    await http.post(Uri.parse(url), headers: Header().getHeader(), body: jsonEncode({'id': id}));
+    var response = await http.post(Uri.parse(url),
+        headers: Header().getHeader(), body: jsonEncode({'id': id}));
 
     List<InfoModel> list = [];
     var resposta = jsonDecode(response.body) as List;
 
-
-    for(var item in resposta) {
+    for (var item in resposta) {
       var info = jsonDecode(jsonEncode(item));
 
-      InfoModel part = InfoModel(id: info['id'],
+      InfoModel part = InfoModel(
+          id: info['id'],
           data: info['data'],
           descricao: info['descricao'],
           idCategoria: info['id_categoria'],
           idSubcategoria: info['id_subcategoria'],
           local: info['local'],
           valor: double.parse(info['valor'].toString()),
-          idAnimal: info['id_animal']
-      );
+          idAnimal: info['id_animal']);
 
       list.add(part);
     }
@@ -211,21 +209,21 @@ class InformacaoRepository {
     url = 'https://www.healthpets.app.br/api/info/$id';
 
     var response =
-    await http.get(Uri.parse(url), headers: Header().getHeader());
+        await http.get(Uri.parse(url), headers: Header().getHeader());
 
     var info = jsonDecode(response.body);
 
     print(info);
   }
 
-    Future<List?> getInfosGeral(int? id) async {
-      url = '${url}/${id}';
+  Future<List?> getInfosGeral(int? id) async {
+    url = '${url}/${id}';
 
-      var response =
-      await http.post(Uri.parse(url), headers: Header().getHeader());
+    var response =
+        await http.post(Uri.parse(url), headers: Header().getHeader());
 
-      return (jsonDecode(response.body)) as List;
-    }
+    return (jsonDecode(response.body)) as List;
+  }
 
   Future<String> deleteInformacao(id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -244,7 +242,4 @@ class InformacaoRepository {
 
     return mensagem;
   }
-
-
-
 }
