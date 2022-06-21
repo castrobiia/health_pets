@@ -22,12 +22,13 @@ class _InformacaoPageState extends State<InformacaoPage> {
   var conexaoInfoSaude;
   initState() {
     setState(() {
+      print('conexaoInfoSaude, idanimal e idsub: $idAnimal, $idSubcategoria');
+
       conexaoInfoSaude =
           InformacaoRepository().getSubcategoriaInfo(idAnimal, idSubcategoria);
     });
     super.initState();
   }
-
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +43,7 @@ class _InformacaoPageState extends State<InformacaoPage> {
               );
             }
             if (snapshot.hasError) {
+              print(snapshot.error);
               return Center(
                 child: Container(
                   child: erroCarregarDados(context),
@@ -49,11 +51,14 @@ class _InformacaoPageState extends State<InformacaoPage> {
               );
             }
 
-            final listaInfosGeral = snapshot.data ?? [];
+            var listaInfosGeral = snapshot.data;
             int tamanhoLista = listaInfosGeral.length;
 
             String titulo = 'Informação';
             //String idSubcategoria = '';
+
+            print('tamanhoLista: $tamanhoLista');
+            print('listaInfosGeral: $listaInfosGeral');
 
             for (var i = 0; i < tamanhoLista; i++) {
               if (listaInfosGeral[i]['id_subcategoria'] == 84) {
@@ -85,17 +90,18 @@ class _InformacaoPageState extends State<InformacaoPage> {
                 elevation: 1,
               ),
               body: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 1,
-                      color: Colors.white,
-                      child: InformacaoLista(idAnimal, idSubcategoria.toString()),
-                    ),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 1,
+                            color: Colors.white,
+                            child:
+                                InformacaoLista(idAnimal, idSubcategoria.toString()),
+                          ),
+                        ),
+                      ],
                   ),
-                ],
-              ),
             );
           }),
     );

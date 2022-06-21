@@ -35,7 +35,8 @@ class InformacaoLista extends StatelessWidget {
         }
         var listaSubcategoriaAnimal = snapshot.data;
 
-        print('listaSubcategoriaAnimal; $listaSubcategoriaAnimal');
+        print('listaSubcategoriaAnimal: $listaSubcategoriaAnimal');
+        
 
         if (listaSubcategoriaAnimal.length == 0) {
           return Center(
@@ -49,24 +50,28 @@ class InformacaoLista extends StatelessWidget {
           );
         } else {
           return ListView.builder(
-            itemCount: listaSubcategoriaAnimal.length,
-            itemBuilder: (context, index) {
-              var informacao = listaSubcategoriaAnimal[index];
+              itemCount: listaSubcategoriaAnimal.length,
+              itemBuilder: (context, index) {
+                //for (var informacao in listaSubcategoriaAnimal) {
+                var informacao = listaSubcategoriaAnimal[index];
 
-              return Container(
-                child: InformacaoCard(
-                  idInformacao: informacao['id'] ?? 0,
-                  idCategoria: informacao['id_categoria'] ?? 0,
-                  idSubcategoria: informacao['id_subcategoria'] ?? 0,
-                  idAnimal: informacao['id_animal'] ?? 0,
-                  descricao: informacao['descricao'] ?? '',
-                  data: informacao['data'] ?? '',
-                  valor: informacao['valor'] ?? 0,
-                  local: informacao['local'] ?? '',
-                ),
+                print('informacao: $informacao');
+
+                return Container(
+                  child: InformacaoCard(
+                    idInformacao: informacao['id'] ?? 0,
+                    idCategoria: informacao['id_categoria'] ?? 0,
+                    idSubcategoria: informacao['id_subcategoria'] ?? 0,
+                    idAnimal: informacao['id_animal'] ?? 0,
+                    descricao: informacao['descricao'] ?? '',
+                    data: informacao['data'] ?? '',
+                    valor: informacao['valor'] ?? 0,
+                    local: informacao['local'] ?? '',
+                  ),
+                );
+              }
+              // },
               );
-            },
-          );
         }
       },
     ));

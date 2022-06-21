@@ -5,17 +5,24 @@ class InfoModel {
   int? idCategoria;
   int? idSubcategoria;
   String? local;
-  double? valor;
+  String? valor;
   int? idAnimal;
 
-  InfoModel({this.id,
-        this.data,
-        this.descricao,
-        this.idCategoria,
-        this.idSubcategoria,
-        this.local,
-        this.valor,
-        this.idAnimal,});
+  @override
+  toString() {
+    return 'id: $id, data: $data, descricao: $descricao, idAnimal: $idAnimal';
+  }
+
+  InfoModel({
+    this.id,
+    this.data,
+    this.descricao,
+    this.idCategoria,
+    this.idSubcategoria,
+    this.local,
+    this.valor,
+    this.idAnimal,
+  });
 
   InfoModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

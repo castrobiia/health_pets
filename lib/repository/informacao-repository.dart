@@ -46,8 +46,7 @@ class InformacaoRepository {
     return jsonDecode(response.statusCode.toString());
   }
 
-  Future<List<InfoModel>> getSubcategoriaInfo(
-      id_animal, id_subcategoria) async {
+  Future<List> getSubcategoriaInfo(id_animal, id_subcategoria) async {
     var url = 'https://www.healthpets.app.br/api/saude';
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -59,8 +58,8 @@ class InformacaoRepository {
       "Authorization": "Bearer ${token}"
     };
 
-    print('id_animal: {$id_animal}');
-    print('id_subcategoria: {$id_subcategoria}');
+    print('id_animal: $id_animal');
+    print('id_subcategoria: $id_subcategoria');
 
     final body = jsonEncode({
       'id_subcategoria': id_subcategoria,
@@ -69,27 +68,11 @@ class InformacaoRepository {
 
     var response = await http.post(Uri.parse(url), headers: header, body: body);
 
-    List<InfoModel> list = [];
+    List list = [];
     var resposta = jsonDecode(response.body) as List;
 
-    for (var item in resposta) {
-      var info = jsonDecode(jsonEncode(item));
-
-      InfoModel part = InfoModel(
-          id: info['id'],
-          data: info['data'],
-          descricao: info['descricao'],
-          idCategoria: info['id_categoria'],
-          idSubcategoria: info['id_subcategoria'],
-          local: info['local'],
-          valor: double.parse(info['valor'].toString()),
-          idAnimal: info['id_animal']);
-
-      list.add(part);
-    }
-
-    return (list);
-  }
+    return resposta;
+  } 
 
   Future<List<InfoModel>> getInfoFood(int? id) async {
     url = 'https://www.healthpets.app.br/api/comida';
@@ -110,7 +93,7 @@ class InformacaoRepository {
           idCategoria: info['id_categoria'],
           idSubcategoria: info['id_subcategoria'],
           local: info['local'],
-          valor: double.parse(info['valor'].toString()),
+          valor: info['valor'].toString(),
           idAnimal: info['id_animal']);
 
       list.add(part);
@@ -138,7 +121,7 @@ class InformacaoRepository {
           idCategoria: info['id_categoria'],
           idSubcategoria: info['id_subcategoria'],
           local: info['local'],
-          valor: double.parse(info['valor'].toString()),
+          valor: info['valor'].toString(),
           idAnimal: info['id_animal']);
 
       list.add(part);
@@ -166,7 +149,7 @@ class InformacaoRepository {
           idCategoria: info['id_categoria'],
           idSubcategoria: info['id_subcategoria'],
           local: info['local'],
-          valor: double.parse(info['valor'].toString()),
+          valor: info['valor'].toString(),
           idAnimal: info['id_animal']);
 
       list.add(part);
@@ -194,7 +177,7 @@ class InformacaoRepository {
           idCategoria: info['id_categoria'],
           idSubcategoria: info['id_subcategoria'],
           local: info['local'],
-          valor: double.parse(info['valor'].toString()),
+          valor: info['valor'].toString(),
           idAnimal: info['id_animal']);
 
       list.add(part);
@@ -241,5 +224,21 @@ class InformacaoRepository {
     var mensagem = informacao['message'];
 
     return mensagem;
+  }
+
+  List<InfoModel> toList(dynamic listaInfos) {
+    List<InfoModel> list = [];
+    list = (listaInfos as List)
+        .map((item) => InfoModel(
+            id: item['id'],
+            data: item['data'],
+            descricao: item['descricao'],
+            idCategoria: item['idCategoria'],
+            idSubcategoria: item['idSubcategoria'],
+            local: item['local'],
+            valor: item['valor'].toString(),
+            idAnimal: item['idAnimal']))
+        .toList();
+    return list;
   }
 }
