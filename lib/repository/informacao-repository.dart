@@ -41,8 +41,6 @@ class InformacaoRepository {
     });
 
     var response = await http.post(Uri.parse(url), headers: header, body: body);
-    print('status code: ${response.statusCode}');
-    print(response.body);
     return jsonDecode(response.statusCode.toString());
   }
 
@@ -202,8 +200,6 @@ class InformacaoRepository {
       list.add(part);
     }
 
-    // print('Retorno lista de Fun: $list');
-
     return (list);
   }
 
@@ -215,7 +211,20 @@ class InformacaoRepository {
 
     var info = jsonDecode(response.body);
 
-    print(info);
+    InfoModel part = InfoModel(id: info['id'],
+        data: info['data'],
+        descricao: info['descricao'],
+        idCategoria: info['id_categoria'],
+        idSubcategoria: info['id_subcategoria'],
+        local: info['local'],
+        valor: double.parse(info['valor'].toString()),
+        idAnimal: info['id_animal']
+    );
+
+    print(part.toString());
+
+    return part;
+
   }
 
     Future<List?> getInfosGeral(int? id) async {

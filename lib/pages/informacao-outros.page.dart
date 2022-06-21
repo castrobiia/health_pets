@@ -193,7 +193,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
   Card _buildHygiene() {
     return Card(
       child: FutureBuilder(
-          future: InformacaoRepository().getInfoAccessories(id),
+          future: InformacaoRepository().getInfoHygiene(id),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return Center(
@@ -256,7 +256,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
   Card _buildleisureFun() {
     return Card(
       child: FutureBuilder(
-          future: InformacaoRepository().getInfoAccessories(id),
+          future: InformacaoRepository().getInfoFun(id),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return Center(
