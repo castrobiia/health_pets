@@ -8,6 +8,7 @@ import 'package:health_pets/pages/informacao-geral.page.dart';
 import 'package:health_pets/pages/login.page.dart';
 import 'package:health_pets/pages/logout.page.dart';
 import 'package:health_pets/pages/pet.page.dart';
+import 'package:health_pets/pages/tabs-perfil-pet.page.dart';
 import 'package:health_pets/repository/diario-repository.dart';
 import 'package:health_pets/repository/informacao-repository.dart';
 import 'package:health_pets/repository/usuario-repository.dart';
@@ -96,6 +97,36 @@ confirmarExclusaoInformacao(BuildContext context, idInformacao, idAnimal,
                   exibirMensagem(context, '$value');
                   setarMaterialPageRoute(
                       context, InformacaoPage(idAnimal, idSubcategoria));
+                });
+              },
+              child: Text(AppLocalizations.of(context)!.yes),
+            ),
+          ],
+        );
+      });
+}
+
+confirmarExclusaoInformacaoOutros(BuildContext context, idInformacao, idAnimal,
+    {idSubcategoria}) {
+  var informacaoController = InformacaoController(InformacaoRepository());
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context)!.alert),
+          content: Text(AppLocalizations.of(context)!.deleteItem),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
+              child: Text(AppLocalizations.of(context)!.no),
+            ),
+            TextButton(
+              onPressed: () {
+                informacaoController.deleteInfo(idInformacao).then((value) {
+                  exibirMensagem(context, '$value');
+                  setarMaterialPageRoute(context, PerfilPetPage(idAnimal));
                 });
               },
               child: Text(AppLocalizations.of(context)!.yes),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:health_pets/models/relatorio-model.dart';
 import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/editar-informacao.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
@@ -38,7 +37,8 @@ class ListaOutros extends StatelessWidget {
             label: AppLocalizations.of(context)!.delete,
             icon: Icons.delete,
             onPressed: (context) {
-              confirmarExclusaoInformacao(context, idInformacao, idAnimal);
+              confirmarExclusaoInformacaoOutros(
+                  context, idInformacao, idAnimal);
             },
           ),
         ],
@@ -80,9 +80,7 @@ class ListaOutros extends StatelessWidget {
                         child: Text(transaction.descricao!),
                       ),
                       Text(
-                        "${transaction.valor != null ? "+" : "-"}${NumberFormat.simpleCurrency(
-                          locale: 'pt_BR',
-                        ).format(transaction.valor)}",
+                        'R\$ ' + transaction.valor.toString(),
                         style: TextStyle(
                           color: transaction.valor != null
                               ? ColorTheme.roxo1
