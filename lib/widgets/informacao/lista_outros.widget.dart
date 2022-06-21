@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:health_pets/models/relatorio-model.dart';
+import 'package:health_pets/pages/alert-dialog.dart';
 import 'package:health_pets/pages/editar-informacao.page.dart';
 import 'package:health_pets/themes/color_theme.dart';
 import 'package:intl/intl.dart';
@@ -8,14 +9,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/info-model.dart';
 
-
 class ListaOutros extends StatelessWidget {
   final InfoModel transaction;
   const ListaOutros(this.transaction);
 
-
   @override
   Widget build(BuildContext context) {
+    var idInformacao = transaction.id;
+    var idAnimal = transaction.idAnimal;
     return Slidable(
       endActionPane: ActionPane(
         motion: ScrollMotion(),
@@ -25,7 +26,10 @@ class ListaOutros extends StatelessWidget {
             label: AppLocalizations.of(context)!.edit,
             icon: Icons.edit,
             onPressed: (context) {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> EditarInformacao(transaction.id!)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditarInformacao(transaction.id!)));
               ;
             },
           ),
@@ -34,7 +38,7 @@ class ListaOutros extends StatelessWidget {
             label: AppLocalizations.of(context)!.delete,
             icon: Icons.delete,
             onPressed: (context) {
-              //confirmarExclusaoDiario(context, idDiario, idAnimal);
+              confirmarExclusaoInformacao(context, idInformacao, idAnimal);
             },
           ),
         ],
@@ -45,7 +49,9 @@ class ListaOutros extends StatelessWidget {
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              color: transaction.valor != null ? ColorTheme.rosa0 : ColorTheme.rosa0,
+              color: transaction.valor != null
+                  ? ColorTheme.rosa0
+                  : ColorTheme.rosa0,
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Center(
@@ -96,7 +102,8 @@ class ListaOutros extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        DateFormat("dd MMM").format(DateTime.parse(transaction.data!)),
+                        DateFormat("dd MMM")
+                            .format(DateTime.parse(transaction.data!)),
                       ),
                       Text(
                         transaction.descricao!,
