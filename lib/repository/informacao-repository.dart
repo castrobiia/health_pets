@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:health_pets/class/api/header.dart';
 import 'package:health_pets/models/info-model.dart';
-import 'package:health_pets/models/relatorio-model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -198,7 +197,7 @@ class InformacaoRepository {
         idCategoria: info['id_categoria'],
         idSubcategoria: info['id_subcategoria'],
         local: info['local'],
-        valor: double.parse(info['valor'].toString()),
+        valor: info['valor'].toString(),
         idAnimal: info['id_animal']
     );
 
