@@ -34,6 +34,17 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
   // }
 
   @override
+  var connFood, connAccessories, connHygiene, connFun;
+  initState() {
+    setState(() {
+      connFood = InformacaoRepository().getInfoFood(id);
+      connAccessories = InformacaoRepository().getInfoAccessories(id);
+      connHygiene = InformacaoRepository().getInfoHygiene(id);
+      connFun = InformacaoRepository().getInfoFun(id);
+    });
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     // getInformacaoComida(id);
 
@@ -65,7 +76,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
   Card _buildFood() {
     return Card(
       child: FutureBuilder(
-          future: InformacaoRepository().getInfoFood(id),
+          future: connFood,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return Center(
@@ -80,7 +91,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
             }
             ;
 
-            food = snapshot.data;
+            food = snapshot.data ?? '';
 
             return ExpansionTile(
               tilePadding: const EdgeInsets.symmetric(
@@ -109,16 +120,17 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
               children: [
                 Column(
                     children: food
-                        .map<Widget>(
-                          (item) => Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8.0,
-                              horizontal: 16.0,
-                            ),
-                            child: ListaOutros(item),
-                          ),
-                        )
-                        .toList()),
+                            .map<Widget>(
+                              (item) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                  horizontal: 16.0,
+                                ),
+                                child: ListaOutros(item),
+                              ),
+                            )
+                            .toList() ??
+                        ''),
               ],
             );
           }),
@@ -129,7 +141,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
   Card _buildAccessories() {
     return Card(
       child: FutureBuilder(
-          future: InformacaoRepository().getInfoAccessories(id),
+          future: connAccessories,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return Center(
@@ -144,7 +156,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
             }
             ;
 
-            accessories = snapshot.data;
+            accessories = snapshot.data ?? '';
 
             return ExpansionTile(
               tilePadding: const EdgeInsets.symmetric(
@@ -173,16 +185,17 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
               children: [
                 Column(
                     children: accessories
-                        .map<Widget>(
-                          (item) => Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8.0,
-                              horizontal: 16.0,
-                            ),
-                            child: ListaOutros(item),
-                          ),
-                        )
-                        .toList()),
+                            .map<Widget>(
+                              (item) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                  horizontal: 16.0,
+                                ),
+                                child: ListaOutros(item),
+                              ),
+                            )
+                            .toList() ??
+                        ''),
               ],
             );
           }),
@@ -193,7 +206,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
   Card _buildHygiene() {
     return Card(
       child: FutureBuilder(
-          future: InformacaoRepository().getInfoHygiene(id),
+          future: connHygiene,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return Center(
@@ -208,7 +221,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
             }
             ;
 
-            hygiene = snapshot.data;
+            hygiene = snapshot.data ?? '';
 
             return ExpansionTile(
                 tilePadding: const EdgeInsets.symmetric(
@@ -237,16 +250,17 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                 children: [
                   Column(
                       children: accessories
-                          .map<Widget>(
-                            (item) => Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8.0,
-                                horizontal: 16.0,
-                              ),
-                              child: ListaOutros(item),
-                            ),
-                          )
-                          .toList()),
+                              .map<Widget>(
+                                (item) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0,
+                                    horizontal: 16.0,
+                                  ),
+                                  child: ListaOutros(item),
+                                ),
+                              )
+                              .toList() ??
+                          ''),
                 ]);
           }),
       //
@@ -256,7 +270,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
   Card _buildleisureFun() {
     return Card(
       child: FutureBuilder(
-          future: InformacaoRepository().getInfoFun(id),
+          future: connFun,
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return Center(
@@ -271,7 +285,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
             }
             ;
 
-            fun = snapshot.data;
+            fun = snapshot.data ?? '';
 
             return ExpansionTile(
               tilePadding: const EdgeInsets.symmetric(
@@ -300,15 +314,17 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
               children: [
                 Column(
                     children: fun
-                        .map<Widget>(
-                          (item) => Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8.0,
-                              horizontal: 16.0,
-                            ),
-                            child: ListaOutros(item),
-                          ),
-                        ).toList()),
+                            .map<Widget>(
+                              (item) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8.0,
+                                  horizontal: 16.0,
+                                ),
+                                child: ListaOutros(item),
+                              ),
+                            )
+                            .toList() ??
+                        ''),
               ],
             );
           }),
