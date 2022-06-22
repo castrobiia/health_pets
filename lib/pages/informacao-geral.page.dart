@@ -22,8 +22,6 @@ class _InformacaoPageState extends State<InformacaoPage> {
   var conexaoInfoSaude;
   initState() {
     setState(() {
-      print('conexaoInfoSaude, idanimal e idsub: $idAnimal, $idSubcategoria');
-
       conexaoInfoSaude =
           InformacaoRepository().getSubcategoriaInfo(idAnimal, idSubcategoria);
     });
@@ -55,10 +53,6 @@ class _InformacaoPageState extends State<InformacaoPage> {
             int tamanhoLista = listaInfosGeral.length;
 
             String titulo = 'Informação';
-            //String idSubcategoria = '';
-
-            print('tamanhoLista: $tamanhoLista');
-            print('listaInfosGeral: $listaInfosGeral');
 
             for (var i = 0; i < tamanhoLista; i++) {
               if (listaInfosGeral[i]['id_subcategoria'] == 84) {
