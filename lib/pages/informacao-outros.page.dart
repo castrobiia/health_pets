@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../models/relatorio-model.dart';
 import '../repository/informacao-repository.dart';
 import '../themes/color_theme.dart';
 import '../widgets/informacao/lista_outros.widget.dart';
@@ -37,7 +36,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
   Widget build(BuildContext context) {
     // getInformacaoComida(id);
 
-    // print("Print Food $food");
+    print("Print Food $food");
 
     return Scaffold(
       body: SafeArea(
@@ -78,9 +77,10 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                 ),
               );
             }
-            ;
 
             food = snapshot.data;
+
+            print('food snapshot: $food');
 
             return ExpansionTile(
               tilePadding: const EdgeInsets.symmetric(
@@ -100,7 +100,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                 ),
                 child: const Center(
                   child: Icon(
-                    Icons.food_bank, //dining
+                    Icons.food_bank,
                     color: Colors.white,
                     size: 36,
                   ),
@@ -122,7 +122,6 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
               ],
             );
           }),
-      //
     );
   }
 
@@ -142,7 +141,6 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                 ),
               );
             }
-            ;
 
             accessories = snapshot.data;
 
@@ -186,7 +184,6 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
               ],
             );
           }),
-      //
     );
   }
 
@@ -206,7 +203,6 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                 ),
               );
             }
-            ;
 
             hygiene = snapshot.data;
 
@@ -249,7 +245,6 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                           .toList()),
                 ]);
           }),
-      //
     );
   }
 
@@ -269,7 +264,6 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                 ),
               );
             }
-            ;
 
             fun = snapshot.data;
 
@@ -291,7 +285,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                 ),
                 child: const Center(
                   child: Icon(
-                    Icons.pest_control_rodent, //eco
+                    Icons.pest_control_rodent,
                     color: Colors.white,
                     size: 36,
                   ),
@@ -308,11 +302,11 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                             ),
                             child: ListaOutros(item),
                           ),
-                        ).toList()),
+                        )
+                        .toList()),
               ],
             );
           }),
-      //
     );
   }
 }

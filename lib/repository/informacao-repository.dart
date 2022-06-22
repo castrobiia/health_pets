@@ -74,29 +74,59 @@ class InformacaoRepository {
   Future<List<InfoModel>> getInfoFood(int? id) async {
     url = 'https://www.healthpets.app.br/api/comida';
 
-    var response = await http.post(Uri.parse(url),
-        headers: Header().getHeader(), body: jsonEncode({'id': id}));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
 
-    List<InfoModel> list = [];
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    print('id: $id');
+
+    final body = jsonEncode({
+      'data': data,
+      'descricao': descricao,
+      'id_categoria': id_categoria,
+      'id_subcategoria': id_subcategoria,
+      'local': local,
+      'valor': valor,
+      // 'hora': hora,
+      // 'alerta': alerta,
+      'id_animal': id_animal,)
+    });
+
+    var response = await http.post(Uri.parse(url), headers: header, body: body);
+
+    List list = [];
     var resposta = jsonDecode(response.body) as List;
 
-    for (var item in resposta) {
-      var info = jsonDecode(jsonEncode(item));
+    return resposta;
 
-      InfoModel part = InfoModel(
-          id: info['id'],
-          data: info['data'],
-          descricao: info['descricao'],
-          idCategoria: info['id_categoria'],
-          idSubcategoria: info['id_subcategoria'],
-          local: info['local'],
-          valor: info['valor'].toString(),
-          idAnimal: info['id_animal']);
+    // var response = await http.post(Uri.parse(url),
+    //     headers: Header().getHeader(), body: jsonEncode({'id': id}));
 
-      list.add(part);
-    }
+    // List<InfoModel> list = [];
+    // var resposta = jsonDecode(response.body) as List;
 
-    return (list);
+    // for (var item in resposta) {
+    //   var info = jsonDecode(jsonEncode(item));
+
+    //   InfoModel part = InfoModel(
+    //       id: info['id'],
+    //       data: info['data'],
+    //       descricao: info['descricao'],
+    //       idCategoria: info['id_categoria'],
+    //       idSubcategoria: info['id_subcategoria'],
+    //       local: info['local'],
+    //       valor: info['valor'].toString(),
+    //       idAnimal: info['id_animal']);
+
+    //   list.add(part);
+    // }
+
+    // return list;
   }
 
   Future getInfoHygiene(int? id) async {
