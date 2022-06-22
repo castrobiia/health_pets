@@ -55,9 +55,6 @@ class InformacaoRepository {
       "Authorization": "Bearer ${token}"
     };
 
-    print('id_animal: $id_animal');
-    print('id_subcategoria: $id_subcategoria');
-
     final body = jsonEncode({
       'id_subcategoria': id_subcategoria,
       'id_animal': id_animal,
