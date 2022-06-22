@@ -69,64 +69,36 @@ class InformacaoRepository {
     var resposta = jsonDecode(response.body) as List;
 
     return resposta;
-  } 
+  }
 
-  Future<List<InfoModel>> getInfoFood(int? id) async {
+  Future<List> getInfoFood(int? id) async {
     url = 'https://www.healthpets.app.br/api/comida';
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = await prefs.get('token').toString();
-
-    var header = {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "Authorization": "Bearer ${token}"
-    };
-
-    print('id: $id');
-
-    final body = jsonEncode({
-      'data': data,
-      'descricao': descricao,
-      'id_categoria': id_categoria,
-      'id_subcategoria': id_subcategoria,
-      'local': local,
-      'valor': valor,
-      // 'hora': hora,
-      // 'alerta': alerta,
-      'id_animal': id_animal,)
-    });
-
-    var response = await http.post(Uri.parse(url), headers: header, body: body);
+    var response = await http.post(Uri.parse(url),
+        headers: Header().getHeader(), body: jsonEncode({'id': id}));
 
     List list = [];
     var resposta = jsonDecode(response.body) as List;
 
-    return resposta;
+    for (var item in resposta) {
+      var info = jsonDecode(jsonEncode(item));
 
-    // var response = await http.post(Uri.parse(url),
-    //     headers: Header().getHeader(), body: jsonEncode({'id': id}));
+      InfoModel part = InfoModel(
+          id: info['id'],
+          data: info['data'],
+          descricao: info['descricao'],
+          idCategoria: info['id_categoria'],
+          idSubcategoria: info['id_subcategoria'],
+          local: info['local'],
+          valor: info['valor'].toString(),
+          idAnimal: info['id_animal']);
 
-    // List<InfoModel> list = [];
-    // var resposta = jsonDecode(response.body) as List;
+      list.add(part);
+    }
+    print('resposta: $resposta');
+    print('list: $list');
 
-    // for (var item in resposta) {
-    //   var info = jsonDecode(jsonEncode(item));
-
-    //   InfoModel part = InfoModel(
-    //       id: info['id'],
-    //       data: info['data'],
-    //       descricao: info['descricao'],
-    //       idCategoria: info['id_categoria'],
-    //       idSubcategoria: info['id_subcategoria'],
-    //       local: info['local'],
-    //       valor: info['valor'].toString(),
-    //       idAnimal: info['id_animal']);
-
-    //   list.add(part);
-    // }
-
-    // return list;
+    return list;
   }
 
   Future getInfoHygiene(int? id) async {
@@ -221,20 +193,19 @@ class InformacaoRepository {
 
     var info = jsonDecode(response.body);
 
-    InfoModel part = InfoModel(id: info['id'],
+    InfoModel part = InfoModel(
+        id: info['id'],
         data: info['data'],
         descricao: info['descricao'],
         idCategoria: info['id_categoria'],
         idSubcategoria: info['id_subcategoria'],
         local: info['local'],
         valor: info['valor'].toString(),
-        idAnimal: info['id_animal']
-    );
+        idAnimal: info['id_animal']);
 
     print(part.toString());
 
     return part;
-
   }
 
   Future<List?> getInfosGeral(int? id) async {
