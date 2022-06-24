@@ -236,7 +236,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                 ),
                 children: [
                   Column(
-                      children: accessories
+                      children: hygiene
                           .map<Widget>(
                             (item) => Padding(
                               padding: const EdgeInsets.symmetric(
@@ -308,7 +308,8 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                             ),
                             child: ListaOutros(item),
                           ),
-                        ).toList()),
+                        )
+                        .toList()),
               ],
             );
           }),
