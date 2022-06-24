@@ -146,8 +146,6 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
 
             accessories = snapshot.data;
 
-            print('accessories: $accessories');
-
             return ExpansionTile(
               tilePadding: const EdgeInsets.symmetric(
                 vertical: 8.0,
@@ -211,7 +209,6 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
             ;
 
             hygiene = snapshot.data;
-            print('hygiene: $hygiene');
 
             return ExpansionTile(
                 tilePadding: const EdgeInsets.symmetric(
