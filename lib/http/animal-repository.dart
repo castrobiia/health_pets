@@ -101,7 +101,7 @@ class AnimalRepository {
 
     final response =
         await http.post(Uri.parse(url), body: body, headers: headerToken);
-
+    print('Animal ${response.body}');
     return jsonDecode(response.body);
   }
 

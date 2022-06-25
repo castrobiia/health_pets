@@ -29,7 +29,7 @@ class ListaOutros extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => EditarInformacao(transaction.id!)));
-              ;
+                      // builder: (context) => EditarInformacao()));
             },
           ),
           SlidableAction(

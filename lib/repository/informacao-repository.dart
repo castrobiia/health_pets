@@ -15,8 +15,8 @@ class InformacaoRepository {
       String id_subcategoria,
       String local,
       String valor,
-      // String hora,
-      // String alerta,
+      String hora,
+      String alerta,
       String id_animal) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = await prefs.get('token').toString();
@@ -34,13 +34,55 @@ class InformacaoRepository {
       'id_subcategoria': id_subcategoria,
       'local': local,
       'valor': valor,
-      // 'hora': hora,
-      // 'alerta': alerta,
+      'hora': hora,
+      'alerta': alerta == 'true' ? true : false,
       'id_animal': id_animal,
     });
 
     var response = await http.post(Uri.parse(url), headers: header, body: body);
+    print(response.body);
     return jsonDecode(response.statusCode.toString());
+  }
+
+  updateInformacao(
+      String data,
+      String descricao,
+      String id_categoria,
+      String id_subcategoria,
+      String local,
+      String valor,
+      String hora,
+      String alerta,
+      String id_animal, String id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = await prefs.get('token').toString();
+    String uri = "https://www.healthpets.app.br/api/info/$id";
+
+    var header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer ${token}"
+    };
+
+    final body = jsonEncode({
+      'data': data,
+      'descricao': descricao,
+      'id_categoria': id_categoria,
+      'id_subcategoria': id_subcategoria,
+      'local': local,
+      'valor': valor,
+      'hora': hora,
+      'alerta': alerta == 'true' ? true : false,
+      'id_animal': id_animal,
+    });
+    print(hora);
+
+    print('update: $body');
+    //
+    var response = await http.put(Uri.parse(uri), headers: header, body: body);
+    print(response.body);
+    return jsonDecode(response.statusCode.toString());
+
   }
 
   Future<List> getSubcategoriaInfo(id_animal, id_subcategoria) async {
@@ -66,7 +108,7 @@ class InformacaoRepository {
     var resposta = jsonDecode(response.body) as List;
 
     return resposta;
-  } 
+  }
 
   Future<List<InfoModel>> getInfoFood(int? id) async {
     url = 'https://www.healthpets.app.br/api/comida';
@@ -180,25 +222,25 @@ class InformacaoRepository {
     return (list);
   }
 
-  Future getInfo(int? id) async {
+  Future<InfoModel> getInfo(int? id) async {
     url = 'https://www.healthpets.app.br/api/info/$id';
 
     var response =
-        await http.get(Uri.parse(url), headers: Header().getHeader());
+    await http.get(Uri.parse(url), headers: Header().getHeader());
 
     var info = jsonDecode(response.body);
+    // var part = InfoModel.fromJson(info);
 
-    InfoModel part = InfoModel(id: info['id'],
+    var part = InfoModel(id: info['id'],
         data: info['data'],
         descricao: info['descricao'],
         idCategoria: info['id_categoria'],
         idSubcategoria: info['id_subcategoria'],
         local: info['local'],
         valor: info['valor'].toString(),
+        hora: info['hora'],
         idAnimal: info['id_animal']
     );
-
-    print(part.toString());
 
     return part;
 
@@ -208,7 +250,7 @@ class InformacaoRepository {
     url = '${url}/${id}';
 
     var response =
-        await http.post(Uri.parse(url), headers: Header().getHeader());
+    await http.post(Uri.parse(url), headers: Header().getHeader());
 
     return (jsonDecode(response.body)) as List;
   }
@@ -235,14 +277,14 @@ class InformacaoRepository {
     List<InfoModel> list = [];
     list = (listaInfos as List)
         .map((item) => InfoModel(
-            id: item['id'],
-            data: item['data'],
-            descricao: item['descricao'],
-            idCategoria: item['idCategoria'],
-            idSubcategoria: item['idSubcategoria'],
-            local: item['local'],
-            valor: item['valor'].toString(),
-            idAnimal: item['idAnimal']))
+        id: item['id'],
+        data: item['data'],
+        descricao: item['descricao'],
+        idCategoria: item['idCategoria'],
+        idSubcategoria: item['idSubcategoria'],
+        local: item['local'],
+        valor: item['valor'].toString(),
+        idAnimal: item['idAnimal']))
         .toList();
     return list;
   }

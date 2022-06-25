@@ -206,7 +206,7 @@ class _OutrasCategoriasState extends State<OutrasCategorias> {
                 ),
               );
             }
-            ;
+
 
             hygiene = snapshot.data;
 

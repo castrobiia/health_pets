@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class SubcategoriaRepository {
+
+
   Future<dynamic> getSubcategoriasPorCategoria(String id) async {
     // alterar url com o id categoria
     var url = 'https://www.healthpets.app.br/api/subcategoria/categoria/${id}';
@@ -17,9 +19,12 @@ class SubcategoriaRepository {
       "Accept": "application/json",
       "Authorization": "Bearer ${token}"
     };
+    print('Subcategoruia id Repository: $id');
+    print('Subcategoruia url Repository: $url');
 
     var response = await http.get(Uri.parse(url), headers: header);
     var subcategorias = jsonDecode(response.body);
+    // print('subcategorias: $subcategorias');
     return subcategorias;
   }
 

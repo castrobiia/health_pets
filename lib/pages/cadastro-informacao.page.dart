@@ -338,59 +338,55 @@ class _CadastroInformacaoState extends State<CadastroInformacao> {
                         decoration: botaoRetangulo(),
                         child: TextButton(
                           onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                var id_categoria = categoriaController.text;
-                var id_subcategoria = subcategoriaController.text;
-                var id_animal = this.idAnimal;
-                String data = dataSemFormatacaoController.text;
-                String local = localizacaoController.text;
-                var valor = valorController.text;
-                String descricao = descricaoController.text;
-                bool lembrete = checkedValue;
-                var hora;
+                              if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
+                                  var id_categoria = categoriaController.text;
+                                  var id_subcategoria = subcategoriaController.text;
+                                  var id_animal = this.idAnimal;
+                                  String data = dataSemFormatacaoController.text;
+                                  String local = localizacaoController.text;
+                                  var valor = valorController.text;
+                                  String descricao = descricaoController.text;
+                                  bool lembrete = checkedValue;
+                                  var hora;
 
-                if (lembrete == true &&
-                horaController.text != null) {
-                hora = horaController.text;
-                }
-                if (lembrete == true &&
-                horaController.text.isEmpty) {
-                hora = '00:00';
-                } else if (lembrete == false) {
-                hora = '00:00';
-                }
+                                  if (lembrete == true &&
+                                      horaController.text != null) {
+                                      hora = horaController.text;
+                                  }
+                                  if (lembrete == true &&
+                                      horaController.text.isEmpty) {
+                                      hora = '00:00';
+                                  } else if (lembrete == false) {
+                                      hora = '00:00';
+                                  }
 
-                print(id_categoria);
-                print(id_subcategoria);
-                print(data);
-                print(local);
-                print(valor);
-                print(descricao);
-                print(lembrete);
-                print(id_animal);
-                print(hora);
-                if (await InformacaoRepository().postInformacao(
-                data,
-                descricao,
-                id_categoria,
-                id_subcategoria,
-                local,
-                valor,
-                // hora,
-                // alerta,
-                id_animal.toString()) ==
-                200) {
-                exibirMensagem(context,
-                'Informações cadastradas com sucesso');
-                setarMaterialPageRoute(
-                context, PerfilPetPage(idAnimal));
-                } else {
-                exibirMensagem(context,
-                'Não foi possível cadastrar informações');
-                }
-                }
-                },
+                              print(id_categoria);
+                              print(id_subcategoria);
+                              print(data);
+                              print(local);
+                              print(valor);
+                              print(descricao);
+                              print(lembrete);
+                              print(id_animal);
+                              print(hora);
+                                  if (await InformacaoRepository().postInformacao(
+                                        data,
+                                        descricao,
+                                        id_categoria,
+                                        id_subcategoria,
+                                        local,
+                                        valor,
+                                        hora,
+                                        lembrete.toString(),
+                                        id_animal.toString()) ==
+                                    200) {
+                                        exibirMensagem(context,'Informações cadastradas com sucesso');
+                                            setarMaterialPageRoute(context, PerfilPetPage(idAnimal));
+                                        } else {
+                                          exibirMensagem(context,'Não foi possível cadastrar informações');
+                                        }
+                              }},
                           child: textBotao(AppLocalizations.of(context)!.save),
                         ),
                       ),

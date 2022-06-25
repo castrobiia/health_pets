@@ -266,9 +266,9 @@ class _CadastrarPetPageState extends State<CadastrarPetPage> {
                                       if (pickedFile != null) {
                                         saveImage(pickedFile!, animal[0]['id']);
                                       }
-                                      //print('animal 1: ${animal['id']}');
                                       print('animal 1: ${animal}');
-                                      print('animal 1: ${animal[0]['id']}');
+                                      // print('animal 1: ${animal}');
+                                      // print('animal 1: ${animal[0]['id']}');
                                       // print(
                                       //     'animal 2: ${animal.id.toString()}');
                                       if (animal[0]['id'] != null) {

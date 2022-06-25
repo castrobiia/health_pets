@@ -6,11 +6,13 @@ class InfoModel {
   int? idSubcategoria;
   String? local;
   String? valor;
+  String? hora;
+  String? alerta;
   int? idAnimal;
 
   @override
   toString() {
-    return 'id: $id, data: $data, descricao: $descricao, idAnimal: $idAnimal';
+    return 'id: $id, data: $data, descricao: $descricao, idAnimal: $idAnimal, idCategoria: $idCategoria, idSubcategoria: $idSubcategoria, local: $local, valor: $valor, alerta: $alerta';
   }
 
   InfoModel({
@@ -21,6 +23,8 @@ class InfoModel {
     this.idSubcategoria,
     this.local,
     this.valor,
+    this.hora,
+    this.alerta,
     this.idAnimal,
   });
 
@@ -32,6 +36,8 @@ class InfoModel {
     idSubcategoria = json['id_subcategoria'];
     local = json['local'];
     valor = json['valor'];
+    hora = json['hora'];
+    alerta = json['alerta'];
     idAnimal = json['id_animal'];
   }
 
@@ -44,7 +50,15 @@ class InfoModel {
     data['id_subcategoria'] = this.idSubcategoria;
     data['local'] = this.local;
     data['valor'] = this.valor;
+    data['hora'] = this.hora;
+    data['alerta'] = this.alerta;
     data['id_animal'] = this.idAnimal;
     return data;
+  }
+
+  @override
+  bool operator ==(Object other) {
+    other is InfoModel && other.id == id && other.idAnimal == idAnimal;
+    return super == other;
   }
 }
