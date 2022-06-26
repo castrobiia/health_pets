@@ -36,6 +36,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
   final ImagePicker _picker = ImagePicker();
   var animal;
   XFile? pickedFile;
+  var _datePicker;
 
   catchAnimal(id) async {
     this.animal = await AnimalRepository().getAnimal(id);
@@ -43,7 +44,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
   }
 
   Future _dataSelecionada(BuildContext context) async {
-    var _datePicker = await showDatePicker(
+    _datePicker = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(DateTime.now().year - 30),
@@ -51,7 +52,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
 
     if (_datePicker != null && _datePicker != _data) {
       dataNascimentoController.text = _datePicker.toString();
-      dataNascimentoTesteController.text = dataNascimentoController.text;
+      dataSemFormatacaoController.text = dataNascimentoController.text;
     } else {
       exibirMensagem(context, AppLocalizations.of(context)!.selectDate);
     }
@@ -65,7 +66,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
   TextEditingController especieController = TextEditingController();
   TextEditingController racaController = TextEditingController();
   TextEditingController dataNascimentoController = TextEditingController();
-  TextEditingController dataNascimentoTesteController = TextEditingController();
+  TextEditingController dataSemFormatacaoController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String? _nome;
   String? _dataNascimento;
@@ -116,7 +117,8 @@ class _EditarPetPageState extends State<EditarPetPage> {
 
           this.animal = snapshot.data;
           nomeController.text = animal.nome;
-          dataNascimentoController.text = animal.dataNascimento;
+          dataNascimentoController.text = DateFormat("dd/MM/yyyy")
+              .format(DateTime.parse(animal.dataNascimento.toString()));
           print(animal.foto);
 
           return Container(
@@ -134,7 +136,7 @@ class _EditarPetPageState extends State<EditarPetPage> {
                     children: <Widget>[
                       Container(
                         width: 200,
-                        height: 200,
+                        height: 210,
                         margin: EdgeInsets.only(top: 15, left: 10),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -346,10 +348,15 @@ class _EditarPetPageState extends State<EditarPetPage> {
                           if (nomeController.text.isEmpty != true)
                             animal.nome = nomeController.text;
 
-                          if (dataNascimentoTesteController.text.isEmpty !=
-                              true)
+                          var dataSemFormatacao =
+                              dataSemFormatacaoController.text;
+
+                          if (dataSemFormatacao.isEmpty) {
+                            animal.dataNascimento = animal.dataNascimento;
+                          } else {
                             animal.dataNascimento =
-                                dataNascimentoTesteController.text;
+                                dataSemFormatacaoController.text;
+                          }
 
                           if (especieController.text.isEmpty != true ||
                               animal.idEspecie.toString() !=
@@ -372,6 +379,15 @@ class _EditarPetPageState extends State<EditarPetPage> {
                               animal.foto,
                               argumentos.id ?? 0,
                               context);
+
+                          if (code == 200) {
+                            exibirMensagem(context,
+                                'Informações do animal atualizadas com sucesso');
+                            Navigator.pushNamed(context, '/home');
+                          } else {
+                            exibirMensagem(context,
+                                'Não foi possível atualizar as informações do animal');
+                          }
                         }
                       },
                       child: textBotao(AppLocalizations.of(context)!.save),
