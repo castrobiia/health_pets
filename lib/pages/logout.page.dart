@@ -26,7 +26,6 @@ Future deleteToken(BuildContext context) async {
   final response = await http.get(Uri.parse(url), headers: header);
 
   if (response.statusCode == 200) {
-    prefs.clear();
     setarMaterialPageRoute(context, LoginPage());
   }
 }
