@@ -55,23 +55,23 @@ class _InformacaoPageState extends State<InformacaoPage> {
             String titulo = 'Informação';
 
             for (var i = 0; i < tamanhoLista; i++) {
-              if (listaInfosGeral[i]['id_subcategoria'] == 84) {
+              if (listaInfosGeral[i]['id_subcategoria'] == 17) {
                 titulo = AppLocalizations.of(context)!.consultations;
                 idSubcategoria == 84;
               }
-              if (listaInfosGeral[i]['id_subcategoria'] == 85) {
+              if (listaInfosGeral[i]['id_subcategoria'] == 18) {
                 titulo = AppLocalizations.of(context)!.exams;
                 idSubcategoria == 85;
               }
-              if (listaInfosGeral[i]['id_subcategoria'] == 86) {
+              if (listaInfosGeral[i]['id_subcategoria'] == 19) {
                 titulo = AppLocalizations.of(context)!.medicines;
                 idSubcategoria == 86;
               }
-              if (listaInfosGeral[i]['id_subcategoria'] == 87) {
+              if (listaInfosGeral[i]['id_subcategoria'] == 20) {
                 titulo = AppLocalizations.of(context)!.procedures;
                 idSubcategoria == 87;
               }
-              if (listaInfosGeral[i]['id_subcategoria'] == 88) {
+              if (listaInfosGeral[i]['id_subcategoria'] == 21) {
                 titulo = AppLocalizations.of(context)!.vaccine;
                 idSubcategoria == 88;
               }
@@ -84,18 +84,18 @@ class _InformacaoPageState extends State<InformacaoPage> {
                 elevation: 1,
               ),
               body: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 1,
-                            color: Colors.white,
-                            child:
-                                InformacaoLista(idAnimal, idSubcategoria.toString()),
-                          ),
-                        ),
-                      ],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 1,
+                      color: Colors.white,
+                      child:
+                          InformacaoLista(idAnimal, idSubcategoria.toString()),
+                    ),
                   ),
+                ],
+              ),
             );
           }),
     );
