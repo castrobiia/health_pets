@@ -389,7 +389,7 @@ class _EditarInformacaoState extends State<EditarInformacao> {
                                       _formKey.currentState!.save();
                                       var id_categoria = _categoria!;
                                       var id_subcategoria = subcategoriaController.text;
-                                      var id_animal = this.id;
+                                      var id_animal = info.idAnimal;
                                       String data = dataSemFormatacaoController.text;
                                       String local = localizacaoController.text;
                                       var valor = valorController.text;
@@ -410,42 +410,30 @@ class _EditarInformacaoState extends State<EditarInformacao> {
                                           horaController.text != null) {
                                         hora = horaController.text;
                                       }
-                                      // if (lembrete == true &&
-                                      //     horaController.text.isEmpty) {
-                                      //   hora = '00:00';
-                                      // } else if (lembrete == false) {
-                                      //   hora = '00:00';
-                                      // }
 
-                                      // print(id_categoria);
-                                      // print(id_subcategoria);
-                                      // print(data);
-                                      // print(local);
-                                      // print(valor);
-                                      // print(descricao);
-                                      // print(lembrete);
-                                      // print(id_animal);
+                                      print(id_animal);
+                                      print(info.id.toString());
                                       // print(lembrete);git checkout -b
 
-                                      // if (await InformacaoRepository().updateInformacao(
-                                      //     data,
-                                      //     descricao,
-                                      //     id_categoria,
-                                      //     id_subcategoria,
-                                      //     local,
-                                      //     valor,
-                                      //     hora,
-                                      //     lembrete.toString(),
-                                      //     id_animal.toString(), info.id.toString()) ==
-                                      //     200) {
-                                      //   exibirMensagem(context,
-                                      //       'Informações cadastradas com sucesso');
-                                      //   setarMaterialPageRoute(
-                                      //       context, PerfilPetPage(info.idAnimal));
-                                      // } else {
-                                      //   exibirMensagem(context,
-                                      //       'Não foi possível cadastrar informações');
-                                      // }
+                                      if (await InformacaoRepository().updateInformacao(
+                                          data,
+                                          descricao,
+                                          id_categoria,
+                                          id_subcategoria,
+                                          local,
+                                          valor,
+                                          hora,
+                                          lembrete.toString(),
+                                          id_animal.toString(), info.id.toString()) ==
+                                          200) {
+                                        exibirMensagem(context,
+                                            'Informações cadastradas com sucesso');
+                                        setarMaterialPageRoute(
+                                            context, PerfilPetPage(info.idAnimal));
+                                      } else {
+                                        exibirMensagem(context,
+                                            'Não foi possível cadastrar informações');
+                                      }
                                     }
                                   },
                                   child: textBotao(AppLocalizations.of(context)!.save),
