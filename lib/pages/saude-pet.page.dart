@@ -84,19 +84,19 @@ class _SaudePetState extends State<SaudePet> {
               int qntdeVacina = 0;
 
               for (var i = 0; i < tamanhoLista; i++) {
-                if (listaInfosGeral[i]['id_subcategoria'] == 85) {
+                if (listaInfosGeral[i]['id_subcategoria'] == 18) {
                   qntdeExame++;
                 }
-                if (listaInfosGeral[i]['id_subcategoria'] == 84) {
+                if (listaInfosGeral[i]['id_subcategoria'] == 17) {
                   qtndeConsulta++;
                 }
-                if (listaInfosGeral[i]['id_subcategoria'] == 86) {
+                if (listaInfosGeral[i]['id_subcategoria'] == 19) {
                   qntdeMedicamento++;
                 }
-                if (listaInfosGeral[i]['id_subcategoria'] == 87) {
+                if (listaInfosGeral[i]['id_subcategoria'] == 20) {
                   qntdeProcedimento++;
                 }
-                if (listaInfosGeral[i]['id_subcategoria'] == 88) {
+                if (listaInfosGeral[i]['id_subcategoria'] == 21ƒ) {
                   qntdeVacina++;
                 }
               }
@@ -131,7 +131,7 @@ class _SaudePetState extends State<SaudePet> {
                             children: <Widget>[
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id, 84),
+                                InformacaoPage(id, 17),
                                 Image.asset("assets/consultation.png"),
                                 AppLocalizations.of(context)!.consultations,
                                 qtndeConsulta.toString(),
@@ -150,14 +150,14 @@ class _SaudePetState extends State<SaudePet> {
                             children: <Widget>[
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id, 85),
+                                InformacaoPage(id, 18),
                                 Image.asset("assets/microscope.png"),
                                 AppLocalizations.of(context)!.exams,
                                 qntdeExame.toString(),
                               ),
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id, 86),
+                                InformacaoPage(id, 19),
                                 Image.asset("assets/medicine.png"),
                                 AppLocalizations.of(context)!.medicines,
                                 qntdeMedicamento.toString(),
@@ -169,14 +169,14 @@ class _SaudePetState extends State<SaudePet> {
                             children: <Widget>[
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id, 87),
+                                InformacaoPage(id, 20),
                                 Image.asset("assets/surgery.png"),
                                 AppLocalizations.of(context)!.procedures,
                                 qntdeProcedimento.toString(),
                               ),
                               iconesHistorico(
                                 context,
-                                InformacaoPage(id, 88),
+                                InformacaoPage(id, 21),
                                 Image.asset("assets/injection.png"),
                                 AppLocalizations.of(context)!.vaccines,
                                 qntdeVacina.toString(),
