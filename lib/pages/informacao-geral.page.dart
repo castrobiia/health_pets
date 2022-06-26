@@ -57,23 +57,23 @@ class _InformacaoPageState extends State<InformacaoPage> {
             for (var i = 0; i < tamanhoLista; i++) {
               if (listaInfosGeral[i]['id_subcategoria'] == 17) {
                 titulo = AppLocalizations.of(context)!.consultations;
-                idSubcategoria == 84;
+                idSubcategoria == 17;
               }
               if (listaInfosGeral[i]['id_subcategoria'] == 18) {
                 titulo = AppLocalizations.of(context)!.exams;
-                idSubcategoria == 85;
+                idSubcategoria == 18;
               }
               if (listaInfosGeral[i]['id_subcategoria'] == 19) {
                 titulo = AppLocalizations.of(context)!.medicines;
-                idSubcategoria == 86;
+                idSubcategoria == 19;
               }
               if (listaInfosGeral[i]['id_subcategoria'] == 20) {
                 titulo = AppLocalizations.of(context)!.procedures;
-                idSubcategoria == 87;
+                idSubcategoria == 20;
               }
               if (listaInfosGeral[i]['id_subcategoria'] == 21) {
                 titulo = AppLocalizations.of(context)!.vaccine;
-                idSubcategoria == 88;
+                idSubcategoria == 21;
               }
             }
             return Scaffold(
