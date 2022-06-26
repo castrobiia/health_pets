@@ -189,6 +189,6 @@ class AnimalRepository {
     request.files.add(pic);
 
     final response = await request.send();
-    Navigator.pushNamed(context, '/editarPet/', arguments: Argumentos(id));
+    Navigator.pushNamed(context, '/home', arguments: Argumentos(id));
   }
 }
