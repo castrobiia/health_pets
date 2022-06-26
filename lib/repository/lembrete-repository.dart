@@ -39,10 +39,15 @@ class LembreteRepository {
     List listaLembretes = jsonDecode(response.body);
 
     var list = listaLembretes.map((item) {
+      var horario = item['hora'];
+      List<String> camposHora = horario.toString().split(':');
+
+      int hora = int.parse(camposHora[0]);
+      int minuto = int.parse(camposHora[1]);
+
       return CleanCalendarEvent(item['titulo'],
-          startTime: DateTime(dia, mes, ano),
-          endTime: DateTime(dia, mes, ano),
-          description: item['descricao'],
+          startTime: DateTime(dia, mes, ano, hora, minuto),
+          endTime: DateTime(dia, mes, ano, hora + 1, minuto),
           color: Colors.green.shade400);
     }).toList();
 
