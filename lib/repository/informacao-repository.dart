@@ -39,8 +39,10 @@ class InformacaoRepository {
       'id_animal': id_animal,
     });
 
+    print(body);
+
     var response = await http.post(Uri.parse(url), headers: header, body: body);
-    print(response.body);
+    print(' Resposta ${response.body}');
     return jsonDecode(response.statusCode.toString());
   }
 
@@ -231,6 +233,8 @@ class InformacaoRepository {
     var info = jsonDecode(response.body);
     // var part = InfoModel.fromJson(info);
 
+    print('Get Info: $info');
+
     var part = InfoModel(id: info['id'],
         data: info['data'],
         descricao: info['descricao'],
@@ -239,6 +243,7 @@ class InformacaoRepository {
         local: info['local'],
         valor: info['valor'].toString(),
         hora: info['hora'],
+        alerta: info['alerta'] == 1 ? true.toString() : false.toString(),
         idAnimal: info['id_animal']
     );
 

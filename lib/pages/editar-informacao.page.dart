@@ -142,6 +142,7 @@ class _EditarInformacaoState extends State<EditarInformacao> {
                       InfoModel informacoes =  InfoModel.fromJson(jsonDecode(jsonEncode(snapshot.data)));
                       this.info = informacoes;
                       // Object? informacoes =  snapshot.data;
+                      print('Informações: $informacoes');
 
 
                       animalController.text = info.idAnimal.toString();
@@ -367,12 +368,12 @@ class _EditarInformacaoState extends State<EditarInformacao> {
                             ),
                               CheckboxListTile(
                                 title: Text(AppLocalizations.of(context)!.addAlert),
-                                value: checkedValue,
-                                onChanged: (newValue) {},
-                                //   setState(() {
-                                //     checkedValue = newValue!;
-                                //   });
-                                // },
+                                value: informacoes.alerta == 'true' ? true : false,
+                                onChanged: (newValue) {
+                                  // setState(() {
+                                    checkedValue = newValue!;
+                                  // });
+                                },
                                 controlAffinity: ListTileControlAffinity
                                     .leading, //  <-- leading Checkbox
                               ),
@@ -409,12 +410,12 @@ class _EditarInformacaoState extends State<EditarInformacao> {
                                           horaController.text != null) {
                                         hora = horaController.text;
                                       }
-                                      if (lembrete == true &&
-                                          horaController.text.isEmpty) {
-                                        hora = '00:00';
-                                      } else if (lembrete == false) {
-                                        hora = '00:00';
-                                      }
+                                      // if (lembrete == true &&
+                                      //     horaController.text.isEmpty) {
+                                      //   hora = '00:00';
+                                      // } else if (lembrete == false) {
+                                      //   hora = '00:00';
+                                      // }
 
                                       // print(id_categoria);
                                       // print(id_subcategoria);
@@ -424,7 +425,7 @@ class _EditarInformacaoState extends State<EditarInformacao> {
                                       // print(descricao);
                                       // print(lembrete);
                                       // print(id_animal);
-                                      print(hora);
+                                      // print(lembrete);git checkout -b
 
                                       // if (await InformacaoRepository().updateInformacao(
                                       //     data,
