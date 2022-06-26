@@ -164,10 +164,7 @@ class AnimalRepository {
       "Authorization": "Bearer ${token}",
     });
 
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      Navigator.pushNamed(context, '/home');
-    }
+    return response.statusCode;
   }
 
   updateFoto(context, String foto, id) async {
