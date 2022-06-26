@@ -96,7 +96,7 @@ class _SaudePetState extends State<SaudePet> {
                 if (listaInfosGeral[i]['id_subcategoria'] == 20) {
                   qntdeProcedimento++;
                 }
-                if (listaInfosGeral[i]['id_subcategoria'] == 21ƒ) {
+                if (listaInfosGeral[i]['id_subcategoria'] == 21) {
                   qntdeVacina++;
                 }
               }
